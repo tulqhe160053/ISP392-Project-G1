@@ -5,6 +5,7 @@
 package dal;
 
 import java.util.ArrayList;
+import java.util.Random;
 import model.Role;
 import model.UserStatus;
 import model.Users;
@@ -170,6 +171,75 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
             ps.executeUpdate();
         } catch (Exception e) {
         }
+    }
+    
+        public Users getUsersByEmail(String userEmail) {
+        Users ketqua = null;
+        String query = "select * from Users where email = ?";
+        try {          
+            ps = con.prepareStatement(query);
+            ps.setString(1, userEmail);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int userId = rs.getInt("UserID");
+                String userName = rs.getString("Username");
+                String password = rs.getString("Password");
+                String gender = rs.getString("gender");
+                String email = rs.getString("Email");
+                String phoneNum = rs.getString("PhoneNum");
+                int role_id = rs.getInt("RoleID");
+
+                RoleDAO dao = new RoleDAO();
+                Role role = dao.selectById(new Role(role_id, null));
+
+                int userStatus_id = rs.getInt("statusId");
+
+                UserStatusDAO userDao = new UserStatusDAO();
+                UserStatus status = userDao.selectById(new UserStatus(userStatus_id, null));
+
+                ketqua = new Users(userId, userName, password, gender, email, phoneNum, role, status);
+            } else {
+                ketqua = null;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (ketqua);
+    }
+    
+    public boolean updatePassword(String userEmail, String newPassword) {
+        Users change = getUsersByEmail(userEmail);
+        String query = "update Users set password=? where email=?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, newPassword);
+            ps.setString(2, userEmail);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public static int randomNumber(int min, int max) {
+        Random rnd = new Random();
+        return rnd.nextInt((max - min) + 1) + min;
+    }
+    
+    public String RandomPassword(int numberOfCharactor) {
+        String alpha = "abcdefghijklmnopqrstuvwxyz"; // a-z
+        String alphaUpperCase = alpha.toUpperCase(); // A-Z
+        String digits = "0123456789"; // 0-9
+        String ALPHA_NUMERIC = alpha + alphaUpperCase + digits;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < numberOfCharactor; i++) {
+            int number = randomNumber(0, ALPHA_NUMERIC.length() - 1);
+            char ch = ALPHA_NUMERIC.charAt(number);
+            sb.append(ch);
+        }
+        return sb.toString();
     }
 
     @Override

@@ -4,9 +4,6 @@
  */
 package Mailer;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import jakarta.websocket.Session;
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;

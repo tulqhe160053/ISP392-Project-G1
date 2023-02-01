@@ -14,10 +14,6 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
-        <url-pattern>/category.jsp</url-pattern>
-        <url-pattern>/category</url-pattern>
-        <url-pattern>/product-detail.jsp</url-pattern>
-        <url-pattern>/product</url-pattern>
         <url-pattern>/cart.jsp</url-pattern>
         <url-pattern>/cart</url-pattern>
     </filter-mapping>
@@ -41,6 +37,10 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>controler.CartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>controler.ResetPassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -56,6 +56,10 @@
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
