@@ -299,7 +299,11 @@ INSERT [dbo].[OrderStatus] ([Name]) VALUES (N'Completed')
 
 
 --------- Insert into Blog -------------------
-
+Insert into Blog values (2,1,
+'The first ferocious RTX 4090 gaming laptop is now available to pre-order',
+'The Gigabyte Aorus 17X, one of the first gaming laptops with an RTX 4090 GPU, is now available to pre-order.',
+'The Gigabyte Aorus 17X, one of the first high-end gaming laptops with an Nvidia GeForce RTX 4090 GPU, is now available to pre-order on Amazon ahead of the official launch on February 8th. The 40-series graphics cards are packing a tremendous amount of power, which is good news for content creators and hardcore gamers. According to Nvidia, “this is the biggest leap in generational performance ever while running much more efficiently than before.” If Nvidia’s claim proves to be true, then you’re in for something special. Let’s dive right into the details.',
+'Laptop_blog1.webp')
 
 --------- Insert into Slider -----------------
 Insert into Slider values ('laptop.jpg',1,null);
