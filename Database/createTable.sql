@@ -233,13 +233,14 @@ Create TABLE Blog(
 	ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	UserID int,
 	CatId int,
-	Title nvarchar(2500),
+	Title text,
 	[description] text,
 	Content text,
 	imageLink nvarchar(1000),
 	constraint blog_in_Category FOREIGN KEY(CatID) REFERENCES Category(CategoryID),
 	constraint userID_in_users_3 FOREIGN KEY(UserID) REFERENCES Users(UserID)
 )
+
 
 --------------- Table Slider -------------------
 
