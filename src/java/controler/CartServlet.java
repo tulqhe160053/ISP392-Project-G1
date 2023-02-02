@@ -95,7 +95,6 @@ public class CartServlet extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         CartDAO cart_dao = new CartDAO();
         ArrayList<Cart> list = cart_dao.selectByUserId(user.getUserID());
-        Arraylist<ProductImg> 
         request.setAttribute("list",list);
         request.getRequestDispatcher("viewCart.jsp").forward(request, response);
     }
