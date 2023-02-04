@@ -51,9 +51,11 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog>{
         return t;
     }
 
-    @Override
-    public Blog selectById(Blog t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+    public Blog selectById(int id) {
+        Blog b =new Blog();
+        
+        return b;
     }
 
     @Override
@@ -88,6 +90,11 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog>{
         for (Blog ca : bd.selectAll()) {
             System.out.println(ca);
         }
+    }
+
+    @Override
+    public Blog selectById(Blog t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 

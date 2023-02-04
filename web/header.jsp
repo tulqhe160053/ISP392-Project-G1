@@ -24,9 +24,9 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <li class="nav-item active"><a class="nav-link" href="home">Home</a></li>
+                        
                         <li class="nav-item">
-                            <a href="blog.html" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Blog</a>
+                            <a href="blog" class="nav-link ">Blog</a>
                         </li>
                         <c:if test="${sessionScope.user == null}">
                             <li class="nav-item">
