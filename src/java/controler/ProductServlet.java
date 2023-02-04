@@ -49,8 +49,6 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         try {
             String productId_String = request.getParameter("productId");
             if (productId_String.equals("")) {
@@ -70,10 +68,7 @@ public class ProductServlet extends HttpServlet {
             }
         } catch (Exception e) {
             System.err.println(e);
-        }
-        
-        response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
+        }       
         
         request.getRequestDispatcher("viewProductDetail.jsp").forward(request, response);
     }
