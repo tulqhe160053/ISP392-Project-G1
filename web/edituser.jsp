@@ -1,6 +1,6 @@
 <%-- 
-    Document   : viewuser2
-    Created on : Feb 5, 2023, 5:34:41 PM
+    Document   : edituser2
+    Created on : Feb 5, 2023, 6:13:54 PM
     Author     : thaib
 --%>
 
@@ -56,9 +56,6 @@
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <h4 class="text-right">Account Detail</h4>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12"><label for = "pwd">Fullname</label><input type="text" class="form-control" placeholder="full name" value=""></div>
-                        </div>
 
                         <div class="row mt-3">
                             <div class="col-md-12"><label for = "pwd">Username</label><input type="text" class="form-control" placeholder="enter user number" value=""></div>
@@ -95,8 +92,7 @@
 
 
                         </div>
-                        <div class="mt-5 text-center"><a class="primary-btn" href="edituser.jsp">Edit User</a></div>
-                        <div class="mt-4 text-center"><a class="primary-btn" href="changepassword.jsp">Change Password</a></div>
+                        <div class="mt-5 text-center"><button class="primary-btn" type="submit">Save</button></div>
                     </div>
                 </div>
 
