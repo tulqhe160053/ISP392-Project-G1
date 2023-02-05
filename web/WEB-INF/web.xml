@@ -50,10 +50,6 @@
         <servlet-class>controler.ChangePassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewCart</servlet-name>
-        <servlet-class>controler.ViewCart</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditCart</servlet-name>
         <servlet-class>controler.EditCart</servlet-class>
     </servlet>
@@ -84,10 +80,6 @@
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCart</servlet-name>
-        <url-pattern>/viewcart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditCart</servlet-name>
