@@ -54,7 +54,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
-                            <form action="cart" method="post">
+                            <form action="viewcart" method="post">
                                 <button type="submit" class="btn"><span class="ti-bag position-relative"></span></button> 
                             </form>                               
                         </li>

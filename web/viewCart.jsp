@@ -74,6 +74,7 @@
         <!--Delete cart button-->
         <div class="container mt-5">
             <div class="float-right">
+                <a class="btn btn-primary" href="editcart">Edit cart</a>
                 <button type="button" class="btn btn-danger">Delete Cart</button>
             </div>
         </div>
@@ -94,32 +95,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="img/cart.jpg" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <p>Minimalistic shop for multipurpose use</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$360.00</h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <h5>1</h5>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$720.00</h5>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                </tr>
+                                <c:set var="sum" value="0"></c:set>
+                                <c:forEach items="${list}" var="cart">
+                                    <c:forEach items="${list_productImg}" var="productImg">
+                                        <c:if test="${cart.getProduct().getProductID() == productImg.getProduct().getProductID()}">
+                                            <c:set var="category" value="${cart.getProduct().getCategory()}"></c:set>
+                                            <c:set var="brand" value="${cart.getProduct().getBrand()}"></c:set>
+                                            <tr>
+                                                <td>
+                                                    <div class="media">
+                                                        <div class="d-flex">
+                                                            <img src="product_img/${category.getCategoryName()}/${brand.getBrandName()}/${productImg.getProductImgUrl()}" alt="error" style="width: 50px">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <p>${cart.getProduct().getProductName()}</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h5>$${cart.getProduct().getSellPrice()}</h5>
+                                                </td>
+                                                <td>
+                                                    <div class="product_count">
+                                                        <h5>${cart.getAmount()}</h5>
+                                                    </div>
+                                                </td>
+                                                <td>                                                  
+                                                    <h5>$${cart.getProduct().getSellPrice() * cart.getAmount()}</h5>
+                         
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
                                 <tr>
                                     <td>
 
@@ -131,7 +142,7 @@
                                         <h2 class="text-danger">Subtotal</h2>
                                     </td>
                                     <td>
-                                        <h2>$2160.00</h2>
+                                        <h2>$${total}</h2>
                                     </td>
                                 </tr>
                                 <tr class="out_button_area">
@@ -146,7 +157,7 @@
                                     </td>
                                     <td>
                                         <div class="checkout_btn_inner d-flex align-items-center">
-                                            <a class="gray_btn" href="#">Continue Shopping</a>
+                                            <a class="gray_btn" href="home">Continue Shopping</a>
                                             <a class="primary-btn" href="#">Proceed to checkout</a>
                                         </div>
                                     </td>

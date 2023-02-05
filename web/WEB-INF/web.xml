@@ -35,7 +35,7 @@
     </servlet>
     <servlet>
         <servlet-name>CartServlet</servlet-name>
-        <servlet-class>controler.CartServlet</servlet-class>
+        <servlet-class>controler.Cart_Add</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ResetPassword</servlet-name>
@@ -52,6 +52,10 @@
     <servlet>
         <servlet-name>ViewCart</servlet-name>
         <servlet-class>controler.ViewCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCart</servlet-name>
+        <servlet-class>controler.EditCart</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -84,6 +88,10 @@
     <servlet-mapping>
         <servlet-name>ViewCart</servlet-name>
         <url-pattern>/viewcart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCart</servlet-name>
+        <url-pattern>/editcart</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

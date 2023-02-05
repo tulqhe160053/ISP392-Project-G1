@@ -23,7 +23,7 @@ import model.Users;
  *
  * @author Tu
  */
-public class CartServlet extends HttpServlet {
+public class Cart_Add extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -91,12 +91,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        CartDAO cart_dao = new CartDAO();
-        ArrayList<Cart> list = cart_dao.selectByUserId(user.getUserID());
-        request.setAttribute("list",list);
-        request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+        
     }
 
     /** 
