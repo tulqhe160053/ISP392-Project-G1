@@ -86,10 +86,6 @@
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewCart</servlet-name>
-        <url-pattern>/viewcart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EditCart</servlet-name>
         <url-pattern>/editcart</url-pattern>
     </servlet-mapping>
