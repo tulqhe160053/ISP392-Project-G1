@@ -58,7 +58,7 @@ public class BlogDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
-            String blogid_raw = request.getParameter("Id");
+            String blogid_raw = request.getParameter("id");
             if (blogid_raw.equals("")) {
                 request.getRequestDispatcher("blog.jsp").forward(request, response);
             } else {
