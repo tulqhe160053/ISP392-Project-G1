@@ -2,55 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dal;
+package dao;
 
 import java.util.ArrayList;
-import model.ProductStatus;
+import model.UserStatus;
 
 /**
  *
  * @author Tu
  */
-public class ProductStatusDAO extends MyDAO implements DAOInterface<ProductStatus> {
+public class UserStatusDAO extends MyDAO implements DAOInterface<UserStatus> {
 
     @Override
-    public ArrayList<ProductStatus> selectAll() {
-        ArrayList<ProductStatus> t = new ArrayList<>();
-        xSql = "select * from ProductStatus";
-        try {
-            ps = con.prepareStatement(xSql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                int statusID = rs.getInt("StatusID");
-                String statusName = rs.getString("StatusName");
-
-                ProductStatus x = new ProductStatus(statusID, statusName);
-                t.add(x);
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return (t);
+    public ArrayList<UserStatus> selectAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ProductStatus selectById(ProductStatus t) {
-        ProductStatus ketqua = null;
-        xSql = "select * from ProductStatus where StatusID = ?";
+    public UserStatus selectById(UserStatus t) {
+        UserStatus ketqua = null;
+        xSql = "select * from UserStatus where ID = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, t.getStatusID());
+            ps.setInt(1, t.getId());
             rs = ps.executeQuery();
             /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
          Thus the first rs.next() statement moves the cursor to the first record
              */
 
             if (rs.next()) {
-                int statusID = rs.getInt("StatusID");
+                int id = rs.getInt("ID");
                 String statusName = rs.getString("StatusName");
-                ketqua = new ProductStatus(statusID, statusName);
+                ketqua = new UserStatus(id, statusName);
             } else {
                 ketqua = null;
             }
@@ -62,35 +45,28 @@ public class ProductStatusDAO extends MyDAO implements DAOInterface<ProductStatu
     }
 
     @Override
-    public void insert(ProductStatus t) {
+    public void insert(UserStatus t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int insertAll(ArrayList<ProductStatus> arr) {
+    public int insertAll(ArrayList<UserStatus> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(ProductStatus t) {
+    public void delete(UserStatus t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int deleteAll(ArrayList<ProductStatus> arr) {
+    public int deleteAll(ArrayList<UserStatus> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(int x, ProductStatus t) {
+    public void update(int x, UserStatus t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public static void main(String[] args) {
-        ProductStatusDAO dao = new ProductStatusDAO();
-        
-        for (ProductStatus pro : dao.selectAll()) {
-            System.out.println(pro);
-        }
-    }
 }

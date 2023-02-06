@@ -5,8 +5,8 @@
 
 package controler;
 
-import dal.CartDAO;
-import dal.ProductImgDAO;
+import dao.CartDAO;
+import dao.ProductImgDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

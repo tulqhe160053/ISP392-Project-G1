@@ -4,11 +4,11 @@
  */
 package controler;
 
-import dal.BlogDAO;
-import dal.CategoryDAO;
-import dal.ProductDAO;
-import dal.ProductImgDAO;
-import dal.SliderDAO;
+import dao.BlogDAO;
+import dao.CategoryDAO;
+import dao.ProductDAO;
+import dao.ProductImgDAO;
+import dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -73,7 +73,7 @@ public class BlogServlet extends HttpServlet {
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectAll();
         request.setAttribute("listBlog", listBlog);
-        request.getRequestDispatcher("viewblog.jsp").forward(request, response);
+        request.getRequestDispatcher("viewBlogList.jsp").forward(request, response);
     }
 
     /**

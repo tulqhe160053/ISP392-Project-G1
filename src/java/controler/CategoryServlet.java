@@ -4,10 +4,10 @@
  */
 package controler;
 
-import dal.CategoryDAO;
-import dal.ProductDAO;
-import dal.ProductImgDAO;
-import dal.SliderDAO;
+import dao.CategoryDAO;
+import dao.ProductDAO;
+import dao.ProductImgDAO;
+import dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -74,7 +74,7 @@ public class CategoryServlet extends HttpServlet {
             System.err.println(e);
         }
         
-        request.getRequestDispatcher("viewProductList.jsp").forward(request, response);
+        request.getRequestDispatcher("listProduct.jsp").forward(request, response);
     }
 
     /**

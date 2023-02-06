@@ -5,7 +5,7 @@
 package controler;
 
 import Mailer.Mailer;
-import dal.UserDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
