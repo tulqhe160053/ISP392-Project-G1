@@ -60,14 +60,14 @@ public class BlogDetail extends HttpServlet {
         try {
             String blogid_raw = request.getParameter("id");
             if (blogid_raw.equals("")) {
-                request.getRequestDispatcher("blog.jsp").forward(request, response);
+                request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
             } else {
                 int blogId = Integer.parseInt(blogid_raw);
                 
                 BlogDAO dao = new BlogDAO();
                 Blog b = dao.selectById(blogId);
                 request.setAttribute("blog", b);
-                request.getRequestDispatcher("viewblogdetail.jsp").forward(request, response);
+                request.getRequestDispatcher("/blog/viewblogdetail.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.err.println(e);

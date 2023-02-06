@@ -61,6 +61,7 @@ public class HomeServlet extends HttpServlet {
        request.setAttribute("list_productImg",list_productImg);
        request.setCharacterEncoding("UTF-8");
        String searchName = request.getParameter("searchName");
+       String url = "/common/homepage.jsp";
        if(searchName!=null){
            ArrayList<Product> listSearch_products =  product_daoo.getProductsByName(searchName);
             request.setAttribute("listSearch_products",listSearch_products);
@@ -68,7 +69,7 @@ public class HomeServlet extends HttpServlet {
         try {
             String catId_String = request.getParameter("catId");
             if(catId_String.equals("")){
-                request.getRequestDispatcher("homepage.jsp").forward(request, response);
+                request.getRequestDispatcher(url).forward(request, response);
             }
             else {
                 int catId = Integer.parseInt(catId_String);
@@ -83,7 +84,7 @@ public class HomeServlet extends HttpServlet {
             System.err.println(e);
         }
         
-       request.getRequestDispatcher("homepage.jsp").forward(request, response);
+       request.getRequestDispatcher(url).forward(request, response);
     } 
 
     /** 

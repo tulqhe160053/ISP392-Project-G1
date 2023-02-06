@@ -61,10 +61,12 @@ public class CategoryServlet extends HttpServlet {
        ProductImgDAO productImg_dao = new ProductImgDAO();
        ArrayList<ProductImg> list_productImg =  productImg_dao.selectAll();
        request.setAttribute("list_productImg",list_productImg);
+       String url = "/product/listProduct.jsp";
         try {
             String catId_String = request.getParameter("catId");
             if(catId_String.equals("")){
-                request.getRequestDispatcher("homepage.jsp").forward(request, response);
+                url = "/common/homepage.jsp";
+                request.getRequestDispatcher(url).forward(request, response);
             }
             else {
                 int catId = Integer.parseInt(catId_String);
@@ -74,7 +76,7 @@ public class CategoryServlet extends HttpServlet {
             System.err.println(e);
         }
         
-        request.getRequestDispatcher("listProduct.jsp").forward(request, response);
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     /**

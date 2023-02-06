@@ -44,16 +44,16 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("num");
         if(!repassword.equals(password)){
             request.setAttribute("mess", "Mật khẩu không trùng khớp");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/register.jsp").forward(request, response);
         }else{
             UserDAO dao = new UserDAO();
             Users u = dao.checklogin(username, email, phone);
             if(u == null) {
                 dao.register(username, password, gender, email, phone, new Role(3,"Customer"), new UserStatus(1, "Active"));
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
             }else{
                 request.setAttribute("mess", "Tài khoản đã tồn tại");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/register.jsp").forward(request, response);
         }
 
     }

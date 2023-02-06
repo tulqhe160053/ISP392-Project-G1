@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("/common/login.jsp").forward(request, response);
     }
 
     /**
@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
         Users u = dao.login(username, password);
         if (u == null) {
             request.setAttribute("mess", "Sai tên đăng nhập hoặc mật khẩu");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", u);

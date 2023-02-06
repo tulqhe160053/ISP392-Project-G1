@@ -91,7 +91,7 @@ public class ViewCart extends HttpServlet {
         ProductImgDAO productImg_dao = new ProductImgDAO();
         ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
         request.setAttribute("list_productImg",list_productImg);
-        request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+        request.getRequestDispatcher("/cart/viewCart.jsp").forward(request, response);
     }
 
     /** 

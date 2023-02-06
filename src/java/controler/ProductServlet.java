@@ -49,10 +49,12 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url = "/product/viewProductDetail.jsp";
         try {
             String productId_String = request.getParameter("productId");
             if (productId_String.equals("")) {
-                request.getRequestDispatcher("homepage.jsp").forward(request, response);
+                url = "/common/homepage.jsp";
+                request.getRequestDispatcher(url).forward(request, response);
             } else {
                 int productId = Integer.parseInt(productId_String);
                 Product product_save = new Product();
@@ -70,7 +72,7 @@ public class ProductServlet extends HttpServlet {
             System.err.println(e);
         }       
         
-        request.getRequestDispatcher("viewProductDetail.jsp").forward(request, response);
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     /**

@@ -73,7 +73,7 @@ public class BlogServlet extends HttpServlet {
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectAll();
         request.setAttribute("listBlog", listBlog);
-        request.getRequestDispatcher("viewBlogList.jsp").forward(request, response);
+        request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
     }
 
     /**
