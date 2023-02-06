@@ -54,43 +54,37 @@
                 <div class="border-right d-flex justify-content-center align-items-center ">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-center align-items-center mb-3">
-                            <h4 class="text-right">Account Detail</h4>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12"><label for = "pwd">Fullname</label><input type="text" class="form-control" placeholder="full name" value=""></div>
+                            <h4 class="text-right">User Detail</h4>
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-12"><label for = "pwd">Username</label><input type="text" class="form-control" placeholder="enter user number" value=""></div>
-
+                            <div class="col-md-12"><label for = "pwd">Username: </label>
+                                <a  class="text-right"> ${sessionScope.user.userName}</a>
+                                </div>
+                                
                         </div>
+                        
                         <div class="row mt-3">
-                            <div class="col-md-12"><label for = "pwd">Gender</label></div>
+                            <div class="col-md-12"><label for = "pwd">Gender: </label>
+                            <a  class="text-right"> ${sessionScope.user.gender}</a>
+                            </div>
                         </div>
 
 
-                        <div class="row mt-3 ml-4">
-                            <div class="col-md-5"> 
-                                <input type="radio" name="gender" id="radio1" value="male">Male
-                            </div>
+                        <div class="row mt-3">                          
+                         
+                            <div class="col-md-12 mt-3"><label for = "pwd">Email: </label>
+                                <a  class="text-right"> ${sessionScope.user.email}</a></div>
+                                
+                            <div class="col-md-12 mt-3"><label for = "pwd">Phone Number: </label>
+                                <a  class="text-right"> ${sessionScope.user.phoneNum}</a></div>
+                           
+                                <div class="col-md-12 mt-3"><label for = "pwd">Role: </label>
+                                    <a  class="text-right"> ??</a>
+                                </div>
 
-                            <div class="col-md-5">
-                                <input type="radio" name="gender" id="radio2" value="female">Female
-                            </div>
-                            <div class="col-md-12 mt-3"><label for = "pwd">Email</label><input type="email" class="form-control" placeholder="enter email" value=""></div>
-                            <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                            <div class="col-md-12 mt-3"><label for = "pwd">Role</label>
-                                <select class="form-select" name="role_id" id="role">
-                                    <option></option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-12 mt-4"><label for = "pwd">Status</label>
-                                <select class="form-select" name="status_id" id="status">
-                                    <option>Active</option>
-                                    <option>Deactive</option>
-
-                                </select>
+                            <div class="col-md-12 mt-4"><label for = "pwd">Status: </label>
+                                <a  class="text-right"> ??</a>
                             </div>
 
 
