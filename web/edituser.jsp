@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-12"><label for = "pwd">Username</label><input type="text" class="form-control" placeholder="enter user number" value=""></div>
+                            <div class="col-md-12"><label for = "pwd">Username</label><input type="text" class="form-control" placeholder="enter username" value=""></div>
 
                         </div>
                         <div class="row mt-3">
