@@ -67,7 +67,7 @@ public class BlogDetail extends HttpServlet {
                 BlogDAO dao = new BlogDAO();
                 Blog b = dao.selectById(blogId);
                 request.setAttribute("blog", b);
-                request.getRequestDispatcher("blogdetail.jsp").forward(request, response);
+                request.getRequestDispatcher("viewblogdetail.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.err.println(e);

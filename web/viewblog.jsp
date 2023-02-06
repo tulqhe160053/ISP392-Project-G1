@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="blog_post">
-                                    <img src="${blog.imageLink}" alt="">
+                                    <img src="./blog_img/${blog.imageLink}" alt="">
                                     <div class="blog_details">
                                         <a>
                                             <h2>${blog.title}</h2>
