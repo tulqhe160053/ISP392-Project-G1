@@ -117,6 +117,9 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog>{
         Blog b = new Blog();
         b= bd.selectById(1);
         System.out.println(b);
+        System.out.println("12");
+        System.out.println("34");
+        System.out.println("45");
         
         
         
