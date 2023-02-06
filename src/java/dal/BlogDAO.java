@@ -53,9 +53,38 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog>{
 
    
     public Blog selectById(int id) {
-        Blog b =new Blog();
-        
-        return b;
+        xSql = "select * from Blog where ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int blogId = rs.getInt("ID");
+                UserDAO dao = new UserDAO();
+                
+                int userId = rs.getInt("UserID");
+                Users x = new Users();
+                x.setUserID(userId);
+                Users bloger=dao.selectById(x);
+                
+                int catId = rs.getInt("CatID");
+                CategoryDAO cat_dao = new CategoryDAO();
+                Category category = cat_dao.selectById(new Category(catId, null));
+                
+                String title = rs.getString("Title");
+                String description = rs.getString("description");
+                String content = rs.getString("Content");
+                String img = rs.getString("imageLink");
+                
+                Blog b = new Blog(blogId,bloger,category,title,description,content,img);
+                return b;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -86,10 +115,11 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog>{
     public static void main(String[] args) {
         BlogDAO bd = new BlogDAO();
         Blog b = new Blog();
+        b= bd.selectById(1);
+        System.out.println(b);
         
-        for (Blog ca : bd.selectAll()) {
-            System.out.println(ca);
-        }
+        
+        
     }
 
     @Override
