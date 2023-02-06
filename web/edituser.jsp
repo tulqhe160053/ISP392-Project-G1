@@ -54,7 +54,7 @@
                 <div class="border-right d-flex justify-content-center align-items-center ">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-center align-items-center mb-3">
-                            <h4 class="text-right">Account Detail</h4>
+                            <h4 class="text-right">User Edit</h4>
                         </div>
 
                         <div class="row mt-3">
@@ -66,7 +66,7 @@
                         </div>
 
 
-                        <div class="row mt-3 ml-4">
+                        <div class="row mt-3">
                             <div class="col-md-5"> 
                                 <input type="radio" name="gender" id="radio1" value="male">Male
                             </div>
