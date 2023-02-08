@@ -4,7 +4,8 @@
  */
 package controler;
 
-import dal.UserDAO;
+
+import dao.UserDAO;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
