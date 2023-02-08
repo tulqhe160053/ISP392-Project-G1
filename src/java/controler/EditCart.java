@@ -5,12 +5,20 @@
 
 package controler;
 
+import dao.CartDAO;
+import dao.ProductImgDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import model.Cart;
+import model.Product;
+import model.ProductImg;
+import model.Users;
 
 /**
  *
@@ -28,18 +36,7 @@ public class EditCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditCart</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditCart at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        doGet(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,7 +50,24 @@ public class EditCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+                HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if(user==null){
+            request.getRequestDispatcher("home").forward(request, response);
+        }
+        CartDAO cart_dao = new CartDAO();
+        ArrayList<Cart> list = cart_dao.selectByUserId(user.getUserID());
+        int total = 0;
+        for (Cart cart : list) {
+            Product p = cart.getProduct();
+            total += p.getSellPrice() * cart.getAmount();
+        }
+        request.setAttribute("total",total);
+        request.setAttribute("list",list);
+        ProductImgDAO productImg_dao = new ProductImgDAO();
+        ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
+        request.setAttribute("list_productImg",list_productImg);
+        request.getRequestDispatcher("/cart/editcart.jsp").forward(request, response);
     } 
 
     /** 

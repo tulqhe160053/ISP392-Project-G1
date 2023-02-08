@@ -13,7 +13,7 @@
         <nav class="navbar navbar-expand-lg navbar-light main_box">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="home"><img src="img/logo.png" alt=""></a>
+                <a class="navbar-brand logo_h" href="home"><img src="<%=request.getContextPath()%>/img/logo.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
@@ -23,17 +23,17 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="home">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/home">Home</a></li>
+                        
                         <li class="nav-item">
-                            <a href="blog.html" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Blog</a>
+                            <a href="<%=request.getContextPath()%>/blog" class="nav-link ">Blog</a>
                         </li>
                         <c:if test="${sessionScope.user == null}">
                             <li class="nav-item">
-                                <a href="login.jsp" class="nav-link">Sign in</a>
+                                <a href="<%=request.getContextPath()%>/common/login.jsp" class="nav-link">Sign in</a>
                             </li>
                             <li class="nav-item">
-                                <a href="register.jsp" class="nav-link">Sign up</a>
+                                <a href="<%=request.getContextPath()%>/common/register.jsp" class="nav-link">Sign up</a>
                             </li>
                         </c:if>
 
@@ -42,19 +42,19 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Hello ${sessionScope.user.userName}</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="#">My Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="viewuser.jsp">My Profile</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#">My Orders</a></li>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 1}">
                                         <li class="nav-item"><a class="nav-link" href="#">Admin Dashboard</a></li>
                                         </c:if>
-                                    <li class="nav-item"><a class="nav-link" href="logout">Log Out</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout">Log Out</a></li>
                                 </ul>
                             </li>
                         </c:if>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
-                            <form action="cart" method="post">
+                            <form action="viewcart" method="post">
                                 <button type="submit" class="btn"><span class="ti-bag position-relative"></span></button> 
                             </form>                               
                         </li>
