@@ -20,6 +20,12 @@ public class UserStatus {
         this.StatusName = StatusName;
     }
 
+    public UserStatus(String StatusName) {
+        this.StatusName = StatusName;
+    }
+
+    
+
     public int getId() {
         return id;
     }

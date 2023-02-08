@@ -14,8 +14,18 @@ import model.UserStatus;
 public class UserStatusDAO extends MyDAO implements DAOInterface<UserStatus> {
 
     @Override
-    public ArrayList<UserStatus> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     public ArrayList<UserStatus> selectAll() {
+        ArrayList<UserStatus> us = new ArrayList<>();
+        String sql = "select * from userstatus";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                us.add(new UserStatus(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return us ; 
     }
 
     @Override
