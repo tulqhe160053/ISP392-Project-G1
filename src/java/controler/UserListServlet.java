@@ -155,7 +155,7 @@ public class UserListServlet extends HttpServlet {
             request.setAttribute("role", role);
             request.setAttribute("userstatus", userstatus);
             request.setAttribute("user", users);
-            request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+            request.getRequestDispatcher("viewuser_1.jsp").forward(request, response);
         }
         if(action.equals("edituser")){
             String uid = request.getParameter("uid");
