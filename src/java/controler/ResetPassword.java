@@ -4,15 +4,15 @@
  */
 package controler;
 
-import Mailer.Mailer;
+import Mailer.SendMail;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import model.Users;
 
 /**
@@ -75,7 +75,7 @@ public class ResetPassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO dao = new UserDAO();
-        Mailer gmail = new Mailer();
+        SendMail sm = new SendMail();
 
         try {
             String toEmail = request.getParameter("email");
@@ -93,7 +93,7 @@ public class ResetPassword extends HttpServlet {
                 // Update
                 dao.updatePassword(u.getEmail(), newPassword);
                 String message = (" Here Your new password: " + newPassword);                
-                gmail.send(toEmail, subject, message, fromEmail, password);
+//                sm.send(toEmail, subject, message, fromEmail, password);
                 
                 request.getRequestDispatcher("login.jsp").forward(request, response);
 
