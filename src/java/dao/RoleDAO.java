@@ -14,10 +14,19 @@ import model.Role;
 public class RoleDAO extends MyDAO implements DAOInterface<Role> {
 
     @Override
-    public ArrayList<Role> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     public ArrayList<Role> selectAll() {
+        ArrayList<Role> role = new ArrayList<>();
+        String sql = "select * from role";
+        try {
+            ps = con.prepareStatement(sql); 
+            rs = ps.executeQuery();
+            while(rs.next()){
+                role.add(new Role(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return role ; 
     }
-
     @Override
     public Role selectById(Role t) {
         Role ketqua = null;

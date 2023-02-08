@@ -15,10 +15,16 @@ public class Role {
 
     public Role() {
     }
+    
+    
 
     public Role(int RoleID, String RoleName) {
         this.RoleID = RoleID;
         this.RoleName = RoleName;
+    }
+
+    public Role(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getRoleID() {

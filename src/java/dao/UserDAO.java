@@ -5,6 +5,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import model.Role;
 import model.UserStatus;
@@ -241,6 +242,157 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         }
         return sb.toString();
     }
+    
+     public List<Users> searchName(String txt) {
+        List<Users> t = new ArrayList<>();
+        String sql = "select UserID , Username , Password, gender , Email,PhoneNum , r.RoleName , us.StatusName from users u\n"
+                + " join role r \n"
+                + " on r.roleID = u.roleID\n"
+                + " join userstatus us\n"
+                + " on us.ID = u.statusId\n"
+                + " where Username like ? or Email like ? or PhoneNum like ? ";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + txt + "%");
+            ps.setString(2, "%" + txt + "%");
+            ps.setString(3, "%" + txt + "%");
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Role r = new Role(rs.getString(7));
+                UserStatus u = new UserStatus(rs.getString(8));
+                t.add(new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), r, u));
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
+     
+      public void deleteUser(String uid) {
+        try {
+            String sql = "delete from users where userid = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, uid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void updateStatusRole(String role_id, String status_id,String uid) {
+        try {
+            String sql = "update users set  RoleId = ? , statusId = ? \n"
+                    + "where userID = ?";
+             ps = con.prepareStatement(sql);
+            ps.setString(1, role_id);
+            ps.setString(2, status_id);
+            ps.setString(3, uid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public List<Users> getListByPage(List<Users> list,
+            int start, int end) {
+        ArrayList<Users> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
+    public List<Users> getFilterByRole(String roleid) {
+        List<Users> user = new ArrayList<>();
+        String sql = "select UserID , Username , Password , gender , Email , PhoneNum ,r.RoleName,s.StatusName from users u\n"
+                + "join role r \n"
+                + "on u.roleID = r.roleID\n"
+                + "join userstatus s \n"
+                + "on u.statusId = s.ID\n"
+                + "where u.roleID = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, roleid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Role r = new Role(rs.getString(7));
+                UserStatus us = new UserStatus(rs.getString(8));
+                user.add(new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), r, us));
+            }
+
+        } catch (Exception e) {
+        }
+        return user;
+    }
+
+    public List<Users> getFilterByStatus(String statusid) {
+        List<Users> user = new ArrayList<>();
+        String sql = "select UserID , Username , Password , gender , Email , PhoneNum ,r.RoleName,s.StatusName from users u\n"
+                + "join role r \n"
+                + "on u.roleID = r.roleID\n"
+                + "join userstatus s \n"
+                + "on u.statusId = s.ID\n"
+                + "where u.statusId = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, statusid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Role r = new Role(rs.getString(7));
+                UserStatus us = new UserStatus(rs.getString(8));
+                user.add(new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), r, us));
+            }
+
+        } catch (Exception e) {
+        }
+        return user;
+    }
+
+    public List<Users> getFilter(String roleid, String statusid) {
+        List<Users> user = new ArrayList<>();
+        String sql = "select UserID , Username , Password , gender , Email , PhoneNum ,r.RoleName,s.StatusName from users u\n"
+                + "join role r \n"
+                + "on u.roleID = r.roleID\n"
+                + "join userstatus s \n"
+                + "on u.statusId = s.ID\n"
+                + "where u.roleID = ? and u.statusId = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, roleid);
+            ps.setString(2, statusid);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Role r = new Role(rs.getString(7));
+                UserStatus us = new UserStatus(rs.getString(8));
+                user.add(new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), r, us));
+            }
+
+        } catch (Exception e) {
+        }
+        return user;
+    }
+
+    public Users getUserByID(String uid) {
+        String sql = "select UserID , Username , Password, gender , Email,PhoneNum , r.RoleName , us.StatusName from users u\n"
+                + "join role r \n"
+                + "on r.roleID = u.roleID\n"
+                + "join userstatus us\n"
+                + "on us.ID = u.statusId\n"
+                + "where userID = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, uid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Role r = new Role(rs.getString(7));
+                UserStatus us = new UserStatus(rs.getString(8));
+                return new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), r, us);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
 
     @Override
     public void insert(Users t) {
