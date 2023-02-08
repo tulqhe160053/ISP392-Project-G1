@@ -22,11 +22,12 @@ public class Role {
         this.RoleID = RoleID;
         this.RoleName = RoleName;
     }
-
-    public Role(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     public Role(String RoleName) {
+         
+        this.RoleName = RoleName;
     }
 
+    
     public int getRoleID() {
         return RoleID;
     }
