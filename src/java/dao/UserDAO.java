@@ -263,7 +263,9 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
             ps.setInt(7, status.getId());
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
         }
+        
 
     }
 
