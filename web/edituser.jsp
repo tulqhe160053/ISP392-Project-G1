@@ -1,5 +1,5 @@
 <%-- 
-    Document   : edituser2
+    Document   : edituser
     Created on : Feb 5, 2023, 6:13:54 PM
     Author     : thaib
 --%>
@@ -56,43 +56,37 @@
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <h4 class="text-right">User Edit</h4>
                         </div>
+                        <form  action="edituser" method="post" id="contactForm" novalidate="novalidate">
+                            <div class="row mt-3">
+                                <div class="col-md-12"><label for = "pwd">Username</label><input type="text" class="form-control" placeholder="${sessionScope.user.userName}" value=""></div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-12"><label for = "pwd">Username</label><input type="text" class="form-control" placeholder="enter username" value=""></div>
-
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12"><label for = "pwd">Gender</label></div>
-                        </div>
-
-
-                        <div class="row mt-3">
-                            <div class="col-md-5"> 
-                                <input type="radio" name="gender" id="radio1" value="male">Male
                             </div>
-
-                            <div class="col-md-5">
-                                <input type="radio" name="gender" id="radio2" value="female">Female
-                            </div>
-                            <div class="col-md-12 mt-3"><label for = "pwd">Email</label><input type="email" class="form-control" placeholder="enter email" value=""></div>
-                            <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                            <div class="col-md-12 mt-3"><label for = "pwd">Role</label>
-                                <select class="form-select" name="role_id" id="role">
-                                    <option></option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-12 mt-4"><label for = "pwd">Status</label>
-                                <select class="form-select" name="status_id" id="status">
-                                    <option>Active</option>
-                                    <option>Deactive</option>
-
-                                </select>
+                            <div class="row mt-3">
+                                <div class="col-md-12"><label for = "pwd">Current gender: ${sessionScope.user.gender}</label></div>
                             </div>
 
 
-                        </div>
-                        <div class="mt-5 text-center"><button class="primary-btn" type="submit">Save</button></div>
+                            <div class="row mt-3">
+                                <div class="col-md-5"> 
+                                    <input type="radio" name="gender" id="radio1" value="male">Male
+                                </div>
+
+                                <div class="col-md-5">
+                                    <input type="radio" name="gender" id="radio2" value="female">Female
+                                </div>
+                                <div class="col-md-12 mt-3"><label for = "pwd">Email</label><input type="email" class="form-control" placeholder="${sessionScope.user.email}" value=""></div>
+                                <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label><input type="text" class="form-control" placeholder="${sessionScope.user.phoneNum}" value=""></div>
+
+
+                                <div class="col-md-12 mt-4"><label for = "pwd">Current status: ${sessionScope.user.getUserStatus().getStatusName()}</label>
+                                    <select class="form-select" name="status_id" id="status">
+                                        <option>Active</option>
+                                        <option>Deactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-5 text-center"><button value="submit" type="submit" class="primary-btn" >Save</button></div>
+                        </form>
                     </div>
                 </div>
 
@@ -101,6 +95,5 @@
     </div>
 </div>
 
-</body>
         <jsp:include page="footer.jsp" />
 </html>

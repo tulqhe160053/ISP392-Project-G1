@@ -4,7 +4,6 @@
  */
 package controler;
 
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,15 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Role;
-import model.UserStatus;
 
 /**
  *
  * @author thaib
  */
-@WebServlet(name = "EditUserServlet", urlPatterns = {"/edituser"})
-public class EditUser extends HttpServlet {
+@WebServlet(name = "ViewUser", urlPatterns = {"/ViewUser"})
+public class ViewUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,18 +31,19 @@ public class EditUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String username = request.getParameter("userName");
-        String password = request.getParameter("password");
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("num");
-        
-        UserDAO dao = new UserDAO();
-        dao.editUser(username, password, gender, email, phone, new Role(3,"Customer"), new UserStatus(1, "Active"));
-        request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ViewUser</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ViewUser at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
