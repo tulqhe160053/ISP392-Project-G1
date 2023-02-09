@@ -108,6 +108,14 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
         }
     }
     
+    public void deleteByUserId(int id) {
+        try {
+            String sql = "delete from Cart where UserID = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }    }
     
     @Override
     public int insertAll(ArrayList<Cart> arr) {

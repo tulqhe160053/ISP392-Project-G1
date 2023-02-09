@@ -75,7 +75,6 @@
         <div class="container mt-5">
             <div class="float-right">               
                 <a class="btn btn-primary" href="<%=request.getContextPath()%>/editcart">Edit cart</a>
-                <button type="button" class="btn btn-danger">Delete Cart</button>g
             </div>
         </div>
         <!--End delete cart button-->
@@ -123,9 +122,6 @@
                                                 <td>                                                  
                                                     <h5>$${cart.getProduct().getSellPrice() * cart.getAmount()}</h5>
                          
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         </c:if>

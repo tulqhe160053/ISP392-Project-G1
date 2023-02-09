@@ -61,6 +61,10 @@
         <servlet-name>BlogServlet</servlet-name>
         <servlet-class>controler.BlogServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCart</servlet-name>
+        <servlet-class>controler.DeleteCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -100,6 +104,10 @@
     <servlet-mapping>
         <servlet-name>BlogServlet</servlet-name>
         <url-pattern>/blog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCart</servlet-name>
+        <url-pattern>/deletecart</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
