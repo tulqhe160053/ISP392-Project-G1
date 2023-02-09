@@ -58,7 +58,8 @@
                         </div>
                         <form  action="edituser" method="post" id="contactForm" novalidate="novalidate">
                             <div class="row mt-3">
-                                <div class="col-md-12"><label for = "pwd">Username</label><input type="text" class="form-control" placeholder="${sessionScope.user.userName}" value=""></div>
+                                <div class="col-md-12"><label for = "pwd">Username</label>
+                                    <input type="text" class="form-control" name="userName" placeholder="${sessionScope.user.userName}" value=""></div>
 
                             </div>
                             <div class="row mt-3">
@@ -74,8 +75,10 @@
                                 <div class="col-md-5">
                                     <input type="radio" name="gender" id="radio2" value="female">Female
                                 </div>
-                                <div class="col-md-12 mt-3"><label for = "pwd">Email</label><input type="email" class="form-control" placeholder="${sessionScope.user.email}" value=""></div>
-                                <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label><input type="text" class="form-control" placeholder="${sessionScope.user.phoneNum}" value=""></div>
+                                <div class="col-md-12 mt-3"><label for = "pwd">Email</label>
+                                    <input type="email" class="form-control" name="email" placeholder="${sessionScope.user.email}" value=""></div>
+                                <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label>
+                                    <input type="text" class="form-control" name="num" placeholder="${sessionScope.user.phoneNum}" value=""></div>
 
 
                                 <div class="col-md-12 mt-4"><label for = "pwd">Current status: ${sessionScope.user.getUserStatus().getStatusName()}</label>
