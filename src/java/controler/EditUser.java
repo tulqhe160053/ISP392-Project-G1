@@ -42,11 +42,9 @@ public class EditUser extends HttpServlet {
         String gender = request.getParameter("gender");
         String email = request.getParameter("Email");
         String phoneNum = request.getParameter("PhoneNum");
-
-
+        String role = request.getParameter("role");
         UserDAO dao = new UserDAO();
-        dao.editUser(userName, gender, email, phoneNum, new Role(3,"Customer"), new UserStatus(1, "Active"), userId);
-        //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+        dao.editUser(userName, gender, email, phoneNum, role, email, userId);        //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
         response.sendRedirect("viewuser.jsp");
         }
     

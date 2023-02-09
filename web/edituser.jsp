@@ -56,7 +56,7 @@
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <h4 class="text-right">User Edit</h4>
                         </div>
-                        <form  action="edituser" method="post" id="contactForm" novalidate="novalidate">
+                        <form  action="edituser" method="post" >
                             <div class="row mt-3">
                                 <div class="col-md-12"><label for = "pwd">Username</label>
                                     <input type="text" class="form-control" name="userName" value="${sessionScope.user.userName}" ></div>
@@ -76,7 +76,7 @@
                                     <input type="radio" name="gender" id="radio2" value="female">Female
                                 </div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Email</label>
-                                    <input type="email" class="form-control" name="email" value="${sessionScope.user.email}" ></div>
+                                    <input type="text" class="form-control" name="email" value="${sessionScope.user.email}" ></div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label>
                                     <input type="text" class="form-control" name="num" value="${sessionScope.user.phoneNum}" ></div>
 
