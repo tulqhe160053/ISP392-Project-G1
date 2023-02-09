@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Role;
 import model.UserStatus;
+import model.Users;
 
 /**
  *
@@ -36,15 +37,17 @@ public class EditUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String username = request.getParameter("userName");
-        String password = request.getParameter("password");
+        String userId = request.getParameter("UserID");
+        String userName = request.getParameter("userName");
         String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("num");
-        
+        String email = request.getParameter("Email");
+        String phoneNum = request.getParameter("PhoneNum");
+
+
         UserDAO dao = new UserDAO();
-        dao.editUser(username, password, gender, email, phone, new Role(3,"Customer"), new UserStatus(1, "Active"));
-        request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+        dao.editUser(userName, gender, email, phoneNum, new Role(3,"Customer"), new UserStatus(1, "Active"), userId);
+        //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+        response.sendRedirect("viewuser.jsp");
         }
     
 
@@ -86,5 +89,6 @@ public class EditUser extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

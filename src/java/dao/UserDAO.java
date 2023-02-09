@@ -242,14 +242,14 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return sb.toString();
     }
     
-    public void editUser(String userName, String pass, String gender, String email, String phoneNum, Role role, UserStatus status) {
-        String query = "UPDATE User\n"
+    public void editUser(String userName, String gender, String email, String phoneNum, Role role, UserStatus status, String userId) {
+        String query = "update User\n"
                 + "[Username] = ?,\n"
                 + "gender = ?,\n"
                 + "Email = ?,\n"
                 + "PhoneNum = ?,\n"
-                + "RoleID = ?\n"
-                + "where UserID =?";
+                + "RoleID = ?,\n"
+                + "where UserID = ?";
         try {
             con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
@@ -258,11 +258,10 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
             ps.setString(4, email);
             ps.setString(5, phoneNum);
             ps.setInt(6, role.getRoleID());
-            ps.setInt(7, status.getId());
+            ps.setString(7, userId);
             ps.executeUpdate();
             
         } catch (Exception e) {
-            e.printStackTrace();
         }
         
 

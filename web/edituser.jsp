@@ -59,7 +59,7 @@
                         <form  action="edituser" method="post" id="contactForm" novalidate="novalidate">
                             <div class="row mt-3">
                                 <div class="col-md-12"><label for = "pwd">Username</label>
-                                    <input type="text" class="form-control" name="userName" placeholder="${sessionScope.user.userName}" value=""></div>
+                                    <input type="text" class="form-control" name="userName" value="${sessionScope.user.userName}" ></div>
 
                             </div>
                             <div class="row mt-3">
@@ -76,13 +76,13 @@
                                     <input type="radio" name="gender" id="radio2" value="female">Female
                                 </div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="${sessionScope.user.email}" value=""></div>
+                                    <input type="email" class="form-control" name="email" value="${sessionScope.user.email}" ></div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label>
-                                    <input type="text" class="form-control" name="num" placeholder="${sessionScope.user.phoneNum}" value=""></div>
+                                    <input type="text" class="form-control" name="num" value="${sessionScope.user.phoneNum}" ></div>
 
 
                                 <div class="col-md-12 mt-4"><label for = "pwd">Current status: ${sessionScope.user.getUserStatus().getStatusName()}</label>
-                                    <select class="form-select" name="status_id" id="status">
+                                    <select class="form-select" name="status_id" id="status" value="${sessionScope.user.getUserStatus().getStatusName()}">
                                         <option>Active</option>
                                         <option>Deactive</option>
                                     </select>
