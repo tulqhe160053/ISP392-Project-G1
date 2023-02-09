@@ -249,18 +249,18 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
                 + "Email = ?,\n"
                 + "PhoneNum = ?,\n"
                 + "RoleID = ?,\n"
-                + "statusId = ?,\n"
-                + "where Username = ?";
+                + "statusId = ?\n"
+                + "where UserID = ?";
         try {
             con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, userName);
-            ps.setString(3, gender);
-            ps.setString(4, email);
-            ps.setString(5, phoneNum);
-            ps.setString(6, role);
-            ps.setString(7, status);
-            ps.setString(8, userId);
+            ps.setString(2, gender);
+            ps.setString(3, email);
+            ps.setString(4, phoneNum);
+            ps.setString(5, role);
+            ps.setString(6, status);
+            ps.setString(7, userId);
             ps.executeUpdate();
             
         } catch (Exception e) {

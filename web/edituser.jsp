@@ -79,6 +79,10 @@
                                     <input type="text" class="form-control" name="email" value="${sessionScope.user.email}" ></div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label>
                                     <input type="text" class="form-control" name="num" value="${sessionScope.user.phoneNum}" ></div>
+                                    
+                                    <div class="col-md-12 mt-3"><label for = "pwd">UserID: </label>
+                                    <a  class="text-right" name="userId" > ${sessionScope.user.getUserID()}</a>
+                                </div>
 
 
                                 <div class="col-md-12 mt-4"><label for = "pwd">Current status: ${sessionScope.user.getUserStatus().getStatusName()}</label>

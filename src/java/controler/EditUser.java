@@ -37,14 +37,15 @@ public class EditUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String userId = request.getParameter("UserID");
+        String userId = request.getParameter("userId");
         String userName = request.getParameter("userName");
         String gender = request.getParameter("gender");
         String email = request.getParameter("Email");
         String phoneNum = request.getParameter("PhoneNum");
         String role = request.getParameter("role");
         UserDAO dao = new UserDAO();
-        dao.editUser(userName, gender, email, phoneNum, role, email, userId);        //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+        dao.editUser(userName, gender, email, phoneNum, role, email, userId);
+        //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
         response.sendRedirect("viewuser.jsp");
         }
     
