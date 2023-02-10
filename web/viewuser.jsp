@@ -80,11 +80,11 @@
                                 <a  class="text-right"> ${sessionScope.user.phoneNum}</a></div>
                            
                                 <div class="col-md-12 mt-3"><label for = "pwd">Role: </label>
-                                    <a  class="text-right"> ??</a>
+                                    <a  class="text-right"> ${sessionScope.user.getRole().getRoleName()}</a>
                                 </div>
 
                             <div class="col-md-12 mt-4"><label for = "pwd">Status: </label>
-                                <a  class="text-right"> ??</a>
+                                <a  class="text-right"> ${sessionScope.user.getUserStatus().getStatusName()}</a>
                             </div>
 
 
