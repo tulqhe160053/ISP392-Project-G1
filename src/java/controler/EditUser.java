@@ -39,7 +39,7 @@ public class EditUser extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
             HttpSession session = request.getSession();
-            model.Users user = (model.Users) session.getAttribute("userId");
+            model.Users user = (model.Users) session.getAttribute("user");
             //model.UserStatus id = (model.UserStatus) session.getAttribute("statusid");
             String userName = request.getParameter("userName");
             String gender = request.getParameter("gender");
@@ -49,12 +49,24 @@ public class EditUser extends HttpServlet {
             int userId = user.getUserID();
             //int status = id.getId();
             dao.editUser(userName, gender, email, phoneNum, userId);
-            //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
-            request.getRequestDispatcher("viewuser.jsp").forward(request, response);
-        }catch (Exception e){}
+            if (!user.getUserName().equals(userName)) {
+                session.removeAttribute("user");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                user.setUserName(userName);
+                user.setGender(gender);
+                user.setEmail(email);
+                user.setPhoneNum(phoneNum);
+                session.setAttribute("user", user);
+                request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().print(e);
+            response.getWriter().print(e.getMessage());
         }
-    
-    
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -82,7 +94,7 @@ public class EditUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-     
+
     }
 
     /**
@@ -94,6 +106,5 @@ public class EditUser extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 
 }

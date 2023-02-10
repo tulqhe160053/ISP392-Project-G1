@@ -247,7 +247,7 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
                 + "set Username = ?,\n"
                 + "gender = ?,\n"
                 + "Email = ?,\n"
-                + "PhoneNum = ?,\n"
+                + "PhoneNum = ?\n"
                 //+ "statusId = ?\n"
                 + "where UserID = ?";
         try {
@@ -260,6 +260,7 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
             ps.setInt(5, userId);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         
 
