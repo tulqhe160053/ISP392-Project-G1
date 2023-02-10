@@ -35,21 +35,26 @@ public class EditUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String userId = request.getParameter("userId");
-        String userName = request.getParameter("userName");
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("Email");
-        String phoneNum = request.getParameter("PhoneNum");
-        String role = request.getParameter("role");
-        UserDAO dao = new UserDAO();
-        dao.editUser(userName, gender, email, phoneNum, role, email, userId);
-        //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
-        response.sendRedirect("viewuser.jsp");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
+            HttpSession session = request.getSession();
+            model.Users user = (model.Users) session.getAttribute("userId");
+            //model.UserStatus id = (model.UserStatus) session.getAttribute("statusid");
+            String userName = request.getParameter("userName");
+            String gender = request.getParameter("gender");
+            String email = request.getParameter("email");
+            String phoneNum = request.getParameter("PhoneNum");
+            UserDAO dao = new UserDAO();
+            int userId = user.getUserID();
+            //int status = id.getId();
+            dao.editUser(userName, gender, email, phoneNum, userId);
+            //request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+            request.getRequestDispatcher("viewuser.jsp").forward(request, response);
+        }catch (Exception e){}
         }
     
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -77,6 +82,7 @@ public class EditUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+     
     }
 
     /**

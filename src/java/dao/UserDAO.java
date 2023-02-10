@@ -242,27 +242,23 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return sb.toString();
     }
     
-    public void editUser(String userName, String gender, String email, String phoneNum, String role, String status, String userId) {
+    public void editUser(String userName, String gender, String email, String phoneNum, int userId) {
         String query = "update Users\n"
                 + "set Username = ?,\n"
                 + "gender = ?,\n"
                 + "Email = ?,\n"
                 + "PhoneNum = ?,\n"
-                + "RoleID = ?,\n"
-                + "statusId = ?\n"
+                //+ "statusId = ?\n"
                 + "where UserID = ?";
         try {
-            con = new DBContext().getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, userName);
             ps.setString(2, gender);
             ps.setString(3, email);
             ps.setString(4, phoneNum);
-            ps.setString(5, role);
-            ps.setString(6, status);
-            ps.setString(7, userId);
+            //ps.setInt(5, status.getId());
+            ps.setInt(5, userId);
             ps.executeUpdate();
-            
         } catch (Exception e) {
         }
         
