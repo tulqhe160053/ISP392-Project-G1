@@ -91,6 +91,44 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         }
         return (ketqua);
     }
+    
+    public Users getById(int userId) {
+        Users ketqua = null;
+        xSql = "select * from Users where UserID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            if (rs.next()) {
+                String userName = rs.getString("Username");
+                String password = rs.getString("Password");
+                String gender = rs.getString("gender");
+                String email = rs.getString("Email");
+                String phoneNum = rs.getString("PhoneNum");
+                int role_id = rs.getInt("RoleID");
+
+                RoleDAO dao = new RoleDAO();
+                Role role = dao.selectById(new Role(role_id, null));
+
+                int userStatus_id = rs.getInt("statusId");
+
+                UserStatusDAO userDao = new UserStatusDAO();
+                UserStatus status = userDao.selectById(new UserStatus(userStatus_id, null));
+
+                ketqua = new Users(userId, userName, password, gender, email, phoneNum, role, status);
+            } else {
+                ketqua = null;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (ketqua);
+    }
 
     public Users login(String user, String pass) {
 

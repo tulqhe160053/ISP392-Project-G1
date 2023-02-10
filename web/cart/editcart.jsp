@@ -116,7 +116,8 @@
                                                 </td>
                                                 <td>
                                                     <div class="product_count">
-                                                        <h5>${cart.getAmount()}</h5>
+                                                        <input name="amount" type="number" value="${cart.getAmount()}">
+                                                        <h5></h5>
                                                     </div>
                                                 </td>
                                                 <td>                                                  
@@ -125,7 +126,8 @@
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                                </td>                                               
+                                                </td>
+                                               
                                             </tr>
                                         </c:if>
                                     </c:forEach>
