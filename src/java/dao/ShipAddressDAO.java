@@ -50,19 +50,19 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
                  City shipCity = city_dao.getById(cityId);
                  
                  int districtId = rs.getInt("DistrictId");
-                 District district;
-                 String addressDetail;
+                 DistrictDAO district_dao = new DistrictDAO();
+                 District district = district_dao.getById(districtId);
                  
-                 ShipAddress x = new ShipAddress(categoryId, categoryName);
+                 String addressDetail = rs.getString("AddressDetail");
+                 
+                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
                 t.add(x);
-            } else {
-                ketqua = null;
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
         }
-        return (ketqua);
+        return t;
     }
 
     @Override
@@ -90,4 +90,9 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public static void main(String[] args) {
+        ShipAddressDAO dao = new ShipAddressDAO();
+        
+        System.out.println(dao.getByUserId(2));
+    }
 }

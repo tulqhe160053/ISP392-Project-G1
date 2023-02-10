@@ -65,6 +65,10 @@
         <servlet-name>DeleteCart</servlet-name>
         <servlet-class>controler.DeleteCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartComplete</servlet-name>
+        <servlet-class>controler.CartComplete</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -108,6 +112,10 @@
     <servlet-mapping>
         <servlet-name>DeleteCart</servlet-name>
         <url-pattern>/deletecart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartComplete</servlet-name>
+        <url-pattern>/cartcomplete</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
