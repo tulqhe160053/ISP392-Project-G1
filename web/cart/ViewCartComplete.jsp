@@ -83,7 +83,7 @@
                         <hr>
                         <h6 class="mb-0">Shopping cart</h6>
                         <div class="d-flex justify-content-between"></div>
-                        <c:forEach items="${requestScope.list}" var="item">
+                        <c:forEach items="${requestScope.listCartProduct}" var="item">
                             <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
                                 <c:forEach items="${requestScope.list_productImg}" var="img_item" >
                                     <c:if test="${img_item.getProduct().getProductID() == item.getProduct().getProductID()}">

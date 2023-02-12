@@ -5,6 +5,7 @@
 package controler;
 
 import dao.CartDAO;
+import dao.CartProductDAO;
 import dao.ProductDAO;
 import dao.ProductImgDAO;
 import dao.ShipAddressDAO;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Cart;
+import model.CartProduct;
 import model.Product;
 import model.ProductImg;
 import model.ShipAddress;
@@ -63,17 +65,18 @@ public class CartComplete extends HttpServlet {
                     request.getRequestDispatcher("home").forward(request, response);
                 }
                 CartDAO cart_dao = new CartDAO();
-                ArrayList<Cart> list = cart_dao.selectByUserId(user.getUserID());
+                CartProductDAO cartproduct_dao = new CartProductDAO();
+                Cart cart = cart_dao.selectByUserId(user.getUserID());
                 int total = 0;
-                for (Cart cart : list) {
-                    Product p = cart.getProduct();
-                    total += p.getSellPrice() * cart.getAmount();
+                for (CartProduct cartproduct : cartproduct_dao.getByCartId(cart.getId())) {
+                    Product p = cartproduct.getProduct();
+                    total += p.getSellPrice() * cartproduct.getAmount();
                 }
                 request.setAttribute("total", total);
-                request.setAttribute("list", list);
+                request.setAttribute("listCartProduct", cartproduct_dao.getByCartId(cart.getId()));
                 ProductImgDAO productImg_dao = new ProductImgDAO();
                 ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
-                
+
                 ShipAddressDAO address_dao = new ShipAddressDAO();
                 ArrayList<ShipAddress> list_shipAddress = address_dao.getByUserId(user.getUserID());
                 request.setAttribute("shipaddress", list_shipAddress.get(0));
