@@ -99,6 +99,40 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
         }
         return ketqua;
     }
+    
+        public ArrayList<CartProduct> getByCartId( int cartId) {
+        ArrayList<CartProduct> t = new ArrayList<>();
+        xSql = "select * from CartProduct where cartId = (?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, cartId);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            while (rs.next()) {
+                int cartid = rs.getInt("cartId");
+                int productid = rs.getInt("productId");
+                int amount = rs.getInt("Amount");
+                
+                CartDAO cart_dao = new CartDAO();
+                Cart cart = cart_dao.selectById(new Cart(cartid, null));
+                
+                ProductDAO product_dao = new ProductDAO();
+                Product test = new Product();
+                test.setProductID(productid);
+                Product product = product_dao.selectById(test);
+
+                CartProduct ketqua = new CartProduct(cart, product, amount);
+                t.add(ketqua);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return t;
+    }
 
     @Override
     public int insertAll(ArrayList<CartProduct> arr) {
@@ -123,7 +157,7 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
     public static void main(String[] args) {
         CartProductDAO dao = new CartProductDAO();
         
-        for (CartProduct object : dao.selectAll()) {
+        for (CartProduct object : dao.getByCartId(1)) {
             System.out.println(object);
         }
     }
