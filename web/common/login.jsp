@@ -84,7 +84,7 @@
 
                                 <div class="col-md-12 form-group">
                                     <button type="submit" value="submit" class="primary-btn">Login</button>
-                                    <a href="<%=request.getContextPath()%>/resetpassword.jsp">Forgot password?</a>
+                                    <a href="<%=request.getContextPath()%>/common/resetpassword.jsp">Forgot password?</a>
                                 </div>
                             </form>
                         </div>

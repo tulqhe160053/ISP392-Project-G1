@@ -64,7 +64,8 @@ public class RegisterServlet extends HttpServlet {
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             } else {
                 String verifyCode = sm.getRandom();
-                sm.send(email, verifyCode);
+                String subject = "Verify";
+                sm.send(email, subject, verifyCode);
                 request.getSession().setAttribute("verifyCode", verifyCode);
                 request.getSession().setAttribute("status", "register");
                 request.getRequestDispatcher("verify.jsp").forward(request, response);

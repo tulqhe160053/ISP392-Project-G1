@@ -16,11 +16,10 @@ import javax.mail.internet.MimeMessage;
 
 /**
  *
- * @author ducth
+ * @author Admin
  */
-public class SendMail {
-    
-    public String getRandom() {
+public class ResetMail {
+       public String getRandom() {
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
         return String.format("%06d", number);
@@ -59,8 +58,7 @@ public class SendMail {
             //set To email field
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(toEmail));
-
-            //set email subject field
+                        //set email subject field
             message.setSubject(subject);
 
             //set the content of the email message
@@ -74,9 +72,9 @@ public class SendMail {
                     + "      border-radius: 10px\n"
                     + "      \"\n"
                     + "    >\n"
-                    + "    <h1>Here we go!</h1>\n"
+                    + "    <h1>Here your new password!</h1>\n"
                     + "      <small\n"
-                    + "        >Please enter this code in the verification link to confirm your identity.</small>\n"
+                    + "        >Comback and log in again</small>\n"
                     + "      <div\n"
                     + "        style=\"\n"
                     + "          background-color: rgb(171, 168, 168);\n"
@@ -98,7 +96,7 @@ public class SendMail {
                     + "          margin: 20px auto;\n"
                     + "        \"\n"
                     + "      >\n"
-                    + "        <a style=\"text-decoration: none\" href=\"http://localhost:8080/OnlineShop/verify\">Verification link</a>\n"
+                    + "        <a style=\"text-decoration: none\" href=\"http://localhost:9999/OnlineShop/common/login.jsp\">Reset</a>\n"
                     + "      </button>\n"
                     + "      <h5>Questions? <a href=\"\">We're here to help</a></h5>\n"
                     + "    </div>",
