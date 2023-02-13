@@ -6,7 +6,6 @@
 package controler;
 
 import dao.CartDAO;
-import dao.CartProductDAO;
 import dao.ProductImgDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Cart;
-import model.CartProduct;
 import model.Product;
 import model.ProductImg;
 import model.Users;
@@ -82,15 +80,14 @@ public class ViewCart extends HttpServlet {
             request.getRequestDispatcher("home").forward(request, response);
         }
         CartDAO cart_dao = new CartDAO();
-        Cart cart = cart_dao.selectByUserId(user.getUserID());
-        CartProductDAO cartproduct_dao = new CartProductDAO();
+        ArrayList<Cart> list = cart_dao.selectByUserId(user.getUserID());
         int total = 0;
-        for (CartProduct cartproduct : cartproduct_dao.getByCartId(cart.getId())) {
-            Product p = cartproduct.getProduct();
-            total += p.getSellPrice() * cartproduct.getAmount();
+        for (Cart cart : list) {
+            Product p = cart.getProduct();
+            total += p.getSellPrice() * cart.getAmount();
         }
         request.setAttribute("total",total);
-        request.setAttribute("listCartProduct",cartproduct_dao.getByCartId(cart.getId()));
+        request.setAttribute("list",list);
         ProductImgDAO productImg_dao = new ProductImgDAO();
         ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
         request.setAttribute("list_productImg",list_productImg);

@@ -241,7 +241,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         
-        for (Product pro : dao.selectAllByCatId(new Category(2, ""))) {
+        for (Product pro : dao.getProductsByName("I")) {
             System.out.println(pro);
         }
 

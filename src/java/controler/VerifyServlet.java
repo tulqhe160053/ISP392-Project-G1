@@ -4,7 +4,6 @@
  */
 package controler;
 
-
 import dao.UserDAO;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -83,7 +82,7 @@ public class VerifyServlet extends HttpServlet {
                dao.register(user.getUserName(), user.getPassword(), user.getGender(), user.getEmail(), user.getPhoneNum(), new Role(3, "Customer"), new UserStatus(1, "Active"));
                  
 
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("common/login.jsp").forward(request, response);
             } else {
                 request.setAttribute("mess", "Verification code is not correct. Please try again");
                 request.getRequestDispatcher("verify.jsp").forward(request, response);

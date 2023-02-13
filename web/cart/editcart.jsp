@@ -74,7 +74,8 @@
         <!--Delete cart button-->
         <div class="container mt-5">
             <div class="float-right">
-                <a class="btn btn-danger" href="<%=request.getContextPath()%>/deletecart">Delete cart</a>
+                <a class="btn btn-primary" href="<%=request.getContextPath()%>/editcart">Edit cart</a>
+                <button type="button" class="btn btn-danger">Delete Cart</button>
             </div>
         </div>
         <!--End delete cart button-->
@@ -100,7 +101,7 @@
                                         <c:if test="${cart.getProduct().getProductID() == productImg.getProduct().getProductID()}">
                                             <c:set var="category" value="${cart.getProduct().getCategory()}"></c:set>
                                             <c:set var="brand" value="${cart.getProduct().getBrand()}"></c:set>
-                                            <tr>                                               
+                                            <tr>
                                                 <td>
                                                     <div class="media">
                                                         <div class="d-flex">
@@ -116,8 +117,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="product_count">
-                                                        <input name="amount" type="number" value="${cart.getAmount()}">
-                                                        <h5></h5>
+                                                        <h5>${cart.getAmount()}</h5>
                                                     </div>
                                                 </td>
                                                 <td>                                                  
@@ -127,11 +127,24 @@
                                                 <td>
                                                     <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
-                                               
                                             </tr>
                                         </c:if>
                                     </c:forEach>
                                 </c:forEach>
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <h2 class="text-danger">Subtotal</h2>
+                                    </td>
+                                    <td>
+                                        <h2>$${total}</h2>
+                                    </td>
+                                </tr>
                                 <tr class="out_button_area">
                                     <td>
 
@@ -145,7 +158,7 @@
                                     <td>
                                         <div class="checkout_btn_inner d-flex align-items-center">
                                             <a class="gray_btn" href="<%=request.getContextPath()%>/home">Continue Shopping</a>
-                                            <a class="primary-btn" href="<%=request.getContextPath()%>/cartcomplete">Proceed to checkout</a>
+                                            <a class="primary-btn" href="#">Proceed to checkout</a>
                                         </div>
                                     </td>
                                 </tr>

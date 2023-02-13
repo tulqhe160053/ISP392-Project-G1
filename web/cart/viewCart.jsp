@@ -75,6 +75,7 @@
         <div class="container mt-5">
             <div class="float-right">               
                 <a class="btn btn-primary" href="<%=request.getContextPath()%>/editcart">Edit cart</a>
+                <button type="button" class="btn btn-danger">Delete Cart</button>g
             </div>
         </div>
         <!--End delete cart button-->
@@ -95,11 +96,11 @@
                             </thead>
                             <tbody>
                                 <c:set var="sum" value="0"></c:set>
-                                <c:forEach items="${listCartProduct}" var="cartProduct">
+                                <c:forEach items="${list}" var="cart">
                                     <c:forEach items="${list_productImg}" var="productImg">
-                                        <c:if test="${cartProduct.getProduct().getProductID() == productImg.getProduct().getProductID()}">
-                                            <c:set var="category" value="${cartProduct.getProduct().getCategory()}"></c:set>
-                                            <c:set var="brand" value="${cartProduct.getProduct().getBrand()}"></c:set>
+                                        <c:if test="${cart.getProduct().getProductID() == productImg.getProduct().getProductID()}">
+                                            <c:set var="category" value="${cart.getProduct().getCategory()}"></c:set>
+                                            <c:set var="brand" value="${cart.getProduct().getBrand()}"></c:set>
                                             <tr>
                                                 <td>
                                                     <div class="media">
@@ -107,21 +108,24 @@
                                                             <img src="<%=request.getContextPath()%>/assets/product_img/${category.getCategoryName()}/${brand.getBrandName()}/${productImg.getProductImgUrl()}" alt="error" style="width: 50px">
                                                         </div>
                                                         <div class="media-body">
-                                                            <p>${cartProduct.getProduct().getProductName()}</p>
+                                                            <p>${cart.getProduct().getProductName()}</p>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <h5>$${cartProduct.getProduct().getSellPrice()}</h5>
+                                                    <h5>$${cart.getProduct().getSellPrice()}</h5>
                                                 </td>
                                                 <td>
                                                     <div class="product_count">
-                                                        <h5>${cartProduct.getAmount()}</h5>
+                                                        <h5>${cart.getAmount()}</h5>
                                                     </div>
                                                 </td>
                                                 <td>                                                  
-                                                    <h5>$${cartProduct.getProduct().getSellPrice() * cartProduct.getAmount()}</h5>
+                                                    <h5>$${cart.getProduct().getSellPrice() * cart.getAmount()}</h5>
                          
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         </c:if>
@@ -154,7 +158,7 @@
                                     <td>
                                         <div class="checkout_btn_inner d-flex align-items-center">
                                             <a class="gray_btn" href="<%=request.getContextPath()%>/home">Continue Shopping</a>
-                                            <a class="primary-btn" href="<%=request.getContextPath()%>/cartcomplete">Proceed to checkout</a>
+                                            <a class="primary-btn" href="#">Proceed to checkout</a>
                                         </div>
                                     </td>
                                 </tr>

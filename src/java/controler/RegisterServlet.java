@@ -37,7 +37,6 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         String username = request.getParameter("userName");
         String password = request.getParameter("password");
         String repassword = request.getParameter("repass");
@@ -54,25 +53,23 @@ public class RegisterServlet extends HttpServlet {
         request.getSession().setAttribute("rawUser", rawUser);
         UserDAO dao = new UserDAO();
         SendMail sm = new SendMail();
-        Users u = dao.checklogin(username, email, phone);
+
         if (!repassword.equals(password)) {
             request.setAttribute("mess", "Password does not match!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("common/register.jsp").forward(request, response);
         } else {
+            Users u = dao.checklogin(username, email, phone);
             if (u != null) {
                 request.setAttribute("mess", "Account is exist!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            } else {
-                String verifyCode = sm.getRandom();
-                String subject = "Verify";
-                sm.send(email, subject, verifyCode);
-                request.getSession().setAttribute("verifyCode", verifyCode);
-                request.getSession().setAttribute("status", "register");
-                request.getRequestDispatcher("verify.jsp").forward(request, response);
-
+                request.getRequestDispatcher("common/register.jsp").forward(request, response);
             }
 
         }
+        String verifyCode = sm.getRandom();
+        sm.send(email, verifyCode);
+        request.getSession().setAttribute("verifyCode", verifyCode);
+        request.getSession().setAttribute("status", "register");
+        request.getRequestDispatcher("verify.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

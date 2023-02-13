@@ -28,19 +28,19 @@
         <!--
                 CSS
                 ============================================= -->
-               <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/owl.carousel.css">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nice-select.css">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nouislider.min.css">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.css" />
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.skinFlat.css" />
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magnific-popup.css">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+        <link rel="stylesheet" href="css/linearicons.css">
+        <link rel="stylesheet" href="css/owl.carousel.css">
+        <link rel="stylesheet" href="css/themify-icons.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <link rel="stylesheet" href="css/nouislider.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/main.css">
     </head>
 
     <body>
 
-            <jsp:include page="../header.jsp" />
+        <jsp:include page="header.jsp" />
 
    
 
@@ -50,17 +50,17 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="login_box_img">
-                            <img class="img-fluid" src="<%=request.getContextPath()%>/img/login.jpg" alt="">
+                            <img class="img-fluid" src="img/login.jpg" alt="">
                             <div class="hover">
                                 <h4>Bạn chưa có tài khoản?</h4>
-                                <a class="primary-btn" href="<%=request.getContextPath()%>/register.jsp">Ðăng kí</a>
+                                <a class="primary-btn" href="register.jsp">Ðăng kí</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="login_form_inner">
                             <h3>Reset Password</h3>
-                            <form class="row login_form" action="<%=request.getContextPath()%>/resetpassword" method="post" id="contactForm" novalidate="novalidate">
+                            <form class="row login_form" action="ResetPassword" method="post" id="contactForm" novalidate="novalidate">
                                 <div class="col-md-12 form-group">
                                     <input type="text" class="form-control" id="name" name="email" placeholder="Email" required>
                                 </div>
@@ -80,5 +80,5 @@
         </section>
         <!--================End Reset Box Area =================-->
 
-        <jsp:include page="../footer.jsp" />
+        <jsp:include page="footer.jsp" />
 </html>

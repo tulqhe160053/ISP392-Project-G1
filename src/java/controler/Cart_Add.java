@@ -6,7 +6,6 @@
 package controler;
 
 import dao.CartDAO;
-import dao.CartProductDAO;
 import dao.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Cart;
-import model.CartProduct;
 import model.Product;
 import model.Users;
 
@@ -66,20 +64,14 @@ public class Cart_Add extends HttpServlet {
                 String amount_string = request.getParameter("amount");
                 int amount = Integer.parseInt(amount_string);
 
+                Cart c = new Cart(5, user, product, amount);
                 CartDAO cart_dao = new CartDAO();
-                Cart cart = cart_dao.selectByUserId(user.getUserID());
-                
-                CartProductDAO cartproduct_dao = new CartProductDAO();
-                CartProduct cartproduct = cartproduct_dao.getByProIdAndCartId(product.getProductID(), cart.getId());
-                if(cart_dao.selectByUserId(user.getUserID()) == null){
-                    cart_dao.insert(new Cart(1, user));
-                    cartproduct_dao.insert(new CartProduct(cart_dao.selectByUserId(user.getUserID()), product, amount));
+                for (Cart object : cart_dao.selectAll()) {
+                    if((c.getUser().getUserID()== object.getUser().getUserID()) && (c.getProduct().getProductID()==object.getProduct().getProductID())){
+                        request.getRequestDispatcher("home").forward(request, response);
+                    }
                 }
-                else {
-                    cartproduct_dao.insert(new CartProduct(cart_dao.selectByUserId(user.getUserID()), product, amount));
-                }
-
-                    
+                cart_dao.insert(new Cart(5, user, product, amount));
                 request.getRequestDispatcher("home").forward(request, response);
             }
             else{

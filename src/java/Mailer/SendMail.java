@@ -26,10 +26,10 @@ public class SendMail {
         return String.format("%06d", number);
     }
     
-    public void send(String toEmail, String subject, String verifyCode) {
+    public void send(String toEmail, String verifyCode) {
         //provide sender's email ID
-        String fromEmail = "CustomerService94321@gmail.com";
-        String fromPassword = "lwrtmwkgshlqaycp";
+        String fromEmail = "media.nst2018@gmail.com";
+        String fromPassword = "lnstuugpucgcmxad";
 
         //provide Mailtrap's host address
         String host = "smtp.gmail.com";
@@ -61,7 +61,7 @@ public class SendMail {
                     InternetAddress.parse(toEmail));
 
             //set email subject field
-            message.setSubject(subject);
+            
 
             //set the content of the email message
             message.setContent("<div\n"

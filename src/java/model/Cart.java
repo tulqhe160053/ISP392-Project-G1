@@ -12,13 +12,17 @@ public class Cart {
     
     private int id;
     private Users user;
+    private Product product;
+    private int amount;
 
     public Cart() {
     }
 
-    public Cart(int id, Users user) {
+    public Cart(int id, Users user, Product product, int amount) {
         this.id = id;
         this.user = user;
+        this.product = product;
+        this.amount = amount;
     }
 
     public int getId() {
@@ -29,6 +33,8 @@ public class Cart {
         this.id = id;
     }
 
+
+
     public Users getUser() {
         return user;
     }
@@ -37,11 +43,27 @@ public class Cart {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" + "id=" + id + ", user=" + user + '}';
+    public Product getProduct() {
+        return product;
     }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" + "id=" + id + ", user=" + user + ", product=" + product + ", amount=" + amount + '}';
+    }
+
+    
     
 }

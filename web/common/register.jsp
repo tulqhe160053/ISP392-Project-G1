@@ -59,20 +59,20 @@
                         <div class="login_box_img">
                             <img class="img-fluid" src="<%=request.getContextPath()%>/img/login.jpg" alt="">
                             <div class="hover">
-                                <h4>Already have an account?</h4>
-                                <a class="primary-btn" href="<%=request.getContextPath()%>/common/login.jsp">Login</a>
+                                <h4>Bạn đã có tài khoản?</h4>
+                                <a class="primary-btn" href="<%=request.getContextPath()%>/common/login.jsp">Ðăng nhập</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="login_form_inner pt-3">
-                            <h3>Register</h3>
+                            <h3>Đăng ký</h3>
                             <form name ="form1" class="row login_form pt-2" action="<%=request.getContextPath()%>/register" method="post" id="contactForm">
                                 <div class="col-md-12 form-group">
                                     <input type="text" class="form-control" id="name" name="userName" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" pattern=".{6,}" title="6 or more characters" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
                                 </div>
 
                                 <div class="col-md-12 form-group">
@@ -93,11 +93,11 @@
 
 
                                 <div class="col-md-12 form-group">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Invalid Email" required>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
                                 </div>
 
                                 <div class="col-md-12 form-group">
-                                    <input type="num" class="form-control" id="tel" name="num" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" title="Invalid Phone" required>
+                                    <input type="tel" class="form-control" id="tel" name="num" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required>
                                 </div>
 
                                 <div class="col-md-12 form-group">
@@ -108,8 +108,8 @@
 
 
                                 <div class="col-md-12 form-group">
-                                    <button type="submit" value="submit" class="primary-btn">Register</button>
-                                     
+                                    <button type="submit" value="submit" class="primary-btn">Đăng ký</button>
+                                    <a href="#">Quên mật khẩu?</a>
                                 </div>
                             </form>
                         </div>
