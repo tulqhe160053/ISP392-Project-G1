@@ -40,8 +40,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                 String description = rs.getString("description");
                 String content = rs.getString("Content");
                 String img = rs.getString("imageLink");
+                String createTime = rs.getString("createtime");
+                int viewer = rs.getInt("viewer");
 
-                Blog b = new Blog(blogId, bloger, category, title, description, content, img);
+                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
                 t.add(b);
             }
             rs.close();
@@ -75,8 +77,11 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                 String description = rs.getString("description");
                 String content = rs.getString("Content");
                 String img = rs.getString("imageLink");
+                String createTime = rs.getString("createtime");
+                int viewer = rs.getInt("viewer");
 
-                Blog b = new Blog(blogId, bloger, category, title, description, content, img);
+                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
+
                 return b;
             }
             rs.close();
@@ -90,7 +95,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public List<Blog> search(String text) {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink  from blog b\n"
+            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
                     + " join category c \n"
                     + " on b.CatId = c.CategoryID\n"
                     + " join users u\n"
@@ -103,7 +108,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
             }
         } catch (Exception e) {
         }
@@ -113,7 +118,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink  from blog b\n"
+            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink, b.createtime , b.viewer  from blog b\n"
                     + " join category c \n"
                     + " on b.CatId = c.CategoryID\n"
                     + " join users u\n"
@@ -125,7 +130,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+
             }
         } catch (Exception e) {
         }
@@ -135,7 +141,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public List<Blog> getFilterByCategory(String catid) {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink  from blog b\n"
+            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
                     + " join category c \n"
                     + " on b.CatId = c.CategoryID\n"
                     + " join users u\n"
@@ -147,13 +153,14 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+
             }
         } catch (Exception e) {
         }
-        return list ;
+        return list;
     }
-    
+
     public List<Blog> getListByPage(List<Blog> list,
             int start, int end) {
         ArrayList<Blog> arr = new ArrayList<>();

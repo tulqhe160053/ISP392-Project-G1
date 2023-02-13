@@ -15,8 +15,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://kit.fontawesome.com/d846362117.css" crossorigin="anonymous">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -55,18 +54,18 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Manager Blogs
                             </a>
-                                                          
+
                         </div>
                     </div>
-                     
+
                 </nav>
             </div>
-        
+
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Blog List</h1>
-                         
+
                         <!--                        <div class="row">
                                                     <div class="col-xl-3 col-md-6">
                                                         <div class="card bg-primary text-white mb-4">
@@ -126,7 +125,7 @@
                                                     </div>
                                                 </div>-->
                         <div class="card mb-4">
-                             
+
                             <div class="row">
                                 <div class="col-md-6 mt-4">
                                     <form action="blogmkt?action=filter" method="post">
@@ -150,23 +149,24 @@
 
                                                 </div>
                                             </div>
-<!--                                            <div class="col-md-4 row align-items-center">
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Status</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select name="status" class="form-select" aria-label="Default select example">
-                                                        <option <c:if test="${status == 'all'}">selected</c:if> value="all">All</option>
-                                                        <c:forEach items="${userstatus}" var="us">
-                                                            <option  <c:if test="${status == us.getId()}">selected</c:if> value="${us.getId()}">${us.getStatusName()}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>  
-                                            </div>-->
 
-                                           
+
+
                                             <div class="col-md-2 md-0">
                                                 <button type="submit" class="btn btn-primary">Lọc</button>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Sort By
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -206,7 +206,7 @@
                                                 <th>Title</th>
                                                 <th>Category</th>
                                                 <th>Author</th>
-                                                 
+
 
 
 
@@ -225,7 +225,7 @@
                                                         <td>${b.user.getUserName()}</td>
 
 
-                                                       
+
 
                                                         <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href=""><i class="fa-solid fa-plus"  style="color:#22baa0"></i></a></i></td>
                                                         <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href=""><i class="fa-solid fa-trash"style="color:#22baa0"></i></a></i></td>
@@ -260,7 +260,7 @@
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted"></div>
-                             
+
                         </div>
                     </div>
                 </footer>
