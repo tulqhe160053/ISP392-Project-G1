@@ -69,6 +69,10 @@
         <servlet-name>CartComplete</servlet-name>
         <servlet-class>controler.CartComplete</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddFeedback</servlet-name>
+        <servlet-class>controler.AddFeedback</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -116,6 +120,10 @@
     <servlet-mapping>
         <servlet-name>CartComplete</servlet-name>
         <url-pattern>/cartcomplete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFeedback</servlet-name>
+        <url-pattern>/addfeedback</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
