@@ -89,7 +89,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog>{
 
     @Override
     public void insert(Blog t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //add blog 
     }
 
     @Override
