@@ -95,7 +95,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
-        <url-pattern>/ChangePassword</url-pattern>
+        <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditCart</servlet-name>

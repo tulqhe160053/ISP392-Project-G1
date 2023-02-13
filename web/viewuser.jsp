@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/main.css">
+
     </head>
 
     <body>
@@ -96,8 +97,6 @@
 
             </div>
         </div>  
-    </div>
-</div>
 
 </body>
         <jsp:include page="footer.jsp" />
