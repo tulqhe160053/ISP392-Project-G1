@@ -40,11 +40,12 @@ public class BlogServletMKT extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String action = request.getParameter("action");
+        String type = request.getParameter("type");
         BlogDAO dao = new BlogDAO();
         CategoryDAO cat = new CategoryDAO();
         if (action == null) {
 
-            List<Blog> listBlog = dao.getAllBlog();
+            List<Blog> listBlog = dao.selectAll();
             List<Category> category = cat.selectAll();
             int page, numperpage = 3;
             int size = listBlog.size();
@@ -85,6 +86,78 @@ public class BlogServletMKT extends HttpServlet {
                 List<Category> category = cat.selectAll();
                 request.setAttribute("category", category);
                 request.setAttribute("listBlog", listBlog);
+                request.getRequestDispatcher("marketing/viewbloglist.jsp").forward(request, response);
+            }
+        }
+
+        if (action.equals("sort")) {
+            if (type.equals("old")) {
+                List<Blog> listBlog = dao.getAllBlog();
+                List<Category> category = cat.selectAll();
+                List<Blog> listBlogSort = dao.getOldest();
+                int page, numperpage = 3;
+                int size = listBlog.size();
+                int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start, end;
+                start = (page - 1) * numperpage;
+                end = Math.min(page * numperpage, size);
+                List<Blog> blog = dao.getListByPage(listBlogSort, start, end);
+                request.setAttribute("page", page);
+                request.setAttribute("num", num);
+                request.setAttribute("category", category);
+                request.setAttribute("listBlog", blog);
+                request.getRequestDispatcher("marketing/viewbloglist.jsp").forward(request, response);
+            }
+            if (type.equals("last")) {
+                List<Blog> listBlog = dao.getAllBlog();
+                List<Category> category = cat.selectAll();
+                List<Blog> listBlogSort = dao.getLatest();
+                int page, numperpage = 3;
+                int size = listBlog.size();
+                int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start, end;
+                start = (page - 1) * numperpage;
+                end = Math.min(page * numperpage, size);
+                List<Blog> blog = dao.getListByPage(listBlogSort, start, end);
+                request.setAttribute("page", page);
+                request.setAttribute("num", num);
+                request.setAttribute("category", category);
+                request.setAttribute("listBlog", blog);
+                request.getRequestDispatcher("marketing/viewbloglist.jsp").forward(request, response);
+            }
+            if (type.equals("high")) {
+                List<Blog> listBlog = dao.getAllBlog();
+                List<Category> category = cat.selectAll();
+                List<Blog> listBlogSort = dao.getHighestViewer();
+                int page, numperpage = 3;
+                int size = listBlog.size();
+                int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start, end;
+                start = (page - 1) * numperpage;
+                end = Math.min(page * numperpage, size);
+                List<Blog> blog = dao.getListByPage(listBlogSort, start, end);
+                request.setAttribute("page", page);
+                request.setAttribute("num", num);
+                request.setAttribute("category", category);
+                request.setAttribute("listBlog", blog);
                 request.getRequestDispatcher("marketing/viewbloglist.jsp").forward(request, response);
             }
         }

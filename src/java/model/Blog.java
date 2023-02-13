@@ -93,6 +93,16 @@ public class Blog {
         this.imageLink = imageLink;
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public int getViewer() {
+        return viewer;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Blog{" + "id=" + id + ", user=" + user + ", category=" + category + ", title=" + title + ", description=" + description + ", content=" + content + ", imageLink=" + imageLink + '}';

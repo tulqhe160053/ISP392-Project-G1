@@ -59,14 +59,14 @@
                         <div class="login_box_img">
                             <img class="img-fluid" src="<%=request.getContextPath()%>/img/login.jpg" alt="">
                             <div class="hover">
-                                <h4>Bạn đã có tài khoản?</h4>
-                                <a class="primary-btn" href="<%=request.getContextPath()%>/common/login.jsp">Ðăng nhập</a>
+                                <h4>Already have an account</h4>
+                                <a class="primary-btn" href="<%=request.getContextPath()%>/common/login.jsp">Login</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="login_form_inner pt-3">
-                            <h3>Đăng ký</h3>
+                            <h3>Register</h3>
                             <form name ="form1" class="row login_form pt-2" action="<%=request.getContextPath()%>/register" method="post" id="contactForm">
                                 <div class="col-md-12 form-group">
                                     <input type="text" class="form-control" id="name" name="userName" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required>
@@ -97,7 +97,7 @@
                                 </div>
 
                                 <div class="col-md-12 form-group">
-                                    <input type="tel" class="form-control" id="tel" name="num" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required>
+                                    <input type="num" class="form-control" id="tel" name="num" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required>
                                 </div>
 
                                 <div class="col-md-12 form-group">
@@ -108,8 +108,8 @@
 
 
                                 <div class="col-md-12 form-group">
-                                    <button type="submit" value="submit" class="primary-btn">Đăng ký</button>
-                                    <a href="#">Quên mật khẩu?</a>
+                                    <button type="submit" value="submit" class="primary-btn">Register</button>
+                                     
                                 </div>
                             </form>
                         </div>

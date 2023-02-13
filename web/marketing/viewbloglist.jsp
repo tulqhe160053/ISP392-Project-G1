@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>List User</title>
+        <title>blog List</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -162,9 +162,9 @@
                                                         Sort By
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                        <li><a class="dropdown-item" href="blogmkt?action=sort&type=old">Oldest Blog</a></li>
+                                                        <li><a class="dropdown-item" href="blogmkt?action=sort&type=last">Latest Blog</a></li>
+                                                        <li><a class="dropdown-item" href="blogmkt?action=sort&type=high">Highest Viewer</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -206,7 +206,8 @@
                                                 <th>Title</th>
                                                 <th>Category</th>
                                                 <th>Author</th>
-
+                                                <th>Time</th>
+                                                <th>Viewer</th>
 
 
 
@@ -223,7 +224,9 @@
                                                         <td>${b.title}</td>
                                                         <td>${b.category.getCategoryName()}</td>
                                                         <td>${b.user.getUserName()}</td>
-
+                                                        <td>${b.createTime}</td>
+                                                        <td>${b.viewer}</td>
+ 
 
 
 

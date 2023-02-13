@@ -69,7 +69,7 @@
                             <h3>Verify</h3>
                             <form class="row login_form" action="verify" method="post" id="contactForm" novalidate="novalidate">
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="name" name="text" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required="">
+                                    <input type="text" class="form-control" id="name" name="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required="">
                                 </div>
                                  
 

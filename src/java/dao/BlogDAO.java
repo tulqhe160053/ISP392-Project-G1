@@ -81,7 +81,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                 int viewer = rs.getInt("viewer");
 
                 Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
-
+            
                 return b;
             }
             rs.close();
@@ -125,7 +125,6 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                     + " on b.UserID = u.UserID\n";
 
             ps = con.prepareStatement(sql);
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
@@ -149,6 +148,72 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                     + "where b.CatId = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, catid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Blog> getOldest() {
+        List<Blog> list = new ArrayList<>();
+        try {
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
+                    + "                    join category c \n"
+                    + "                   on b.CatId = c.CategoryID\n"
+                    + "                    join users u\n"
+                    + "                     on b.UserID = u.UserID\n"
+                    + "			   order by createtime asc";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public List<Blog> getLatest() {
+        List<Blog> list = new ArrayList<>();
+        try {
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
+                    + "                    join category c \n"
+                    + "                   on b.CatId = c.CategoryID\n"
+                    + "                    join users u\n"
+                    + "                     on b.UserID = u.UserID\n"
+                    + "			   order by createtime desc";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public List<Blog> getHighestViewer() {
+        List<Blog> list = new ArrayList<>();
+        try {
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
+                    + "                    join category c \n"
+                    + "                   on b.CatId = c.CategoryID\n"
+                    + "                    join users u\n"
+                    + "                     on b.UserID = u.UserID\n"
+                    + "			   order by viewer desc";
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
