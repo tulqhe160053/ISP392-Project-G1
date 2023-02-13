@@ -61,6 +61,13 @@
         <servlet-name>BlogServlet</servlet-name>
         <servlet-class>controler.BlogServlet</servlet-class>
     </servlet>
+<<<<<<< HEAD
+=======
+    <servlet>
+        <servlet-name>DeleteCart</servlet-name>
+        <servlet-class>controler.DeleteCart</servlet-class>
+    </servlet>
+>>>>>>> parent of 0f15935 (add màn hình view cart complete)
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -101,6 +108,13 @@
         <servlet-name>BlogServlet</servlet-name>
         <url-pattern>/blog</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
+=======
+    <servlet-mapping>
+        <servlet-name>DeleteCart</servlet-name>
+        <url-pattern>/deletecart</url-pattern>
+    </servlet-mapping>
+>>>>>>> parent of 0f15935 (add màn hình view cart complete)
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
