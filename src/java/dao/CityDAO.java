@@ -6,93 +6,92 @@ package dao;
 
 import java.util.ArrayList;
 import model.City;
-import model.District;
-import model.ShipAddress;
-import model.Users;
 
 /**
  *
  * @author Tu
  */
-public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
+public class CityDAO extends MyDAO implements DAOInterface<City> {
 
     @Override
-    public ArrayList<ShipAddress> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<City> selectAll() {
+        ArrayList<City> t = new ArrayList<>();
+        xSql = "select * from City";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int categoryId = rs.getInt("id");
+                String categoryName = rs.getString("CityName");
+
+                City x = new City(categoryId, categoryName);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
 
     @Override
-    public ShipAddress selectById(ShipAddress t) {
+    public City selectById(City t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public ArrayList<ShipAddress> getByUserId(int UserID) {
-        ArrayList<ShipAddress> t = new ArrayList<>();
-        xSql = "select * from ShipAddress where UserID = ?";
+    public City getById(int cityId) {
+        City ketqua = null;
+        xSql = "select * from City where id = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, UserID);
+            ps.setInt(1, cityId);
             rs = ps.executeQuery();
             /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
          Thus the first rs.next() statement moves the cursor to the first record
              */
 
             if (rs.next()) {
-                 int id = rs.getInt("ID");
-                 
-                 UserDAO user_dao = new UserDAO();
-                 Users user = user_dao.getById(UserID);
-                 String fullName = rs.getString("Fullname");
-                 String phoneNum = rs.getString("PhoneNum");
-                 
-                 int cityId = rs.getInt("ShipCityID");
-                 CityDAO city_dao = new CityDAO();
-                 City shipCity = city_dao.getById(cityId);
-                 
-                 int districtId = rs.getInt("DistrictId");
-                 DistrictDAO district_dao = new DistrictDAO();
-                 District district = district_dao.getById(districtId);
-                 
-                 String addressDetail = rs.getString("AddressDetail");
-                 
-                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
-                t.add(x);
+                 String cityName = rs.getString("CityName");;
+                ketqua = new City(cityId, cityName);
+            } else {
+                ketqua = null;
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
         }
-        return t;
+        return (ketqua);
     }
 
     @Override
-    public void insert(ShipAddress t) {
+    public void insert(City t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int insertAll(ArrayList<ShipAddress> arr) {
+    public int insertAll(ArrayList<City> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(ShipAddress t) {
+    public void delete(City t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int deleteAll(ArrayList<ShipAddress> arr) {
+    public int deleteAll(ArrayList<City> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(int x, ShipAddress t) {
+    public void update(int x, City t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     public static void main(String[] args) {
-        ShipAddressDAO dao = new ShipAddressDAO();
+        CityDAO dao = new CityDAO();
         
-        System.out.println(dao.getByUserId(2));
+        System.out.println(dao.getById(2));
     }
 }

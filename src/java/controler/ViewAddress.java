@@ -4,26 +4,20 @@
  */
 package controler;
 
-import Mailer.SendMail;
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Role;
-import model.UserStatus;
-import model.Users;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ducth
+ * @author thaib
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "ViewAddress", urlPatterns = {"/ViewAddress"})
+public class ViewAddress extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,41 +31,17 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String username = request.getParameter("userName");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repass");
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("num");
-
-        Users rawUser = new Users();
-        rawUser.setUserName(username);
-        rawUser.setPassword(password);
-        rawUser.setGender(gender);
-        rawUser.setEmail(email);
-        rawUser.setPhoneNum(phone);
-        request.getSession().setAttribute("rawUser", rawUser);
-        UserDAO dao = new UserDAO();
-        SendMail sm = new SendMail();
-        Users u = dao.checklogin(username, email, phone);
-        if (!repassword.equals(password)) {
-            request.setAttribute("mess", "Password does not match!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        } else {
-            if (u != null) {
-                request.setAttribute("mess", "Account is exist!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            } else {
-                String verifyCode = sm.getRandom();
-                String subject = "Verify";
-                sm.send(email, subject, verifyCode);
-                request.getSession().setAttribute("verifyCode", verifyCode);
-                request.getSession().setAttribute("status", "register");
-                request.getRequestDispatcher("verify.jsp").forward(request, response);
-
-            }
-
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ViewAddress</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ViewAddress at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

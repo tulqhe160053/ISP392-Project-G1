@@ -4,7 +4,6 @@
  */
 package controler;
 
-import Mailer.SendMail;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,10 +19,10 @@ import model.Users;
 
 /**
  *
- * @author ducth
+ * @author thaib
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "EditUserServlet", urlPatterns = {"/edituser"})
+public class EditUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,42 +35,35 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        String username = request.getParameter("userName");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repass");
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("num");
-
-        Users rawUser = new Users();
-        rawUser.setUserName(username);
-        rawUser.setPassword(password);
-        rawUser.setGender(gender);
-        rawUser.setEmail(email);
-        rawUser.setPhoneNum(phone);
-        request.getSession().setAttribute("rawUser", rawUser);
-        UserDAO dao = new UserDAO();
-        SendMail sm = new SendMail();
-        Users u = dao.checklogin(username, email, phone);
-        if (!repassword.equals(password)) {
-            request.setAttribute("mess", "Password does not match!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        } else {
-            if (u != null) {
-                request.setAttribute("mess", "Account is exist!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
+            HttpSession session = request.getSession();
+            model.Users user = (model.Users) session.getAttribute("user");
+            //model.UserStatus id = (model.UserStatus) session.getAttribute("statusid");
+            String userName = request.getParameter("userName");
+            String gender = request.getParameter("gender");
+            String email = request.getParameter("email");
+            String phoneNum = request.getParameter("PhoneNum");
+            UserDAO dao = new UserDAO();
+            int userId = user.getUserID();
+            //int status = id.getId();
+            dao.editUser(userName, gender, email, phoneNum, userId);
+            if (!user.getUserName().equals(userName)) {
+                session.removeAttribute("user");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                String verifyCode = sm.getRandom();
-                String subject = "Verify";
-                sm.send(email, subject, verifyCode);
-                request.getSession().setAttribute("verifyCode", verifyCode);
-                request.getSession().setAttribute("status", "register");
-                request.getRequestDispatcher("verify.jsp").forward(request, response);
-
+                user.setUserName(userName);
+                user.setGender(gender);
+                user.setEmail(email);
+                user.setPhoneNum(phoneNum);
+                session.setAttribute("user", user);
+                request.getRequestDispatcher("viewuser.jsp").forward(request, response);
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().print(e);
+            response.getWriter().print(e.getMessage());
         }
     }
 
@@ -102,6 +94,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

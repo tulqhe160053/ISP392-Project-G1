@@ -12,8 +12,8 @@ public class DBContext {
     {
         try {
             //Change the username password and url to connect your own database
-            String username = "dt";
-            String password = "123";
+            String username = "sa";
+            String password = "sa";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=OnlineShop";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
@@ -25,5 +25,9 @@ public class DBContext {
     public static void main(String[] args) {
         DBContext db = new DBContext();
         
+    }
+
+    Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

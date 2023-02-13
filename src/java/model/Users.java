@@ -20,14 +20,7 @@ public class Users {
     private UserStatus userStatus;
 
     public Users() {
-        
     }
-
-    public Users(String userName) {
-        this.userName = userName;
-    }
-    
-    
 
     public Users(int userID, String userName, String password, String gender, String email, String phoneNum, Role role, UserStatus userStatus) {
         this.userID = userID;

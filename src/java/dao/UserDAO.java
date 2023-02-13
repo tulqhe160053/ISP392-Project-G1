@@ -91,6 +91,44 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         }
         return (ketqua);
     }
+    
+    public Users getById(int userId) {
+        Users ketqua = null;
+        xSql = "select * from Users where UserID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            if (rs.next()) {
+                String userName = rs.getString("Username");
+                String password = rs.getString("Password");
+                String gender = rs.getString("gender");
+                String email = rs.getString("Email");
+                String phoneNum = rs.getString("PhoneNum");
+                int role_id = rs.getInt("RoleID");
+
+                RoleDAO dao = new RoleDAO();
+                Role role = dao.selectById(new Role(role_id, null));
+
+                int userStatus_id = rs.getInt("statusId");
+
+                UserStatusDAO userDao = new UserStatusDAO();
+                UserStatus status = userDao.selectById(new UserStatus(userStatus_id, null));
+
+                ketqua = new Users(userId, userName, password, gender, email, phoneNum, role, status);
+            } else {
+                ketqua = null;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (ketqua);
+    }
 
     public Users login(String user, String pass) {
 
@@ -243,6 +281,29 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return sb.toString();
     }
     
+    public void editUser(String userName, String gender, String email, String phoneNum, int userId) {
+        String query = "update Users\n"
+                + "set Username = ?,\n"
+                + "gender = ?,\n"
+                + "Email = ?,\n"
+                + "PhoneNum = ?\n"
+                //+ "statusId = ?\n"
+                + "where UserID = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, userName);
+            ps.setString(2, gender);
+            ps.setString(3, email);
+            ps.setString(4, phoneNum);
+            //ps.setInt(5, status.getId());
+            ps.setInt(5, userId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
+    }
      public List<Users> searchName(String txt) {
         List<Users> t = new ArrayList<>();
         String sql = "select UserID , Username , Password, gender , Email,PhoneNum , r.RoleName , us.StatusName from users u\n"

@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/main.css">
+
     </head>
 
     <body>
@@ -80,11 +81,11 @@
                                 <a  class="text-right"> ${sessionScope.user.phoneNum}</a></div>
                            
                                 <div class="col-md-12 mt-3"><label for = "pwd">Role: </label>
-                                    <a  class="text-right"> ??</a>
+                                    <a  class="text-right"> ${sessionScope.user.getRole().getRoleName()}</a>
                                 </div>
 
                             <div class="col-md-12 mt-4"><label for = "pwd">Status: </label>
-                                <a  class="text-right"> ??</a>
+                                <a  class="text-right"> ${sessionScope.user.getUserStatus().getStatusName()}</a>
                             </div>
 
 
@@ -96,8 +97,6 @@
 
             </div>
         </div>  
-    </div>
-</div>
 
 </body>
         <jsp:include page="footer.jsp" />

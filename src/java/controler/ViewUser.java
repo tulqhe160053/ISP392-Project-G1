@@ -4,7 +4,6 @@
  */
 package controler;
 
-import Mailer.SendMail;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,13 +16,12 @@ import jakarta.servlet.http.HttpSession;
 import model.Role;
 import model.UserStatus;
 import model.Users;
-
 /**
  *
- * @author ducth
+ * @author thaib
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "ViewUser", urlPatterns = {"/ViewUser"})
+public class ViewUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,42 +35,11 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String username = request.getParameter("userName");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repass");
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("num");
-
-        Users rawUser = new Users();
-        rawUser.setUserName(username);
-        rawUser.setPassword(password);
-        rawUser.setGender(gender);
-        rawUser.setEmail(email);
-        rawUser.setPhoneNum(phone);
-        request.getSession().setAttribute("rawUser", rawUser);
+        String userId = request.getParameter("UserID");
+        HttpSession session = request.getSession();
         UserDAO dao = new UserDAO();
-        SendMail sm = new SendMail();
-        Users u = dao.checklogin(username, email, phone);
-        if (!repassword.equals(password)) {
-            request.setAttribute("mess", "Password does not match!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        } else {
-            if (u != null) {
-                request.setAttribute("mess", "Account is exist!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-            } else {
-                String verifyCode = sm.getRandom();
-                String subject = "Verify";
-                sm.send(email, subject, verifyCode);
-                request.getSession().setAttribute("verifyCode", verifyCode);
-                request.getSession().setAttribute("status", "register");
-                request.getRequestDispatcher("verify.jsp").forward(request, response);
 
-            }
 
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/ISP392-Project-G1/web/feedback/addfeedback.jsp</file>
+            <file>file:/D:/ISP392-Project-G1/src/java/controler/ResetPassword.java</file>
+            <file>file:/D:/ISP392-Project-G1/src/java/controler/AddFeedback.java</file>
+            <file>file:/D:/ISP392-Project-G1/src/java/controler/RegisterServlet.java</file>
+            <file>file:/D:/ISP392-Project-G1/web/product/viewProductDetail.jsp</file>
+        </group>
     </open-files>
 </project-private>

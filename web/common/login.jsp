@@ -60,14 +60,14 @@
                         <div class="login_box_img">
                             <img class="img-fluid" src="<%=request.getContextPath()%>/img/login.jpg" alt="">
                             <div class="hover">
-                                <h4>Bạn chưa có tài khoản?</h4>
-                                <a class="primary-btn" href="<%=request.getContextPath()%>/common/register.jsp">Ðăng kí</a>
+                                <h4>Have not an account?</h4>
+                                <a class="primary-btn" href="<%=request.getContextPath()%>/common/register.jsp">Register</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="login_form_inner">
-                            <h3>Đăng nhập</h3>
+                            <h3>Login</h3>
                             <form class="row login_form" action="<%=request.getContextPath()%>/login" method="post" id="contactForm" novalidate="novalidate">
                                 <div class="col-md-12 form-group">
                                     <input type="text" class="form-control" id="name" name="userName" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
@@ -83,8 +83,8 @@
 
 
                                 <div class="col-md-12 form-group">
-                                    <button type="submit" value="submit" class="primary-btn">Ðăng nhập</button>
-                                    <a href="<%=request.getContextPath()%>/resetpassword.jsp">Quên mật khẩu?</a>
+                                    <button type="submit" value="submit" class="primary-btn">Login</button>
+                                    <a href="<%=request.getContextPath()%>/common/resetpassword.jsp">Forgot password?</a>
                                 </div>
                             </form>
                         </div>

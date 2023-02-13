@@ -5,94 +5,75 @@
 package dao;
 
 import java.util.ArrayList;
-import model.City;
 import model.District;
-import model.ShipAddress;
-import model.Users;
 
 /**
  *
  * @author Tu
  */
-public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
+public class DistrictDAO extends MyDAO implements DAOInterface<District> {
 
     @Override
-    public ArrayList<ShipAddress> selectAll() {
+    public ArrayList<District> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ShipAddress selectById(ShipAddress t) {
+    public District selectById(District t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public ArrayList<ShipAddress> getByUserId(int UserID) {
-        ArrayList<ShipAddress> t = new ArrayList<>();
-        xSql = "select * from ShipAddress where UserID = ?";
+    public District getById(int districtId) {
+        District ketqua = null;
+        xSql = "select * from District where id = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, UserID);
+            ps.setInt(1, districtId);
             rs = ps.executeQuery();
             /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
          Thus the first rs.next() statement moves the cursor to the first record
              */
 
             if (rs.next()) {
-                 int id = rs.getInt("ID");
-                 
-                 UserDAO user_dao = new UserDAO();
-                 Users user = user_dao.getById(UserID);
-                 String fullName = rs.getString("Fullname");
-                 String phoneNum = rs.getString("PhoneNum");
-                 
-                 int cityId = rs.getInt("ShipCityID");
-                 CityDAO city_dao = new CityDAO();
-                 City shipCity = city_dao.getById(cityId);
-                 
-                 int districtId = rs.getInt("DistrictId");
-                 DistrictDAO district_dao = new DistrictDAO();
-                 District district = district_dao.getById(districtId);
-                 
-                 String addressDetail = rs.getString("AddressDetail");
-                 
-                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
-                t.add(x);
+                String districtName = rs.getString("DistrictName");
+                ketqua = new District(districtId, districtName);
+            } else {
+                ketqua = null;
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
         }
-        return t;
+        return (ketqua);
     }
 
     @Override
-    public void insert(ShipAddress t) {
+    public void insert(District t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int insertAll(ArrayList<ShipAddress> arr) {
+    public int insertAll(ArrayList<District> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(ShipAddress t) {
+    public void delete(District t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int deleteAll(ArrayList<ShipAddress> arr) {
+    public int deleteAll(ArrayList<District> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(int x, ShipAddress t) {
+    public void update(int x, District t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public static void main(String[] args) {
+        DistrictDAO dao = new DistrictDAO();
+        System.out.println(dao.getById(3));
     }
     
-    public static void main(String[] args) {
-        ShipAddressDAO dao = new ShipAddressDAO();
-        
-        System.out.println(dao.getByUserId(2));
-    }
 }
