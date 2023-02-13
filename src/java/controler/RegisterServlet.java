@@ -57,18 +57,18 @@ public class RegisterServlet extends HttpServlet {
         Users u = dao.checklogin(username, email, phone);
         if (!repassword.equals(password)) {
             request.setAttribute("mess", "Password does not match!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/register.jsp").forward(request, response);
         } else {
             if (u != null) {
                 request.setAttribute("mess", "Account is exist!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/register.jsp").forward(request, response);
             } else {
                 String verifyCode = sm.getRandom();
                 String subject = "Verify";
                 sm.send(email, subject, verifyCode);
                 request.getSession().setAttribute("verifyCode", verifyCode);
                 request.getSession().setAttribute("status", "register");
-                request.getRequestDispatcher("verify.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/verify.jsp").forward(request, response);
 
             }
 

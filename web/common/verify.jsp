@@ -12,7 +12,7 @@
         <!-- Mobile Specific Meta -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Favicon-->
-        <link rel="shortcut icon" href="img/fav.png">
+        <link rel="shortcut icon" href="<%=request.getContextPath()%>/img/fav.png">
         <!-- Author Meta -->
         <meta name="author" content="CodePixar">
         <!-- Meta Description -->
@@ -27,19 +27,19 @@
         <!--
                 CSS
                 ============================================= -->
-        <link rel="stylesheet" href="css/linearicons.css">
-        <link rel="stylesheet" href="css/owl.carousel.css">
-        <link rel="stylesheet" href="css/themify-icons.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/nice-select.css">
-        <link rel="stylesheet" href="css/nouislider.min.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/linearicons.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/owl.carousel.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/themify-icons.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nice-select.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nouislider.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
     </head>
 
     <body>
 
-        <jsp:include page="header.jsp" />
+        <jsp:include page="../header.jsp" />
 
         <!-- Start Banner Area -->
         <section class="banner-area organic-breadcrumb">
@@ -58,18 +58,18 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="login_box_img">
-                            <img class="img-fluid" src="img/login.jpg" alt="">
+                            <img class="img-fluid" src="<%=request.getContextPath()%>/img/login.jpg" alt="">
                             <div class="hover">
-                                <a class="primary-btn" href="register.jsp">Register</a>
+                                <a class="primary-btn" href="<%=request.getContextPath()%>/common/register.jsp">Register</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="login_form_inner">
                             <h3>Verify</h3>
-                            <form class="row login_form" action="verify" method="post" id="contactForm" novalidate="novalidate">
+                            <form class="row login_form" action="<%=request.getContextPath()%>/verify" method="post" id="contactForm" novalidate="novalidate">
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="name" name="text" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required="">
+                                    <input type="text" class="form-control" id="name" name="text" placeholder="Verify code" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required="">
                                 </div>
                                  
 
@@ -92,7 +92,7 @@
         <!--================End Login Box Area =================-->
 
         <!-- start footer Area -->
-        <jsp:include page="footer.jsp"></jsp:include>
+        <jsp:include page="../footer.jsp" />
         <!-- End footer Area -->
 
 
