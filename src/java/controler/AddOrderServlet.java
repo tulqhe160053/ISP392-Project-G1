@@ -5,27 +5,18 @@
 
 package controler;
 
-import dao.CartDAO;
-import dao.CartProductDAO;
-import dao.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import model.Cart;
-import model.CartProduct;
-import model.Product;
-import model.Users;
 
 /**
  *
  * @author Tu
  */
-public class Cart_Add extends HttpServlet {
+public class AddOrderServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,7 +28,18 @@ public class Cart_Add extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        doPost(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddOrderServlet</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddOrderServlet at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,41 +54,7 @@ public class Cart_Add extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession();
-            if(session!=null){
-                Users user = (Users) session.getAttribute("user");
-
-                String productId_String = request.getParameter("productId");
-                int productId = Integer.parseInt(productId_String);
-                ProductDAO product_dao = new ProductDAO();
-                Product x = new Product();
-                x.setProductID(productId);
-                Product product = product_dao.selectById(x);
-
-                String amount_string = request.getParameter("amount");
-                int amount = Integer.parseInt(amount_string);
-
-                CartDAO cart_dao = new CartDAO();
-                
-                
-                CartProductDAO cartproduct_dao = new CartProductDAO();
-                
-                if(cart_dao.selectByUserId(user.getUserID()) == null){
-//                    Cart cart = cart_dao.selectByUserId(user.getUserID());
-//                    CartProduct cartproduct = cartproduct_dao.getByProIdAndCartId(product.getProductID(), cart.getId());
-                    cart_dao.insert(new Cart(1, user));
-                    cartproduct_dao.insert(new CartProduct(cart_dao.selectByUserId(user.getUserID()), product, amount));
-                }
-                else {
-                    cartproduct_dao.insert(new CartProduct(cart_dao.selectByUserId(user.getUserID()), product, amount));
-                }
-
-                    
-                request.getRequestDispatcher("home").forward(request, response);
-            }
-            else{
-                request.getRequestDispatcher("login").forward(request, response);
-            }
+            
         } catch (Exception e) {
         }
     } 
@@ -101,7 +69,7 @@ public class Cart_Add extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /** 

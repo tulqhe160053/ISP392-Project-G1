@@ -114,7 +114,12 @@
                         <div><a href="#">Change ship address</a></div>
                         <hr class="line">
                         <div class="d-flex justify-content-between information"><span>Total</span><span>$${requestScope.total}</span></div>
-                        <button class="btn btn-danger btn-block mt-3" type="button"><span>Order</span></button>
+                        <form action="<%=request.getContextPath()%>/addorder">
+                            <input type="hidden" name="cartId" value="${requestScope.cartId}" />
+                            <input type="hidden" name="cartId" value="${shipaddress.getId()}" />
+                            <button class="btn btn-danger btn-block mt-3" type="submit"><span>Order</span></button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>

@@ -73,6 +73,10 @@
         <servlet-name>AddFeedback</servlet-name>
         <servlet-class>controler.AddFeedback</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddOrderServlet</servlet-name>
+        <servlet-class>controler.AddOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -124,6 +128,10 @@
     <servlet-mapping>
         <servlet-name>AddFeedback</servlet-name>
         <url-pattern>/addfeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddOrderServlet</servlet-name>
+        <url-pattern>/addorder</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
