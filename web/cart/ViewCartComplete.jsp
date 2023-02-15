@@ -116,7 +116,8 @@
                         <div class="d-flex justify-content-between information"><span>Total</span><span>$${requestScope.total}</span></div>
                         <form action="<%=request.getContextPath()%>/addorder">
                             <input type="hidden" name="cartId" value="${requestScope.cartId}" />
-                            <input type="hidden" name="cartId" value="${shipaddress.getId()}" />
+                            <input type="hidden" name="shipAddressId" value="${shipaddress.getId()}" />
+                            <input type="hidden" name="total" value="${requestScope.total}" />
                             <button class="btn btn-danger btn-block mt-3" type="submit"><span>Order</span></button>
                         </form>
                         

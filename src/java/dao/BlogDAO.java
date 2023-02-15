@@ -86,6 +86,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog>{
         }
         return null;
     }
+    
 
     @Override
     public void insert(Blog t) {

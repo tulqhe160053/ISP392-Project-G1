@@ -17,8 +17,8 @@ public class FeedbackDAO extends MyDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, feedback.getUserID());
             ps.setInt(2, feedback.getProductID());
-            ps.setInt(4, feedback.getStar());
-            ps.setString(5, feedback.getFeedbackDetail());
+            ps.setInt(3, feedback.getStar());
+            ps.setString(4, feedback.getFeedbackDetail());
             ps.executeUpdate();
             
         } catch (Exception e) {

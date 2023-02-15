@@ -4,11 +4,13 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Tu
  */
-public class Order {
+public class Orders {
     private int id;
     private Users user;
     private int totalPrice;
@@ -18,10 +20,10 @@ public class Order {
     private String OrderDate;
     private String DeliveryDate;
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(int id, Users user, int totalPrice, String note, ShipAddress shipAddress, OrderStatus orderStatus, String OrderDate, String DeliveryDate) {
+    public Orders(int id, Users user, int totalPrice, String note, ShipAddress shipAddress, OrderStatus orderStatus, String OrderDate, String DeliveryDate) {
         this.id = id;
         this.user = user;
         this.totalPrice = totalPrice;
@@ -98,8 +100,9 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", user=" + user + ", totalPrice=" + totalPrice + ", note=" + note + ", shipAddress=" + shipAddress + ", orderStatus=" + orderStatus + ", OrderDate=" + OrderDate + ", DeliveryDate=" + DeliveryDate + '}';
+        return "Orders{" + "id=" + id + ", user=" + user + ", totalPrice=" + totalPrice + ", note=" + note + ", shipAddress=" + shipAddress + ", orderStatus=" + orderStatus + ", OrderDate=" + OrderDate + ", DeliveryDate=" + DeliveryDate + '}';
     }
+
     
     
 }
