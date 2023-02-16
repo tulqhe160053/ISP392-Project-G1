@@ -5,7 +5,14 @@
 package dao;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import model.Orders;
 import model.OrderStatus;
 import model.ShipAddress;
@@ -108,11 +115,96 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, t.getUser().getUserID());
+            ps.setInt(2, t.getTotalPrice());
+            ps.setString(3, t.getNote());
+            ps.setInt(4, t.getShipAddress().getId());
+            ps.setInt(5, t.getOrderStatus().getId());
+            ps.setString(6, t.getOrderDate());
+            ps.setString(7, t.getDeliveryDate());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Orders selectByUserId(int userId) {
+        Orders ketqua = null;
+        xSql = "select * from Orders where UserID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                UserDAO user_dao = new UserDAO();
+                Users user = user_dao.getById(userId);
+
+                int totalPrice = rs.getInt("TotalPrice");
+                String note = rs.getString("Note");
+
+                int shipId = rs.getInt("ShipId");
+                ShipAddressDAO shipAddress_dao = new ShipAddressDAO();
+                ShipAddress shipAddress = shipAddress_dao.getById(shipId);
+
+                int orderStatusId = rs.getInt("StatusID");
+                OrderStatusDAO orderStatus_dao = new OrderStatusDAO();
+                OrderStatus orderStatus = orderStatus_dao.getById(orderStatusId);
+
+                String OrderDate = rs.getString("OrderDate");
+                String DeliveryDate = rs.getString("DeliveryDate");
+
+                ketqua = new Orders(id, user, totalPrice, note, shipAddress, orderStatus, OrderDate, DeliveryDate);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return ketqua;
+    }
+
+    public Orders selectByUserIdAndOrderDate(int userId, String orderDate) {
+        Orders ketqua = null;
+        xSql = "select * from Orders where UserID = ? and OrderDate = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            ps.setString(2, orderDate);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                UserDAO user_dao = new UserDAO();
+                Users user = user_dao.getById(userId);
+
+                int totalPrice = rs.getInt("TotalPrice");
+                String note = rs.getString("Note");
+
+                int shipId = rs.getInt("ShipId");
+                ShipAddressDAO shipAddress_dao = new ShipAddressDAO();
+                ShipAddress shipAddress = shipAddress_dao.getById(shipId);
+
+                int orderStatusId = rs.getInt("StatusID");
+                OrderStatusDAO orderStatus_dao = new OrderStatusDAO();
+                OrderStatus orderStatus = orderStatus_dao.getById(orderStatusId);
+
+                String OrderDate = rs.getString("OrderDate");
+                String DeliveryDate = rs.getString("DeliveryDate");
+
+                ketqua = new Orders(id, user, totalPrice, note, shipAddress, orderStatus, OrderDate, DeliveryDate);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return ketqua;
     }
 
     @Override
@@ -136,10 +228,31 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
     }
 
     public static void main(String[] args) {
+
         OrderDAO dao = new OrderDAO();
-        for (Orders orders : dao.selectAll()) {
-            System.out.println(orders);
-        }
+
+        UserDAO user_dao = new UserDAO();
+        Users user = user_dao.getById(2);
+//
+        ShipAddressDAO shipaddress_dao = new ShipAddressDAO();
+        ShipAddress shipAddress = shipaddress_dao.getById(2);
+
+        OrderStatusDAO orderStatus_dao = new OrderStatusDAO();
+        OrderStatus orderStatus = orderStatus_dao.getById(2);
+
+        LocalDateTime orderDate = LocalDate.now().atTime(LocalTime.now());
+
+        // Tạo LocalTime đại diện cho giờ mặc định là 8 giờ sáng
+        LocalTime defaultTime = LocalTime.of(8, 0, 0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        // Kết hợp LocalDate và LocalTime thành LocalDateTime
+        LocalDateTime deliveryTime = LocalDate.now().atTime(defaultTime).plus(1, ChronoUnit.DAYS);
+//
+//        Orders order = new Orders(1, user, 2000, "hi", shipAddress, orderStatus, orderDate.format(formatter), deliveryTime.format(formatter));
+//        dao.insert(order);
+        Orders order1 = dao.selectByUserIdAndOrderDate(user.getUserID(),formatter.format(orderDate));
+        
+        System.out.println(order1);
     }
 
 }

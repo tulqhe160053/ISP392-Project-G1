@@ -157,7 +157,7 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
     public static void main(String[] args) {
         CartProductDAO dao = new CartProductDAO();
         
-        for (CartProduct object : dao.getByCartId(1)) {
+        for (CartProduct object : dao.selectAll()) {
             System.out.println(object);
         }
     }

@@ -55,7 +55,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
     </head>
     <body>
-    <body>
+        <div id="my-text">${sessionScope.mess}</div>
         <!-- Start Header Area -->
         <jsp:include page="../header.jsp" />
         <!-- End Header Area -->
@@ -268,6 +268,15 @@
 
         <!-- footer -->
         <%@include file="../footer.jsp" %>
+
+        <script>
+            var myText = document.getElementById("my-text");
+
+        // Đợi 2 giây, sau đó ẩn đối tượng div
+            setTimeout(function () {
+                myText.style.display = "none";
+            }, 4000);
+        </script>
 
         <script src="<%=request.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
