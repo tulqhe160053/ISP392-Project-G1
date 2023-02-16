@@ -54,7 +54,7 @@ public class OrderStatusDAO extends MyDAO implements DAOInterface<OrderStatus> {
             if (rs.next()) {
                 int orderStatusId = rs.getInt("ID");
                 String name = rs.getString("Name");
-                ketqua = new OrderStatus(id, name);
+                ketqua = new OrderStatus(orderStatusId, name);
             } else {
                 ketqua = null;
             }

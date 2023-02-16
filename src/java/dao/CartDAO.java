@@ -117,7 +117,7 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
     
     public void deleteByUserId(int id) {
         try {
-            String sql = "delete from Cart where UserID = ?";
+            String sql = "delete from Cart where UserID = (?)";
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -131,8 +131,18 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
 
     @Override
     public void delete(Cart t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        xSql = "delete from Cart where ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, t.getId());
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    
 
     @Override
     public int deleteAll(ArrayList<Cart> arr) {
@@ -146,6 +156,7 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
 
     public static void main(String[] args) {
         CartDAO dao = new CartDAO();
+        
         for (Cart arg : dao.selectAll()) {
             System.out.println(arg);
         }

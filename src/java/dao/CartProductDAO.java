@@ -100,7 +100,7 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
         return ketqua;
     }
     
-        public ArrayList<CartProduct> getByCartId( int cartId) {
+    public ArrayList<CartProduct> getByCartId( int cartId) {
         ArrayList<CartProduct> t = new ArrayList<>();
         xSql = "select * from CartProduct where cartId = (?)";
         try {
@@ -131,7 +131,7 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
             ps.close();
         } catch (Exception e) {
         }
-        return t;
+        return (t);
     }
 
     @Override
@@ -146,7 +146,21 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
 
     @Override
     public int deleteAll(ArrayList<CartProduct> arr) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public void deleteByCartId (int cartId, int productId) {
+        xSql = "delete from CartProduct where cartId = (?) and productId = (?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, cartId);
+            ps.setInt(2, productId);
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -157,6 +171,7 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
     public static void main(String[] args) {
         CartProductDAO dao = new CartProductDAO();
         
+
         for (CartProduct object : dao.selectAll()) {
             System.out.println(object);
         }

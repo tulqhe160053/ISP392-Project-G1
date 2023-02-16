@@ -231,28 +231,26 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
 
         OrderDAO dao = new OrderDAO();
 
-        UserDAO user_dao = new UserDAO();
-        Users user = user_dao.getById(2);
-//
-        ShipAddressDAO shipaddress_dao = new ShipAddressDAO();
-        ShipAddress shipAddress = shipaddress_dao.getById(2);
-
-        OrderStatusDAO orderStatus_dao = new OrderStatusDAO();
-        OrderStatus orderStatus = orderStatus_dao.getById(2);
-
-        LocalDateTime orderDate = LocalDate.now().atTime(LocalTime.now());
-
-        // Tạo LocalTime đại diện cho giờ mặc định là 8 giờ sáng
-        LocalTime defaultTime = LocalTime.of(8, 0, 0);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        // Kết hợp LocalDate và LocalTime thành LocalDateTime
-        LocalDateTime deliveryTime = LocalDate.now().atTime(defaultTime).plus(1, ChronoUnit.DAYS);
-//
-//        Orders order = new Orders(1, user, 2000, "hi", shipAddress, orderStatus, orderDate.format(formatter), deliveryTime.format(formatter));
+//        UserDAO user_dao = new UserDAO();
+//        
+//        ShipAddressDAO shipaddress_dao = new ShipAddressDAO();
+//        OrderStatusDAO orderStatus_dao = new OrderStatusDAO();
+//        
+//        Orders order = new Orders(1, user_dao.getById(2), 3000, null, shipaddress_dao.getById(1), orderStatus_dao.getById(2), "12-02-2023 08:35", "13-02-2023 08:35");
 //        dao.insert(order);
-        Orders order1 = dao.selectByUserIdAndOrderDate(user.getUserID(),formatter.format(orderDate));
-        
-        System.out.println(order1);
+//        
+//        for (Orders orders : dao.selectAll()) {
+//            System.out.println(orders);
+//        }
+//        
+//        Orders order1 = dao.selectAll().get(dao.selectAll().size()-1);
+//        
+//        System.out.println("---------------------");
+//        System.out.println(order1);
+         
+          for (Orders orders : dao.selectAll()) {
+              System.out.println(orders);
+        }
     }
 
 }

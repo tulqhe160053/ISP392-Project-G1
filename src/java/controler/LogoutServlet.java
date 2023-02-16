@@ -30,6 +30,7 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         session.removeAttribute("user");
+        session.removeAttribute("message");
         response.sendRedirect("home");
     }
 

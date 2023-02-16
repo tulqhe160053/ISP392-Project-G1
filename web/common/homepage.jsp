@@ -55,7 +55,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
     </head>
     <body>
-        <div id="my-text">${sessionScope.mess}</div>
+        <div id="my-text" class="text-primary">${sessionScope.message}</div>
         <!-- Start Header Area -->
         <jsp:include page="../header.jsp" />
         <!-- End Header Area -->
