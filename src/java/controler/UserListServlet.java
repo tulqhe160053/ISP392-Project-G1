@@ -67,105 +67,100 @@ public class UserListServlet extends HttpServlet {
             request.setAttribute("num", num);
             request.setAttribute("user", userList);
             request.getRequestDispatcher("admin/user.jsp").forward(request, response);
-        }
-
-        if (action.equals("search")) {
-            String searchTxt = request.getParameter("txt");
-            List<Users> userSearch = u.searchName(searchTxt);
-            request.setAttribute("user", userSearch);
-            List<Role> ro = r.selectAll();
-            List<UserStatus> userstatus = us.selectAll();
-            request.setAttribute("role", ro);
-            request.setAttribute("userstatus", userstatus);
-            request.getRequestDispatcher("admin/user.jsp").forward(request, response);
-            if (searchTxt == null) {
-                List<Users> user = u.selectAll();
-                List<Role> role = r.selectAll();
-                request.setAttribute("role", role);
-                int page, numperpage = 10;
-                int size = user.size();
-                int num = (size % 10 == 0 ? (size / 10) : ((size / 10)) + 1);//so trang
-                String xpage = request.getParameter("page");
-                if (xpage == null) {
-                    page = 1;
-                } else {
-                    page = Integer.parseInt(xpage);
-                }
-                int start, end;
-                start = (page - 1) * numperpage;
-                end = Math.min(page * numperpage, size);
-                List<Users> userList = u.getListByPage(user, start, end);
-                request.setAttribute("page", page);
-                request.setAttribute("num", num);
-                request.setAttribute("user", userList);
+        } else {
+            if (action.equals("search")) {
+                String searchTxt = request.getParameter("txt");
+                List<Users> userSearch = u.searchName(searchTxt);
+                request.setAttribute("user", userSearch);
+                List<Role> ro = r.selectAll();
+                List<UserStatus> userstatus = us.selectAll();
+                request.setAttribute("role", ro);
+                request.setAttribute("userstatus", userstatus);
                 request.getRequestDispatcher("admin/user.jsp").forward(request, response);
+                if (searchTxt == null) {
+                    List<Users> user = u.selectAll();
+                    List<Role> role = r.selectAll();
+                    request.setAttribute("role", role);
+                    int page, numperpage = 10;
+                    int size = user.size();
+                    int num = (size % 10 == 0 ? (size / 10) : ((size / 10)) + 1);//so trang
+                    String xpage = request.getParameter("page");
+                    if (xpage == null) {
+                        page = 1;
+                    } else {
+                        page = Integer.parseInt(xpage);
+                    }
+                    int start, end;
+                    start = (page - 1) * numperpage;
+                    end = Math.min(page * numperpage, size);
+                    List<Users> userList = u.getListByPage(user, start, end);
+                    request.setAttribute("page", page);
+                    request.setAttribute("num", num);
+                    request.setAttribute("user", userList);
+                    request.getRequestDispatcher("admin/user.jsp").forward(request, response);
+                }
             }
-        }
 
-        if (action.equals("filter")) {
-            String role_id = request.getParameter("role_id");
-            String status = request.getParameter("status");
-            request.setAttribute("role_id", role_id);
-            request.setAttribute("status", status);
-            if (role_id.equals("all") && status.equals("all")) {
+            if (action.equals("filter")) {
+                String role_id = request.getParameter("role_id");
+                String status = request.getParameter("status");
+                request.setAttribute("role_id", role_id);
+                request.setAttribute("status", status);
+                if (role_id.equals("all") && status.equals("all")) {
+                    response.sendRedirect("user");
+                } else if (role_id.equals("all")) {
+//                List<Role> rolee = r.selectAll();
+//                List<UserStatus> userstatuss = us.selectAll();
+//                request.setAttribute("role", rolee);
+//                request.setAttribute("userstatus", userstatuss);
+                    List<Users> list = u.getFilterByStatus(status);
+                    request.setAttribute("user", list);
+                    request.getRequestDispatcher("admin/user.jsp").forward(request, response);
+
+                } else if (status.equals("all")) {
+//                List<Role> rolee = r.selectAll();
+//                List<UserStatus> userstatuss = us.selectAll();
+//                request.setAttribute("role", rolee);
+//                request.setAttribute("userstatus", userstatuss);
+                    List<Users> list = u.getFilterByRole(role_id);
+                    request.setAttribute("user", list);
+                    request.getRequestDispatcher("admin/user.jsp").forward(request, response);
+
+                } else {
+                    List<Role> role = r.selectAll();
+                    List<UserStatus> userstatus = us.selectAll();
+                    request.setAttribute("role", role);
+                    request.setAttribute("userstatus", userstatus);
+                    List<Users> list = u.getFilter(role_id, status);
+                    request.setAttribute("user", list);
+                    request.getRequestDispatcher("admin/user.jsp").forward(request, response);
+
+                }
+            }
+            if (action.equals("delete")) {
+                String userid = request.getParameter("uid");
+                u.deleteUser(userid);
                 response.sendRedirect("user");
             }
-            else if (role_id.equals("all")) {
-//                List<Role> rolee = r.selectAll();
-//                List<UserStatus> userstatuss = us.selectAll();
-//                request.setAttribute("role", rolee);
-//                request.setAttribute("userstatus", userstatuss);
-                List<Users> list = u.getFilterByStatus(status);
-                request.setAttribute("user", list);
-                request.getRequestDispatcher("admin/user.jsp").forward(request, response);
 
-            }
-            else if (status.equals("all")) {
-//                List<Role> rolee = r.selectAll();
-//                List<UserStatus> userstatuss = us.selectAll();
-//                request.setAttribute("role", rolee);
-//                request.setAttribute("userstatus", userstatuss);
-                List<Users> list = u.getFilterByRole(role_id);
-                request.setAttribute("user", list);
-                request.getRequestDispatcher("admin/user.jsp").forward(request, response);
-
-            }
-            else {
+            if (action.equals("update")) {
                 List<Role> role = r.selectAll();
                 List<UserStatus> userstatus = us.selectAll();
+                String userid = request.getParameter("uid");
+                Users users = u.getUserByID(userid);
                 request.setAttribute("role", role);
                 request.setAttribute("userstatus", userstatus);
-                List<Users> list = u.getFilter(role_id, status);
-                request.setAttribute("user", list);
-                request.getRequestDispatcher("admin/user.jsp").forward(request, response);
-
+                request.setAttribute("user", users);
+                request.getRequestDispatcher("admin/viewuserdetail.jsp").forward(request, response);
+            }
+            if (action.equals("edituser")) {
+                String uid = request.getParameter("uid");
+                String role = request.getParameter("role_id");
+                String status = request.getParameter("status_id");
+                u.updateStatusRole(role, status, uid);
+                response.sendRedirect("user");
             }
         }
-        if (action.equals("delete")) {
-            String userid = request.getParameter("uid");
-            u.deleteUser(userid);
-            response.sendRedirect("user");
-        }
-        
-        
-        if (action.equals("update")) {
-            List<Role> role = r.selectAll();
-            List<UserStatus> userstatus = us.selectAll();
-            String userid = request.getParameter("uid");
-            Users users = u.getUserByID(userid);
-            request.setAttribute("role", role);
-            request.setAttribute("userstatus", userstatus);
-            request.setAttribute("user", users);
-            request.getRequestDispatcher("admin/viewuserdetail.jsp").forward(request, response);
-        }
-        if(action.equals("edituser")){
-            String uid = request.getParameter("uid");
-            String role = request.getParameter("role_id");
-            String status = request.getParameter("status_id");
-            u.updateStatusRole(role,status,uid);
-            response.sendRedirect("user");
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
