@@ -149,12 +149,11 @@ public class CartProductDAO extends MyDAO implements DAOInterface<CartProduct> {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public void deleteByCartId (int cartId, int productId) {
-        xSql = "delete from CartProduct where cartId = (?) and productId = (?)";
+    public void deleteByCartId (int cartId) {
+        xSql = "delete from CartProduct where cartId = (?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, cartId);
-            ps.setInt(2, productId);
             ps.executeUpdate();
             //con.commit();
             ps.close();

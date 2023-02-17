@@ -74,7 +74,7 @@
         <!--Delete cart button-->
         <div class="container mt-5">
             <div class="float-right">
-                <a class="btn btn-danger" href="<%=request.getContextPath()%>/deletecart">Delete cart</a>
+                <a class="btn btn-danger" href="<%=request.getContextPath()%>/editcart?action=deleteCart">Delete cart</a>
             </div>
         </div>
         <!--End delete cart button-->
@@ -95,11 +95,11 @@
                             </thead>
                             <tbody>
                                 <c:set var="sum" value="0"></c:set>
-                                <c:forEach items="${list}" var="cart">
+                                <c:forEach items="${listCartProduct}" var="cartProduct">
                                     <c:forEach items="${list_productImg}" var="productImg">
-                                        <c:if test="${cart.getProduct().getProductID() == productImg.getProduct().getProductID()}">
-                                            <c:set var="category" value="${cart.getProduct().getCategory()}"></c:set>
-                                            <c:set var="brand" value="${cart.getProduct().getBrand()}"></c:set>
+                                        <c:if test="${cartProduct.getProduct().getProductID() == productImg.getProduct().getProductID()}">
+                                            <c:set var="category" value="${cartProduct.getProduct().getCategory()}"></c:set>
+                                            <c:set var="brand" value="${cartProduct.getProduct().getBrand()}"></c:set>
                                             <tr>                                               
                                                 <td>
                                                     <div class="media">
@@ -107,21 +107,21 @@
                                                             <img src="<%=request.getContextPath()%>/assets/product_img/${category.getCategoryName()}/${brand.getBrandName()}/${productImg.getProductImgUrl()}" alt="error" style="width: 50px">
                                                         </div>
                                                         <div class="media-body">
-                                                            <p>${cart.getProduct().getProductName()}</p>
+                                                            <p>${cartProduct.getProduct().getProductName()}</p>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <h5>$${cart.getProduct().getSellPrice()}</h5>
+                                                    <h5>$${cartProduct.getProduct().getSellPrice()}</h5>
                                                 </td>
                                                 <td>
                                                     <div class="product_count">
-                                                        <input name="amount" type="number" value="${cart.getAmount()}">
+                                                        <input name="amount" type="number" value="${cartProduct.getAmount()}">
                                                         <h5></h5>
                                                     </div>
                                                 </td>
                                                 <td>                                                  
-                                                    <h5>$${cart.getProduct().getSellPrice() * cart.getAmount()}</h5>
+                                                    <h5>$${cartProduct.getProduct().getSellPrice() * cartProduct.getAmount()}</h5>
                          
                                                 </td>
                                                 <td>

@@ -111,7 +111,6 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
     

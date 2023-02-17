@@ -84,5 +84,11 @@ public class OrderProductDAO extends MyDAO implements DAOInterface<OrderProduct>
     public void update(int x, OrderProduct t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+    public static void main(String[] args) {
+        OrderProductDAO dao = new OrderProductDAO();
+        for (OrderProduct orderProduct : dao.selectAll()) {
+            System.out.println(orderProduct);
+        }
+    }
 }
