@@ -374,11 +374,10 @@
 							<div class="review_box">
 						                                                          <form method="GET" action="<%=request.getContextPath()%>/addfeedback">
                                                                                                                                                                                                                 <input type="hidden" name="productID" value="${product.getProductID()}" id="myValue"/>
-                                                                                                                                                                                                                <a class="primary-btn" href="/feedback/addfeedback.jsp" data-value="1">Add a feedback</a>
+                                                                                                                                                                                                                <button class="btn primary-btn" type="submit">Add a feedback</button>
                                                                                                                                                                                                         
-                                                                                                                                                                                                            </form>
+                                                                                                                                                                                                   </form>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>

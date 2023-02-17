@@ -56,18 +56,14 @@ public class AddFeedback extends HttpServlet {
             response.setCharacterEncoding("UTF-8");         
             String url = "/feedback/addfeedback.jsp";
         try {
-            String productId_String = request.getParameter("productId");
+            String productId_String = request.getParameter("productID");
 
-                int productId = Integer.parseInt(productId_String);
+                int productID = Integer.parseInt(productId_String);
                 Product product_save = new Product();
-                product_save.setProductID(productId);
-                
+                product_save.setProductID(productID);             
                 ProductDAO product_dao = new ProductDAO();
                 Product product = product_dao.selectById(product_save);
                 request.setAttribute("product", product);
-                ProductImgDAO productImg_dao = new ProductImgDAO();
-                 ProductImg productImg = productImg_dao.selectByProductId(product);
-                request.setAttribute("productImg", productImg);
                 request.getRequestDispatcher(url).forward(request, response);
                 
            
@@ -89,24 +85,18 @@ public class AddFeedback extends HttpServlet {
             throws ServletException, IOException {
             HttpSession session = request.getSession();
             Users user = (Users) session.getAttribute("user");
- 
-            // get FeedbackDAO
             FeedbackDAO feedbackDAO = new FeedbackDAO();
-
             // get current product id
-            String productId_String = request.getParameter("productId");
-            int productId = Integer.parseInt(productId_String);
-           // int productId = Integer.parseInt(request.getParameter("productId"));
-
+            String productId_String = request.getParameter("productID");
+            int productID = Integer.parseInt(productId_String);
             // get input rating
             int star = Integer.parseInt(request.getParameter("star-value"));
             String feedback = request.getParameter("feedback-text");
-
             // create feedback
             Feedback userFeedback = new Feedback();
-            userFeedback.setProductID(productId);
+            userFeedback.setProductID(productID);
             userFeedback.setUserID(user.getUserID());
-            userFeedback.setStar(star);;
+            userFeedback.setStar(star);
             userFeedback.setFeedbackDetail(feedback);
             System.out.println(userFeedback.toString());
 
@@ -114,7 +104,7 @@ public class AddFeedback extends HttpServlet {
             feedbackDAO.addFeedback(userFeedback);
 
             // redirect 
-            response.sendRedirect("/common/homepage");
+            response.sendRedirect("home");
         
 
         

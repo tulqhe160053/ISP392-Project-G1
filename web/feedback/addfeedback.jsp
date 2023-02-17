@@ -42,17 +42,37 @@
                 />
 
             <!-- CSS -->
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/linearicons.css">
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/themify-icons.css">
+            <link
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+                rel="stylesheet"
+                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                crossorigin="anonymous"
+                />
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+                integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer"
+                />
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/owl.carousel.css">
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nice-select.css">
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nouislider.min.css">
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.css" />
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.skinFlat.css" />
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magnific-popup.css">
+            <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
             <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css" />
             <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/queries.css" />
             <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/homepage.css" />
 
 
-            
-            
-
-            
-            
-            <title>Get Feedback</title>
+            <title>Add Feedback</title>
 
             <style>
                 .rating {
@@ -140,7 +160,21 @@
         <body>
             <%@include file="../header.jsp" %>
             
-             <div class="container">
+            	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<nav class="d-flex align-items-center">
+                                                                                                                            Add feedback
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+            <div class="container">
 
                 <div class="row mt-3">
 
@@ -186,27 +220,52 @@
                                         </label>
                                     </form>
                                 </div>
-                                <h1>
-                                <c:out value ="${requestScope.product.productID}"> </c:out>
-                                 </h1>
-                                <div class="feedback-text">
-                                    <form action="<%=request.getContextPath()%>/addfeedback" id="submit-feedback" method="POST" onsubmit="submitFeedback()" >                                    
+
+        
+                                    <div class="feedback-text">
+                                        <form action="<%=request.getContextPath()%>/addfeedback" id="submit-feedback" method="POST" onsubmit="submitFeedback()" >                                    
                                         <label for="feedback-text" class="form-label">Your Feedback: </label>
                                         <textarea name="feedback-text" class="form-control" id="feedback-text" rows="5" placeholder="Write your Feedback here"></textarea>
                                         <input type="hidden" id="star-value" name="star-value">                                        
-                                     <input type="hidden" id="productId" name="productId" value="${requestScope.product.productID}">
-                                        <input type="submit" class="btn btn-warning mt-5" value="Submit">                                   
-                                    </form>
+                                        <input type="hidden" id="productID" name="productID" value="${product.getProductID()}">
+                                        <button type="submit" class="btn btn-warning mt-5" >Submit</button>                                   
+                                         </form>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-            </div>                            
-</div>
+                </div>                            
+            </div>
+
+            <!--Start footer-->
+            <jsp:include page="../footer.jsp" />
+            <!--End footer-->
+
+            <script src="<%=request.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+            <script src="<%=request.getContextPath()%>/js/vendor/bootstrap.min.js"></script>
+            <script src="<%=request.getContextPath()%>/js/jquery.ajaxchimp.min.js"></script>
+            <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
+            <script src="<%=request.getContextPath()%>/js/jquery.sticky.js"></script>
+            <script src="<%=request.getContextPath()%>/js/nouislider.min.js"></script>
+            <script src="<%=request.getContextPath()%>/js/countdown.js"></script>
+            <script src="<%=request.getContextPath()%>/js/jquery.magnific-popup.min.js"></script>
+            <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+            <!--gmaps Js-->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+            <script src="<%=request.getContextPath()%>/js/gmaps.min.js"></script>
+            <script src="<%=request.getContextPath()%>/js/main.js"></script>
+
+            <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"
+            ></script>
         </body>
-        
-          <jsp:include page="../footer.jsp" />
-          
+
+
+
     </html>
 
