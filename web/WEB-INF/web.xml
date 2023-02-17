@@ -16,6 +16,8 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/cart.jsp</url-pattern>
         <url-pattern>/cart</url-pattern>
+        <url-pattern>/viewMyBlogList.jsp</url-pattern>
+        <url-pattern>/mylistblog</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>EncodingCharacter</filter-name>
@@ -32,6 +34,10 @@
     <servlet>
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>controler.ProductServlet</servlet-class>
+    </servlet>
+        <servlet>
+        <servlet-name>MyListBlogServlet</servlet-name>
+        <servlet-class>controler.MyListBlogServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CartServlet</servlet-name>
@@ -96,6 +102,10 @@
     <servlet-mapping>
         <servlet-name>ResetPassword</servlet-name>
         <url-pattern>/resetpassword</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>MyListBlogServlet</servlet-name>
+        <url-pattern>/mylistblog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>testing</servlet-name>

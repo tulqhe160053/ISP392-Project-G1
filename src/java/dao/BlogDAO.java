@@ -100,6 +100,43 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return null;
     }
+    
+        public ArrayList<Blog> selectMyAll(int UserID) {
+        ArrayList<Blog> t = new ArrayList<>();
+        xSql = "select * from Blog where UserID = ? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1,UserID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int blogId = rs.getInt("ID");
+                UserDAO dao = new UserDAO();
+                
+                int userId = rs.getInt("UserID");
+                Users x = new Users();
+                x.setUserID(userId);
+                Users bloger=dao.selectById(x);
+                
+                int catId = rs.getInt("CatID");
+                CategoryDAO cat_dao = new CategoryDAO();
+                Category category = cat_dao.selectById(new Category(catId, null));
+                
+                String title = rs.getString("Title");
+                String description = rs.getString("description");
+                String content = rs.getString("Content");
+                String img = rs.getString("imageLink");
+                
+                Blog b= new Blog(blogId,bloger,category,title,description,content,img);
+                t.add(b);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+    
 
     public Blog getBlogByID(String bid) {
         String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
