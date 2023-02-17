@@ -66,7 +66,7 @@ public class UserListServlet extends HttpServlet {
             request.setAttribute("page", page);
             request.setAttribute("num", num);
             request.setAttribute("user", userList);
-            request.getRequestDispatcher("user.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/user.jsp").forward(request, response);
         }
 
         if (action.equals("search")) {
@@ -77,7 +77,7 @@ public class UserListServlet extends HttpServlet {
             List<UserStatus> userstatus = us.selectAll();
             request.setAttribute("role", ro);
             request.setAttribute("userstatus", userstatus);
-            request.getRequestDispatcher("user.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/user.jsp").forward(request, response);
             if (searchTxt == null) {
                 List<Users> user = u.selectAll();
                 List<Role> role = r.selectAll();
@@ -98,7 +98,7 @@ public class UserListServlet extends HttpServlet {
                 request.setAttribute("page", page);
                 request.setAttribute("num", num);
                 request.setAttribute("user", userList);
-                request.getRequestDispatcher("user.jsp").forward(request, response);
+                request.getRequestDispatcher("admin/user.jsp").forward(request, response);
             }
         }
 
@@ -117,7 +117,7 @@ public class UserListServlet extends HttpServlet {
 //                request.setAttribute("userstatus", userstatuss);
                 List<Users> list = u.getFilterByStatus(status);
                 request.setAttribute("user", list);
-                request.getRequestDispatcher("user.jsp").forward(request, response);
+                request.getRequestDispatcher("admin/user.jsp").forward(request, response);
 
             }
             else if (status.equals("all")) {
@@ -127,7 +127,7 @@ public class UserListServlet extends HttpServlet {
 //                request.setAttribute("userstatus", userstatuss);
                 List<Users> list = u.getFilterByRole(role_id);
                 request.setAttribute("user", list);
-                request.getRequestDispatcher("user.jsp").forward(request, response);
+                request.getRequestDispatcher("admin/user.jsp").forward(request, response);
 
             }
             else {
@@ -137,7 +137,7 @@ public class UserListServlet extends HttpServlet {
                 request.setAttribute("userstatus", userstatus);
                 List<Users> list = u.getFilter(role_id, status);
                 request.setAttribute("user", list);
-                request.getRequestDispatcher("user.jsp").forward(request, response);
+                request.getRequestDispatcher("admin/user.jsp").forward(request, response);
 
             }
         }
@@ -156,7 +156,7 @@ public class UserListServlet extends HttpServlet {
             request.setAttribute("role", role);
             request.setAttribute("userstatus", userstatus);
             request.setAttribute("user", users);
-            request.getRequestDispatcher("viewuserdetail.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/viewuserdetail.jsp").forward(request, response);
         }
         if(action.equals("edituser")){
             String uid = request.getParameter("uid");

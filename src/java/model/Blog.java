@@ -17,6 +17,8 @@ public class Blog {
     private String description;
     private String content;
     private String imageLink;
+    private String createTime;
+    private int viewer;
 
     public Blog() {
     }
@@ -30,6 +32,22 @@ public class Blog {
         this.content = content;
         this.imageLink = imageLink;
     }
+
+    public Blog(int id, Users user, Category category, String title, String description, String content, String imageLink, String createTime, int viewer) {
+        this.id = id;
+        this.user = user;
+        this.category = category;
+        this.title = title;
+        this.description = description;
+        this.content = content;
+        this.imageLink = imageLink;
+        this.createTime = createTime;
+        this.viewer = viewer;
+    }
+    
+    
+
+     
 
     public int getId() {
         return id;
@@ -86,6 +104,24 @@ public class Blog {
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getViewer() {
+        return viewer;
+    }
+
+    public void setViewer(int viewer) {
+        this.viewer = viewer;
+    }
+    
+    
 
     @Override
     public String toString() {

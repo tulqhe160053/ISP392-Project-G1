@@ -52,8 +52,8 @@
                         <div class="login_box_img">
                             <img class="img-fluid" src="<%=request.getContextPath()%>/img/login.jpg" alt="">
                             <div class="hover">
-                                <h4>Bạn chưa có tài khoản?</h4>
-                                <a class="primary-btn" href="<%=request.getContextPath()%>/register.jsp">Ðăng kí</a>
+                                <h4>Have not an account?</h4>
+                                <a class="primary-btn" href="<%=request.getContextPath()%>common/register.jsp">Register</a>
                             </div>
                         </div>
                     </div>
