@@ -9,17 +9,18 @@ import dao.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import model.Blog;
 
 /**
  *
- * @author Tu
+ * @author Admin
  */
-public class BlogServlet extends HttpServlet {
+@WebServlet(name="BlogDetail", urlPatterns={"/blogdetail"})
+public class ViewBlogDetail extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,7 +32,18 @@ public class BlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        doGet(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet BlogDetail</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet BlogDetail at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,13 +57,23 @@ public class BlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-            response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        BlogDAO dao = new BlogDAO();
-        ArrayList<Blog> listBlog = dao.selectAll();
-        request.setAttribute("listBlog", listBlog);
-        request.getRequestDispatcher("blog/viewBlogList.jsp").forward(request, response);
+        try {
+            String blogid_raw = request.getParameter("id");
+            if (blogid_raw.equals("")) {
+                request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
+            } else {
+                int blogId = Integer.parseInt(blogid_raw);
+                
+                BlogDAO dao = new BlogDAO();
+                Blog b = dao.selectById(blogId);
+                request.setAttribute("blog", b);
+                request.getRequestDispatcher("/blog/viewblogdetail.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     } 
+    
 
     /** 
      * Handles the HTTP <code>POST</code> method.

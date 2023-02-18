@@ -45,7 +45,7 @@
                 <div class="col-first">
                     <h1>Blog Detail</h1>
                     <nav class="d-flex align-items-center">
-                        <a >Blog<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="<%=request.getContextPath()%>/listblog">Blog<span class="lnr lnr-arrow-right"></span></a>
                         <a >Blog Detail</a>
                     </nav>
                 </div>
@@ -69,6 +69,7 @@
                                 <div class="blog_info text-right">
                                     <div class="post_tag">
                                         <h3>${blog.category.categoryName}</h3>
+                                        
                                     </div>
                                     
                                 </div>
@@ -79,8 +80,8 @@
                                     <div class="blog_details">
                                         <a>
                                             <h2>${blog.title}</h2>
-                                            <h5>${blog.description}</h5>
                                             <h5>${blog.content}</h5>
+                                            <h5>${blog.description}</h5>
                                         </a>
                                     </div>
                                 </div>
@@ -99,6 +100,65 @@
                                 </span>
                             </div><!-- /input-group -->
                             <div class="br"></div>
+                        </aside>
+                        <aside class="single_sidebar_widget author_widget">
+                            <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
+                            <h4>ISP392 G1</h4>
+                            <div class="social_icon">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-github"></i></a>
+                                <a href="#"><i class="fa fa-behance"></i></a>
+                            </div>
+                            
+                            <div class="br"></div>
+                        </aside>
+                        <aside class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title">Popular Posts</h3>
+                            <div class="media post_item">
+                                <img src="img/blog/popular-post/post1.jpg" alt="post">
+                                <div class="media-body">
+                                    <a href="">
+                                        <h3>Space The Final Frontier</h3>
+                                    </a>
+                                    <p>02 Hours ago</p>
+                                </div>
+                            </div>
+                            <div class="media post_item">
+                                <img src="img/blog/popular-post/post2.jpg" alt="post">
+                                <div class="media-body">
+                                    <a href="">
+                                        <h3>The Amazing Hubble</h3>
+                                    </a>
+                                    <p>02 Hours ago</p>
+                                </div>
+                            </div>
+                            <div class="br"></div>
+                        </aside>
+                        <aside class="single-sidebar-widget newsletter_widget">
+                            <h4 class="widget_title">Newsletter</h4>
+                            <p>
+                                Here, I focus on a range of items and features that we use in life without
+                                giving them a second thought.
+                            </p>
+                            <div class="form-group d-flex flex-row">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'">
+                                </div>
+                                <a href="#" class="bbtns">Subcribe</a>
+                            </div>
+                            <p class="text-bottom">You can unsubscribe at any time</p>
+                            <div class="br"></div>
+                        </aside>
+                        <aside class="single-sidebar-widget tag_cloud_widget">
+                            <h4 class="widget_title">Tag Clouds</h4>
+                            <ul class="list">
+                                <li><a href="#">${blog.category.categoryName}</a></li>
+                            </ul>
                         </aside>
                     </div>
                 </div>

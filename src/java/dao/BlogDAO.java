@@ -9,6 +9,7 @@ import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,8 +126,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                 String description = rs.getString("description");
                 String content = rs.getString("Content");
                 String img = rs.getString("imageLink");
+                String createTime = rs.getString("createtime");
+                int viewer = rs.getInt("viewer");
                 
-                Blog b= new Blog(blogId,bloger,category,title,description,content,img);
+                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
                 t.add(b);
             }
             rs.close();
@@ -397,4 +400,6 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public Blog selectById(Blog t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
 }

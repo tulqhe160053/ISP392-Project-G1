@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 import model.Blog;
 
 /**
@@ -60,7 +61,22 @@ public class MyListBlogServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectMyAll(3);
-        request.setAttribute("listBlog", listBlog);
+        int page, numperpage = 3;
+        int size = listBlog.size();
+        int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
+        String xpage = request.getParameter("page");
+        if (xpage == null) {
+            page = 1;
+        } else {
+            page = Integer.parseInt(xpage);
+        }
+        int start, end;
+        start = (page - 1) * numperpage;
+        end = Math.min(page * numperpage, size);
+        List<Blog> blog = dao.getListByPage(listBlog, start, end);
+        request.setAttribute("page", page);
+        request.setAttribute("num", num);
+        request.setAttribute("listBlog", blog);
         request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
     } 
 

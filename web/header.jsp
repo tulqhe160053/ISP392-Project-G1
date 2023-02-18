@@ -26,7 +26,7 @@
                         <li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/home">Home</a></li>
                         
                         <li class="nav-item">
-                            <a href="<%=request.getContextPath()%>/blog" class="nav-link ">Blog</a>
+                            <a href="<%=request.getContextPath()%>/listblog" class="nav-link ">Blog</a>
                         </li>
                         <c:if test="${sessionScope.user == null}">
                             <li class="nav-item">
