@@ -42,8 +42,8 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Hello ${sessionScope.user.userName}</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="viewuser.jsp">My Profile</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">My Orders</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/common/viewuser.jsp">My Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="ViewListAddress">My Address</a></li>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 1}">
                                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user">Admin Dashboard</a></li>
                                         </c:if>

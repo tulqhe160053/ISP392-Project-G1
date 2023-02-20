@@ -4,25 +4,23 @@
  */
 package controler;
 
-import dao.UserDAO;
+import dao.CityDAO;
+import dao.DistrictDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Role;
-import model.UserStatus;
-import model.Users;
+import java.util.ArrayList;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import model.City;
+import model.District;
 
 /**
  *
  * @author thaib
  */
-@WebServlet(name = "EditUserServlet", urlPatterns = {"/edituser"})
-public class EditUser extends HttpServlet {
+public class AddAddress extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,37 +33,17 @@ public class EditUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
-            HttpSession session = request.getSession();
-            model.Users user = (model.Users) session.getAttribute("user");
-            //model.UserStatus id = (model.UserStatus) session.getAttribute("statusid");
-            String userName = request.getParameter("userName");
-            String gender = request.getParameter("gender");
-            String email = request.getParameter("email");
-            String phoneNum = request.getParameter("PhoneNum");
-            UserDAO dao = new UserDAO();
-            int userId = user.getUserID();
-            //int status = id.getId();
-            dao.editUser(userName, gender, email, phoneNum, userId);
-            if (!user.getUserName().equals(userName)) {
-                session.removeAttribute("user");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
-                user.setUserName(userName);
-                user.setGender(gender);
-                user.setEmail(email);
-                user.setPhoneNum(phoneNum);
-                session.setAttribute("user", user);
-                request.getRequestDispatcher("/commom/viewuser.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().print(e);
-            response.getWriter().print(e.getMessage());
+        response.setContentType("text/html;charset=UTF-8");
+        DistrictDAO dao = new DistrictDAO();
+        ArrayList<District> d = dao.selectAll();
+        request.setAttribute("listD", d);
+        CityDAO dal = new CityDAO();
+        ArrayList<City> c = dal.selectAll();
+        request.setAttribute("listC", c);
+//        response.getWriter().print(t);
+        request.getRequestDispatcher("/address/addaddress.jsp").forward(request, response);
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -94,7 +72,6 @@ public class EditUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
