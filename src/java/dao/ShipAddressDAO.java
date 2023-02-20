@@ -18,54 +18,50 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
 
     @Override
     public ArrayList<ShipAddress> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<ShipAddress> t = new ArrayList<>();
+        xSql = "select * from ShipAddress";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+            while (rs.next()) {
+                 int id = rs.getInt("ID");
+                 int userId = rs.getInt("UserID");
+                 UserDAO user_dao = new UserDAO();
+                 Users user = user_dao.getById(userId);
+                 
+                 String fullName = rs.getString("Fullname");
+                 String phoneNum = rs.getString("PhoneNum");
+                 
+                 int cityId = rs.getInt("ShipCityID");
+                 CityDAO city_dao = new CityDAO();
+                 City shipCity = city_dao.getById(cityId);
+                 
+                 int districtId = rs.getInt("DistrictId");
+                 DistrictDAO district_dao = new DistrictDAO();
+                 District district = district_dao.getById(districtId);
+                 
+                 String addressDetail = rs.getString("AddressDetail");
+                 
+                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public ShipAddress selectById(ShipAddress t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    public ShipAddress getById(int shipAddressId) {
-        ShipAddress ketqua = null;
-        xSql = "select * from ShipAddress where ID = ?";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setInt(1, shipAddressId);
-            rs = ps.executeQuery();
-            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
-         Thus the first rs.next() statement moves the cursor to the first record
-             */
-
-            if (rs.next()) {
-                int id = shipAddressId;
-                int userId = rs.getInt("UserID");
-                UserDAO user_dao = new UserDAO();
-                Users user = user_dao.getById(userId);                               
-                String fullName = rs.getString("Fullname");
-                String phoneNum = rs.getString("PhoneNum");
-
-                int cityId = rs.getInt("ShipCityID");
-                CityDAO city_dao = new CityDAO();
-                City shipCity = city_dao.getById(cityId);
-
-                int districtId = rs.getInt("DistrictId");
-                DistrictDAO district_dao = new DistrictDAO();
-                District district = district_dao.getById(districtId);
-
-                String addressDetail = rs.getString("AddressDetail");
-
-                ketqua = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
-            } else {
-                ketqua = null;
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-        }
-        return (ketqua);
-    }
-
+    
     public ArrayList<ShipAddress> getByUserId(int UserID) {
         ArrayList<ShipAddress> t = new ArrayList<>();
         xSql = "select * from ShipAddress where UserID = ?";
@@ -77,25 +73,25 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
          Thus the first rs.next() statement moves the cursor to the first record
              */
 
-            if (rs.next()) {
-                int id = rs.getInt("ID");
-
-                UserDAO user_dao = new UserDAO();
-                Users user = user_dao.getById(UserID);
-                String fullName = rs.getString("Fullname");
-                String phoneNum = rs.getString("PhoneNum");
-
-                int cityId = rs.getInt("ShipCityID");
-                CityDAO city_dao = new CityDAO();
-                City shipCity = city_dao.getById(cityId);
-
-                int districtId = rs.getInt("DistrictId");
-                DistrictDAO district_dao = new DistrictDAO();
-                District district = district_dao.getById(districtId);
-
-                String addressDetail = rs.getString("AddressDetail");
-
-                ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
+            while (rs.next()) {
+                 int id = rs.getInt("ID");
+                 
+                 UserDAO user_dao = new UserDAO();
+                 Users user = user_dao.getById(UserID);
+                 String fullName = rs.getString("Fullname");
+                 String phoneNum = rs.getString("PhoneNum");
+                 
+                 int cityId = rs.getInt("ShipCityID");
+                 CityDAO city_dao = new CityDAO();
+                 City shipCity = city_dao.getById(cityId);
+                 
+                 int districtId = rs.getInt("DistrictId");
+                 DistrictDAO district_dao = new DistrictDAO();
+                 District district = district_dao.getById(districtId);
+                 
+                 String addressDetail = rs.getString("AddressDetail");
+                 
+                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
                 t.add(x);
             }
             rs.close();
@@ -107,7 +103,6 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
 
     @Override
     public void insert(ShipAddress t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -129,10 +124,101 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
     public void update(int x, ShipAddress t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public ShipAddress getById(int id) {
+        ShipAddress ketqua = null;
+            xSql = "select * from ShipAddress where ID = ?";
+            try {
+                ps = con.prepareStatement(xSql);
+                ps.setInt(1, id );
+                rs = ps.executeQuery();
+                /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+             Thus the first rs.next() statement moves the cursor to the first record
+                 */
 
+                while (rs.next()) {
+                     
+
+                     int UserID = rs.getInt("UserID");
+                     UserDAO user_dao = new UserDAO();
+                     Users user = user_dao.getById(UserID);
+                     String fullName = rs.getString("Fullname");
+                     String phoneNum = rs.getString("PhoneNum");
+
+                     int cityId = rs.getInt("ShipCityID");
+                     CityDAO city_dao = new CityDAO();
+                     City shipCity = city_dao.getById(cityId);
+
+                     int districtId = rs.getInt("DistrictId");
+                     DistrictDAO district_dao = new DistrictDAO();
+                     District district = district_dao.getById(districtId);
+
+                     String addressDetail = rs.getString("AddressDetail");
+
+                     ketqua = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
+                }
+                rs.close();
+                ps.close();
+            } catch (Exception e) {
+            }
+            return ketqua;
+    }
+    
+    
     public static void main(String[] args) {
         ShipAddressDAO dao = new ShipAddressDAO();
+        ArrayList<ShipAddress> t = dao.getByUserId(3);
+        for (ShipAddress o : t) {
+        System.out.println(o);
+        }
 
-        System.out.println(dao.getById(2));
+    }
+    public void deleteAddress(String aid) {
+        String query = "delete from ShipAddress\n" +
+                "where id = ?";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setString(1, aid);
+            ps.executeUpdate();
+        } catch (Exception e){
+        }
+    }
+    public void addshipaddress(int userId, String Fullname, String PhoneNum, int City, int District, String AddressDetail){
+        String query = "insert into dbo.[ShipAddress] \n" +
+                    "(UserID, Fullname, PhoneNum, ShipCityID, DistrictId, AddressDetail) \n" +
+                    "values (?,?,?,?,?,?)";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+            ps.setString(2, Fullname);
+            ps.setString(3, PhoneNum);
+            ps.setInt(4, City);
+            ps.setInt(5, District);
+            ps.setString(6, AddressDetail);
+            ps.executeUpdate();
+        } catch (Exception e){
+        }
+    }
+
+
+public void editshipaddress( String Fullname, String PhoneNum, int City, int District, String AddressDetail, int ID){
+        String query = "update ShipAddress\n" +
+                        "set Fullname = ?,\n" +
+                        "PhoneNum = ?,\n" +
+                        "ShipCityID = ?,\n" +
+                        "DistrictId = ?,\n" +
+                        "AddressDetail = ?\n" +
+                        "where ID = ?";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setString(1, Fullname);
+            ps.setString(2, PhoneNum);
+            ps.setInt(3, City);
+            ps.setInt(4, District);
+            ps.setString(5, AddressDetail);
+            ps.setInt(6, ID);
+            ps.executeUpdate();
+        } catch (Exception e){
+        }
     }
 }
