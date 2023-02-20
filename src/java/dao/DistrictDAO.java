@@ -15,7 +15,17 @@ public class DistrictDAO extends MyDAO implements DAOInterface<District> {
 
     @Override
     public ArrayList<District> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<District> district = new ArrayList<>();
+        xSql = "select * from District";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                district.add(new District(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return district;
     }
 
     @Override
@@ -73,7 +83,7 @@ public class DistrictDAO extends MyDAO implements DAOInterface<District> {
     }
     public static void main(String[] args) {
         DistrictDAO dao = new DistrictDAO();
-        System.out.println(dao.getById(3));
+        System.out.println(dao.selectAll());
     }
     
 }

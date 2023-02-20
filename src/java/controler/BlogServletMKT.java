@@ -202,13 +202,9 @@ public class BlogServletMKT extends HttpServlet {
                 String blog_id = request.getParameter("blog_id");
                 Part filePart = request.getPart("image");
                 String imageFileName = filePart.getSubmittedFileName();
-                String uploadPath = "C:/Users/ducth/Documents/NetBeansProjects/ISP392-Project-G1/web/assets/blog_img" + imageFileName;
-                FileOutputStream fos = new FileOutputStream(uploadPath);
                 InputStream is = filePart.getInputStream();
                 byte[] data = new byte[is.available()];
-                is.read(data);
-                fos.write(data);
-                fos.close();
+                is.read(data);              
                 dao.UpdateImage(blog_id, imageFileName);
                 request.getRequestDispatcher("blogmkt?action=blogdetail&blog_id=" + blog_id).forward(request, response);
             } catch (Exception e) {

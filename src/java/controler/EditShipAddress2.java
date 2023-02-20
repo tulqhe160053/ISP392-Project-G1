@@ -4,25 +4,22 @@
  */
 package controler;
 
-import dao.UserDAO;
+import dao.ShipAddressDAO;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Role;
-import model.UserStatus;
 import model.Users;
 
 /**
  *
  * @author thaib
  */
-@WebServlet(name = "EditUserServlet", urlPatterns = {"/edituser"})
-public class EditUser extends HttpServlet {
+public class EditShipAddress2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,36 +32,27 @@ public class EditUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
-            HttpSession session = request.getSession();
-            model.Users user = (model.Users) session.getAttribute("user");
-            //model.UserStatus id = (model.UserStatus) session.getAttribute("statusid");
-            String userName = request.getParameter("userName");
-            String gender = request.getParameter("gender");
-            String email = request.getParameter("email");
-            String phoneNum = request.getParameter("PhoneNum");
-            UserDAO dao = new UserDAO();
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = (HttpSession) request.getSession();
+            String id = request.getParameter("id");
+            int ID = Integer.parseInt(id);
+            
+            Users user = (Users) session.getAttribute("user");
             int userId = user.getUserID();
-            //int status = id.getId();
-            dao.editUser(userName, gender, email, phoneNum, userId);
-            if (!user.getUserName().equals(userName)) {
-                session.removeAttribute("user");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
-                user.setUserName(userName);
-                user.setGender(gender);
-                user.setEmail(email);
-                user.setPhoneNum(phoneNum);
-                session.setAttribute("user", user);
-                request.getRequestDispatcher("/commom/viewuser.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().print(e);
-            response.getWriter().print(e.getMessage());
-        }
+            String Fullname = request.getParameter("Fullname");
+            String PhoneNum = request.getParameter("PhoneNum");
+            
+            String Cityid = request.getParameter("city");
+            int City = Integer.parseInt(Cityid);
+            
+            String Districtid = request.getParameter("district");
+            int District = Integer.parseInt(Districtid);
+
+            String AddressDetail = request.getParameter("AddressDetail");
+            
+            ShipAddressDAO dao = new ShipAddressDAO();
+            dao.editshipaddress( Fullname, PhoneNum, City, District, AddressDetail, ID);
+            response.sendRedirect("ViewListAddress");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -94,7 +82,6 @@ public class EditUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**

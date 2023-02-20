@@ -25,6 +25,20 @@ public class FeedbackDAO extends MyDAO {
             System.out.println(e);
         }
     }
+           public void editFeedback(Feedback feedback) {
+        String sql = "update into Feedback values (?,?,?,?)";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, feedback.getUserID());
+            ps.setInt(2, feedback.getProductID());
+            ps.setInt(3, feedback.getStar());
+            ps.setString(4, feedback.getFeedbackDetail());
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
    
   

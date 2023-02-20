@@ -4,25 +4,23 @@
  */
 package controler;
 
-import dao.UserDAO;
+import dao.ShipAddressDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Role;
-import model.UserStatus;
+import model.City;
+import model.District;
 import model.Users;
 
 /**
  *
  * @author thaib
  */
-@WebServlet(name = "EditUserServlet", urlPatterns = {"/edituser"})
-public class EditUser extends HttpServlet {
+public class AddAddress2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,35 +33,18 @@ public class EditUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
-            HttpSession session = request.getSession();
-            model.Users user = (model.Users) session.getAttribute("user");
-            //model.UserStatus id = (model.UserStatus) session.getAttribute("statusid");
-            String userName = request.getParameter("userName");
-            String gender = request.getParameter("gender");
-            String email = request.getParameter("email");
-            String phoneNum = request.getParameter("PhoneNum");
-            UserDAO dao = new UserDAO();
-            int userId = user.getUserID();
-            //int status = id.getId();
-            dao.editUser(userName, gender, email, phoneNum, userId);
-            if (!user.getUserName().equals(userName)) {
-                session.removeAttribute("user");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
-                user.setUserName(userName);
-                user.setGender(gender);
-                user.setEmail(email);
-                user.setPhoneNum(phoneNum);
-                session.setAttribute("user", user);
-                request.getRequestDispatcher("/commom/viewuser.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().print(e);
-            response.getWriter().print(e.getMessage());
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddAddress2</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddAddress2 at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -93,8 +74,23 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = (HttpSession) request.getSession();
+            Users user = (Users) session.getAttribute("user");
+            int userId = user.getUserID();
+            String Fullname = request.getParameter("Fullname");
+            String PhoneNum = request.getParameter("PhoneNum");
+            
+            String Cityid = request.getParameter("city");
+            int City = Integer.parseInt(Cityid);
+            
+            String Districtid = request.getParameter("district");
+            int District = Integer.parseInt(Districtid);
 
+            String AddressDetail = request.getParameter("AddressDetail");
+
+            ShipAddressDAO daol = new ShipAddressDAO();
+            daol.addshipaddress(userId, Fullname, PhoneNum, City, District, AddressDetail);
+            response.sendRedirect("ViewListAddress");
     }
 
     /**

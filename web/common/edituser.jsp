@@ -28,19 +28,19 @@
         <!--
                 CSS
                 ============================================= -->
-        <link rel="stylesheet" href="css/linearicons.css">
-        <link rel="stylesheet" href="css/owl.carousel.css">
-        <link rel="stylesheet" href="css/themify-icons.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/nice-select.css">
-        <link rel="stylesheet" href="css/nouislider.min.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/owl.carousel.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nice-select.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nouislider.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.skinFlat.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magnific-popup.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
     </head>
 
     <body>
 
-        <jsp:include page="header.jsp" />
+        <jsp:include page="../header.jsp" />
 
    
 
@@ -102,5 +102,5 @@
     </div>
 </div>
 
-        <jsp:include page="footer.jsp" />
+        <jsp:include page="../footer.jsp" />
 </html>
