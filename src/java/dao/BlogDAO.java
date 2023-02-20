@@ -139,6 +139,52 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return t;
     }
+         public ArrayList<Blog> selectTop2() {
+        ArrayList<Blog> t = new ArrayList<>();
+        xSql = "SELECT TOP (3) [ID]\n" +
+"      ,[UserID]\n" +
+"      ,[CatId]\n" +
+"      ,[Title]\n" +
+"      ,[description]\n" +
+"      ,[Content]\n" +
+"      ,[imageLink]\n" +
+"      ,[createtime]\n" +
+"      ,[viewer]\n" +
+"  FROM Blog\n" +
+"  order by viewer desc";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int blogId = rs.getInt("ID");
+                UserDAO dao = new UserDAO();
+                
+                int userId = rs.getInt("UserID");
+                Users x = new Users();
+                x.setUserID(userId);
+                Users bloger=dao.selectById(x);
+                
+                int catId = rs.getInt("CatID");
+                CategoryDAO cat_dao = new CategoryDAO();
+                Category category = cat_dao.selectById(new Category(catId, null));
+                
+                String title = rs.getString("Title");
+                String description = rs.getString("description");
+                String content = rs.getString("Content");
+                String img = rs.getString("imageLink");
+                String createTime = rs.getString("createtime");
+                int viewer = rs.getInt("viewer");
+                
+                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
+                t.add(b);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
     
 
     public Blog getBlogByID(String bid) {
@@ -392,8 +438,14 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public static void main(String[] args) {
         BlogDAO bd = new BlogDAO();
         Blog b = new Blog();
-        b = bd.selectById(1);
-
+        b = bd.selectById(2);
+        ArrayList<Blog> t = new ArrayList<>();
+        t=bd.selectTop2();
+        for (Blog blog : t) {
+            System.out.println(blog.toString());
+            
+        }
+       
     }
 
     @Override
