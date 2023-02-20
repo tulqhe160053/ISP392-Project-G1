@@ -99,6 +99,10 @@
         <servlet-name>EditShipAddress2</servlet-name>
         <servlet-class>controler.EditShipAddress2</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewListAddress</servlet-name>
+        <servlet-class>controler.ViewListAddress</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -186,6 +190,10 @@
     <servlet-mapping>
         <servlet-name>EditShipAddress2</servlet-name>
         <url-pattern>/EditShipAddress2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewListAddress</servlet-name>
+        <url-pattern>/ViewListAddress</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
