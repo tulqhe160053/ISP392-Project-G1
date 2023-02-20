@@ -91,7 +91,7 @@
 
                         </div>
                         <div class="mt-5 text-center"><a class="primary-btn" href="<%=request.getContextPath()%>/common/edituser.jsp">Edit User</a></div>
-                        <div class="mt-4 text-center"><a class="primary-btn" href="changepassword.jsp">Change Password</a></div>
+                        <div class="mt-4 text-center"><a class="primary-btn" href="<%=request.getContextPath()%>/common/changepassword.jsp">Change Password</a></div>
                     </div>
                 </div>
 

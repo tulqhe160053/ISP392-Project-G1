@@ -58,7 +58,7 @@ public class ChangePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("changepassword.jsp");
+        response.sendRedirect("common/changepassword.jsp");
     }
 
     /**
@@ -85,11 +85,11 @@ public class ChangePassword extends HttpServlet {
                 if (user.getPassword().equals(oldPassword) && newPassword.equals(repeatNewPassword)) {
                     dao.updatePassword(user.getEmail(), newPassword);
                     request.setAttribute("mess", "Đổi mật khẩu thành công");
-                    request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+                    request.getRequestDispatcher("common/changepassword.jsp").forward(request, response);
                     
                 } else {    
                     request.setAttribute("mess", "Nhập lại chính xác thông tin!");
-                    request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+                    request.getRequestDispatcher("common/changepassword.jsp").forward(request, response);
                 }
             } else {
                 //response.sendRedirect("error.jsp");
