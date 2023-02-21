@@ -44,10 +44,13 @@
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/common/viewuser.jsp">My Profile</a></li>
                                     <li class="nav-item"><a class="nav-link" href="ViewListAddress">My Address</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">My Orders</a></li>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 1}">
-                                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user">Admin Dashboard</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user">Admin Dashboard</a></li>
                                         </c:if>
+                                        <c:if test="${sessionScope.user.getRole().getRoleID() == 3}">
+                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/order/ListOrder.jsp">My Order</a></li>
+                                        </c:if>
+                                    
                                     <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout">Log Out</a></li>
                                 </ul>
                             </li>

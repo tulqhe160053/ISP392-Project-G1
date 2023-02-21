@@ -62,7 +62,7 @@ public class CartComplete extends HttpServlet {
             if (session != null) {
                 Users user = (Users) session.getAttribute("user");
                 if (user == null) {
-                    request.getRequestDispatcher("home").forward(request, response);
+                    request.getRequestDispatcher("login").forward(request, response);
                 }
                 
                 CartDAO cart_dao = new CartDAO();
