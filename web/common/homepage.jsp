@@ -55,11 +55,11 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
     </head>
     <body>
-        <div id="my-text" class="text-primary">${sessionScope.message}</div>
+
         <!-- Start Header Area -->
         <jsp:include page="../header.jsp" />
         <!-- End Header Area -->
-
+        <div id="my-text" class="text-primary">${sessionScope.message}</div>
         <!-- start banner Area -->
         <section class="slider">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">

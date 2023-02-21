@@ -14,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Category;
 import model.Product;
@@ -62,6 +63,8 @@ public class CategoryServlet extends HttpServlet {
        ArrayList<ProductImg> list_productImg =  productImg_dao.selectAll();
        request.setAttribute("list_productImg",list_productImg);
        String url = "/product/listProduct.jsp";
+       HttpSession session = request.getSession();
+        session.removeAttribute("message");
         try {
             String catId_String = request.getParameter("catId");
             if(catId_String.equals("")){
