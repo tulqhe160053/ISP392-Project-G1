@@ -64,6 +64,7 @@ public class CartComplete extends HttpServlet {
                 if (user == null) {
                     request.getRequestDispatcher("home").forward(request, response);
                 }
+                
                 CartDAO cart_dao = new CartDAO();
                 CartProductDAO cartproduct_dao = new CartProductDAO();
                 Cart cart = cart_dao.selectByUserId(user.getUserID());

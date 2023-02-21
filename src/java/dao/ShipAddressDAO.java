@@ -168,10 +168,9 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
     public static void main(String[] args) {
         ShipAddressDAO dao = new ShipAddressDAO();
         ArrayList<ShipAddress> t = dao.getByUserId(3);
-        for (ShipAddress o : t) {
-        System.out.println(o);
+        for (ShipAddress o : dao.selectAll()) {
+            System.out.println(o);
         }
-
     }
     public void deleteAddress(String aid) {
         String query = "delete from ShipAddress\n" +

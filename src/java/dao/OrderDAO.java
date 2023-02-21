@@ -166,6 +166,44 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         }
         return ketqua;
     }
+    
+        public ArrayList<Orders> selectAllByUserId(int userId) {
+        ArrayList<Orders> t = new ArrayList<>();
+        xSql = "select * from Orders where UserID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                int userID = rs.getInt("UserID");
+                UserDAO user_dao = new UserDAO();
+                Users user = user_dao.getById(userId);
+
+                int totalPrice = rs.getInt("TotalPrice");
+                String note = rs.getString("Note");
+
+                int shipId = rs.getInt("ShipId");
+                ShipAddressDAO shipAddress_dao = new ShipAddressDAO();
+                ShipAddress shipAddress = shipAddress_dao.getById(shipId);
+
+                int orderStatusId = rs.getInt("StatusID");
+                OrderStatusDAO orderStatus_dao = new OrderStatusDAO();
+                OrderStatus orderStatus = orderStatus_dao.getById(orderStatusId);
+
+                String OrderDate = rs.getString("OrderDate");
+                String DeliveryDate = rs.getString("DeliveryDate");
+
+                Orders x = new Orders(id, user, totalPrice, note, shipAddress, orderStatus, OrderDate, DeliveryDate);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
     public Orders selectByUserIdAndOrderDate(int userId, String orderDate) {
         Orders ketqua = null;
