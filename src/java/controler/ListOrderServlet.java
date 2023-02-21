@@ -5,12 +5,17 @@
 
 package controler;
 
+import dao.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import model.Orders;
+import model.Users;
 
 /**
  *
@@ -28,7 +33,23 @@ public class ListOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try {
+            HttpSession session = request.getSession();
+            if (session != null) {
+                Users user = (Users) session.getAttribute("user");
+                if (user == null) {
+                    request.getRequestDispatcher("login").forward(request, response);
+                }
+                
+                OrderDAO orderDao = new OrderDAO();
+                ArrayList<Orders> listOrder = orderDao.selectAllByUserId(user.getUserID());
+                request.setAttribute("listOrder", listOrder);
+                request.getRequestDispatcher("/order/ListOrder.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("login").forward(request, response);
+            }
+        } catch (Exception e) {
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

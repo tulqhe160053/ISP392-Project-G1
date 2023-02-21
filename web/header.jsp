@@ -48,7 +48,7 @@
                                             <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user">Admin Dashboard</a></li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 3}">
-                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/order/ListOrder.jsp">My Order</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/listorder">My Order</a></li>
                                         </c:if>
                                     
                                     <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout">Log Out</a></li>

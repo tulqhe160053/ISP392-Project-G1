@@ -286,7 +286,7 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
 //        System.out.println("---------------------");
 //        System.out.println(order1);
          
-          for (Orders orders : dao.selectAll()) {
+          for (Orders orders : dao.selectAllByUserId(2)) {
               System.out.println(orders);
         }
     }
