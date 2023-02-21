@@ -88,7 +88,9 @@
                                                     <div class="media-body">
                                                         <h6 class="mb-1 text-secondary">${o.fullName}</h6>
                                                         <p class="text-black">${o.phoneNum}
-                                                        <p class="text-black">${o.addressDetail},${o.district.districtName},${o.shipCity.cityName}
+                                                        <p class="text-black">${o.addressDetail}
+                                                        </p>
+                                                        <p class="text-black">${o.district.districtName},${o.shipCity.cityName}
                                                         </p>
                                                         <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" data-toggle="modal" data-target="#add-address-modal" href="EditShipAddress?aid=${o.id}"><i class="icofont-ui-edit"></i> EDIT</a> <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="DeleteAddress?aid=${o.id}"><i class="icofont-ui-delete"></i> DELETE</a></p>
                                                     </div>
