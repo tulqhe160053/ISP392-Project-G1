@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import model.Blog;
 
 /**
@@ -66,7 +67,9 @@ public class ViewBlogDetail extends HttpServlet {
                 
                 BlogDAO dao = new BlogDAO();
                 Blog b = dao.selectById(blogId);
+                ArrayList<Blog> topBlog = dao.selectTop2();
                 request.setAttribute("blog", b);
+                request.setAttribute("topBlog", topBlog);
                 request.getRequestDispatcher("/blog/viewblogdetail.jsp").forward(request, response);
             }
         } catch (Exception e) {

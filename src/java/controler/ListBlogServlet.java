@@ -53,6 +53,7 @@ public class ListBlogServlet extends HttpServlet {
         
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectAll();
+        ArrayList<Blog> topBlog = dao.selectTop2();
         int page, numperpage = 3;
         int size = listBlog.size();
         int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
@@ -69,6 +70,7 @@ public class ListBlogServlet extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("num", num);
         request.setAttribute("listBlog", blog);
+        request.setAttribute("topBlog", topBlog);
         request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
     }
 
