@@ -25,7 +25,8 @@ public class FeedbackDAO extends MyDAO {
             System.out.println(e);
         }
     }
-           public void editFeedback(Feedback feedback) {
+    
+    public void editFeedback(Feedback feedback) {
         String sql = "update into Feedback values (?,?,?,?)";
         try {
             ps = con.prepareStatement(sql);
