@@ -98,19 +98,9 @@ public class ViewCart extends HttpServlet {
             request.getRequestDispatcher("/cart/viewCart.jsp").forward(request, response);
         }
         else {
-            try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Cart not found</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Don't have any product in cart " + "</h1>");
-            out.println("<h1>Don't have any product in cart " + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            }
+            String message = "You don't have any product in cart ";
+            session.setAttribute("message", message);
+            request.getRequestDispatcher("home").forward(request, response);
         }
         
     }

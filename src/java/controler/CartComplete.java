@@ -80,10 +80,16 @@ public class CartComplete extends HttpServlet {
 
                 ShipAddressDAO address_dao = new ShipAddressDAO();
                 ArrayList<ShipAddress> list_shipAddress = address_dao.getByUserId(user.getUserID());
-                request.setAttribute("shipaddress", list_shipAddress.get(0));
-                request.setAttribute("cartId", cart.getId());
-                request.setAttribute("list_productImg", list_productImg);
-                request.getRequestDispatcher("/cart/ViewCartComplete.jsp").forward(request, response);
+                if(!list_shipAddress.isEmpty()){
+                    request.setAttribute("shipaddress", list_shipAddress.get(0));
+                    request.setAttribute("cartId", cart.getId());
+                    request.setAttribute("list_productImg", list_productImg);
+                    request.getRequestDispatcher("/cart/ViewCartComplete.jsp").forward(request, response);
+                }
+                else{
+                    response.sendRedirect("AddAddress");
+                }
+                
             } else {
                 request.getRequestDispatcher("login").forward(request, response);
             }

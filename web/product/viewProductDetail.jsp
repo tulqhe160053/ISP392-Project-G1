@@ -72,7 +72,7 @@
 							<li><span>Stock</span> : <span class="ml-4">${product.getProductStatus().getStatusName()}</span></li>
 						</ul>
 						<p>${product.getDescription()}</p>
-                                                <form action="<%=request.getContextPath()%>/cart" method="post">
+                                                <form action="<%=request.getContextPath()%>/cart" method="get">
                                                     <div class="product_count">
                                                             <label for="qty">Quantity:</label>
                                                             <input type="number" name="amount" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
