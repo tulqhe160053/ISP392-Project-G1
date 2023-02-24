@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,17 +57,26 @@
         <!-- Start Header Area -->
         <jsp:include page="../header.jsp" />
         <!-- End Header Area -->
-        
+
         <!-- Start Banner Area -->
+        <section class="banner-area organic-breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                    <div class="col-first">
+                        <h1>Order detail</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Banner Area -->
 
         <div class="container mt-5 p-3 rounded cart">
             <div class="row no-gutters justify-content-between">
                 <div class="col-md-7 pl-3">
                     <div class="product-details mr-2">
                         <hr>
-                        <h6 class="mb-0">Shopping cart</h6>
                         <div class="d-flex justify-content-between"></div>
-                        <c:forEach items="${requestScope.listCartProduct}" var="item">
+                        <c:forEach items="${requestScope.list_orderProduct}" var="item">
                             <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
                                 <c:forEach items="${requestScope.list_productImg}" var="img_item" >
                                     <c:if test="${img_item.getProduct().getProductID() == item.getProduct().getProductID()}">
@@ -76,7 +86,7 @@
                                             <div class="ml-2"><span class="font-weight-bold d-block">${item.getProduct().getProductName()}</span></div>
                                         </div>
                                         <div class="d-flex flex-row align-items-center"><span class="d-block">${item.getAmount()}</span><span class="d-block ml-5 font-weight-bold">$${item.getProduct().getSellPrice()}</span><i class="fa fa-trash-o ml-3 text-black-50"></i></div>
-                                        </c:if>
+                                    </c:if>
                                 </c:forEach>
 
                             </div>
@@ -84,33 +94,35 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <c:set var="shipaddress" value="${requestScope.shipaddress}"></c:set>
+                    <c:set var="order" value="${requestScope.order}"></c:set>
                     <div class="payment-info">
                         <div class="d-flex justify-content-between align-items-center font-weight-bold"><h2>Ship address</h2></div>
 
-                        <div><h5 class="credit-card-label text-black-50">Fullname: <span class="text-dark">${shipaddress.getFullName()}</span></h5></div>
-                        <div><h5 class="credit-card-label text-black-50">Email: <span class="text-dark">${shipaddress.getUser().getEmail()}</span></h5></div>
-                        <div><h5 class="credit-card-label text-black-50">Phone Number: <span class="text-dark">${shipaddress.getUser().getPhoneNum()}</span></h5></div>
-                        <div><h5 class="credit-card-label text-black-50">City: <span class="text-dark">${shipaddress.getShipCity().getCityName()}</span></h5></div>
-                        <div><h5 class="credit-card-label text-black-50">District: <span class="text-dark">${shipaddress.getDistrict().getDistrictName()}</span></h5></div>
-                        <div><h5 class="credit-card-label text-black-50">Address detail: <span class="text-dark">${shipaddress.getAddressDetail()}</span></h5></div>
-                        <div><a href="#">Change ship address</a></div>
+                        <div><h5 class="credit-card-label text-black-50">Fullname: <span class="text-dark">${order.getShipAddress().getFullName()}</span></h5></div>
+                        <div><h5 class="credit-card-label text-black-50">Email: <span class="text-dark">${order.getShipAddress().getUser().getEmail()}</span></h5></div>
+                        <div><h5 class="credit-card-label text-black-50">Phone Number: <span class="text-dark">${order.getShipAddress().getPhoneNum()}</span></h5></div>
+                        <div><h5 class="credit-card-label text-black-50">City: <span class="text-dark">${order.getShipAddress().getShipCity().getCityName()}</span></h5></div>
+                        <div><h5 class="credit-card-label text-black-50">District: <span class="text-dark">${order.getShipAddress().getDistrict().getDistrictName()}</span></h5></div>
+                        <div><h5 class="credit-card-label text-black-50">Address detail: <span class="text-dark">${order.getShipAddress().getAddressDetail()}</span></h5></div>
                         <hr class="line">
-                        <div class="d-flex justify-content-between information"><span>Total</span><span>$${requestScope.total}</span></div>
-                        <button class="btn btn-danger btn-block mt-3"><a href="<%=request.getContextPath()%>/order?cartId=${requestScope.cartId}&shipAddressId=${requestScope.shipaddress.getId()}&total=${requestScope.total}">Order</a></button>
+                        <div class="d-flex justify-content-between information "><h5>Total</h5><h5 class="bold-lable">$${order.getTotalPrice()}</h5></div>
+                        <div><h5 class="credit-card-label text-black-50">Order status: <span class="text-dark">${order.getOrderStatus().getName()}</span></h5></div>
+                        <div><h5 class="credit-card-label text-black-50">Order date: <span class="text-dark">${order.getOrderDate()}</span></h5></div>
+                        <div><h5 class="credit-card-label text-black-50">Delivery date: <span class="text-dark">${order.getDeliveryDate()}</span></h5></div>
+                        <button class="btn btn-danger btn-block mt-3"><a href="<%=request.getContextPath()%>/listorder">View list order</a></button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- End Banner Area -->
-        
+
         <!--View Order detail area-->
         <div class="container">
             <<h1>title</h1>
         </div>
         <!--End View Order detail area-->
-        
+
         <!-- start footer Area -->
         <%@include file="../footer.jsp" %>
         <!-- End footer Area -->

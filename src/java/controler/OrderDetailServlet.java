@@ -5,13 +5,19 @@
 
 package controler;
 
+import dao.OrderDAO;
 import dao.OrderProductDAO;
+import dao.ProductImgDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.OrderProduct;
+import model.Orders;
+import model.ProductImg;
 
 /**
  *
@@ -34,6 +40,18 @@ public class OrderDetailServlet extends HttpServlet {
             int orderId = Integer.parseInt(orderId_String);
             
             OrderProductDAO orderproduct_dao = new OrderProductDAO();
+            ArrayList<OrderProduct> list_orderProduct = orderproduct_dao.getByOrderId(orderId);
+            
+            request.setAttribute("list_orderProduct",list_orderProduct);
+            
+            OrderDAO order_dao = new OrderDAO();
+            Orders order = order_dao.getById(orderId);
+            request.setAttribute("order",order);
+            
+            ProductImgDAO productImg_dao = new ProductImgDAO();
+            ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
+            request.setAttribute("list_productImg",list_productImg);
+            request.getRequestDispatcher("/order/ViewOrderDetail.jsp").forward(request, response);
         } catch (Exception e) {
         }
     } 

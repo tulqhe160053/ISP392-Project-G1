@@ -120,7 +120,7 @@
                                                     <h5>${order.getDeliveryDate()}</h5>                         
                                                 </td>
                                                 <td>                                                  
-                                                    <a class="btn btn-warning" href="#">View detail</a>                        
+                                                    <a class="btn btn-warning" href="<%=request.getContextPath()%>/orderdetail?orderId=${order.getId()}">View detail</a>                        
                                                 </td>
                                             </tr>
                                 </c:forEach>
