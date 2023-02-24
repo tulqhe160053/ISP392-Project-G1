@@ -83,6 +83,9 @@
                                     <th scope="col">Total price</th>
                                     <th scope="col">District</th>
                                     <th scope="col">City</th>
+                                    <th scope="col">Order status</th>
+                                    <th scope="col">Order date</th>
+                                    <th scope="col">Delivery date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,8 +108,19 @@
                                                     </div>
                                                 </td>
                                                 <td>                                                  
-                                                    <h5>${order.getShipAddress().getShipCity().getCityName()}</h5>
-                         
+                                                    <h5>${order.getShipAddress().getShipCity().getCityName()}</h5>                         
+                                                </td>
+                                                <td>                                                  
+                                                    <h5>${order.getOrderStatus().getName()}</h5>                         
+                                                </td>
+                                                <td>                                                  
+                                                    <h5>${order.getOrderDate()}</h5>                         
+                                                </td>
+                                                <td>                                                  
+                                                    <h5>${order.getDeliveryDate()}</h5>                         
+                                                </td>
+                                                <td>                                                  
+                                                    <a class="btn btn-warning" href="#">View detail</a>                        
                                                 </td>
                                             </tr>
                                 </c:forEach>
