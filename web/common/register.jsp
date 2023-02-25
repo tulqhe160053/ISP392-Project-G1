@@ -112,7 +112,7 @@
                                     <input type="text" class="form-control" id="name" name="userName" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="password" class="form-control" id="psw" name="password" placeholder="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
+                                    <input type="password" class="form-control" id="psw" name="password" placeholder="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
                                 </div>
 
                                 <div class="col-md-12 form-group">
@@ -133,11 +133,11 @@
 
 
                                 <div class="col-md-12 form-group">
-                                    <input type="email" class="form-control" id="em" name="email" placeholder="Email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Invalid Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
+                                    <input type="email" class="form-control" id="em" name="email" placeholder="Email"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
                                 </div>
 
                                 <div class="col-md-12 form-group">
-                                    <input type="num" class="form-control" id="phone" name="num" placeholder="Phone" pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" title="Invalid Phone Number"onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required>
+                                    <input type="num" class="form-control" id="phone" name="num" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required>
                                 </div>
 
                                 <div class="col-md-12 form-group">
@@ -238,7 +238,7 @@
                                             }
 
                                             // Validate length
-                                            if (myInput.value.length >= 8) {
+                                            if (myInput.value.length >= 6) {
                                                 lengthpass.classList.remove("invalid");
                                                 lengthpass.classList.add("valid");
                                             } else {

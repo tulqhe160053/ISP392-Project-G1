@@ -41,11 +41,7 @@ public class UserDetailServlet extends HttpServlet {
         UserDAO u = new UserDAO();
         RoleDAO r = new RoleDAO();
         UserStatusDAO us = new UserStatusDAO();
-        if (action.equals("delete")) {
-            String userid = request.getParameter("uid");
-            u.deleteUser(userid);
-            response.sendRedirect("user");
-        }
+         
 
         if (action.equals("update")) {
             List<Role> role = r.selectAll();

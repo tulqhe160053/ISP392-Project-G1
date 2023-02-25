@@ -163,22 +163,25 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         }
         return null;
     }
+    
+    
 
-    public Users checklogin(String user, String email, String phone) {
+    public Users checkUserExist(String user) {
 
-        try {
-            String sql = "select UserID , Username , Password , gender , Email,PhoneNum , roleID, userStatusId from users  \n"
-                    + "where Username = ? or Email = ? or PhoneNum = ?";
+       try {
+            String sql = "select UserID , Username , Password , gender , Email,PhoneNum , RoleID, statusId from users  \n"
+                    + "where Username = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, user);
-            ps.setString(2, email);
-            ps.setString(3, phone);
+            
             rs = ps.executeQuery();
             while (rs.next()) {
+
                 int userId = rs.getInt("UserID");
                 String userName = rs.getString("Username");
                 String password = rs.getString("Password");
                 String gender = rs.getString("gender");
+                String email = rs.getString("Email");
                 String phoneNum = rs.getString("PhoneNum");
                 int role_id = rs.getInt("RoleID");
 
@@ -189,6 +192,7 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
 
                 UserStatusDAO userDao = new UserStatusDAO();
                 UserStatus status = userDao.selectById(new UserStatus(userStatus_id, null));
+
                 return new Users(userId, userName, password, gender, email, phoneNum, role, status);
             }
         } catch (Exception e) {
@@ -196,17 +200,49 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return null;
     }
 
-    public void register(String userName, String pass, String gender, String email, String phoneNum, Role role, UserStatus status) {
-        try {
-            String sql = "insert into users values (? , ? , ? , ? , ?, ? ,?)";
+    public Users checkEmailExist(String email) {
+
+         try {
+            String sql = "select UserID , Username , Password , gender , Email,PhoneNum , RoleID, statusId from users  \n"
+                    + "where Email = ?";
             ps = con.prepareStatement(sql);
-            ps.setString(1, userName);
-            ps.setString(2, pass);
-            ps.setString(3, gender);
-            ps.setString(4, email);
-            ps.setString(5, phoneNum);
-            ps.setInt(6, role.getRoleID());
-            ps.setInt(7, status.getId());
+            ps.setString(1, email);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                int userId = rs.getInt("UserID");
+                String userName = rs.getString("Username");
+                String password = rs.getString("Password");
+                String gender = rs.getString("gender");
+                String emaill = rs.getString("Email");
+                String phoneNum = rs.getString("PhoneNum");
+                int role_id = rs.getInt("RoleID");
+
+                RoleDAO dao = new RoleDAO();
+                Role role = dao.selectById(new Role(role_id, null));
+
+                int userStatus_id = rs.getInt("statusId");
+
+                UserStatusDAO userDao = new UserStatusDAO();
+                UserStatus status = userDao.selectById(new UserStatus(userStatus_id, null));
+
+                return new Users(userId, userName, password, gender, emaill, phoneNum, role, status);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void register(Users u) {
+        try {
+            String sql = "insert into users values (? , ? , ? , ? , ?, 3 ,1)";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, u.getUserName());
+            ps.setString(2, u.getPassword());
+            ps.setString(3, u.getGender());
+            ps.setString(4, u.getEmail());
+            ps.setString(5, u.getPhoneNum());
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -329,15 +365,7 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return t;
     }
 
-    public void deleteUser(String uid) {
-        try {
-            String sql = "delete from users where userid = ?";
-            ps = con.prepareStatement(sql);
-            ps.setString(1, uid);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
-    }
+     
 
     public void updateStatusRole(String role_id, String status_id, String uid) {
         try {
@@ -361,53 +389,6 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return arr;
     }
 
-    public List<Users> getFilterByRole(String roleid) {
-        List<Users> user = new ArrayList<>();
-        String sql = "select UserID , Username , Password , gender , Email , PhoneNum ,r.RoleName,s.StatusName from users u\n"
-                + "join role r \n"
-                + "on u.roleID = r.roleID\n"
-                + "join userstatus s \n"
-                + "on u.statusId = s.ID\n"
-                + "where u.roleID = ?";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, roleid);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Role r = new Role(rs.getString(7));
-                UserStatus us = new UserStatus(rs.getString(8));
-                user.add(new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), r, us));
-            }
-
-        } catch (Exception e) {
-        }
-        return user;
-    }
-
-    public List<Users> getFilterByStatus(String statusid) {
-        List<Users> user = new ArrayList<>();
-        String sql = "select UserID , Username , Password , gender , Email , PhoneNum ,r.RoleName,s.StatusName from users u\n"
-                + "join role r \n"
-                + "on u.roleID = r.roleID\n"
-                + "join userstatus s \n"
-                + "on u.statusId = s.ID\n"
-                + "where u.statusId = ?";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, statusid);
-
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Role r = new Role(rs.getString(7));
-                UserStatus us = new UserStatus(rs.getString(8));
-                user.add(new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), r, us));
-            }
-
-        } catch (Exception e) {
-        }
-        return user;
-    }
-
     public List<Users> getFilter(String roleid, String statusid) {
         List<Users> user = new ArrayList<>();
         String sql = "select UserID , Username , Password , gender , Email , PhoneNum ,r.RoleName,s.StatusName from users u\n"
@@ -415,12 +396,15 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
                 + "on u.roleID = r.roleID\n"
                 + "join userstatus s \n"
                 + "on u.statusId = s.ID\n"
-                + "where u.roleID = ? and u.statusId = ?";
+                + "where 1=1";
+        if (roleid != null && roleid != "") {
+            sql += " and u.roleID = " + roleid;
+        }
+        if (statusid != null && statusid != "") {
+            sql += " and u.statusId = " + statusid;
+        }
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, roleid);
-            ps.setString(2, statusid);
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 Role r = new Role(rs.getString(7));
@@ -454,23 +438,21 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return null;
     }
 
-    public void adduser(String username, String password,String gender, String email, String phoneNum, int role, int status) {
+    public void adduser(Users u) {
         try {
             String sql = "insert into users(Username,Password,gender , Email , PhoneNum ,roleID , statusId) values (?,?,? , ? , ?, ? ,?)";
             ps = con.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, password);
-            ps.setString(3, gender);
-            ps.setString(4, email);
-            ps.setString(5, phoneNum);
-            ps.setInt(6, role);
-            ps.setInt(7, status);
+            ps.setString(1, u.getUserName());
+            ps.setString(2, u.getPassword());
+            ps.setString(3, u.getGender());
+            ps.setString(4, u.getEmail());
+            ps.setString(5, u.getPhoneNum());
+            ps.setInt(6, u.getRole().getRoleID());
+            ps.setInt(7, u.getUserStatus().getId());
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
-
-   
 
     public int countGender(String gender) {
         int count = 0;
@@ -544,10 +526,8 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        List<Users> list = dao.getFilterByStatus("2");
+        Users u = dao.checkEmailExist("admin@fpt.edu.vn");
+        System.out.println(u);
 
-        for (Users users : list) {
-            System.out.println(users);
-        }
     }
 }

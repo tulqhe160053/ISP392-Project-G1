@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <filter>
-        <filter-name>EncodingCharacter</filter-name>
-        <filter-class>filter.EncodingCharacter</filter-class>
-        <init-param>
-            <param-name>ENCODE</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
-    <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>filter.LoginFilter</filter-class>
     </filter>
@@ -16,10 +8,8 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/cart.jsp</url-pattern>
         <url-pattern>/cart</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>EncodingCharacter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/viewMyBlogList.jsp</url-pattern>
+        <url-pattern>/mylistblog</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -32,6 +22,10 @@
     <servlet>
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>controler.ProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyListBlogServlet</servlet-name>
+        <servlet-class>controler.MyListBlogServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CartServlet</servlet-name>
@@ -58,8 +52,8 @@
         <servlet-class>controler.ViewCart</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BlogServlet</servlet-name>
-        <servlet-class>controler.BlogServlet</servlet-class>
+        <servlet-name>ListBlogServlet</servlet-name>
+        <servlet-class>controler.ListBlogServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCart</servlet-name>
@@ -74,8 +68,44 @@
         <servlet-class>controler.AddFeedback</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddOrderServlet</servlet-name>
-        <servlet-class>controler.AddOrderServlet</servlet-class>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>controler.OrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetailServlet</servlet-name>
+        <servlet-class>controler.ViewBlogDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListOrderServlet</servlet-name>
+        <servlet-class>controler.ListOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditShipAddress</servlet-name>
+        <servlet-class>controler.EditShipAddress</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteAddress</servlet-name>
+        <servlet-class>controler.DeleteAddress</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAddress</servlet-name>
+        <servlet-class>controler.AddAddress</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAddress2</servlet-name>
+        <servlet-class>controler.AddAddress2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditShipAddress2</servlet-name>
+        <servlet-class>controler.EditShipAddress2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewListAddress</servlet-name>
+        <servlet-class>controler.ViewListAddress</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <servlet-class>controler.OrderDetailServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -98,6 +128,10 @@
         <url-pattern>/resetpassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>MyListBlogServlet</servlet-name>
+        <url-pattern>/mylistblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>testing</servlet-name>
         <url-pattern>/testing</url-pattern>
     </servlet-mapping>
@@ -114,10 +148,6 @@
         <url-pattern>/viewcart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BlogServlet</servlet-name>
-        <url-pattern>/blog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DeleteCart</servlet-name>
         <url-pattern>/deletecart</url-pattern>
     </servlet-mapping>
@@ -130,8 +160,48 @@
         <url-pattern>/addfeedback</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddOrderServlet</servlet-name>
-        <url-pattern>/addorder</url-pattern>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListBlogServlet</servlet-name>
+        <url-pattern>/listblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailServlet</servlet-name>
+        <url-pattern>/viewblogdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListOrderServlet</servlet-name>
+        <url-pattern>/listorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditShipAddress</servlet-name>
+        <url-pattern>/EditShipAddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAddress</servlet-name>
+        <url-pattern>/DeleteAddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAddress</servlet-name>
+        <url-pattern>/AddAddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAddress2</servlet-name>
+        <url-pattern>/AddAddress2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditShipAddress2</servlet-name>
+        <url-pattern>/EditShipAddress2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewListAddress</servlet-name>
+        <url-pattern>/ViewListAddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <url-pattern>/orderdetail</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

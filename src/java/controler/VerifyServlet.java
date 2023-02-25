@@ -4,7 +4,6 @@
  */
 package controler;
 
-
 import dao.UserDAO;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -37,7 +36,7 @@ public class VerifyServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,8 +52,8 @@ public class VerifyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        request.getRequestDispatcher("verify.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("common/verify.jsp").forward(request, response);
+
     }
 
     /**
@@ -69,26 +68,18 @@ public class VerifyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String status = (String) request.getSession().getAttribute("status");
-        String verifyCode = (String) request.getSession().getAttribute("verifyCode");
+        Users newUser = (Users) request.getSession().getAttribute("userAcc");
+        String verifyCode = (String) request.getSession().getAttribute("code");
         String rawCode = request.getParameter("text");
         UserDAO dao = new UserDAO();
-        if (status.equals("register")) {
+        if (verifyCode.equals(rawCode)) {
             //get register information from session
-            Users user = (Users) request.getSession().getAttribute("rawUser");
-
-            if (rawCode.equals(verifyCode)) {
-                //insert new account to database
-              
-               dao.register(user.getUserName(), user.getPassword(), user.getGender(), user.getEmail(), user.getPhoneNum(), new Role(3, "Customer"), new UserStatus(1, "Active"));
-                 
-
-                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
-            } else {
-                request.setAttribute("mess", "Verification code is not correct. Please try again");
-                request.getRequestDispatcher("/common/verify.jsp").forward(request, response);
-            }
-    }
+            dao.register(newUser);
+            response.sendRedirect("login");
+        }else {
+            request.setAttribute("mess","Wrong verify code!");
+            request.getRequestDispatcher("common/verify.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -101,5 +92,4 @@ public class VerifyServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
 }

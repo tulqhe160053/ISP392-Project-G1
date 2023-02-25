@@ -50,9 +50,9 @@ public class UserListServlet extends HttpServlet {
             List<UserStatus> userstatus = us.selectAll();
             request.setAttribute("role", role);
             request.setAttribute("userstatus", userstatus);
-            int page, numperpage = 10;
+            int page, numperpage = 5;
             int size = user.size();
-            int num = (size % 10 == 0 ? (size / 10) : ((size / 10)) + 1);//so trang
+            int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang
             String xpage = request.getParameter("page");
             if (xpage == null) {
                 page = 1;
@@ -115,45 +115,32 @@ public class UserListServlet extends HttpServlet {
         }
 
         if (action.equals("filter")) {
-            String role_id = request.getParameter("role_id");
+ 
+            HttpSession session = request.getSession();
+            String role = request.getParameter("role_id");
             String status = request.getParameter("status");
-            request.setAttribute("role_id", role_id);
+            List<Users> listFilter = u.getFilter(role, status);
+            int page, numperpage = 5;
+            int size = listFilter.size();
+            int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang
+            String xpage = request.getParameter("page");
+            if (xpage == null) {
+                page = 1;
+            } else {
+                page = Integer.parseInt(xpage);
+            }
+            int start, end;
+            start = (page - 1) * numperpage;
+            end = Math.min(page * numperpage, size);
+            List<Users> userList = u.getListByPage(listFilter, start, end);
+            request.setAttribute("page", page);
+            request.setAttribute("num", num);
+            request.setAttribute("role", role);
             request.setAttribute("status", status);
-            if (role_id.equals("all") && status.equals("all")) {
-                response.sendRedirect("user");
-            }
-            if (role_id.equals("all") && !status.equals("all")) {
-                List<Users> list = u.getFilterByStatus(status);
-//                List<Role> role = r.selectAll();
-//                List<UserStatus> userstatus = us.selectAll();
-//                request.setAttribute("role", role);
-//                request.setAttribute("userstatus", userstatus);
-                request.setAttribute("user", list);
-                request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
-
-            }
-            if (status.equals("all") && !role_id.equals("all")) {
-                List<Users> list = u.getFilterByRole(role_id);
-//                List<Role> role = r.selectAll();
-//                List<UserStatus> userstatus = us.selectAll();
-//                request.setAttribute("role", role);
-//                request.setAttribute("userstatus", userstatus);
-                request.setAttribute("user", list);
-                request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
-
-            }
-            if (!status.equals("all") && !role_id.equals("all")) {
-                List<Role> role = r.selectAll();
-                List<UserStatus> userstatus = us.selectAll();
-                request.setAttribute("role", role);
-                request.setAttribute("userstatus", userstatus);
-                List<Users> list = u.getFilter(role_id, status);
-                request.setAttribute("user", list);
-                request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
-
-            }
+//          session.setAttribute("user", listFilter);
+            request.setAttribute("user", userList);
+            request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
         }
-        
 
     }
 

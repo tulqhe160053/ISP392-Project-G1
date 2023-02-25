@@ -44,7 +44,7 @@
             </ul>
         </nav>
         <div id="layoutSidenav">
-             <div id="layoutSidenav_nav">
+            <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
@@ -67,10 +67,10 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">User List</h1>
-                         
-                                                
-                                                                                                    
-                                                 
+
+
+
+
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -89,80 +89,85 @@
 
                                                     <select name="role_id" class="form-select" aria-label="Default select example">
 
-                                                        <option <c:if test="${role_id == 'all'}">selected</c:if> value="all">All</option>
-                                                        <c:forEach items="${role}" var = "r"> 
-                                                            <option <c:if test="${role_id == r.getRoleID()}">selected</c:if> value="${r.getRoleID()}">${r.getRoleName()}</option>
-                                                        </c:forEach>
+                                                        <option value="" >All</option>
+                                                        <option value="1" <c:if test="${requestScope.role.equals('1')}">selected</c:if>  >Admin</option>
+                                                        <option value="2" <c:if test="${requestScope.role.equals('2')}">selected</c:if> >Seller</option>
+                                                        <option value="3" <c:if test="${requestScope.role.equals('3')}">selected</c:if> >Customer</option>
+                                                        <option value="4" <c:if test="${requestScope.role.equals('4')}">selected</c:if> >Marketing</option>
 
-
-
-                                                    </select>  
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 row align-items-center">
-                                                <div class="col-md-4">
-                                                    <label class="form-label">Status</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select name="status" class="form-select" aria-label="Default select example">
-                                                        <option <c:if test="${status == 'all'}">selected</c:if> value="all">All</option>
-                                                        <c:forEach items="${userstatus}" var="us">
-                                                            <option  <c:if test="${status == us.getId()}">selected</c:if> value="${us.getId()}">${us.getStatusName()}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>  
-                                            </div>
-
-                                           
-                                            <div class="col-md-2 md-0">
-                                                <button type="submit" class="btn btn-primary">Filter</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div class="col-md-6 mt-4">
-
-                                    <div class="col-md-9">
-                                        <div class="search-bar p-1 d-lg-block ms-2">                                                        
-                                            <div id="search" class="menu-search mb-2">
-                                                <form action="user?action=search" method="post" id="searchform" class="searchform">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <span> 
-                                                                <input type="text" class="col-8" name="txt" placeholder="Search...">
-                                                                <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                                            </span>
-                                                        </div>
+                                                        </select>  
 
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                                <div class="col-md-4 row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Status</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select name="status" class="form-select" aria-label="Default select example">
+                                                            <option value="" >All</option>
+                                                            <option value="1" <c:if test="${requestScope.status.equals('1')}">selected</c:if> >Active</option>
+                                                        <option value="0" <c:if test="${requestScope.status.equals('0')}">selected</c:if> >Locked</option>
+                                                        </select>
+                                                    </div>  
+                                                </div>
 
+
+                                                <div class="col-md-2 md-0">
+                                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                                        
+
+                                    <div class="row col-md-6 mt-4">
+                                         
+                                         
+
+                                        <div class="col-md-8">
+                                            <div class="search-bar p-1 d-lg-block ms-2">                                                        
+                                                <div id="search" class="menu-search mb-2">
+                                                    <form action="user?action=search" method="post" id="searchform" class="searchform">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <span> 
+                                                                    <input type="text" class="col-8" name="txt" placeholder="Search...">
+                                                                    <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <a class="btn btn-secondary" href="adduser.jsp">Add new User</a>
                                         </div>
                                     </div>
-                                </div>
 
 
 
-                                <div class="card-body">
-                                    <table width ="100%">
+                                    <div class="card-body">
+                                        <table width ="100%">
 
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Gender</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Role</th>
-                                                <th>Status</th>
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Gender</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Role</th>
+                                                    <th>Status</th>
 
 
 
-                                            </tr>
-                                        </thead>
+                                                </tr>
+                                            </thead>
 
                                         <c:if test="${user != null}"> 
                                             <c:forEach items="${user}" var = "u">       
@@ -176,27 +181,23 @@
                                                         <td>${u.phoneNum}</td>
 
                                                         <td>${u.role.getRoleName()}</td>
-                                                        
+
                                                         <c:if test="${u.userStatus.statusName == 'Active'}"> 
-                                                        <td>
-                                                            <a class="btn btn-success" href="">${u.userStatus.getStatusName()}</a>
-                                                        </td>
+                                                            <td>
+                                                                <a class="btn btn-success" href="">${u.userStatus.getStatusName()}</a>
+                                                            </td>
                                                         </c:if>
-                                                         <c:if test="${u.userStatus.statusName == 'Locked'}"> 
-                                                        <td>
-                                                            <a class="btn btn-danger" href="">${u.userStatus.getStatusName()}</a>
-                                                        </td>
+                                                        <c:if test="${u.userStatus.statusName == 'Locked'}"> 
+                                                            <td>
+                                                                <a class="btn btn-danger" href="">${u.userStatus.getStatusName()}</a>
+                                                            </td>
                                                         </c:if>
-                                                        
-                                                         
+
+
 
 
 
                                                         <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="userdetail?action=update&uid=${u.userID}"><i class="fa-solid fa-user"  style="color:#22baa0"></i></a></i></td>
-                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="userdetail?action=delete&uid=${u.userID}"><i class="fa-solid fa-trash"style="color:#22baa0"></i></a></i></td>
-
-
-
 
                                                     </tr>
 
@@ -225,7 +226,7 @@
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted"></div>
-                             
+
                         </div>
                     </div>
                 </footer>
