@@ -81,7 +81,8 @@ public class Cart_Add extends HttpServlet {
                     cartproduct_dao.insert(new CartProduct(cart_dao.selectByUserId(user.getUserID()), product, amount));
                 }
 
-                    
+                String message = "Add product successfully ";
+                session.setAttribute("message", message);
                 request.getRequestDispatcher("home").forward(request, response);
             }
             else{
