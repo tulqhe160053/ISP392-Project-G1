@@ -68,10 +68,14 @@
                                 <div class="col-md-3">
                                     <div class="blog_info text-right">
                                         <div class="post_tag">
+                                            <h3><a class="active" >${blog.category.categoryName}</a></h3>
+
+                                        </div>
+                                        <ul class="blog_meta list">
                                             <li> Author : ${blog.user.userName} <i class="lnr lnr-user "></i></li>
                                             <li>${blog.viewer} view <i class="lnr lnr-eye"></i></a</li>
                                             <li>${blog.createTime} <i class="lnr lnr-calendar-full"></i></li>
-                                        </div>
+                                        </ul>
 
                                     </div>
                                 </div>

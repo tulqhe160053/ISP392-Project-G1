@@ -207,6 +207,28 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return null;
     }
+    
+    public Blog getBlogByID1(int id) {
+        String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
+                + " join category c \n"
+                + " on b.CatId = c.CategoryID\n"
+                + " join users u\n"
+                + " on b.UserID = u.UserID\n"
+                + " where b.id = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
 
     public List<Blog> search(String text) {
         List<Blog> list = new ArrayList<>();
@@ -230,6 +252,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return list;
     }
+    
 
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();
@@ -375,6 +398,21 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setString(3, des);
             ps.setString(4, content);
             ps.setString(5, blog_id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+    public void UpdateBlog1(String image,String catid, String title, String des, String content, String blog_id) {
+        try {
+            String sql = "UPDATE blog SET imageLink = ?, CatId = ? , Title = ? , description = ? , Content = ?   where ID = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, image);
+            ps.setString(2, catid);
+            ps.setString(3, title);
+            ps.setString(4, des);
+            ps.setString(5, content);
+            ps.setString(6, blog_id);
             ps.executeUpdate();
 
         } catch (Exception e) {
