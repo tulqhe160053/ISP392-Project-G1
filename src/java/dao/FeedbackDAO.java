@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import model.Feedback;
 
 /**
@@ -11,6 +12,29 @@ import model.Feedback;
  * @author Trang
  */
 public class FeedbackDAO extends MyDAO {
+        public ArrayList<Feedback> getAllFeedbacks() {
+        String sql = "SELECT * FROM Feedback";
+        try {
+            ArrayList<Feedback> lsFeedback = new ArrayList<>();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Feedback f = new Feedback(
+                        rs.getInt("ID"),
+                        rs.getInt("UserID"),
+                        rs.getInt("ProductID"),
+                        rs.getInt("Star"),
+                        rs.getString("FeedbackDetail")
+                );
+                lsFeedback.add(f);
+            }
+            return lsFeedback;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public void addFeedback(Feedback feedback) {
         String sql = "insert into Feedback values (?,?,?,?)";
         try {
