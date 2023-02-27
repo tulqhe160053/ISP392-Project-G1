@@ -48,21 +48,17 @@
                         <nav class="d-flex align-items-center">
                             <a href="<%=request.getContextPath()%>/home">Home<span class="lnr lnr-arrow-right"></span></a>
                             <a href="<%=request.getContextPath()%>/listblog">Blog</a>
-
                         </nav>
+                          <div class="br"></div>
+                          <div class="br"></div>
                         <nav class="d-flex align-items-center">
-
-                            <a href="<%=request.getContextPath()%>/mylistblog?ID=${blog.user.userID}">View my blogs</a>
+                            <a href="<%=request.getContextPath()%>/mylistblog">View my blogs</a>
                         </nav>
                     </div>
                 </div>
             </div>
         </section>
         <!-- End Banner Area -->
-
-        <!--================Blog Categorie Area =================-->
-
-        <!--================Blog Categorie Area =================-->
 
         <!--================Blog Area =================-->
         <section class="blog_area">
@@ -92,7 +88,6 @@
                                             <div class="blog_details">
                                                 <a>
                                                     <h2>${blog.title}</h2>
-                                                    <h5>${blog.content}</h5>
                                                 </a>
                                                 <p></p>
                                                 <a href="<%=request.getContextPath()%>/blogdetail?id=${blog.id}" class="white_bg_btn">View More</a>
