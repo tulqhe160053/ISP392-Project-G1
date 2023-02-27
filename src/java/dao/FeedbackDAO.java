@@ -34,6 +34,29 @@ public class FeedbackDAO extends MyDAO {
         }
         return null;
     }
+        
+            public Feedback getFeedbacksById(int id) {
+        String query = "SELECT * FROM Feedback WHERE ID = ?";
+        try {
+            ps = con.prepareStatement(query);           
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+               Feedback  f = new Feedback(
+                        rs.getInt("ID"),
+                        rs.getInt("UserID"),
+                        rs.getInt("ProductID"),
+                        rs.getInt("Star"),
+                        rs.getString("FeedbackDetail")
+                );
+                return f;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public void addFeedback(Feedback feedback) {
         String sql = "insert into Feedback values (?,?,?,?)";
