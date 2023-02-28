@@ -60,7 +60,7 @@ public class AddUser extends HttpServlet {
             request.getRequestDispatcher("admin/adduser.jsp").forward(request, response);
         } else {
             if (validateEmail == false || validatePhone == false) {
-                request.setAttribute("message", "Incorrect email");
+                request.setAttribute("message", "Incorrect email or phone");
                 request.getRequestDispatcher("adduser.jsp").forward(request, response);
             } else {
                 if (u2 != null) {
