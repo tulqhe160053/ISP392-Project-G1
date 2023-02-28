@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>blog List</title>
+        <title>Blog List</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -50,7 +50,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 MKT Dashboard
                             </a>
-                            <a class="nav-link" href="blogmkt">
+                            <a class="nav-link" href="mktblog">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Manager Blogs
                             </a>
@@ -66,155 +66,105 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Blog List</h1>
 
-                        <!--                        <div class="row">
-                                                    <div class="col-xl-3 col-md-6">
-                                                        <div class="card bg-primary text-white mb-4">
-                                                            <div class="card-body">Primary Card</div>
-                                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-3 col-md-6">
-                                                        <div class="card bg-warning text-white mb-4">
-                                                            <div class="card-body">Warning Card</div>
-                                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-3 col-md-6">
-                                                        <div class="card bg-success text-white mb-4">
-                                                            <div class="card-body">Success Card</div>
-                                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-3 col-md-6">
-                                                        <div class="card bg-danger text-white mb-4">
-                                                            <div class="card-body">Danger Card</div>
-                                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-                        <!--                        <div class="row">
-                                                    <div class="col-xl-6">
-                                                        <div class="card mb-4">
-                                                            <div class="card-header">
-                                                                <i class="fas fa-chart-area me-1"></i>
-                                                                Area Chart Example
-                                                            </div>
-                                                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6">
-                                                        <div class="card mb-4">
-                                                            <div class="card-header">
-                                                                <i class="fas fa-chart-bar me-1"></i>
-                                                                Bar Chart Example
-                                                            </div>
-                                                            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
+
                         <div class="card mb-4">
 
                             <div class="row">
                                 <div class="col-md-6 mt-4">
-                                    <form action="blogmkt?action=filter" method="post">
+                                    <form action="filterblog" method="get">
                                         <div class="justify-content-md-start row">
-                                            <div class="col-md-6 row align-items-center">
-                                                <div class="col-md-3">
+                                            <div class="col-md-5 row align-items-center">
+                                                <div class="col-md-4">
                                                     <label class="">Category</label>
                                                 </div>
                                                 <div class="col-md-8">
 
                                                     <select name="catid" class="form-select" aria-label="Default select example">
 
-                                                        <option <c:if test="${catid == 'all'}">selected</c:if> value="all">All</option>
-                                                        <c:forEach items="${category}" var = "c"> 
-                                                            <option <c:if test="${catid == c.getCategoryId()}">selected</c:if> value="${c.getCategoryId()}">${c.getCategoryName()}</option>
-                                                        </c:forEach>
+                                                        <option value="" >All</option>
+                                                        <option value="1" <c:if test="${requestScope.catid.equals('1')}">selected</c:if>  >Laptop</option>
+                                                        <option value="2" <c:if test="${requestScope.catid.equals('2')}">selected</c:if> >Smartphone</option>
+                                                        <option value="3" <c:if test="${requestScope.catid.equals('3')}">selected</c:if> >Tablet</option>
+                                                        <option value="4" <c:if test="${requestScope.catid.equals('4')}">selected</c:if> >Accesories</option>
 
 
-
-                                                    </select>  
-
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="col-md-2 md-0">
-                                                <button type="submit" class="btn btn-primary">Lọc</button>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Sort By
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                        <li><a class="dropdown-item" href="blogmkt?action=sort&type=old">Oldest Blog</a></li>
-                                                        <li><a class="dropdown-item" href="blogmkt?action=sort&type=last">Latest Blog</a></li>
-                                                        <li><a class="dropdown-item" href="blogmkt?action=sort&type=high">Highest Viewer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div class="col-md-6 mt-4">
-
-                                    <div class="col-md-9">
-                                        <div class="search-bar p-1 d-lg-block ms-2">                                                        
-                                            <div id="search" class="menu-search mb-2">
-                                                <form action="blogmkt?action=search" method="post" id="searchform" class="searchform">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <span> 
-                                                                <input type="text" class="col-8" name="txt" placeholder="Search...">
-                                                                <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                                            </span>
-                                                        </div>
+                                                        </select>  
 
                                                     </div>
-                                                </form>
+                                                </div>
+
+                                                <div class="col-md-5 row align-items-center">
+                                                    <div class="col-md-3">
+                                                        <label class="">Status</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+
+                                                        <select name="blogstatusid" class="form-select" aria-label="Default select example">
+                                                            <option value="" >All</option>
+                                                            <option value="1" <c:if test="${requestScope.status.equals('1')}">selected</c:if> >Active</option>
+                                                        <option value="2" <c:if test="${requestScope.status.equals('2')}">selected</c:if> >Hide</option>
+                                                        </select>  
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-2 md-0">
+                                                    <input type="submit" class="btn btn-primary" value="Filter">
+                                                </div>
+
+
                                             </div>
-
-                                        </div>
+                                        </form>
                                     </div>
-                                </div>
+
+                                    <div class="col-md-6 mt-4 row">
+
+                                        <div class="col-md-8">
+                                            <div class="search-bar p-1 d-lg-block ms-2">                                                        
+                                                <div id="search" class="menu-search mb-2">
+                                                    <form action="searchblog" method="get" id="searchform" class="searchform">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <span> 
+                                                                    <input type="text" class="col-8" name="txt" placeholder="Search...">
+                                                                    <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
 
 
 
-                                <div class="card-body">
-                                    <table width ="100%">
+                                    <div class="card-body">
+                                        <table width ="100%">
 
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th style="text-align: center;">Image</th>
-                                                <th>Title</th>
-                                                <th>Category</th>
-                                                <th>Author</th>
-                                                <th style="text-align: center;">Time</th>
-                                                <th>Viewer</th>
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th style="text-align: center;">Image</th>
+                                                    <th>Title</th>
+                                                    <th>Category</th>
+                                                    <th>Author</th>
+                                                    <th style="text-align: center;">Time</th>
+                                                    <th>Viewer</th>
+                                                    <th style="text-align: center;">Status</th>
 
 
 
-                                            </tr>
-                                        </thead>
+                                                </tr>
+                                            </thead>
 
-                                        <c:if test="${listBlog != null}"> 
+                                        <c:if test="${listBlog != null}">
                                             <c:forEach items="${listBlog}" var = "b">       
                                                 <tbody>
 
@@ -226,12 +176,22 @@
                                                         <td>${b.user.getUserName()}</td>
                                                         <td style="text-align: center;">${b.createTime}</td>
                                                         <td style="text-align: center;">${b.viewer}</td>
- 
+
+                                                        <c:if test="${b.blogstatus.statusName == 'Active'}">
+                                                            <td style="text-align: center;"> 
+                                                                <a class ="btn btn-success" href="blogdetailmkt?action=editstatus&type=active&bid=${b.id}&statusid=${b.blogstatus.statusID}">${b.blogstatus.getStatusName()}</a>
+                                                            </td>
+                                                        </c:if>
+
+                                                        <c:if test="${b.blogstatus.statusName == 'Hide'}">
+                                                            <td style="text-align: center;"> 
+                                                                <a class ="btn btn-secondary" href="blogdetailmkt?action=editstatus&type=hide&bid=${b.id}&statusid=${b.blogstatus.statusID}">${b.blogstatus.getStatusName()}</a>
+                                                            </td>
+                                                        </c:if>
 
 
-
-                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogmkt?action=blogdetail&blog_id=${b.id}"><i class="fa-solid fa-plus"  style="color:#22baa0"></i></a></i></td>
-                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogmkt?action=delete&bid=${b.id}"><i class="fa-solid fa-trash"style="color:#22baa0"></i></a></i></td>
+                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogdetailmkt?action=blogdetail&blog_id=${b.id}"><i class="fa-solid fa-book"  style="color:#22baa0"></i></a></i></td>
+                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogdetailmkt?action=delete&bid=${b.id}&sid=${b.blogstatus.getStatusID()}"><i class="fa-solid fa-trash"style="color:#22baa0"></i></a></i></td>
 
 
 
@@ -245,15 +205,41 @@
                                         </c:if>
                                     </table>
 
+                                    <c:if test="${requestScope.check.equals('list')}">
 
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <c:set var="page" value="${page}"/>
-                                            <c:forEach begin="${1}" end="${num}" var="i">
-                                                <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogmkt?page=${i}">${i}</a></li>
-                                                </c:forEach>
-                                        </ul>
-                                    </nav>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <c:set var="page" value="${page}"/>
+                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogmkt?page=${i}">${i}</a></li>
+                                                    </c:forEach>
+                                            </ul>
+                                        </nav>
+                                    </c:if>
+                                        
+                                        <c:if test="${requestScope.check.equals('filter')}">
+
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <c:set var="page" value="${page}"/>
+                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filterblog?catid=${requestScope.catid}&blogstatusid=${requestScope.status}&page=${i}">${i}</a></li>
+                                                    </c:forEach>
+                                            </ul>
+                                        </nav>
+                                    </c:if>
+                                        
+                                        <c:if test="${requestScope.check.equals('search')}">
+
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <c:set var="page" value="${page}"/>
+                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog?txt=${requestScope.search}&page=${i}">${i}</a></li>
+                                                    </c:forEach>
+                                            </ul>
+                                        </nav>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>filter.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/cart.jsp</url-pattern>
-        <url-pattern>/cart</url-pattern>
-        <url-pattern>/viewMyBlogList.jsp</url-pattern>
-        <url-pattern>/mylistblog</url-pattern>
-    </filter-mapping>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controler.HomeServlet</servlet-class>
@@ -107,6 +96,34 @@
         <servlet-name>OrderDetailServlet</servlet-name>
         <servlet-class>controler.OrderDetailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <servlet-class>controler.EditBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <servlet-class>controler.UserDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterUserServlet</servlet-name>
+        <servlet-class>controler.FilterUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <servlet-class>controler.SearchUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterBlogServlet</servlet-name>
+        <servlet-class>controler.FilterBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBlogServlet</servlet-name>
+        <servlet-class>controler.SearchBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetailMKTServlet</servlet-name>
+        <servlet-class>controler.BlogDetailMKTServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -202,6 +219,34 @@
     <servlet-mapping>
         <servlet-name>OrderDetailServlet</servlet-name>
         <url-pattern>/orderdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <url-pattern>/editblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <url-pattern>/userdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterUserServlet</servlet-name>
+        <url-pattern>/filteruser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <url-pattern>/searchuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterBlogServlet</servlet-name>
+        <url-pattern>/filterblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBlogServlet</servlet-name>
+        <url-pattern>/searchblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetailMKTServlet</servlet-name>
+        <url-pattern>/blogdetailmkt</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

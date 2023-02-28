@@ -65,6 +65,7 @@ public class UserListServlet extends HttpServlet {
             List<Users> userList = u.getListByPage(user, start, end);
             request.setAttribute("page", page);
             request.setAttribute("num", num);
+            request.setAttribute("check", "list");
             request.setAttribute("user", userList);
             request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
         }
@@ -97,50 +98,11 @@ public class UserListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response);
-        String action = request.getParameter("action");
-        UserDAO u = new UserDAO();
-        RoleDAO r = new RoleDAO();
-        UserStatusDAO us = new UserStatusDAO();
-        if (action.equals("search")) {
-            String searchTxt = request.getParameter("txt");
-            List<Users> userSearch = u.searchName(searchTxt);
-            request.setAttribute("user", userSearch);
-            List<Role> ro = r.selectAll();
-            List<UserStatus> userstatus = us.selectAll();
-            request.setAttribute("role", ro);
-            request.setAttribute("userstatus", userstatus);
-            request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
+         processRequest(request, response);
+        
+         
 
-        }
-
-        if (action.equals("filter")) {
- 
-            HttpSession session = request.getSession();
-            String role = request.getParameter("role_id");
-            String status = request.getParameter("status");
-            List<Users> listFilter = u.getFilter(role, status);
-            int page, numperpage = 5;
-            int size = listFilter.size();
-            int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
-            }
-            int start, end;
-            start = (page - 1) * numperpage;
-            end = Math.min(page * numperpage, size);
-            List<Users> userList = u.getListByPage(listFilter, start, end);
-            request.setAttribute("page", page);
-            request.setAttribute("num", num);
-            request.setAttribute("role", role);
-            request.setAttribute("status", status);
-//          session.setAttribute("user", listFilter);
-            request.setAttribute("user", userList);
-            request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
-        }
+        
 
     }
 

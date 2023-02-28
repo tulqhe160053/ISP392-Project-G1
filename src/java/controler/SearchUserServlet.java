@@ -4,28 +4,23 @@
  */
 package controler;
 
-import dao.BlogDAO;
-import dao.CategoryDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import dao.UserDAO;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.InputStream;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Locale.Category;
-import model.Blog;
+import model.Role;
+import model.UserStatus;
+import model.Users;
 
 /**
  *
- * @author Tu
+ * @author ducth
  */
-@MultipartConfig(maxFileSize = 16177216)
-public class EditBlogServlet extends HttpServlet {
+public class SearchUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +39,10 @@ public class EditBlogServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditBlogServlet</title>");
+            out.println("<title>Servlet SearchUserServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditBlogServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchUserServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,20 +60,30 @@ public class EditBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        BlogDAO bd = new BlogDAO();
-        Blog b = new Blog();
-        CategoryDAO cat = new CategoryDAO();
-        int id;
-        try {
-            
-            b = bd.getBlogByID(id_raw);
-            ArrayList<model.Category> category = cat.selectAll();
-            request.setAttribute("category", category);
-            request.setAttribute("blog", b);
-            request.getRequestDispatcher("blog/editBlog.jsp").forward(request, response);
-        } catch (Exception e) {
+        //processRequest(request, response);
+        UserDAO u = new UserDAO();
+        String searchTxt = request.getParameter("txt");
+        List<Users> userSearch = u.searchName(searchTxt);
+        request.setAttribute("user", userSearch);
+         int page, numperpage = 5;
+        int size = userSearch.size();
+        int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang
+        String xpage = request.getParameter("page");
+        if (xpage == null) {
+            page = 1;
+        } else {
+            page = Integer.parseInt(xpage);
         }
+        int start, end;
+        start = (page - 1) * numperpage;
+        end = Math.min(page * numperpage, size);
+        List<Users> userList = u.getListByPage(userSearch, start, end);
+        request.setAttribute("page", page);
+        request.setAttribute("num", num);
+        request.setAttribute("search", searchTxt);
+        request.setAttribute("check", "search");
+        request.setAttribute("user", userList);
+        request.getRequestDispatcher("admin/userlist.jsp").forward(request, response);
     }
 
     /**
@@ -92,22 +97,7 @@ public class EditBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO bd = new BlogDAO();
-        try {
-            Part filePart = request.getPart("image");
-            String imageFileName = filePart.getSubmittedFileName();
-            InputStream is = filePart.getInputStream();
-            byte[] data = new byte[is.available()];
-            is.read(data);
-            String id = request.getParameter("id");
-            String title = request.getParameter("title");
-            String des = request.getParameter("des");
-            String content = request.getParameter("content");
-            String catid = request.getParameter("catid");
-            bd.UpdateBlog1(imageFileName, catid, title, des, content, id);
-            response.sendRedirect("mylistblog");
-        } catch (Exception e) {
-        }
+        processRequest(request, response);
     }
 
     /**

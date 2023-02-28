@@ -79,7 +79,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 mt-4">
-                                    <form action="user?action=filter" method="post">
+                                    <form action="filteruser" method="get">
                                         <div class="justify-content-md-start row">
                                             <div class="col-md-6 row align-items-center">
                                                 <div class="col-md-2">
@@ -107,7 +107,7 @@
                                                         <select name="status" class="form-select" aria-label="Default select example">
                                                             <option value="" >All</option>
                                                             <option value="1" <c:if test="${requestScope.status.equals('1')}">selected</c:if> >Active</option>
-                                                        <option value="0" <c:if test="${requestScope.status.equals('0')}">selected</c:if> >Locked</option>
+                                                        <option value="2" <c:if test="${requestScope.status.equals('2')}">selected</c:if> >Locked</option>
                                                         </select>
                                                     </div>  
                                                 </div>
@@ -119,16 +119,16 @@
                                             </div>
                                         </form>
                                     </div>
-                                                        
+
 
                                     <div class="row col-md-6 mt-4">
-                                         
-                                         
+
+
 
                                         <div class="col-md-8">
                                             <div class="search-bar p-1 d-lg-block ms-2">                                                        
                                                 <div id="search" class="menu-search mb-2">
-                                                    <form action="user?action=search" method="post" id="searchform" class="searchform">
+                                                    <form action="searchuser" method="get" id="searchform" class="searchform">
                                                         <div class="container">
                                                             <div class="row">
                                                                 <span> 
@@ -143,7 +143,7 @@
 
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <a class="btn btn-secondary" href="adduser.jsp">Add new User</a>
                                         </div>
@@ -208,15 +208,38 @@
                                         </c:if>
                                     </table>
 
-
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <c:set var="page" value="${page}"/>
-                                            <c:forEach begin="${1}" end="${num}" var="i">
-                                                <li class="page-item"><a class="page-link ${i==page?"current":""}" href="user?page=${i}">${i}</a></li>
-                                                </c:forEach>
-                                        </ul>
-                                    </nav>
+                                    <c:if test="${requestScope.check.equals('list')}">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <c:set var="page" value="${page}"/>
+                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="user?page=${i}">${i}</a></li>
+                                                    </c:forEach>
+                                            </ul>
+                                        </nav>
+                                    </c:if>
+                                        
+                                         <c:if test="${requestScope.check.equals('filter')}">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <c:set var="page" value="${page}"/>
+                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filteruser?role_id=${requestScope.role}&status=${requestScope.status}&page=${i}">${i}</a></li>
+                                                    </c:forEach>
+                                            </ul>
+                                        </nav>
+                                    </c:if>
+                                        
+                                         <c:if test="${requestScope.check.equals('search')}">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <c:set var="page" value="${page}"/>
+                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchuser?txt=${requestScope.search}&page=${i}">${i}</a></li>
+                                                    </c:forEach>
+                                            </ul>
+                                        </nav>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

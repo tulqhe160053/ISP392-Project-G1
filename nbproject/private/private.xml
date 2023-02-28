@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ISP392-Project-G1/web/feedback/addfeedback.jsp</file>
-            <file>file:/D:/ISP392-Project-G1/src/java/controler/ResetPassword.java</file>
-            <file>file:/D:/ISP392-Project-G1/src/java/controler/AddFeedback.java</file>
-            <file>file:/D:/ISP392-Project-G1/src/java/controler/RegisterServlet.java</file>
-            <file>file:/D:/ISP392-Project-G1/web/product/viewProductDetail.jsp</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/controler/UserListServlet.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/web/marketing/viewbloglist.jsp</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/controler/SearchUserServlet.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/controler/FilterUserServlet.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/controler/EditBlogServlet.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/controler/BlogDetailMKTServlet.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/dao/DBContext.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/model/BlogStatus.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/controler/UserDetailServlet.java</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/web/admin/userlist.jsp</file>
+            <file>file:/C:/Users/ducth/ISP392-Project-G1/src/java/controler/FilterBlogServlet.java</file>
         </group>
     </open-files>
 </project-private>

@@ -19,21 +19,12 @@ public class Blog {
     private String imageLink;
     private String createTime;
     private int viewer;
+    private BlogStatus blogstatus;
 
     public Blog() {
     }
 
-    public Blog(int id, Users user, Category category, String title, String description, String content, String imageLink) {
-        this.id = id;
-        this.user = user;
-        this.category = category;
-        this.title = title;
-        this.description = description;
-        this.content = content;
-        this.imageLink = imageLink;
-    }
-
-    public Blog(int id, Users user, Category category, String title, String description, String content, String imageLink, String createTime, int viewer) {
+    public Blog(int id, Users user, Category category, String title, String description, String content, String imageLink, String createTime, int viewer, BlogStatus blogstatus) {
         this.id = id;
         this.user = user;
         this.category = category;
@@ -43,7 +34,11 @@ public class Blog {
         this.imageLink = imageLink;
         this.createTime = createTime;
         this.viewer = viewer;
+        this.blogstatus = blogstatus;
     }
+
+    
+
     
     
 
@@ -119,6 +114,14 @@ public class Blog {
 
     public void setViewer(int viewer) {
         this.viewer = viewer;
+    }
+
+    public BlogStatus getBlogstatus() {
+        return blogstatus;
+    }
+
+    public void setBlogstatus(BlogStatus blogstatus) {
+        this.blogstatus = blogstatus;
     }
     
     

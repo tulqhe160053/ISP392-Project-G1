@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Blog;
+import model.BlogStatus;
 import model.Category;
 import model.Users;
 
@@ -27,173 +28,115 @@ import model.Users;
 public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
 
     @Override
+
     public ArrayList<Blog> selectAll() {
-        ArrayList<Blog> t = new ArrayList<>();
-        xSql = "select * from Blog";
+        ArrayList<Blog> list = new ArrayList<>();
         try {
-            ps = con.prepareStatement(xSql);
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                    + "                join category c \n"
+                    + "                 on b.CatId = c.CategoryID\n"
+                    + "                 join users u\n"
+                    + "                 on b.UserID = u.UserID\n"
+                    + "		        join BlogStatus bs \n"
+                    + "		        on b.statusID = bs.statusID \n"
+                    + "                 where bs.statusid = 1";
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int blogId = rs.getInt("ID");
-                UserDAO dao = new UserDAO();
-
-                int userId = rs.getInt("UserID");
-                Users x = new Users();
-                x.setUserID(userId);
-                Users bloger = dao.selectById(x);
-
-                int catId = rs.getInt("CatID");
-                CategoryDAO cat_dao = new CategoryDAO();
-                Category category = cat_dao.selectById(new Category(catId, null));
-
-                String title = rs.getString("Title");
-                String description = rs.getString("description");
-                String content = rs.getString("Content");
-                String img = rs.getString("imageLink");
-                String createTime = rs.getString("createtime");
-                int viewer = rs.getInt("viewer");
-
-                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
-                t.add(b);
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
             }
-            rs.close();
-            ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
-        return t;
+        return list;
     }
 
     public Blog selectById(int id) {
-        xSql = "select * from Blog where ID = ?";
+        String sql = "select  b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                + "                join category c \n"
+                + "                 on b.CatId = c.CategoryID\n"
+                + "                 join users u\n"
+                + "                 on b.UserID = u.UserID\n"
+                + "		        join BlogStatus bs \n"
+                + "		        on b.statusID = bs.statusID \n"
+                + "                      where b.id = ? and bs.statusid = 1";
         try {
-            ps = con.prepareStatement(xSql);
+            ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int blogId = rs.getInt("ID");
-                UserDAO dao = new UserDAO();
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs);
 
-                int userId = rs.getInt("UserID");
-                Users x = new Users();
-                x.setUserID(userId);
-                Users bloger = dao.selectById(x);
-
-                int catId = rs.getInt("CatID");
-                CategoryDAO cat_dao = new CategoryDAO();
-                Category category = cat_dao.selectById(new Category(catId, null));
-
-                String title = rs.getString("Title");
-                String description = rs.getString("description");
-                String content = rs.getString("Content");
-                String img = rs.getString("imageLink");
-                String createTime = rs.getString("createtime");
-                int viewer = rs.getInt("viewer");
-
-                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
-
-                return b;
             }
-            rs.close();
-            ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return null;
     }
-    
-        public ArrayList<Blog> selectMyAll(int UserID) {
-        ArrayList<Blog> t = new ArrayList<>();
-        xSql = "select * from Blog where UserID = ? ";
+
+    public ArrayList<Blog> selectMyAll(int UserID) {
+        ArrayList<Blog> list = new ArrayList<>();
+        String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                + "                join category c \n"
+                + "                 on b.CatId = c.CategoryID\n"
+                + "                 join users u\n"
+                + "                 on b.UserID = u.UserID\n"
+                + "		        join BlogStatus bs \n"
+                + "		        on b.statusID = bs.statusID \n"
+                + "                      where b.UserID = ? and bs.statusid = 1";
         try {
-            ps = con.prepareStatement(xSql);
-            ps.setInt(1,UserID);
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, UserID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int blogId = rs.getInt("ID");
-                UserDAO dao = new UserDAO();
-                
-                int userId = rs.getInt("UserID");
-                Users x = new Users();
-                x.setUserID(userId);
-                Users bloger=dao.selectById(x);
-                
-                int catId = rs.getInt("CatID");
-                CategoryDAO cat_dao = new CategoryDAO();
-                Category category = cat_dao.selectById(new Category(catId, null));
-                
-                String title = rs.getString("Title");
-                String description = rs.getString("description");
-                String content = rs.getString("Content");
-                String img = rs.getString("imageLink");
-                String createTime = rs.getString("createtime");
-                int viewer = rs.getInt("viewer");
-                
-                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
-                t.add(b);
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
             }
-            rs.close();
-            ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
-        return t;
+        return list;
     }
-         public ArrayList<Blog> selectTop2() {
-        ArrayList<Blog> t = new ArrayList<>();
-        xSql = "SELECT TOP (3) [ID]\n" +
-"      ,[UserID]\n" +
-"      ,[CatId]\n" +
-"      ,[Title]\n" +
-"      ,[description]\n" +
-"      ,[Content]\n" +
-"      ,[imageLink]\n" +
-"      ,[createtime]\n" +
-"      ,[viewer]\n" +
-"  FROM Blog\n" +
-"  order by viewer desc";
+
+    public ArrayList<Blog> selectTop2() {
+        ArrayList<Blog> list = new ArrayList<>();
+        String sql = "select top 2 b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                + "                join category c \n"
+                + "                 on b.CatId = c.CategoryID\n"
+                + "                 join users u\n"
+                + "                 on b.UserID = u.UserID\n"
+                + "		    join BlogStatus bs \n"
+                + "		    on b.statusID = bs.statusID \n"
+                + "                 where bs.statusid = 1"
+                + "                 order by viewer desc";
         try {
-            ps = con.prepareStatement(xSql);
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int blogId = rs.getInt("ID");
-                UserDAO dao = new UserDAO();
-                
-                int userId = rs.getInt("UserID");
-                Users x = new Users();
-                x.setUserID(userId);
-                Users bloger=dao.selectById(x);
-                
-                int catId = rs.getInt("CatID");
-                CategoryDAO cat_dao = new CategoryDAO();
-                Category category = cat_dao.selectById(new Category(catId, null));
-                
-                String title = rs.getString("Title");
-                String description = rs.getString("description");
-                String content = rs.getString("Content");
-                String img = rs.getString("imageLink");
-                String createTime = rs.getString("createtime");
-                int viewer = rs.getInt("viewer");
-                
-                Blog b = new Blog(blogId, bloger, category, title, description, content, img, createTime, viewer);
-                t.add(b);
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
             }
-            rs.close();
-            ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
-        return t;
+        return list;
     }
-    
 
     public Blog getBlogByID(String bid) {
-        String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
-                + " join category c \n"
-                + " on b.CatId = c.CategoryID\n"
-                + " join users u\n"
-                + " on b.UserID = u.UserID\n"
-                + " where b.id = ?";
+        String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                + "                join category c \n"
+                + "                 on b.CatId = c.CategoryID\n"
+                + "                 join users u\n"
+                + "                 on b.UserID = u.UserID\n"
+                + "		        join BlogStatus bs \n"
+                + "		        on b.statusID = bs.statusID \n"
+                + "                      where b.id = ? and bs.statusID = 1";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bid);
@@ -201,7 +144,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs);
             }
         } catch (Exception e) {
         }
@@ -211,12 +155,15 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public List<Blog> search(String text) {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
-                    + " join category c \n"
-                    + " on b.CatId = c.CategoryID\n"
-                    + " join users u\n"
-                    + " on b.UserID = u.UserID\n"
-                    + " where u.userName like ? or b.title like ?";
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                    + "                join category c \n"
+                    + "                 on b.CatId = c.CategoryID\n"
+                    + "                 join users u\n"
+                    + "                 on b.UserID = u.UserID\n"
+                    + "		        join BlogStatus bs \n"
+                    + "		        on b.statusID = bs.statusID \n"
+                    + "                      where u.UserName like ? or b.title like ?";
+
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + text + "%");
             ps.setString(2, "%" + text + "%");
@@ -224,7 +171,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
             }
         } catch (Exception e) {
         }
@@ -234,18 +182,21 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink, b.createtime , b.viewer  from blog b\n"
-                    + " join category c \n"
-                    + " on b.CatId = c.CategoryID\n"
-                    + " join users u\n"
-                    + " on b.UserID = u.UserID\n";
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                    + "                join category c \n"
+                    + "                 on b.CatId = c.CategoryID\n"
+                    + "                 join users u\n"
+                    + "                 on b.UserID = u.UserID\n"
+                    + "		        join BlogStatus bs \n"
+                    + "		        on b.statusID = bs.statusID \n";
 
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
 
             }
         } catch (Exception e) {
@@ -253,30 +204,39 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         return list;
     }
 
-    public List<Blog> getFilterByCategory(String catid) {
+    public List<Blog> getFilter(String catid, String blogstatusid) {
         List<Blog> list = new ArrayList<>();
+
+        String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                + "                join category c \n"
+                + "                 on b.CatId = c.CategoryID\n"
+                + "                 join users u\n"
+                + "                 on b.UserID = u.UserID\n"
+                + "		        join BlogStatus bs \n"
+                + "		        on b.statusID = bs.statusID \n"
+                + "		        where 1=1";
+        if (catid != null && catid != "") {
+            sql += " and b.CatId = " + catid;
+        }
+        if (blogstatusid != null && blogstatusid != "") {
+            sql += " and b.statusID = " + blogstatusid;
+        }
         try {
-            String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
-                    + " join category c \n"
-                    + " on b.CatId = c.CategoryID\n"
-                    + " join users u\n"
-                    + " on b.UserID = u.UserID\n"
-                    + "where b.CatId = ?";
             ps = con.prepareStatement(sql);
-            ps.setString(1, catid);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
 
             }
         } catch (Exception e) {
         }
         return list;
     }
-    
-        public Blog getBlogByID1(int id) {
+
+    public Blog getBlogByID1(int id) {
         String sql = " select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
                 + " join category c \n"
                 + " on b.CatId = c.CategoryID\n"
@@ -290,16 +250,17 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             while (rs.next()) {
                 Users u = new Users(rs.getString(2));
                 Category c = new Category(rs.getString(3));
-                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs);
             }
         } catch (Exception e) {
         }
         return null;
     }
-        
-        public void UpdateBlog1(String image,String catid, String title, String des, String content, String blog_id) {
+
+    public void UpdateBlog1(String image, String catid, String title, String des, String content, String blog_id) {
         try {
-            String sql = "UPDATE blog SET imageLink = ?, CatId = ? , Title = ? , description = ? , Content = ?   where ID = ?";
+            String sql = "UPDATE blog SET imageLink = ?, CatId = ? , Title = ? , description = ? , Content = ? , statusID = 1  where ID = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, image);
             ps.setString(2, catid);
@@ -312,72 +273,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         } catch (Exception e) {
         }
     }
-
-    public List<Blog> getOldest() {
-        List<Blog> list = new ArrayList<>();
-        try {
-            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
-                    + "                    join category c \n"
-                    + "                   on b.CatId = c.CategoryID\n"
-                    + "                    join users u\n"
-                    + "                     on b.UserID = u.UserID\n"
-                    + "			   order by createtime asc";
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
-
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
-
-    public List<Blog> getLatest() {
-        List<Blog> list = new ArrayList<>();
-        try {
-            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
-                    + "                    join category c \n"
-                    + "                   on b.CatId = c.CategoryID\n"
-                    + "                    join users u\n"
-                    + "                     on b.UserID = u.UserID\n"
-                    + "			   order by createtime desc";
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
-
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
-
-    public List<Blog> getHighestViewer() {
-        List<Blog> list = new ArrayList<>();
-        try {
-            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer  from blog b\n"
-                    + "                    join category c \n"
-                    + "                   on b.CatId = c.CategoryID\n"
-                    + "                    join users u\n"
-                    + "                     on b.UserID = u.UserID\n"
-                    + "			   order by viewer desc";
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
-
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+    
+    
 
     public void deleteBlog(String bid) {
         try {
@@ -389,29 +286,40 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
     }
 
-    public void UpdateImage(String blog_id, String image) throws IOException, SQLException {
+    public void UpdateImage(String blog_id, String image) {
 
         try {
             String sql = "UPDATE blog SET imageLink = ? WHERE ID = ?";
             ps = con.prepareStatement(sql);
-            
             ps.setString(1, image);
             ps.setString(2, blog_id);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(BlogDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void UpdateBlog(String catid, String title, String des, String content, String blog_id) {
         try {
-            String sql = "UPDATE blog set CatId = ? , Title = ? , description = ? , Content = ?   where ID = ?";
+            String sql = "UPDATE blog SET CatId = ? , Title = ? , description = ? , Content = ?   where ID = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, catid);
             ps.setString(2, title);
             ps.setString(3, des);
             ps.setString(4, content);
             ps.setString(5, blog_id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void UpdateStatus(String id, String status) {
+        try {
+            String sql = "UPDATE blog SET statusID = ? where ID = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setString(2, id);
+
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -427,26 +335,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         return arr;
     }
 
-    public void insertBlog(String userid, String catid, String title, String des, String content, InputStream file, String createtime, String viewer) {
-
-        try {
-            String sql = "insert into blog values(?,?,?,?,?,?,?,?)";
-            ps = con.prepareStatement(sql);
-            ps.setString(1, userid);
-            ps.setString(2, catid);
-            ps.setString(3, title);
-            ps.setString(4, des);
-            ps.setString(5, content);
-            ps.setString(7, createtime);
-            ps.setString(8, viewer);
-            if (file != null) {
-                ps.setBlob(6, file);
-            }
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
-    }
-
+     
     @Override
     public void insert(Blog t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -477,12 +366,12 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         Blog b = new Blog();
         b = bd.selectById(2);
         ArrayList<Blog> t = new ArrayList<>();
-        t=bd.selectTop2();
+        t = bd.selectTop2();
         for (Blog blog : t) {
             System.out.println(blog.toString());
-            
+
         }
-       
+
     }
 
     @Override
@@ -490,5 +379,4 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 }

@@ -11,9 +11,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
+import model.Users;
 
 /**
  *
@@ -49,7 +51,6 @@ public class MyListBlogServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectAll();
         int page, numperpage = 3;
