@@ -117,12 +117,6 @@
 
         <!-- End Banner Area -->
 
-        <!--View Order detail area-->
-        <div class="container">
-            <<h1>title</h1>
-        </div>
-        <!--End View Order detail area-->
-
         <!-- start footer Area -->
         <%@include file="../footer.jsp" %>
         <!-- End footer Area -->
