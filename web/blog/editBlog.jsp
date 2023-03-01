@@ -99,7 +99,8 @@
                                 <div class="col-md-12 mt-5 text-center">
                                     <button class="btn btn-primary" type="submit">Save</button>
 
-                                    <input class="btn btn-secondary" type="reset" value="enter again">
+                                    <input class="btn btn-secondary" type="reset" value="Enter again">
+                                    <a href="mylistblog" class="btn btn-danger">Cancel</a>
                                 </div>
                                 </form>
 
