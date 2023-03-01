@@ -260,7 +260,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
 
     public void UpdateBlog1(String image, String catid, String title, String des, String content, String blog_id) {
         try {
-            String sql = "UPDATE blog SET imageLink = ?, CatId = ? , Title = ? , description = ? , Content = ? , statusID = 1  where ID = ?";
+            String sql = "UPDATE Blog SET imageLink = ?, CatId = ? , Title = ? , description = ? , Content = ?   where ID = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, image);
             ps.setString(2, catid);
@@ -363,11 +363,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
 
     public static void main(String[] args) {
         BlogDAO bd = new BlogDAO();
-        Blog b = new Blog();
-        b = bd.selectById(2);
-        ArrayList<Blog> t = new ArrayList<>();
-        t = bd.selectTop2();
-        for (Blog blog : t) {
+        for (Blog blog : bd.selectAll()) {
             System.out.println(blog.toString());
 
         }

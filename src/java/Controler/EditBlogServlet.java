@@ -5,22 +5,26 @@
 package Controler;
 
 import Dao.BlogDAO;
+import Dao.CategoryDAO;
+import Model.Blog;
+import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.util.List;
-import Model.Blog;
 
 /**
  *
  * @author Admin
  */
-public class MyListBlogServlet extends HttpServlet {
+ @MultipartConfig(maxFileSize = 16177216)
+public class EditBlogServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +37,19 @@ public class MyListBlogServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EditBlogServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EditBlogServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,33 +64,15 @@ public class MyListBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        
-        HttpSession session = request.getSession();
-        Model.Users user = (Model.Users) session.getAttribute("user");
-        int userId = user.getUserID();
-        BlogDAO dao = new BlogDAO();
-        ArrayList<Blog> listBlog = dao.selectMyAll(userId);
-        
-        int page, numperpage = 3;
-        int size = listBlog.size();
-        int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
-        String xpage = request.getParameter("page");
-        if (xpage == null) {
-            page = 1;
-        } else {
-            page = Integer.parseInt(xpage);
-        }
-        int start, end;
-        start = (page - 1) * numperpage;
-        end = Math.min(page * numperpage, size);
-        List<Blog> blog = dao.getListByPage(listBlog, start, end);
-        request.setAttribute("page", page);
-        request.setAttribute("num", num);
-        request.setAttribute("listBlog", blog);
-        request.getRequestDispatcher("blog/viewMyBlogList.jsp").forward(request, response);
-
+        String id = request.getParameter("id");
+        BlogDAO bd = new BlogDAO();
+        CategoryDAO cat = new CategoryDAO();
+        List<Category> category = cat.selectAll();
+        Blog b = new Blog();
+        b= bd.getBlogByID(id);
+        request.setAttribute("category", category);
+        request.setAttribute("blog", b);
+        request.getRequestDispatcher("blog/editBlog.jsp").forward(request, response);
     }
 
     /**
@@ -88,7 +86,20 @@ public class MyListBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        BlogDAO bd = new BlogDAO();
+        String blog_id = request.getParameter("blog_id");
+        Part filePart = request.getPart("image");
+        String imageFileName = filePart.getSubmittedFileName();
+        InputStream is = filePart.getInputStream();
+        byte[] data = new byte[is.available()];
+        is.read(data);
+        
+        String title = request.getParameter("title");
+        String des = request.getParameter("des");
+        String content = request.getParameter("content");
+        String catid = request.getParameter("catid");
+        bd.UpdateBlog1(imageFileName, catid, title, des, content, blog_id);
+        response.sendRedirect("mylistblog");
     }
 
     /**

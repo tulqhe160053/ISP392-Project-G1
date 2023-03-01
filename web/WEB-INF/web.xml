@@ -117,8 +117,12 @@
         <servlet-class>Controler.BlogDetailMKTServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>MyListBLogServlet</servlet-name>
-        <servlet-class>Controler.MyListBLogServlet</servlet-class>
+        <servlet-name>MyListBlogServlet</servlet-name>
+        <servlet-class>Controler.MyListBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <servlet-class>Controler.EditBlogServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -237,8 +241,12 @@
         <url-pattern>/blogdetailmkt</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>MyListBLogServlet</servlet-name>
+        <servlet-name>MyListBlogServlet</servlet-name>
         <url-pattern>/mylistblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <url-pattern>/editblog</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
