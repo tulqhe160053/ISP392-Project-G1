@@ -47,8 +47,8 @@
                         <h1>My Blogs</h1>
                         <nav class="d-flex align-items-center">
                             <a href="<%=request.getContextPath()%>/home">Home<span class="lnr lnr-arrow-right"></span></a>
-                            <a href="<%=request.getContextPath()%>/listblog">Blog<span class="lnr lnr-arrow-right"></span></a>
-                            <a  href="<%=request.getContextPath()%>/mylistblog?ID=${blog.user.userID}">View my blogs</a>
+                            <a href="<%=request.getContextPath()%>/mylistblog">My Blog</a>
+                            
                         </nav>
                         
                     </div>
@@ -68,7 +68,7 @@
                     <div class="col-lg-8">
                         <div class="blog_left_sidebar">
                             <c:forEach var="blog" items="${listBlog}">
-                                <c:if test="${blog.getUser().getUserID() == sessionScope.user.getUserID()}">
+                                
 
 
                                     <article class="row blog_item">
@@ -99,7 +99,7 @@
                                             </div>
                                         </div>
                                     </article>
-                                </c:if>
+                                
 
                             </c:forEach>
                             <nav class="blog-pagination justify-content-center d-flex">
@@ -116,29 +116,16 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search Posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-                                    </span>
-                                </div><!-- /input-group -->
-                                <div class="br"></div>
-                            </aside>
-                            <aside class="single_sidebar_widget author_widget">
-                                <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
-                                <h4>ISP392 G1</h4>
-                                <div class="social_icon">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-github"></i></a>
-                                    <a href="#"><i class="fa fa-behance"></i></a>
-                                </div>
-
-                                <div class="br"></div>
-                            </aside>
-
                             
+                           <aside class="single-sidebar-widget tag_cloud_widget">
+                                <h4 class="widget_title">Tag Clouds</h4>
+                                <ul class="list">
+                                    <li><a href="#">Laptop</a></li>
+                                    <li><a href="#">Smartphone</a></li>
+                                    <li><a href="#">Accessories</a></li>
+                                    <li><a href="#">Tablet</a></li>
+                                </ul>
+                            </aside>
                         </div>
                     </div>
 

@@ -85,8 +85,9 @@
                                         <div class="blog_details">
                                             <a>
                                                 <h2>${blog.title}</h2>
-                                                <h5>${blog.content}</h5>
                                                 <h5>${blog.description}</h5>
+                                                <h5>${blog.content}</h5>
+                                                
                                             </a>
                                         </div>
                                     </div>

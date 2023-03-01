@@ -366,7 +366,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         Blog b = new Blog();
         b = bd.selectById(2);
         ArrayList<Blog> t = new ArrayList<>();
-        t = bd.selectTop2();
+        t = bd.selectMyAll(3);
         for (Blog blog : t) {
             System.out.println(blog.toString());
 

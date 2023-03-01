@@ -51,8 +51,14 @@ public class MyListBlogServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        
+        HttpSession session = request.getSession();
+        model.Users user = (model.Users) session.getAttribute("user");
+        int userId = user.getUserID();
+        
         BlogDAO dao = new BlogDAO();
-        ArrayList<Blog> listBlog = dao.selectAll();
+        ArrayList<Blog> listBlog = dao.selectMyAll(userId);
+        
         int page, numperpage = 3;
         int size = listBlog.size();
         int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
