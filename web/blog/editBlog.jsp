@@ -44,12 +44,8 @@
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                     <div class="col-first">
-                        <h1>My Blogs</h1>
-                        <nav class="d-flex align-items-center">
-                            <a href="<%=request.getContextPath()%>/home">Home<span class="lnr lnr-arrow-right"></span></a>
-                            <a href="<%=request.getContextPath()%>/mylistblog">My Blog</a>
-
-                        </nav>
+                        <h1>Edit my blog</h1>
+                        
 
                     </div>
                 </div>
@@ -66,72 +62,82 @@
             <div class="container">
                 <div class="row">
                     <form action="editblog?id=${blog.id}" method="post" enctype='multipart/form-data'>
-                        <div class="row">
-                            <div class="col-md-12 border-right">
-                                <div class="d-flex flex-column align-items-start text-start p-3 py-5"><img width="300px" src="<%=request.getContextPath()%>/assets/blog_img/${blog.imageLink}" id="image" alt="alt"/></div>
-                                <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
+                        <div class="col-lg-8">
+                            <div class="blog_left_sidebar">
+
+                                <article class="row blog_item">
+                                    <div class="col-md-3">
+                                        <div class="blog_info text-right">
+                                            <div class="post_tag">
+                                                <h3><select class="form-select active" name="catid">
+                                                        <c:forEach items="${category}" var="c">
+                                                            <option <c:if test="${blog.category.getCategoryName() == c.getCategoryName()}">selected</c:if> value="${c.getCategoryId()}">${c.getCategoryName()}</option>
+                                                        </c:forEach>
+                                                    </select></h3>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="blog_post">
+                                            <img src="<%=request.getContextPath()%>/assets/blog_img/${blog.imageLink}" alt="">
+                                            <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
+                                            
+                                            <div class="blog_details">
+                                                <a>
+                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="${blog.title}" placeholder="enter title"></h2>
+                                                    <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description">${blog.description}</textarea></h5>
+                                                    <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content">${blog.content}</textarea></h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                                <div class="row">
+                                <div class="col-md-12 mt-5 text-center">
+                                    <button class="btn btn-primary" type="submit">Save</button>
+
+                                    <input class="btn btn-secondary" type="reset" value="Enter again">
+                                    <a href="mylistblog" class="btn btn-danger">Cancel</a>
+                                </div>
+                                </form>
+
+
+                            </div>
 
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12"><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="${blog.title}" placeholder="enter title"></div>
-
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12"><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description">${blog.description}</textarea></div>
-                        </div>
-
-
-
-                        <div class="row mt-3">
-
-
-
-                            <div class="col-md-12"><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content">${blog.content}</textarea></div>
-                            <div class="col-md-12"><label for = "pwd">Category</label>
-                                <select class="form-select" name="catid">
-                                    <c:forEach items="${category}" var="c">
-                                        <option <c:if test="${blog.category.getCategoryName() == c.getCategoryName()}">selected</c:if> value="${c.getCategoryId()}">${c.getCategoryName()}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-
-
-                        <div class="row">
-                            <div class="col-md-12 mt-5 text-center">
-                                <button class="btn btn-primary" type="submit">Save</button>
-
-                                <input class="btn btn-secondary" type="reset" value="enter again">
-                            </div>
                     </form>
+                    
 
 
+                            </div>
+                        </div>
                 </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!--================Blog Area =================-->
+        <!--================Blog Area =================-->
 
-    <!-- start footer Area -->
-    <%@include file="../footer.jsp" %>
-    <!-- End footer Area -->
+        <!-- start footer Area -->
+        <%@include file="../footer.jsp" %>
+        <!-- End footer Area -->
 
-    <script src="<%=request.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-    crossorigin="anonymous"></script>
-    <script src="<%=request.getContextPath()%>/js/vendor/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.ajaxchimp.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.sticky.js"></script>
-    <script src="<%=request.getContextPath()%>/js/nouislider.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.magnific-popup.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-    <!--gmaps Js-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-    <script src="<%=request.getContextPath()%>/js/gmaps.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/main.js"></script>
-</body>
+        <script src="<%=request.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+        <script src="<%=request.getContextPath()%>/js/vendor/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery.ajaxchimp.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery.sticky.js"></script>
+        <script src="<%=request.getContextPath()%>/js/nouislider.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery.magnific-popup.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+        <!--gmaps Js-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+        <script src="<%=request.getContextPath()%>/js/gmaps.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/main.js"></script>
+    </body>
 
 </html>
