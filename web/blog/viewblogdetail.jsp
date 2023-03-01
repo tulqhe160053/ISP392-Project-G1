@@ -85,8 +85,8 @@
                                         <div class="blog_details">
                                             <a>
                                                 <h2>${blog.title}</h2>
-                                                <h5>${blog.content}</h5>
                                                 <h5>${blog.description}</h5>
+                                                <h5>${blog.content}</h5>
                                             </a>
                                         </div>
                                     </div>
@@ -97,15 +97,6 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search Posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-                                    </span>
-                                </div><!-- /input-group -->
-                                <div class="br"></div>
-                            </aside>
                             <aside class="single_sidebar_widget author_widget">
                                 <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
                                 <h4>ISP392 G1</h4>
@@ -157,15 +148,7 @@
                                 <p class="text-bottom">You can unsubscribe at any time</p>
                                 <div class="br"></div>
                             </aside>
-                            <aside class="single-sidebar-widget tag_cloud_widget">
-                                <h4 class="widget_title">Tag Clouds</h4>
-                                <ul class="list">
-                                    <li><a href="#">Laptop</a></li>
-                                    <li><a href="#">Smartphone</a></li>
-                                    <li><a href="#">Accessories</a></li>
-                                    <li><a href="#">Tablet</a></li>
-                                </ul>
-                            </aside>
+                            
                         </div>
                     </div>
 
