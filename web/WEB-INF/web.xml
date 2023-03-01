@@ -13,10 +13,6 @@
         <servlet-class>Controler.ProductServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>MyListBlogServlet</servlet-name>
-        <servlet-class>Controler.MyListBlogServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>Controler.Cart_Add</servlet-class>
     </servlet>
@@ -97,10 +93,6 @@
         <servlet-class>Controler.OrderDetailServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditBlogServlet</servlet-name>
-        <servlet-class>Controler.EditBlogServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UserDetailServlet</servlet-name>
         <servlet-class>Controler.UserDetailServlet</servlet-class>
     </servlet>
@@ -124,6 +116,10 @@
         <servlet-name>BlogDetailMKTServlet</servlet-name>
         <servlet-class>Controler.BlogDetailMKTServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyListBLogServlet</servlet-name>
+        <servlet-class>Controler.MyListBLogServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -143,10 +139,6 @@
     <servlet-mapping>
         <servlet-name>ResetPassword</servlet-name>
         <url-pattern>/resetpassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MyListBlogServlet</servlet-name>
-        <url-pattern>/mylistblog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>testing</servlet-name>
@@ -221,10 +213,6 @@
         <url-pattern>/orderdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditBlogServlet</servlet-name>
-        <url-pattern>/editblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>UserDetailServlet</servlet-name>
         <url-pattern>/userdetail</url-pattern>
     </servlet-mapping>
@@ -247,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>BlogDetailMKTServlet</servlet-name>
         <url-pattern>/blogdetailmkt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyListBLogServlet</servlet-name>
+        <url-pattern>/mylistblog</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
