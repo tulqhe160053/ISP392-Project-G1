@@ -111,7 +111,7 @@
                         <div><h5 class="credit-card-label text-black-50">City: <span class="text-dark">${shipaddress.getShipCity().getCityName()}</span></h5></div>
                         <div><h5 class="credit-card-label text-black-50">District: <span class="text-dark">${shipaddress.getDistrict().getDistrictName()}</span></h5></div>
                         <div><h5 class="credit-card-label text-black-50">Address detail: <span class="text-dark">${shipaddress.getAddressDetail()}</span></h5></div>
-                        <div><a href="#">Change ship address</a></div>
+                        <div><a href="ViewListAddress">Change ship address</a></div>
                         <hr class="line">
                         <div class="d-flex justify-content-between information"><span>Total</span><span>$${requestScope.total}</span></div>
                         <button class="btn btn-danger btn-block mt-3"><a href="<%=request.getContextPath()%>/order?cartId=${requestScope.cartId}&shipAddressId=${requestScope.shipaddress.getId()}&total=${requestScope.total}">Order</a></button>

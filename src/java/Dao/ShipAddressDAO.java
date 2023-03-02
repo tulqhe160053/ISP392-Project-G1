@@ -45,7 +45,9 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
                  
                  String addressDetail = rs.getString("AddressDetail");
                  
-                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
+                 boolean isUse = rs.getBoolean("isUse");
+                 
+                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail,isUse);
                 t.add(x);
             }
             rs.close();
@@ -55,6 +57,50 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
         }
         return t;
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public ShipAddress getByShipId(int shipaddressId) {
+        ShipAddress ketqua = null;
+        xSql = "select * from ShipAddress where ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, shipaddressId);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            if (rs.next()) {
+                int id = rs.getInt("ID");
+                 int userId = rs.getInt("UserID");
+                 UserDAO user_dao = new UserDAO();
+                 Users user = user_dao.getById(userId);
+                 
+                 String fullName = rs.getString("Fullname");
+                 String phoneNum = rs.getString("PhoneNum");
+                 
+                 int cityId = rs.getInt("ShipCityID");
+                 CityDAO city_dao = new CityDAO();
+                 City shipCity = city_dao.getById(cityId);
+                 
+                 int districtId = rs.getInt("DistrictId");
+                 DistrictDAO district_dao = new DistrictDAO();
+                 District district = district_dao.getById(districtId);
+                 
+                 String addressDetail = rs.getString("AddressDetail");
+                 
+                 boolean isUse = rs.getBoolean("isUse");
+                 
+
+                ketqua = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail,isUse);
+            } else {
+                ketqua = null;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (ketqua);
     }
 
     @Override
@@ -91,7 +137,9 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
                  
                  String addressDetail = rs.getString("AddressDetail");
                  
-                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
+                 boolean isUse = rs.getBoolean("isUse");
+                 
+                 ShipAddress x = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail, isUse);
                 t.add(x);
             }
             rs.close();
@@ -154,8 +202,10 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
                      District district = district_dao.getById(districtId);
 
                      String addressDetail = rs.getString("AddressDetail");
+                     
+                     boolean isUse = rs.getBoolean("isUse");
 
-                     ketqua = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail);
+                     ketqua = new ShipAddress(id, user, fullName, phoneNum, shipCity, district, addressDetail,isUse);
                 }
                 rs.close();
                 ps.close();
@@ -167,7 +217,6 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
     
     public static void main(String[] args) {
         ShipAddressDAO dao = new ShipAddressDAO();
-        ArrayList<ShipAddress> t = dao.getByUserId(3);
         for (ShipAddress o : dao.selectAll()) {
             System.out.println(o);
         }
@@ -200,7 +249,7 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
     }
 
 
-public void editshipaddress( String Fullname, String PhoneNum, int City, int District, String AddressDetail, int ID){
+    public void editshipaddress( String Fullname, String PhoneNum, int City, int District, String AddressDetail, int ID){
         String query = "update ShipAddress\n" +
                         "set Fullname = ?,\n" +
                         "PhoneNum = ?,\n" +
@@ -216,6 +265,28 @@ public void editshipaddress( String Fullname, String PhoneNum, int City, int Dis
             ps.setInt(4, District);
             ps.setString(5, AddressDetail);
             ps.setInt(6, ID);
+            ps.executeUpdate();
+        } catch (Exception e){
+        }
+    }
+    
+    public void editIsuse( int ID){
+        String query = "update ShipAddress set isUse = ? where ID = ?";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setBoolean(1, false);
+            ps.setInt(2, ID);
+            ps.executeUpdate();
+        } catch (Exception e){
+        }
+    }
+    
+    public void updateIsuse(int ID){
+        String query = "update ShipAddress set isUse = ? where ID = ?";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setBoolean(1, true);
+            ps.setInt(2, ID);
             ps.executeUpdate();
         } catch (Exception e){
         }

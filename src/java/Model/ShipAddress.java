@@ -17,11 +17,12 @@ public class ShipAddress {
     private City shipCity;
     private District district;
     private String addressDetail;
+    private boolean isUse;
 
     public ShipAddress() {
     }
 
-    public ShipAddress(int id, Users user, String fullName, String phoneNum, City shipCity, District district, String addressDetail) {
+    public ShipAddress(int id, Users user, String fullName, String phoneNum, City shipCity, District district, String addressDetail, boolean isUse) {
         this.id = id;
         this.user = user;
         this.fullName = fullName;
@@ -29,7 +30,10 @@ public class ShipAddress {
         this.shipCity = shipCity;
         this.district = district;
         this.addressDetail = addressDetail;
+        this.isUse = isUse;
     }
+
+    
 
     public int getId() {
         return id;
@@ -87,10 +91,19 @@ public class ShipAddress {
         this.addressDetail = addressDetail;
     }
 
+    public boolean getIsUse() {
+        return isUse;
+    }
+
+    public void setIsUse(boolean isUse) {
+        this.isUse = isUse;
+    }
+
     @Override
     public String toString() {
-        return "ShipAddress{" + "id=" + id + ", user=" + user + ", fullName=" + fullName + ", phoneNum=" + phoneNum + ", shipCity=" + shipCity + ", district=" + district + ", addressDetail=" + addressDetail + '}';
+        return "ShipAddress{" + "id=" + id + ", user=" + user + ", fullName=" + fullName + ", phoneNum=" + phoneNum + ", shipCity=" + shipCity + ", district=" + district + ", addressDetail=" + addressDetail + ", isUse=" + isUse + '}';
     }
+    
     
     
 }

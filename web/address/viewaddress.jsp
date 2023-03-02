@@ -28,14 +28,14 @@
         <!--
                 CSS
                 ============================================= -->
-        <link rel="stylesheet" href="css/linearicons.css">
-        <link rel="stylesheet" href="css/owl.carousel.css">
-        <link rel="stylesheet" href="css/themify-icons.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/nice-select.css">
-        <link rel="stylesheet" href="css/nouislider.min.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/linearicons.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/owl.carousel.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/themify-icons.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nice-select.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nouislider.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
     </head>
 
     
@@ -92,7 +92,18 @@
                                                         </p>
                                                         <p class="text-black">${o.district.districtName},${o.shipCity.cityName}
                                                         </p>
-                                                        <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3" data-toggle="modal" data-target="#add-address-modal" href="EditShipAddress?aid=${o.id}"><i class="icofont-ui-edit"></i> EDIT</a> <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="DeleteAddress?aid=${o.id}"><i class="icofont-ui-delete"></i> DELETE</a></p>
+                                                        <p class="mb-0 text-black font-weight-bold">
+                                                            <a class="text-primary mr-3" data-toggle="modal" data-target="#add-address-modal" href="EditShipAddress?aid=${o.id}"><i class="icofont-ui-edit"></i> EDIT</a>
+                                                            <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="DeleteAddress?aid=${o.id}"><i class="icofont-ui-delete"></i> DELETE</a>
+                                                            
+                                                            <c:if test="${o.getIsUse() == true}">
+                                                                <i class="ml-1 fa fa-check" style="color: green"></i>
+                                                            </c:if>
+                                                            <c:if test="${o.getIsUse() != true}">
+                                                                <a class="btn btn-primary" href="updateaddress?addressId=${o.getId()}" style="margin-left: 104px;">Set default</a> 
+                                                            </c:if>
+                                                                                                                       
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
