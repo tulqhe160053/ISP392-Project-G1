@@ -132,6 +132,10 @@
         <servlet-name>ListSellProduct</servlet-name>
         <servlet-class>Controler.ListSellProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewBrand</servlet-name>
+        <servlet-class>Controler.ViewBrand</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -263,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>ListSellProduct</servlet-name>
         <url-pattern>/ListSellProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBrand</servlet-name>
+        <url-pattern>/ViewBrand</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
