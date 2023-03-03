@@ -2,15 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controler;
+package controler;
 
+import Dao.ProductDAO;
+import Dao.ProductImgDAO;
+import Dao.ShipAddressDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import Model.Product;
+import Model.ProductImg;
+import Model.ShipAddress;
+import Model.Users;
 /**
  *
  * @author thaib
@@ -55,7 +63,21 @@ public class ListSellProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = (HttpSession) request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        int userId = user.getUserID();
+        
+        ProductImgDAO dal = new ProductImgDAO();
+        ArrayList<ProductImg> i = dal.selectAll();
+        
+        
+
+        ProductDAO dao = new ProductDAO() ;
+        ArrayList<Product> p = dao.getBySellerID(userId );
+        request.setAttribute("listP", p);
+        request.setAttribute("ListI", i);
+//        response.getWriter().print(t);
+        request.getRequestDispatcher("/product/listSellproduct.jsp").forward(request, response);
     }
 
     /**
