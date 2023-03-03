@@ -212,6 +212,53 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         }
         return (t);
     }
+    
+    public ArrayList<Product> getBySellerID(int seller_id) {
+        ArrayList<Product> t = new ArrayList<>();
+        xSql = "select * from Product where SellerID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, seller_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int productID = rs.getInt("ProductID");
+                String productName = rs.getString("ProductName");
+                String description = rs.getString("Description");
+                String color = rs.getString("color");
+                int originalPrice = rs.getInt("OriginalPrice");
+                int sellPrice = rs.getInt("SellPrice");
+                int salePercent = rs.getInt("SalePercent");
+                
+                int catId = rs.getInt("CatID");
+                CategoryDAO cat_dao = new CategoryDAO();
+                Category category = cat_dao.selectById(new Category(catId, null));
+
+                UserDAO dao = new UserDAO();
+                Users x = new Users();
+                x.setUserID(seller_id);
+                Users seller = dao.selectById(x);
+
+                int amount = rs.getInt("Amount");
+
+                int productStatus_id = rs.getInt("StatusID");
+                ProductStatusDAO status_dao = new ProductStatusDAO();
+                ProductStatus productStatus = status_dao.selectById(new ProductStatus(productStatus_id, null));
+
+                int brand_id = rs.getInt("BrandID");
+                BrandDAO brand_dao = new BrandDAO();
+                Brand brand = brand_dao.selectById(new Brand(brand_id, null));
+
+                Product y = new Product(productID, productName, description, color, originalPrice,
+                        sellPrice, salePercent, category, seller, amount, productStatus, brand);
+                t.add(y);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
     @Override
     public void insert(Product t) {
