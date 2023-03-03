@@ -15,7 +15,28 @@ public class BrandDAO extends MyDAO implements DAOInterface<Brand> {
 
     @Override
     public ArrayList<Brand> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Brand> t = new ArrayList<>();
+        xSql = "select * from Brand";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            while (rs.next()) {
+                int brandID = rs.getInt("BrandID");
+                String brandName = rs.getString("BrandName");
+                
+                Brand x = new Brand(brandID, brandName);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
 
     @Override
