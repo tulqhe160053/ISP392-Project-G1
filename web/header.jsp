@@ -44,6 +44,9 @@
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/common/viewuser.jsp">My Profile</a></li>
                                     <li class="nav-item"><a class="nav-link" href="ViewListAddress">My Address</a></li>
+                                    <c:if test="${sessionScope.user.getRole().getRoleID() == 2}">
+                                            <li class="nav-item"><a class="nav-link" href="ListSellProduct">My Product</a></li>
+                                        </c:if>
                                     <li class="nav-item"><a class="nav-link" href="mylistblog">My blog</a></li>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 1}">
                                             <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user">Admin Dashboard</a></li>
