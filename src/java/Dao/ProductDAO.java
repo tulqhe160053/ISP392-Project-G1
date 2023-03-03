@@ -261,7 +261,6 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
     }
     
     
-    
     @Override
     public void insert(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
