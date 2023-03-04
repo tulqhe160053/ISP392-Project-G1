@@ -56,7 +56,6 @@ public class ShipAddressDAO extends MyDAO implements DAOInterface<ShipAddress> {
             e.printStackTrace();
         }
         return t;
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     public ShipAddress getByShipId(int shipaddressId) {
