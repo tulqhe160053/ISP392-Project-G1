@@ -211,10 +211,15 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
-                                                 
-                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                <c:if test="${requestScope.page > 1}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogmkt?page=${requestScope.page-1}">Previous</a></li>
+                                                    </c:if>
+                                                    <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogmkt?page=${i}">${i}</a></li>
                                                     </c:forEach>
+                                                    <c:if test="${requestScope.num > requestScope.page}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogmkt?page=${requestScope.page+1}">Next</a></li>
+                                                    </c:if>
                                             </ul>
                                         </nav>
                                     </c:if>
@@ -224,10 +229,15 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
-                                                 
-                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                <c:if test="${requestScope.page > 1}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filterblog?catid=${requestScope.catid}&blogstatusid=${requestScope.status}&page=${requestScope.page-1}">Previous</a></li>
+                                                    </c:if>
+                                                    <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filterblog?catid=${requestScope.catid}&blogstatusid=${requestScope.status}&page=${i}">${i}</a></li>
                                                     </c:forEach>
+                                                    <c:if test="${requestScope.num > requestScope.page}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filterblog?catid=${requestScope.catid}&blogstatusid=${requestScope.status}&page=${requestScope.page+1}">Next</a></li>
+                                                    </c:if>
                                             </ul>
                                         </nav>
                                     </c:if>
@@ -237,9 +247,15 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
+                                                 <c:if test="${requestScope.page > 1}">
+                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog?txt=${requestScope.search}&page=${requestScope.page-1}">Previous</a></li>
+                                                    </c:if>
                                                 <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog?txt=${requestScope.search}&page=${i}">${i}</a></li>
                                                     </c:forEach>
+                                                    <c:if test="${requestScope.num > requestScope.page}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog?txt=${requestScope.search}&page=${requestScope.page+1}">Next</a></li>
+                                                    </c:if>
                                             </ul>
                                         </nav>
                                     </c:if>

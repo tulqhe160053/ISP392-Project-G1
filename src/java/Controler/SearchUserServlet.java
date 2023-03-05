@@ -64,7 +64,7 @@ public class SearchUserServlet extends HttpServlet {
         UserDAO u = new UserDAO();
         String searchTxt = request.getParameter("txt");
         List<Users> userSearch = u.searchName(searchTxt);
-        request.setAttribute("user", userSearch);
+         
          int page, numperpage = 5;
         int size = userSearch.size();
         int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang

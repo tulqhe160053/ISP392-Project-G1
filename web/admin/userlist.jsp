@@ -19,6 +19,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://kit.fontawesome.com/d846362117.css" crossorigin="anonymous">
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -132,42 +133,42 @@
                                                         <div class="container">
                                                             <div class="row">
                                                                 <span> 
-                                                                    <input type="text" class="col-8" name="txt" placeholder="Search...">
-                                                                    <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                                                </span>
-                                                            </div>
-
+                                                                    <input oninput="searchBy(this" value="${txtS}" type="text" class="col-8" name="txt" placeholder="Search...">
+                                                                <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                                            </span>
                                                         </div>
-                                                    </form>
-                                                </div>
 
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-4">
-                                            <a class="btn btn-secondary" href="adduser.jsp">Add new User</a>
                                         </div>
                                     </div>
 
-
-
-                                    <div class="card-body">
-                                        <table width ="100%">
-
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th>Role</th>
-                                                    <th>Status</th>
+                                    <div class="col-md-4">
+                                        <a class="btn btn-secondary" href="adduser.jsp">Add new User</a>
+                                    </div>
+                                </div>
 
 
 
-                                                </tr>
-                                            </thead>
+                                <div class="card-body">
+                                    <table width ="100%">
+
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Gender</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Role</th>
+                                                <th>Status</th>
+
+
+
+                                            </tr>
+                                        </thead>
 
                                         <c:if test="${user != null}"> 
                                             <c:forEach items="${user}" var = "u">       
@@ -212,31 +213,50 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
-                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                <c:if test="${requestScope.page > 1}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="user?page=${requestScope.page-1}">Previous</a></li>
+                                                    </c:if>
+                                                    <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="user?page=${i}">${i}</a></li>
                                                     </c:forEach>
+                                                    <c:if test="${requestScope.num > requestScope.page}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="user?page=${requestScope.page+1}">Next</a></li>
+                                                    </c:if>    
                                             </ul>
                                         </nav>
                                     </c:if>
-                                        
-                                         <c:if test="${requestScope.check.equals('filter')}">
+
+                                    <c:if test="${requestScope.check.equals('filter')}">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
+                                                <c:if test="${requestScope.page > 1}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filteruser?role_id=${requestScope.role}&status=${requestScope.status}&page=${requestScope.page-1}">Previous</a></li>
+                                                    </c:if>
                                                 <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filteruser?role_id=${requestScope.role}&status=${requestScope.status}&page=${i}">${i}</a></li>
                                                     </c:forEach>
+                                                    <c:if test="${requestScope.num > requestScope.page}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filteruser?role_id=${requestScope.role}&status=${requestScope.status}&page=${requestScope.page+1}">Next</a></li>
+                                                    </c:if>
+                                                    
                                             </ul>
                                         </nav>
                                     </c:if>
-                                        
-                                         <c:if test="${requestScope.check.equals('search')}">
+
+                                    <c:if test="${requestScope.check.equals('search')}">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
+                                                <c:if test="${requestScope.page > 1}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchuser?txt=${requestScope.search}&page=${requestScope.page-1} ">Previous</a></li>
+                                                    </c:if>
                                                 <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchuser?txt=${requestScope.search}&page=${i}">${i}</a></li>
                                                     </c:forEach>
+                                                     <c:if test="${requestScope.num > requestScope.page}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchuser?txt=${requestScope.search}&page=${requestScope.page+1}">Next</a></li>
+                                                    </c:if>
                                             </ul>
                                         </nav>
                                     </c:if>
@@ -255,6 +275,7 @@
                 </footer>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -262,5 +283,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+
     </body>
 </html>
