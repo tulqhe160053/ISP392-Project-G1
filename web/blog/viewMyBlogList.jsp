@@ -85,13 +85,11 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="blog_post">
-                                                <img src="<%=request.getContextPath()%>/assets/blog_img/${blog.imageLink}" alt="">
                                                 <div class="blog_details">
                                                     <a>
                                                         <h2>${blog.title}</h2>
                                                     </a>
                                                     <p></p>
-                                                    <a href="<%=request.getContextPath()%>/blogdetail?id=${blog.id}" class="white_bg_btn">View More</a>
                                                     <a href="<%=request.getContextPath()%>/editblog?id=${blog.id}" class="white_bg_btn">Edit</a>
                                                 </div>
                                             </div>
@@ -114,6 +112,10 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
+                            
+                            <aside class="col-md-12 mt-5 text-center" >
+                                <a href="<%=request.getContextPath()%>/blog/addNewBlog.jsp" class="active"> Add Blog</a>
+                            </aside>
                             
                            <aside class="single-sidebar-widget tag_cloud_widget">
                                 <h4 class="widget_title">Tag Clouds</h4>

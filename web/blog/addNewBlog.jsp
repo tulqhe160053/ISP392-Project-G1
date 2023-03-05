@@ -44,7 +44,7 @@
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                     <div class="col-first">
-                        <h1>Edit my blog</h1>
+                        <h1>Add blog</h1>
                         
 
                     </div>
@@ -82,14 +82,13 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="blog_post">
-                                            <img src="<%=request.getContextPath()%>/assets/blog_img/${blog.imageLink}" alt="">
                                             <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
                                             
                                             <div class="blog_details">
                                                 <a>
-                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="${blog.title}" placeholder="enter title"></h2>
-                                                    <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description">${blog.description}</textarea></h5>
-                                                    <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content">${blog.content}</textarea></h5>
+                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="" placeholder="enter title"></h2>
+                                                    <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description"></textarea></h5>
+                                                    <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content"></textarea></h5>
                                                 </a>
                                             </div>
                                         </div>
