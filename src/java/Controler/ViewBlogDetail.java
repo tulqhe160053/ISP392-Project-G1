@@ -64,8 +64,8 @@ public class ViewBlogDetail extends HttpServlet {
                 request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
             } else {
                 int blogId = Integer.parseInt(blogid_raw);
-                
                 BlogDAO dao = new BlogDAO();
+                dao.updateView(blogId);
                 Blog b = dao.selectById(blogId);
                 ArrayList<Blog> topBlog = dao.selectTop2();
                 request.setAttribute("blog", b);

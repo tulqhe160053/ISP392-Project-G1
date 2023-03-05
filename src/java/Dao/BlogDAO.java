@@ -375,4 +375,14 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public void updateView(int id){
+        try {
+            String sql = "UPDATE Blog SET viewer = viewer+1  where ID = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
 }
