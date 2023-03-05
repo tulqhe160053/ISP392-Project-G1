@@ -184,12 +184,12 @@
 
                                                         <c:if test="${u.userStatus.statusName == 'Active'}"> 
                                                             <td>
-                                                                <a class="btn btn-success" href="">${u.userStatus.getStatusName()}</a>
+                                                                <a class="btn btn-success" href="userdetail?action=editstatus&type=active&uid=${u.userID}&sid${u.userStatus.id}">${u.userStatus.getStatusName()}</a>
                                                             </td>
                                                         </c:if>
                                                         <c:if test="${u.userStatus.statusName == 'Locked'}"> 
                                                             <td>
-                                                                <a class="btn btn-danger" href="">${u.userStatus.getStatusName()}</a>
+                                                                <a class="btn btn-danger" href="userdetail?action=editstatus&type=locked&uid=${u.userID}&sid${u.userStatus.id}">${u.userStatus.getStatusName()}</a>
                                                             </td>
                                                         </c:if>
 

@@ -60,6 +60,17 @@ public class UserDetailServlet extends HttpServlet {
             u.updateStatusRole(role, status, uid);
             response.sendRedirect("user");
         }
+        if(action.equals("editstatus")){
+            String type = request.getParameter("type");
+            String uid = request.getParameter("uid");
+            String status = request.getParameter("sid");
+            if(type.equals("active")){
+                u.updateStatus("2", uid);
+            }else{
+                u.updateStatus("1", uid);
+            }
+            response.sendRedirect("user");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -379,6 +379,18 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         } catch (Exception e) {
         }
     }
+    
+    public void updateStatus(String statusid , String uid){
+         try {
+            String sql = "update users set statusId = ? \n"
+                    + "where userID = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, statusid);
+            ps.setString(2, uid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
     public List<Users> getListByPage(List<Users> list,
             int start, int end) {
