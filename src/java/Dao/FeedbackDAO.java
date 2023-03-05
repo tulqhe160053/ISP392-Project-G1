@@ -87,6 +87,20 @@ public class FeedbackDAO extends MyDAO {
             System.out.println(e);
         }
     }
+     public int countStar(int star){
+        int count = 0 ; 
+        String sql = "select count(*) as count_star from feedback where star = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, star);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
 }
    
   

@@ -334,6 +334,54 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return arr;
     }
+    
+    public int getBlogByViewer(int catid) {
+        int count = 0;
+        try {
+            String sql = "select viewer , count(id) as 'count' from blog \n"
+                    + "where catid = ?\n"
+                    + "group by viewer";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, catid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
+    
+     public int countBlogByCategory(int catid) {
+        int count = 0;
+        try {
+            String sql = "select count(id) as 'count' from blog \n"
+                    + "where catid = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, catid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
+
+     public int AverageStar() {
+        int count = 0;
+        try {
+            String sql = "select avg(star) as avg_star from feedback";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
+    
 
      
     @Override
