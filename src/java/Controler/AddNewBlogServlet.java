@@ -7,29 +7,21 @@ package Controler;
 
 import Dao.BlogDAO;
 import Dao.CategoryDAO;
-import Model.Blog;
 import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
  * @author Admin
  */
- @MultipartConfig(maxFileSize = 16177216)
-public class EditBlogServlet extends HttpServlet {
+public class AddNewBlogServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -46,10 +38,10 @@ public class EditBlogServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditBlogServlet</title>");  
+            out.println("<title>Servlet AddNewBlogServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditBlogServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddNewBlogServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,15 +58,16 @@ public class EditBlogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id = request.getParameter("id");
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        Model.Users user = (Model.Users) session.getAttribute("user");
+        int userId = user.getUserID();
         BlogDAO bd = new BlogDAO();
         CategoryDAO cat = new CategoryDAO();
         List<Category> category = cat.selectAll();
-        Blog b = new Blog();
-        b= bd.getBlogByID(id);
         request.setAttribute("category", category);
-        request.setAttribute("blog", b);
-        request.getRequestDispatcher("blog/editBlog.jsp").forward(request, response);
+        request.getRequestDispatcher("blog/addNewBlog.jsp").forward(request, response);
     } 
 
     /** 
@@ -87,35 +80,7 @@ public class EditBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        BlogDAO bd = new BlogDAO();
-        String blog_id = request.getParameter("blog_id");
-         Part imagePart = request.getPart("image");
-        String imageName = null;
-        if (imagePart.getSize() > 0) {
-            // Lưu file ảnh vào thư mục tạm trên server
-            String uploadPath = getServletContext().getRealPath("/") + "uploads/";
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-            imageName = UUID.randomUUID().toString() + ".jpg";
-            File imageFile = new File(uploadDir, imageName);
-            try (InputStream inputStream = imagePart.getInputStream()) {
-                Files.copy(inputStream, imageFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            }
-        } else {
-            // Lấy đường dẫn của ảnh cũ từ CSDL
-            BlogDAO blogDAO = new BlogDAO();
-            Blog blog = blogDAO.getBlogByID(blog_id);
-            imageName = blog.getImageLink();
-        }
-        
-        String title = request.getParameter("title");
-        String des = request.getParameter("des");
-        String content = request.getParameter("content");
-        String catid = request.getParameter("catid");
-        bd.UpdateBlog1(imageName, catid, title, des, content, blog_id);
-        response.sendRedirect("mylistblog");
+        processRequest(request, response);
     }
 
     /** 

@@ -71,7 +71,7 @@
                                             <div class="post_tag">
                                                 <h3><select class="form-select active" name="catid">
                                                         <c:forEach items="${category}" var="c">
-                                                            <option <c:if test="${blog.category.getCategoryName() == c.getCategoryName()}">selected</c:if> value="${c.getCategoryId()}">${c.getCategoryName()}</option>
+                                                            <option value="${c.getCategoryId()}">${c.getCategoryName()}</option>
                                                         </c:forEach>
                                                     </select></h3>
 

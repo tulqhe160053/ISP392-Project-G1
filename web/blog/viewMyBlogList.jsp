@@ -90,7 +90,7 @@
                                                         <h2>${blog.title}</h2>
                                                     </a>
                                                     <p></p>
-                                                    <a href="<%=request.getContextPath()%>/editblog?id=${blog.id}" class="white_bg_btn">Edit</a>
+                                                    <a href="editblog?id=${blog.id}" class="white_bg_btn">Edit</a>
                                                 </div>
                                             </div>
                                         </div>
