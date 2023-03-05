@@ -5,6 +5,8 @@
 package Controler;
 
 import Dao.BlogDAO;
+import Dao.BlogStatusDAO;
+import Dao.CategoryDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import Model.Blog;
+import Model.BlogStatus;
 import Model.Category;
 
 /**
@@ -63,6 +66,12 @@ public class FilterBlogServlet extends HttpServlet {
         BlogDAO dao = new BlogDAO();
         String catid = request.getParameter("catid");
         String status = request.getParameter("blogstatusid");
+         CategoryDAO cat = new CategoryDAO();
+        BlogStatusDAO blogstatus = new BlogStatusDAO();
+        List<Category> category = cat.selectAll();
+        List<BlogStatus> blogs = blogstatus.selectAll();
+        request.setAttribute("category", category);
+        request.setAttribute("blogstatus", blogs);
 
         List<Blog> listFilter = dao.getFilter(catid, status);
         int page, numperpage = 3;

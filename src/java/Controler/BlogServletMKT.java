@@ -5,27 +5,20 @@
 package Controler;
 
 import Dao.BlogDAO;
+import Dao.BlogStatusDAO;
 import Dao.CategoryDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import Model.Blog;
+import Model.BlogStatus;
 import Model.Category;
-import Model.Users;
 
 /**
  *
@@ -49,6 +42,12 @@ public class BlogServletMKT extends HttpServlet {
         InputStream inputStream = null;
         String action = request.getParameter("action");
         BlogDAO dao = new BlogDAO();
+        CategoryDAO cat = new CategoryDAO();
+        BlogStatusDAO blogstatus = new BlogStatusDAO();
+        List<Category> category = cat.selectAll();
+        List<BlogStatus> blogs = blogstatus.selectAll();
+        request.setAttribute("category", category);
+        request.setAttribute("blogstatus", blogs);
         if (action == null) {
 
             List<Blog> listBlog = dao.getAllBlog();

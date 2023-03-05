@@ -285,6 +285,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         } catch (Exception e) {
         }
     }
+    
+    
 
     public void UpdateImage(String blog_id, String image) {
 

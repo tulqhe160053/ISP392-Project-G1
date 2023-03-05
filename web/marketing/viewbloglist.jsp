@@ -82,87 +82,88 @@
                                                     <select name="catid" class="form-select" aria-label="Default select example">
 
                                                         <option value="" >All</option>
-                                                        <option value="1" <c:if test="${requestScope.catid.equals('1')}">selected</c:if>  >Laptop</option>
-                                                        <option value="2" <c:if test="${requestScope.catid.equals('2')}">selected</c:if> >Smartphone</option>
-                                                        <option value="3" <c:if test="${requestScope.catid.equals('3')}">selected</c:if> >Tablet</option>
-                                                        <option value="4" <c:if test="${requestScope.catid.equals('4')}">selected</c:if> >Accesories</option>
+
+                                                        <c:forEach items="${category}" var="c">
+                                                            <option <c:if test="${requestScope.catid == c.categoryId}">selected</c:if> value="${c.categoryId}">${c.categoryName}</option>
+                                                        </c:forEach>
 
 
-                                                        </select>  
+                                                    </select>  
 
-                                                    </div>
                                                 </div>
-
-                                                <div class="col-md-5 row align-items-center">
-                                                    <div class="col-md-3">
-                                                        <label class="">Status</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-
-                                                        <select name="blogstatusid" class="form-select" aria-label="Default select example">
-                                                            <option value="" >All</option>
-                                                            <option value="1" <c:if test="${requestScope.status.equals('1')}">selected</c:if> >Active</option>
-                                                        <option value="2" <c:if test="${requestScope.status.equals('2')}">selected</c:if> >Hide</option>
-                                                        </select>  
-
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="col-md-2 md-0">
-                                                    <input type="submit" class="btn btn-primary" value="Filter">
-                                                </div>
-
-
                                             </div>
-                                        </form>
-                                    </div>
 
-                                    <div class="col-md-6 mt-4 row">
-
-                                        <div class="col-md-8">
-                                            <div class="search-bar p-1 d-lg-block ms-2">                                                        
-                                                <div id="search" class="menu-search mb-2">
-                                                    <form action="searchblog" method="get" id="searchform" class="searchform">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <span> 
-                                                                    <input type="text" class="col-8" name="txt" placeholder="Search...">
-                                                                    <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                                                </span>
-                                                            </div>
-
-                                                        </div>
-                                                    </form>
+                                            <div class="col-md-5 row align-items-center">
+                                                <div class="col-md-3">
+                                                    <label class="">Status</label>
                                                 </div>
+                                                <div class="col-md-8">
 
+                                                    <select name="blogstatusid" class="form-select" aria-label="Default select example">
+                                                        <option value="" >All</option>
+                                                        <c:forEach items="${blogstatus}" var="b">
+                                                            <option <c:if test="${requestScope.status == b.statusID}">selected</c:if> value="${b.statusID}">${b.statusName}</option>
+                                                        </c:forEach>
+                                                    </select>  
+
+                                                </div>
                                             </div>
+
+
+
+                                            <div class="col-md-2 md-0">
+                                                <input type="submit" class="btn btn-primary" value="Filter">
+                                            </div>
+
+
                                         </div>
+                                    </form>
+                                </div>
 
+                                <div class="col-md-6 mt-4 row">
 
+                                    <div class="col-md-8">
+                                        <div class="search-bar p-1 d-lg-block ms-2">                                                        
+                                            <div id="search" class="menu-search mb-2">
+                                                <form action="searchblog" method="get" id="searchform" class="searchform">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <span> 
+                                                                <input type="text" class="col-8" name="txt" placeholder="Search...">
+                                                                <button style="border: none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
                                     </div>
 
 
-
-                                    <div class="card-body">
-                                        <table width ="100%">
-
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th style="text-align: center;">Image</th>
-                                                    <th>Title</th>
-                                                    <th>Category</th>
-                                                    <th>Author</th>
-                                                    <th style="text-align: center;">Time</th>
-                                                    <th>Viewer</th>
-                                                    <th style="text-align: center;">Status</th>
+                                </div>
 
 
 
-                                                </tr>
-                                            </thead>
+                                <div class="card-body">
+                                    <table width ="100%">
+
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th style="text-align: center;">Image</th>
+                                                <th>Title</th>
+                                                <th>Category</th>
+                                                <th>Author</th>
+                                                <th style="text-align: center;">Time</th>
+                                                <th>Viewer</th>
+                                                <th style="text-align: center;">Status</th>
+
+
+
+                                            </tr>
+                                        </thead>
 
                                         <c:if test="${listBlog != null}">
                                             <c:forEach items="${listBlog}" var = "b">       
@@ -191,7 +192,7 @@
 
 
                                                         <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogdetailmkt?action=blogdetail&blog_id=${b.id}"><i class="fa-solid fa-book"  style="color:#22baa0"></i></a></i></td>
-                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogdetailmkt?action=delete&bid=${b.id}&sid=${b.blogstatus.getStatusID()}"><i class="fa-solid fa-trash"style="color:#22baa0"></i></a></i></td>
+                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogdetailmkt?action=delete&bid=${b.id}"><i class="fa-solid fa-trash"style="color:#22baa0"></i></a></i></td>
 
 
 
@@ -210,26 +211,28 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
+                                                 
                                                 <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogmkt?page=${i}">${i}</a></li>
                                                     </c:forEach>
                                             </ul>
                                         </nav>
                                     </c:if>
-                                        
-                                        <c:if test="${requestScope.check.equals('filter')}">
+
+                                    <c:if test="${requestScope.check.equals('filter')}">
 
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
+                                                 
                                                 <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="filterblog?catid=${requestScope.catid}&blogstatusid=${requestScope.status}&page=${i}">${i}</a></li>
                                                     </c:forEach>
                                             </ul>
                                         </nav>
                                     </c:if>
-                                        
-                                        <c:if test="${requestScope.check.equals('search')}">
+
+                                    <c:if test="${requestScope.check.equals('search')}">
 
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">

@@ -5,6 +5,8 @@
 package Controler;
 
 import Dao.BlogDAO;
+import Dao.BlogStatusDAO;
+import Dao.CategoryDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import java.io.PrintWriter;
 import static java.util.Collections.list;
 import java.util.List;
 import Model.Blog;
+import Model.BlogStatus;
+import Model.Category;
 
 /**
  *
@@ -63,6 +67,12 @@ public class SearchBlogServlet extends HttpServlet {
         BlogDAO dao = new BlogDAO();
         String text = request.getParameter("txt");
         List<Blog> listSearch = dao.search(text);
+        CategoryDAO cat = new CategoryDAO();
+        BlogStatusDAO blogstatus = new BlogStatusDAO();
+        List<Category> category = cat.selectAll();
+        List<BlogStatus> blogs = blogstatus.selectAll();
+        request.setAttribute("category", category);
+        request.setAttribute("blogstatus", blogs);
         int page, numperpage = 3;
         int size = listSearch.size();
         int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
