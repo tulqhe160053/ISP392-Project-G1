@@ -244,6 +244,20 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         }
         return ketqua;
     }
+    
+    public int countOrder() {
+        String sql = "select COUNT (*) from [orders] ";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
 
     @Override
     public int insertAll(ArrayList<Orders> arr) {

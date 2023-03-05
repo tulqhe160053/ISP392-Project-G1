@@ -26,6 +26,21 @@ public class Product {
     public Product() {
     }
 
+    public Product(int productID, String productName) {
+        this.productID = productID;
+        this.productName = productName;
+    }
+
+    public Product(int productID, String productName, int sellPrice) {
+        this.productID = productID;
+        this.productName = productName;
+        this.sellPrice = sellPrice;
+    }
+    
+    
+    
+    
+
     public Product(int productID, String productName, String description, String color, int originalPrice, int sellPrice, int salePercent, Category category, Users seller, int amount, ProductStatus productStatus, Brand brand) {
         this.productID = productID;
         this.productName = productName;
@@ -40,6 +55,10 @@ public class Product {
         this.productStatus = productStatus;
         this.brand = brand;
     }
+
+     
+    
+    
 
     public int getProductID() {
         return productID;
@@ -141,6 +160,8 @@ public class Product {
     public String toString() {
         return "Product{" + "productID=" + productID + ", productName=" + productName + ", description=" + description + ", color=" + color + ", originalPrice=" + originalPrice + ", sellPrice=" + sellPrice + ", salePercent=" + salePercent + ", category=" + category + ", seller=" + seller + ", amount=" + amount + ", productStatus=" + productStatus + ", brand=" + brand + '}';
     }
+    
+    
     
     
 }

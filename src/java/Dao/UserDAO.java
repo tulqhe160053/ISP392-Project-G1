@@ -484,15 +484,14 @@ public class UserDAO extends MyDAO implements DAOInterface<Users> {
         return count;
     }
 
-    public int countUserByRole(int roleID) {
+     public int countUsers() {
         int count = 0;
+        String sql = "select count(*) as 'count' from users";
         try {
-            String sql = "select count(*) as 'count' from users where RoleID = ?";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, roleID);
             rs = ps.executeQuery();
-            if (rs.next()) {
-                count = rs.getInt(1);
+            if(rs.next()){
+                 count = rs.getInt(1);
             }
         } catch (Exception e) {
         }

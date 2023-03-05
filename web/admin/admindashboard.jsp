@@ -68,6 +68,41 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Admin Dashboard</h1>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Total Number of Customers</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <h3>${requestScope.countUser} users</h3>
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Total Number of Product</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <h3>${requestScope.product} products</h3>                                         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Total Number of Orders</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <h3>${requestScope.order} orders</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Most Ordered Product</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <h4>${most.product.productName}(${most.order.id})</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                         <div class="row">
@@ -84,22 +119,14 @@
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar me-1"></i>
-                                        Count Number of User by Status
+                                        Top 3 Most Orders Product
                                     </div>
                                     <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Number of Role
-                                </div>
-                                <div class="card-body"><canvas id="roleChart" width="100%" height="30"></canvas></div>
-                            </div>
-                        </div>
+                         
 
 
 
@@ -121,8 +148,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
 
-        <!--        <script src="assets/demo/chart-area-demo.js"></script>
-                <script src="assets/demo/chart-bar-demo.js"></script>-->
+        
         <script>
             var xValues = ["Male", "Female"];
             var yValues = [${requestScope.male}, ${requestScope.female}];
@@ -150,7 +176,7 @@
             });
         </script>
 
-        <script>
+<!--        <script>
             var xValues = ["Active", "Locked"];
             var yValues = [${requestScope.active}, ${requestScope.locked}];
             var barColors = [
@@ -175,30 +201,41 @@
                     }
                 }
             });
-        </script>
-
+        </script>-->
+        
         <script>
-            var xValues = ["Admin", "Seller", "Marketing", "Customer"];
-            var yValues = [${requestScope.admin}, ${requestScope.seller}, ${requestScope.marketing}, ${requestScope.customer}];
-            var barColors = ["red", "green", "blue", "orange"];
-
-            new Chart('roleChart', {
-                type: 'pie',
-                data: {
-                    labels: xValues,
+            const dataPie = {
+            labels: [
+            <c:forEach items="${listSell}" var="x">
+            "${x.product.productName}",
+            </c:forEach>
+            ],
                     datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
-                        }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Count Number of User by Role'
-                    }
-                }
-            });
+                    label: "My First Dataset",
+                            data: [
+            <c:forEach items="${listSell}" var="x">
+                            "${x.order.id}",
+            </c:forEach>
+                            ],
+                            backgroundColor: [
+                                    "rgb(255, 99, 132)",
+                                    "rgb(54, 162, 235)",
+                                    "rgb(255, 205, 86)"
+                            ],
+                            hoverOffset: 4
+                    }]
+            };
+            const configPie = {
+            type: "pie",
+                    data: dataPie,
+            };
+            const myPieChart = new Chart(
+                    document.getElementById("myPieChart"),
+                    configPie
+                    );
         </script>
+
+        
  
 
     </body>

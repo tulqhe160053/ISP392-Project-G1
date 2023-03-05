@@ -49,7 +49,11 @@
                                         </c:if>
                                     <li class="nav-item"><a class="nav-link" href="mylistblog">My blog</a></li>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 1}">
-                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/user">Admin Dashboard</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/admin">Admin Dashboard</a></li>
+                                        </c:if>
+                                            
+                                             <c:if test="${sessionScope.user.getRole().getRoleID() == 4}">
+                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/mkt">MKT Dashboard</a></li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 3}">
                                             <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/listorder">My Order</a></li>

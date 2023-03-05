@@ -135,11 +135,11 @@
 
                             <form action="adduser" method="post">
                                 <div class="row mt-3">
-                                    <div class="col-md-12"><label for = "pwd">Username</label><input name="username" type="text" class="form-control" placeholder="enter user number" value="${user.userName}"></div>
+                                    <div class="col-md-12"><label for = "pwd">Username</label><input name="username" type="text" class="form-control" placeholder="enter user number"></div>
 
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-12"><label for = "pwd">Password</label><input name="password" type="password" class="form-control" placeholder="enter user number" value="${user.userName}"></div>
+                                    <div class="col-md-12"><label for = "pwd">Password</label><input name="password" type="password" class="form-control" placeholder="enter password"></div>
 
                                 </div>
 
@@ -157,8 +157,8 @@
                                     <div class="col-md-5">
                                         <input type="radio" name="gender" id="radio2" value="female">Female
                                     </div>
-                                    <div class="col-md-12 mt-3"><label for = "pwd">Email</label><input name="email" type="email" class="form-control" placeholder="enter email" value="${user.email}"></div>
-                                    <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label><input name ="phone" type="tel" class="form-control" placeholder="enter phone number" value="${user.phoneNum}"></div>
+                                    <div class="col-md-12 mt-3"><label for = "pwd">Email</label><input name="email" type="email" class="form-control" placeholder="enter email"></div>
+                                    <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label><input name ="phone" type="tel" class="form-control" placeholder="enter phone number"></div>
                                     <div class="col-md-12 mt-3"><label for = "pwd">Role</label>
                                         <select class="form-select" name="role_id" id="role">
                                             <option value="1">Admin</option>

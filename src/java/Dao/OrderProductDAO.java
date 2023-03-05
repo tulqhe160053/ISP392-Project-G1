@@ -95,6 +95,51 @@ public class OrderProductDAO extends MyDAO implements DAOInterface<OrderProduct>
         } catch (Exception e) {
             e.printStackTrace();
         }    }
+    
+     public OrderProduct mostOrder() {
+        String sql = "select top 1 p.productId ,p.ProductName , Sum(orderId) as 'count' from orderproduct o \n"
+                + "join product p \n"
+                + "on p.productID = o.productId \n"
+                + "join orders od\n"
+                + "on  od.ID = o.orderId\n"
+                + "group by p.productId,p.ProductName\n"
+                + "order by count desc";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Product p = new Product(rs.getInt(1), rs.getString(2));
+                Orders o = new Orders(rs.getInt(3));
+                return new OrderProduct(p, o);
+            }
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public ArrayList<OrderProduct> mostOrderTop3() {
+        ArrayList<OrderProduct> od = new ArrayList<>();
+        String sql = "select top 3 p.productId ,p.ProductName ,p.sellPrice, Sum(orderId) as 'count' from orderproduct o \n"
+                + "join product p \n"
+                + "on p.productID = o.productId \n"
+                + "join orders od\n"
+                + "on  od.ID = o.orderId\n"
+                + "group by p.productId,p.ProductName,p.sellPrice\n"
+                + "order by count desc";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt(1), rs.getString(2),rs.getInt(3));
+                Orders o = new Orders(rs.getInt(4));
+                od.add(new OrderProduct(p, o));
+            }
+
+        } catch (Exception e) {
+        }
+        return od;
+    }
 
     @Override
     public int insertAll(ArrayList<OrderProduct> arr) {

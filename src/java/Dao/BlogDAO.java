@@ -136,7 +136,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                 + "                 on b.UserID = u.UserID\n"
                 + "		        join BlogStatus bs \n"
                 + "		        on b.statusID = bs.statusID \n"
-                + "                      where b.id = ? and bs.statusID = 1";
+                + "                      where b.id = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bid);

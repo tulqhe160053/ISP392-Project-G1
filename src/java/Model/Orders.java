@@ -23,6 +23,12 @@ public class Orders {
     public Orders() {
     }
 
+    public Orders(int id) {
+        this.id = id;
+    }
+    
+    
+
     public Orders(int id, Users user, int totalPrice, String note, ShipAddress shipAddress, OrderStatus orderStatus, String OrderDate, String DeliveryDate) {
         this.id = id;
         this.user = user;

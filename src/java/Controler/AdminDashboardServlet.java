@@ -4,15 +4,18 @@
  */
 package Controler;
 
+import Dao.OrderDAO;
+import Dao.OrderProductDAO;
+import Dao.ProductDAO;
 import Dao.UserDAO;
+import Model.OrderProduct;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,24 +36,37 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDAO ud = new UserDAO();
+         UserDAO ud = new UserDAO();
+        ProductDAO pdao = new ProductDAO();
+        OrderDAO odao = new OrderDAO();
+        OrderProductDAO opdao = new OrderProductDAO();
         int male = ud.countGender("male");
         int female = ud.countGender("female");
         int active = ud.countUser(1);
         int locked = ud.countUser(2);
-        int admin = ud.countUserByRole(1);
-        int seller = ud.countUserByRole(2);
-        int customer = ud.countUserByRole(3);
-        int marketing = ud.countUserByRole(4);
-
+         
         request.setAttribute("male", male);
         request.setAttribute("female", female);
         request.setAttribute("active", active);
         request.setAttribute("locked", locked);
-        request.setAttribute("admin", admin);
-        request.setAttribute("seller", seller);
-        request.setAttribute("customer", customer);
-        request.setAttribute("marketing",marketing);
+        
+        int countUser = ud.countUsers();
+        request.setAttribute("countUser", countUser);
+        
+        int countProduct = pdao.countProduct();
+        request.setAttribute("product", countProduct);
+        
+        int countOrder = odao.countOrder();
+        request.setAttribute("order", countOrder);
+        
+        OrderProduct mostOrder = opdao.mostOrder();
+        request.setAttribute("most", mostOrder);
+        
+        ArrayList<OrderProduct> orderProduct = opdao.mostOrderTop3();
+        request.setAttribute("listSell", orderProduct);
+
+        request.getRequestDispatcher("admin/admindashboard.jsp").forward(request, response);
+         
         
         
 

@@ -17,6 +17,14 @@ public class OrderProduct {
     public OrderProduct() {
     }
 
+    public OrderProduct(Product product, Orders order) {
+        this.product = product;
+        this.order = order;
+    }
+
+    
+    
+
     public OrderProduct(Product product, Orders order, int amount) {
         this.product = product;
         this.order = order;

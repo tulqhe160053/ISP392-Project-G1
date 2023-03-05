@@ -260,6 +260,20 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         return (t);
     }
     
+     public int countProduct(){
+        int count = 0 ;
+        String sql = "select count(*) as 'count' from product";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery(); 
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
+    
     
     
     

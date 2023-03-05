@@ -12,7 +12,7 @@ public class DBContext {
     {
         try {
             //Change the username password and url to connect your own database
-            String username = "sa";
+            String username = "dt";
             String password = "123";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=OnlineShop";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
