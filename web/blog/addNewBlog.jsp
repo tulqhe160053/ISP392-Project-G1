@@ -88,9 +88,9 @@
 
                                             <div class="blog_details">
                                                 <a>
-                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control"  placeholder="enter title"></h2>
-                                                    <h5><label for = "pwd">Desciption</label><input type = "text" name = "des" class="form-control" placeholder="enter description"></input></h5>
-                                                    <h5><label for = "pwd">Content</label><input type = "text" name = "content" class="form-control"  placeholder="enter content"></input></h5>
+                                                    <h2><label for = "pwd">Title</label><input required name="title" type="text" class="form-control"  placeholder="enter title"></h2>
+                                                    <h5><label for = "pwd">Desciption</label><input required type = "text" name = "des" class="form-control" placeholder="enter description"></input></h5>
+                                                    <h5><label for = "pwd">Content</label><input required type = "text" name = "content" class="form-control"  placeholder="enter content"></input></h5>
                                                 </a>
                                             </div>
                                         </div>

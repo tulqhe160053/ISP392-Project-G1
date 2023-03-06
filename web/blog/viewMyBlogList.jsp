@@ -45,12 +45,17 @@
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                     <div class="col-first">
                         <h1>My Blogs</h1>
-                        <nav class="d-flex align-items-center">
+<!--                        <nav class="d-flex align-items-center">
                             <a href="<%=request.getContextPath()%>/home">Home<span class="lnr lnr-arrow-right"></span></a>
                             <a href="<%=request.getContextPath()%>/mylistblog">My Blog</a>
-                            
+
+                        </nav>-->
+                        <nav class="d-flex align-items-center">
+                            <h4><a href="addnewblog" class="text-danger "> Add Blog</a></h4>
+
                         </nav>
-                        
+
+
                     </div>
                 </div>
             </div>
@@ -69,34 +74,34 @@
                         <div class="blog_left_sidebar">
                             <c:forEach var="blog" items="${listBlog}">
 
-                                    <article class="row blog_item">
-                                        <div class="col-md-3">
-                                            <div class="blog_info text-right">
-                                                <div class="post_tag">
-                                                    <h3><a class="active" >${blog.category.categoryName}</a></h3>
+                                <article class="row blog_item">
+                                    <div class="col-md-3">
+                                        <div class="blog_info text-right">
+                                            <div class="post_tag">
+                                                <h3><a class="active" >${blog.category.categoryName}</a></h3>
 
-                                                </div>
-                                                <ul class="blog_meta list">
+                                            </div>
+                                            <ul class="blog_meta list">
                                                 <li>${blog.viewer} view <i class="lnr lnr-eye"></i></a</li>
                                                 <li>${blog.createTime} <i class="lnr lnr-calendar-full"></i></li>
-                                                </ul>
+                                            </ul>
 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="blog_post">
+                                            <img src="<%=request.getContextPath()%>/assets/blog_img/${blog.imageLink}" alt="">
+                                            <div class="blog_details">
+                                                <a>
+                                                    <h2>${blog.title}</h2>
+                                                </a>
+                                                <p></p>
+                                                <a href="editblog?id=${blog.id}" class="white_bg_btn">Edit</a>
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
-                                            <div class="blog_post">
-                                                <img src="<%=request.getContextPath()%>/assets/blog_img/${blog.imageLink}" alt="">
-                                                <div class="blog_details">
-                                                    <a>
-                                                        <h2>${blog.title}</h2>
-                                                    </a>
-                                                    <p></p>
-                                                    <a href="editblog?id=${blog.id}" class="white_bg_btn">Edit</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                
+                                    </div>
+                                </article>
+
 
                             </c:forEach>
                             <nav class="blog-pagination justify-content-center d-flex">
@@ -113,12 +118,12 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
-                            
+
                             <aside class="col-md-12 mt-5 text-center" >
-                                <a href="addnewblog" class="active"> Add Blog</a>
+
                             </aside>
-                            
-                           <aside class="single-sidebar-widget tag_cloud_widget">
+
+                            <aside class="single-sidebar-widget tag_cloud_widget">
                                 <h4 class="widget_title">Tag Clouds</h4>
                                 <ul class="list">
                                     <li><a href="#">Laptop</a></li>
