@@ -4,22 +4,16 @@
  */
 package Dao;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.Part;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import Model.Blog;
 import Model.BlogStatus;
 import Model.Category;
 import Model.Users;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -274,20 +268,29 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
     }
 
-    public void InsertBlog123( int userID, String catid, String title, String des, String content,String image, String createTime) {
+    public void InsertBlog(int userID, String catid, String title, String des, String content, String imageLink) {
+        LocalDate d = java.time.LocalDate.now();
+        String date = d.toString();
         try {
-            String sql = "Insert into Blog values (?,?,?,?,?,?,?,0,1)";
+            String sql = "Insert into Blog ([UserID]\n"
+                    + "           ,[CatId]\n"
+                    + "           ,[Title]\n"
+                    + "           ,[description]\n"
+                    + "           ,[Content]\n"
+                    + "           ,[imageLink]\n"
+                    + "           ,[createtime]\n"
+                    + "           ,[viewer]\n"
+                    + "           ,[statusID]) values(?,?,?,?,?,?,?,0,1)";
             ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
             ps.setString(2, catid);
             ps.setString(3, title);
             ps.setString(4, des);
             ps.setString(5, content);
-            ps.setString(6,image);
-            ps.setString(7, createTime);
+            ps.setString(6, imageLink);
+            ps.setString(7, date);
             ps.executeUpdate();
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
 
@@ -426,10 +429,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         BlogDAO bd = new BlogDAO();
         for (Blog blog : bd.selectAll()) {
             System.out.println(blog);
-
         }
-        
-
     }
 
     @Override

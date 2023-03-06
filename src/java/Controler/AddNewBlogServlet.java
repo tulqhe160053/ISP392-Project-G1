@@ -89,10 +89,7 @@ public class AddNewBlogServlet extends HttpServlet {
         String des = request.getParameter("des");
         String content = request.getParameter("content");
         String catid = request.getParameter("catid");
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String date = simpleDateFormat.format(new Date());
-
+        
         Part filePart = request.getPart("image");
         String imageFileName = filePart.getSubmittedFileName();
         InputStream is = filePart.getInputStream();
@@ -100,7 +97,7 @@ public class AddNewBlogServlet extends HttpServlet {
         is.read(data);
         
         BlogDAO bd = new BlogDAO();
-        bd.InsertBlog123(userID, catid, title, des, content, date, imageFileName);
+        bd.InsertBlog(userID, catid, title, des, content, imageFileName);
         response.sendRedirect("mylistblog");
 
     }
