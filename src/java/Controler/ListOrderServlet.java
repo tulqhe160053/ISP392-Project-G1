@@ -43,6 +43,11 @@ public class ListOrderServlet extends HttpServlet {
                 
                 OrderDAO orderDao = new OrderDAO();
                 ArrayList<Orders> listOrder = orderDao.selectAllByUserId(user.getUserID());
+                if(listOrder.isEmpty()){
+                    String message = "You don't have any order";
+                    session.setAttribute("message", message);
+                    request.getRequestDispatcher("home").forward(request, response);
+                }
                 request.setAttribute("listOrder", listOrder);
                 request.getRequestDispatcher("/order/ListOrder.jsp").forward(request, response);
             } else {
