@@ -40,7 +40,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="EditProductControl" method="post">
+                        <form action="AddProduct" method="post">
                             <div class="modal-header">						
                                 <h4 class="text-warning">New product</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-success" value="Save">
-                        <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/seller/sellerDashboard.jsp">Back</a></button>
+                        <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/seller/sellerdashboard.jsp">Back</a></button>
                     </div>
                     </form>
                 </div>
