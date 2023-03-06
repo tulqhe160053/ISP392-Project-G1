@@ -61,7 +61,7 @@
         <section class="blog_area">
             <div class="container">
                 <div class="row">
-                    <form action="addnewblog" method="post" enctype='multipart/form-data'>
+                    <form action="addnewblog" method="POST" enctype='multipart/form-data'>
                         <div class="col-lg-8">
                             <div class="blog_left_sidebar">
 
@@ -88,26 +88,13 @@
 
                                             <div class="blog_details">
                                                 <a>
-                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="" placeholder="enter title"></h2>
-                                                    <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description"></textarea></h5>
-                                                    <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content"></textarea></h5>
+                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control"  placeholder="enter title"></h2>
+                                                    <h5><label for = "pwd">Desciption</label><input type = "text" name = "des" class="form-control" placeholder="enter description"></input></h5>
+                                                    <h5><label for = "pwd">Content</label><input type = "text" name = "content" class="form-control"  placeholder="enter content"></input></h5>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--                                    <div class="col-md-9">
-                                                                            <div class="blog_post">
-                                                                                <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
-                                                                                
-                                                                                <div class="blog_details">
-                                                                                    <a>
-                                                                                        <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="" placeholder="enter title"></h2>
-                                                                                        <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description"></textarea></h5>
-                                                                                        <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content"></textarea></h5>
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
                                 </article>
                                 <div class="row">
                                     <div class="col-md-12 mt-5 text-center">

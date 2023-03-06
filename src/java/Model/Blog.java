@@ -36,6 +36,7 @@ public class Blog {
         this.viewer = viewer;
         this.blogstatus = blogstatus;
     }
+    
 
     
 

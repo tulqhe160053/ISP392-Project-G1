@@ -274,9 +274,9 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
     }
 
-    public void InsertBlog( int userID, String catid, String title, String des, String content,String image, String createTime) {
+    public void InsertBlog123( int userID, String catid, String title, String des, String content,String image, String createTime) {
         try {
-            String sql = "Insert into Blog value (?,?,?,?,?,?,?,0,1)";
+            String sql = "Insert into Blog values (?,?,?,?,?,?,?,0,1)";
             ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
             ps.setString(2, catid);
@@ -428,6 +428,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             System.out.println(blog);
 
         }
+        
 
     }
 

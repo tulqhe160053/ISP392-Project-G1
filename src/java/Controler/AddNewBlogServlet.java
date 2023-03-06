@@ -10,29 +10,25 @@ import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
  * @author Admin
  */
+@MultipartConfig(maxFileSize = 16177216)
 public class AddNewBlogServlet extends HttpServlet {
 
     /**
@@ -47,16 +43,7 @@ public class AddNewBlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
-        BlogDAO bd = new BlogDAO();
-        CategoryDAO cat = new CategoryDAO();
-        List<Category> category = cat.selectAll();
-        request.setAttribute("category", category);
-        request.getRequestDispatcher("blog/addNewBlog.jsp").forward(request, response);
-        }
+        doGet(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,7 +65,7 @@ public class AddNewBlogServlet extends HttpServlet {
         CategoryDAO cat = new CategoryDAO();
         List<Category> category = cat.selectAll();
         request.setAttribute("category", category);
-        
+
         request.getRequestDispatcher("blog/addNewBlog.jsp").forward(request, response);
     }
 
@@ -93,11 +80,11 @@ public class AddNewBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         Model.Users user = (Model.Users) session.getAttribute("user");
-        int userId = user.getUserID();
-        
+        int userID = user.getUserID();
+
         String title = request.getParameter("title");
         String des = request.getParameter("des");
         String content = request.getParameter("content");
@@ -105,13 +92,15 @@ public class AddNewBlogServlet extends HttpServlet {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
-        BlogDAO bd = new BlogDAO();
+
         Part filePart = request.getPart("image");
         String imageFileName = filePart.getSubmittedFileName();
         InputStream is = filePart.getInputStream();
         byte[] data = new byte[is.available()];
         is.read(data);
-        bd.InsertBlog(userId, catid, title, des, content, date, imageFileName);
+        
+        BlogDAO bd = new BlogDAO();
+        bd.InsertBlog123(userID, catid, title, des, content, date, imageFileName);
         response.sendRedirect("mylistblog");
 
     }
