@@ -71,7 +71,7 @@
                                             <div class="post_tag">
                                                 <h3><select class="form-select active" name="catid">
                                                         <c:forEach items="${category}" var="c">
-                                                            <option value="${c.getCategoryId()}">${c.getCategoryName()}</option>
+                                                            <option <c:if test="${blog.category.getCategoryName() == c.getCategoryName()}">selected</c:if> value="${c.getCategoryId()}">${c.getCategoryName()}</option>
                                                         </c:forEach>
                                                     </select></h3>
 
@@ -82,6 +82,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="blog_post">
+                                            <img witdh="1000px" height="300px" src="<%=request.getContextPath()%>/assets/blog_img/default.jpg" alt="">
                                             <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
                                             
                                             <div class="blog_details">
@@ -93,6 +94,19 @@
                                             </div>
                                         </div>
                                     </div>
+<!--                                    <div class="col-md-9">
+                                        <div class="blog_post">
+                                            <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
+                                            
+                                            <div class="blog_details">
+                                                <a>
+                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="" placeholder="enter title"></h2>
+                                                    <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description"></textarea></h5>
+                                                    <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content"></textarea></h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>-->
                                 </article>
                                                 <div class="row">
                                 <div class="col-md-12 mt-5 text-center">

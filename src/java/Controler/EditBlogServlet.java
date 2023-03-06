@@ -89,7 +89,7 @@ public class EditBlogServlet extends HttpServlet {
     throws ServletException, IOException {
         BlogDAO bd = new BlogDAO();
         String blog_id = request.getParameter("blog_id");
-         Part imagePart = request.getPart("image");
+        Part imagePart = request.getPart("image");
         String imageName = null;
         if (imagePart.getSize() > 0) {
             // Lưu file ảnh vào thư mục tạm trên server
