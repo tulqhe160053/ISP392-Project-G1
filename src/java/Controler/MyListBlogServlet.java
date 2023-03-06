@@ -54,6 +54,7 @@ public class MyListBlogServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Model.Users user = (Model.Users) session.getAttribute("user");
         int userId = user.getUserID();
+        
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectMyAll(userId);
         

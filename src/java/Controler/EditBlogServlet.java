@@ -88,21 +88,14 @@ public class EditBlogServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         BlogDAO bd = new BlogDAO();
-        String blog_id = request.getParameter("blog_id");
-        Part imagePart = request.getPart("image");
+        String blog_id = request.getParameter("id");
+        Part filePart = request.getPart("image");
         String imageName = null;
-        if (imagePart.getSize() > 0) {
-            // Lưu file ảnh vào thư mục tạm trên server
-            String uploadPath = getServletContext().getRealPath("/") + "uploads/";
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-            imageName = UUID.randomUUID().toString() + ".jpg";
-            File imageFile = new File(uploadDir, imageName);
-            try (InputStream inputStream = imagePart.getInputStream()) {
-                Files.copy(inputStream, imageFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            }
+        if (filePart.getSize() > 0) {
+            imageName = filePart.getSubmittedFileName();
+                InputStream is = filePart.getInputStream();
+                byte[] data = new byte[is.available()];
+                is.read(data);
         } else {
             // Lấy đường dẫn của ảnh cũ từ CSDL
             BlogDAO blogDAO = new BlogDAO();

@@ -273,8 +273,23 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         } catch (Exception e) {
         }
     }
-    
-    
+
+    public void InsertBlog( int userID, String catid, String title, String des, String content,String image, String createTime) {
+        try {
+            String sql = "Insert into Blog value (?,?,?,?,?,?,?,0,1)";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ps.setString(2, catid);
+            ps.setString(3, title);
+            ps.setString(4, des);
+            ps.setString(5, content);
+            ps.setString(6,image);
+            ps.setString(7, createTime);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
 
     public void deleteBlog(String bid) {
         try {
@@ -285,8 +300,6 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         } catch (Exception e) {
         }
     }
-    
-    
 
     public void UpdateImage(String blog_id, String image) {
 
@@ -336,7 +349,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return arr;
     }
-    
+
     public int getBlogByViewer(int catid) {
         int count = 0;
         try {
@@ -353,8 +366,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return count;
     }
-    
-     public int countBlogByCategory(int catid) {
+
+    public int countBlogByCategory(int catid) {
         int count = 0;
         try {
             String sql = "select count(id) as 'count' from blog \n"
@@ -370,7 +383,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         return count;
     }
 
-     public int AverageStar() {
+    public int AverageStar() {
         int count = 0;
         try {
             String sql = "select avg(star) as avg_star from feedback";
@@ -383,9 +396,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return count;
     }
-    
 
-     
     @Override
     public void insert(Blog t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -425,7 +436,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void updateView(int id){
+    public void updateView(int id) {
         try {
             String sql = "UPDATE Blog SET viewer = viewer+1  where ID = ?";
             ps = con.prepareStatement(sql);

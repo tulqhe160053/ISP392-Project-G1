@@ -45,7 +45,7 @@
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                     <div class="col-first">
                         <h1>Add blog</h1>
-                        
+
 
                     </div>
                 </div>
@@ -83,8 +83,9 @@
                                     <div class="col-md-9">
                                         <div class="blog_post">
                                             <img witdh="1000px" height="300px" src="<%=request.getContextPath()%>/assets/blog_img/default.jpg" alt="">
-                                            <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
-                                            
+                                            <label for="image">Image:</label>
+                                            <input type="file" name="image"><br>
+
                                             <div class="blog_details">
                                                 <a>
                                                     <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="" placeholder="enter title"></h2>
@@ -94,63 +95,63 @@
                                             </div>
                                         </div>
                                     </div>
-<!--                                    <div class="col-md-9">
-                                        <div class="blog_post">
-                                            <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
-                                            
-                                            <div class="blog_details">
-                                                <a>
-                                                    <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="" placeholder="enter title"></h2>
-                                                    <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description"></textarea></h5>
-                                                    <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content"></textarea></h5>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="col-md-9">
+                                                                            <div class="blog_post">
+                                                                                <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
+                                                                                
+                                                                                <div class="blog_details">
+                                                                                    <a>
+                                                                                        <h2><label for = "pwd">Title</label><input name="title" type="text" class="form-control" value="" placeholder="enter title"></h2>
+                                                                                        <h5><label for = "pwd">Desciption</label><textarea type = "text" name = "des" class="form-control" placeholder="enter description"></textarea></h5>
+                                                                                        <h5><label for = "pwd">Content</label><textarea type = "text" name = "content" class="form-control"  placeholder="enter content"></textarea></h5>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
                                 </article>
-                                                <div class="row">
-                                <div class="col-md-12 mt-5 text-center">
-                                    <button class="btn btn-primary" type="submit">Save</button>
+                                <div class="row">
+                                    <div class="col-md-12 mt-5 text-center">
+                                        <button class="btn btn-primary" type="submit">Save</button>
 
-                                    <input class="btn btn-secondary" type="reset" value="Enter again">
-                                    <a href="mylistblog" class="btn btn-danger">Cancel</a>
+                                        <input class="btn btn-secondary" type="reset" value="Enter again">
+                                        <a href="mylistblog" class="btn btn-danger">Cancel</a>
+                                    </div>
+                                    </form>
+
+
                                 </div>
-                                </form>
-
-
-                            </div>
 
                             </div>
                         </div>
                     </form>
-                    
 
 
-                            </div>
-                        </div>
+
                 </div>
-        </section>
+            </div>
+        </div>
+    </section>
 
-        <!--================Blog Area =================-->
+    <!--================Blog Area =================-->
 
-        <!-- start footer Area -->
-        <%@include file="../footer.jsp" %>
-        <!-- End footer Area -->
+    <!-- start footer Area -->
+    <%@include file="../footer.jsp" %>
+    <!-- End footer Area -->
 
-        <script src="<%=request.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-        crossorigin="anonymous"></script>
-        <script src="<%=request.getContextPath()%>/js/vendor/bootstrap.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/jquery.ajaxchimp.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/jquery.sticky.js"></script>
-        <script src="<%=request.getContextPath()%>/js/nouislider.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/jquery.magnific-popup.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
-        <!--gmaps Js-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-        <script src="<%=request.getContextPath()%>/js/gmaps.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/main.js"></script>
-    </body>
+    <script src="<%=request.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+    <script src="<%=request.getContextPath()%>/js/vendor/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.ajaxchimp.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.nice-select.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.sticky.js"></script>
+    <script src="<%=request.getContextPath()%>/js/nouislider.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.magnific-popup.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+    <script src="<%=request.getContextPath()%>/js/gmaps.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/main.js"></script>
+</body>
 
 </html>
