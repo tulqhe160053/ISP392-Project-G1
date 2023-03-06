@@ -275,7 +275,27 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
     }
     
     
-    
+        public void AddProduct(Product p) {
+        String query = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?,?, ?,?)";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, p.getProductName());
+            ps.setString(2, p.getDescription());
+            ps.setString(3, p.getColor());
+            ps.setInt(4, p.getOriginalPrice());
+            ps.setInt(5, p.getSellPrice());
+            ps.setInt(6, p.getSellPrice());
+            ps.setInt(7, p.getCategory().getCategoryId());
+            ps.setInt(8, p.getSeller().getUserID());
+            ps.setInt(9, p.getAmount());
+            ps.setInt(10, p.getProductStatus().getStatusID());
+            ps.setInt(11, p.getBrand().getBrandID());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
     
     
     @Override
