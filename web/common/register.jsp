@@ -114,6 +114,13 @@
                                 <div class="col-md-12 form-group">
                                     <input type="password" class="form-control" id="psw" name="password" placeholder="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
                                 </div>
+                               <div id="message">
+                                <h3>Password must contain the following:</h3>
+                                <p id="letter" class="invalid">A lowercaseletter</p>
+                                <p id="capital" class="invalid">A uppercase letter</p>
+                                <p id="number" class="invalid">A number </p>
+                                <p id="lengthPass" class="invalid">Minimum 6 characters</p>                              
+                            </div>
 
                                 <div class="col-md-12 form-group">
                                     <input type="password" class="form-control" id="repassword" name="repass" placeholder="RePassword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'RePassword'" required>
@@ -152,13 +159,7 @@
 
                                 </div>
                             </form>
-                            <div id="message">
-                                <h3>Password must contain the following:</h3>
-                                <p id="letter" class="invalid">A lowercaseletter</p>
-                                <p id="capital" class="invalid">A uppercase letter</p>
-                                <p id="number" class="invalid">A number </p>
-                                <p id="lengthPass" class="invalid">Minimum 8 characters</p>                              
-                            </div>
+                             
 
                             
                         </div>
