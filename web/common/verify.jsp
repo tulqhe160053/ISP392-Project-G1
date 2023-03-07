@@ -39,7 +39,7 @@
 
     <body>
 
-        <jsp:include page="header.jsp" />
+        <jsp:include page="../header.jsp" />
 
         <!-- Start Banner Area -->
         <section class="banner-area organic-breadcrumb">
@@ -92,7 +92,7 @@
         <!--================End Login Box Area =================-->
 
         <!-- start footer Area -->
-        <jsp:include page="footer.jsp"></jsp:include>
+        <jsp:include page="../footer.jsp"></jsp:include>
         <!-- End footer Area -->
 
 
