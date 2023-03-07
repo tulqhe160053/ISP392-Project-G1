@@ -121,7 +121,8 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
-        }    }
+        }
+    }
     
     @Override
     public int insertAll(ArrayList<Cart> arr) {

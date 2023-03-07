@@ -167,7 +167,7 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         return ketqua;
     }
     
-        public ArrayList<Orders> selectAllByUserId(int userId) {
+    public ArrayList<Orders> selectAllByUserId(int userId) {
         ArrayList<Orders> t = new ArrayList<>();
         xSql = "select * from Orders where UserID = ?";
         try {

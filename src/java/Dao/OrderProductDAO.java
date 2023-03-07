@@ -94,7 +94,8 @@ public class OrderProductDAO extends MyDAO implements DAOInterface<OrderProduct>
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }    }
+        }  
+    }
     
      public OrderProduct mostOrder() {
         String sql = "select top 1 p.productId ,p.ProductName , Sum(orderId) as 'count' from orderproduct o \n"
