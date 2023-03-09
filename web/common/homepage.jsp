@@ -194,6 +194,7 @@
                                                 <p class="card-text text-danger">Price: ${product.getSellPrice()}$</p>
                                                 <a href="product?productId=${product.getProductID()}" class="btn btn-primary">View detail</a>
                                                 <form action="<%=request.getContextPath()%>/cart" method="get" style="display: inline-block">
+                                                    <input type="hidden" name="action" value="addCart" />
                                                     <input type="hidden" name="productId" value="${product.getProductID()}" />
                                                     <input type="hidden" name="amount" value="1" />
                                                     <button type="submit" class="btn btn-danger" value="submit" >Add to cart</button>
@@ -242,6 +243,7 @@
                                                                                                                 <button class="btn btn-danger" type="submit" value="submit">Add to cart</button>
                                                                                                             </form>-->
                                                             <form action="<%=request.getContextPath()%>/cart" method="get" style="display: inline-block">
+                                                                <input type="hidden" name="action" value="addCart" />
                                                                 <input type="hidden" name="productId" value="${product.getProductID()}" />
                                                                 <input type="hidden" name="amount" value="1" />
                                                                 <button type="submit" class="btn btn-danger" value="submit" >Add to cart</button>

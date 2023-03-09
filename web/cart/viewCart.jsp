@@ -154,7 +154,7 @@
                                     <td>
                                         <div class="checkout_btn_inner d-flex align-items-center">
                                             <a class="gray_btn" href="<%=request.getContextPath()%>/home">Continue Shopping</a>
-                                            <a class="primary-btn" href="<%=request.getContextPath()%>/cartcomplete">Proceed to checkout</a>
+                                            <a class="primary-btn" href="<%=request.getContextPath()%>/cart?action=viewCartComplete">Proceed to checkout</a>
                                         </div>
                                     </td>
                                 </tr>

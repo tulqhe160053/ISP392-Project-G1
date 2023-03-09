@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : header
     Created on : Jan 25, 2023, 12:31:34 AM
     Author     : Tu
@@ -24,7 +24,7 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/home">Home</a></li>
-                        
+
                         <li class="nav-item">
                             <a href="<%=request.getContextPath()%>/listblog" class="nav-link ">Blog</a>
                         </li>
@@ -51,7 +51,7 @@
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 1}">
                                             <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/admin">Admin Dashboard</a></li>
                                         </c:if>
-                                            
+
                                              <c:if test="${sessionScope.user.getRole().getRoleID() == 4}">
                                             <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/mkt">MKT Dashboard</a></li>
                                         </c:if>
@@ -61,7 +61,7 @@
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 2}">
                                             <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/seller/sellerdashboard.jsp">Seller Dashboard</a></li>
                                         </c:if>
-                                    
+
                                     <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout">Log Out</a></li>
                                 </ul>
                             </li>
@@ -69,9 +69,10 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
-                            <form action="<%=request.getContextPath()%>/viewcart" method="post">
-                                <button type="submit" class="btn"><span class="ti-bag position-relative"></span></button> 
-                            </form>                               
+                            <form action="<%=request.getContextPath()%>/cart" method="post">
+                                <input type="hidden" name="action" value="viewCart" />
+                                <button type="submit" class="btn"><span class="ti-bag position-relative"></span></button>
+                            </form>
                         </li>
                     </ul>
                 </div>

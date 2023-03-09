@@ -78,7 +78,7 @@
                                                             <input type="number" name="amount" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
                                                     </div>
                                                     <div class="card_area d-flex align-items-center">
-
+                                                                    <input type="hidden" name="action" value="addCart" />
                                                                     <input type="hidden" name="productId" value="${product.getProductID()}" />
                                                                     <button class="btn btn-danger" type="submit" value="submit">Add to cart</button>
                                                     </div>
