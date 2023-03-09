@@ -114,7 +114,7 @@
                         <div><a href="ViewListAddress">Change ship address</a></div>
                         <hr class="line">
                         <div class="d-flex justify-content-between information"><span>Total</span><span>$${requestScope.total}</span></div>
-                        <button class="btn btn-danger btn-block mt-3"><a href="<%=request.getContextPath()%>/order?cartId=${requestScope.cartId}&shipAddressId=${requestScope.shipaddress.getId()}&total=${requestScope.total}">Order</a></button>
+                        <button class="btn btn-danger btn-block mt-3"><a href="<%=request.getContextPath()%>/order?action=addOrder&cartId=${requestScope.cartId}&shipAddressId=${requestScope.shipaddress.getId()}&total=${requestScope.total}">Order</a></button>
                     </div>
                 </div>
             </div>

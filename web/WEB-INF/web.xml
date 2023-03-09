@@ -45,10 +45,6 @@
         <servlet-class>Controler.ViewBlogDetail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListOrderServlet</servlet-name>
-        <servlet-class>Controler.ListOrderServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditShipAddress</servlet-name>
         <servlet-class>Controler.EditShipAddress</servlet-class>
     </servlet>
@@ -71,10 +67,6 @@
     <servlet>
         <servlet-name>ViewListAddress</servlet-name>
         <servlet-class>Controler.ViewListAddress</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <servlet-class>Controler.OrderDetailServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserDetailServlet</servlet-name>
@@ -177,10 +169,6 @@
         <url-pattern>/viewblogdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListOrderServlet</servlet-name>
-        <url-pattern>/listorder</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EditShipAddress</servlet-name>
         <url-pattern>/EditShipAddress</url-pattern>
     </servlet-mapping>
@@ -203,10 +191,6 @@
     <servlet-mapping>
         <servlet-name>ViewListAddress</servlet-name>
         <url-pattern>/ViewListAddress</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <url-pattern>/orderdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserDetailServlet</servlet-name>

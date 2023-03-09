@@ -109,7 +109,7 @@
                         <div><h5 class="credit-card-label text-black-50">Order status: <span class="text-dark">${order.getOrderStatus().getName()}</span></h5></div>
                         <div><h5 class="credit-card-label text-black-50">Order date: <span class="text-dark">${order.getOrderDate()}</span></h5></div>
                         <div><h5 class="credit-card-label text-black-50">Delivery date: <span class="text-dark">${order.getDeliveryDate()}</span></h5></div>
-                        <button class="btn btn-danger btn-block mt-3"><a href="<%=request.getContextPath()%>/listorder">View list order</a></button>
+                        <button class="btn btn-danger btn-block mt-3"><a href="<%=request.getContextPath()%>/order?action=listOrder">View list order</a></button>
                     </div>
                 </div>
             </div>
