@@ -9,6 +9,7 @@ import Dao.OrderProductDAO;
 import Dao.ProductDAO;
 import Dao.UserDAO;
 import Model.OrderProduct;
+import Model.Orders;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -44,30 +46,29 @@ public class AdminDashboardServlet extends HttpServlet {
         int female = ud.countGender("female");
         int active = ud.countUser(1);
         int locked = ud.countUser(2);
-         
+
         request.setAttribute("male", male);
         request.setAttribute("female", female);
         request.setAttribute("active", active);
         request.setAttribute("locked", locked);
-        
+
         int countUser = ud.countUsers();
         request.setAttribute("countUser", countUser);
-        
+
         int countProduct = pdao.countProduct();
         request.setAttribute("product", countProduct);
-        
+
         int countOrder = odao.countOrder();
         request.setAttribute("order", countOrder);
-        
+
         OrderProduct mostOrder = opdao.mostOrder();
         request.setAttribute("most", mostOrder);
-        
+
         ArrayList<OrderProduct> orderProduct = opdao.mostOrderTop3();
         request.setAttribute("listSell", orderProduct);
 
-        request.getRequestDispatcher("admin/admindashboard.jsp").forward(request, response);
-         
-        
+        List<Orders> orders = odao.countUserOrder();
+        request.setAttribute("orders", orders);
         
 
         request.getRequestDispatcher("admin/admindashboard.jsp").forward(request, response);

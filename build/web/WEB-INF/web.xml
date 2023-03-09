@@ -5,16 +5,8 @@
         <servlet-class>Controler.HomeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CategoryServlet</servlet-name>
-        <servlet-class>Controler.CategoryServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>Controler.ProductServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CartServlet</servlet-name>
-        <servlet-class>Controler.Cart_Add</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ResetPassword</servlet-name>
@@ -33,20 +25,12 @@
         <servlet-class>Controler.EditCart</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewCart</servlet-name>
-        <servlet-class>Controler.ViewCart</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ListBlogServlet</servlet-name>
         <servlet-class>Controler.ListBlogServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCart</servlet-name>
         <servlet-class>Controler.DeleteCart</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CartComplete</servlet-name>
-        <servlet-class>Controler.CartComplete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddFeedback</servlet-name>
@@ -59,10 +43,6 @@
     <servlet>
         <servlet-name>BlogDetailServlet</servlet-name>
         <servlet-class>Controler.ViewBlogDetail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListOrderServlet</servlet-name>
-        <servlet-class>Controler.ListOrderServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditShipAddress</servlet-name>
@@ -87,10 +67,6 @@
     <servlet>
         <servlet-name>ViewListAddress</servlet-name>
         <servlet-class>Controler.ViewListAddress</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <servlet-class>Controler.OrderDetailServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserDetailServlet</servlet-name>
@@ -141,6 +117,10 @@
         <servlet-class>Controler.EditBlogServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>Controler.CartServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>MKTDashboardServlet</servlet-name>
         <servlet-class>Controler.MKTDashboardServlet</servlet-class>
     </servlet>
@@ -149,16 +129,8 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CategoryServlet</servlet-name>
-        <url-pattern>/category</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/product</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CartServlet</servlet-name>
-        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ResetPassword</servlet-name>
@@ -177,16 +149,8 @@
         <url-pattern>/editcart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewCart</servlet-name>
-        <url-pattern>/viewcart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DeleteCart</servlet-name>
         <url-pattern>/deletecart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CartComplete</servlet-name>
-        <url-pattern>/cartcomplete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddFeedback</servlet-name>
@@ -203,10 +167,6 @@
     <servlet-mapping>
         <servlet-name>BlogDetailServlet</servlet-name>
         <url-pattern>/viewblogdetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListOrderServlet</servlet-name>
-        <url-pattern>/listorder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditShipAddress</servlet-name>
@@ -231,10 +191,6 @@
     <servlet-mapping>
         <servlet-name>ViewListAddress</servlet-name>
         <url-pattern>/ViewListAddress</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderDetailServlet</servlet-name>
-        <url-pattern>/orderdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserDetailServlet</servlet-name>
@@ -283,6 +239,10 @@
     <servlet-mapping>
         <servlet-name>EditBlogServlet</servlet-name>
         <url-pattern>/editblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MKTDashboardServlet</servlet-name>

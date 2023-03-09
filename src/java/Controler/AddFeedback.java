@@ -94,14 +94,15 @@ public class AddFeedback extends HttpServlet {
             String feedback = request.getParameter("feedback-text");
             // create feedback
             Feedback userFeedback = new Feedback();
-            userFeedback.setProductID(productID);
-            userFeedback.setUserID(user.getUserID());
+            Product p = new Product();
+            p.setProductID(productID);
+            user.getUserID();
             userFeedback.setStar(star);
             userFeedback.setFeedbackDetail(feedback);
             System.out.println(userFeedback.toString());
 
             // add feedback to database
-            feedbackDAO.addFeedback(userFeedback);
+            feedbackDAO.addFeedback(userFeedback , p ,user);
 
             // redirect 
             response.sendRedirect("home");

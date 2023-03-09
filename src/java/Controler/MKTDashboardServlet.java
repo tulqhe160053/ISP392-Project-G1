@@ -6,8 +6,11 @@ package Controler;
 
 import Dao.BlogDAO;
 import Dao.FeedbackDAO;
+import Dao.OrderProductDAO;
 import Dao.ProductDAO;
+import Dao.SliderDAO;
 import Model.Feedback;
+import Model.OrderProduct;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,6 +40,8 @@ public class MKTDashboardServlet extends HttpServlet {
          BlogDAO blog = new BlogDAO();
         FeedbackDAO feedback = new FeedbackDAO();
         ProductDAO product = new ProductDAO();
+        SliderDAO slider = new SliderDAO();
+        OrderProductDAO opdao = new OrderProductDAO();
         int laptop = blog.countBlogByCategory(1);
         int smartphone = blog.countBlogByCategory(2);
         int tablet = blog.countBlogByCategory(3);
@@ -46,14 +51,17 @@ public class MKTDashboardServlet extends HttpServlet {
         request.setAttribute("tablet", tablet);
         request.setAttribute("acces", acces);
 
-        int laptop1 = blog.getBlogByViewer(1);
-        int smartphone1 = blog.getBlogByViewer(2);
-        int tablet1 = blog.getBlogByViewer(3);
-        int acces1 = blog.getBlogByViewer(4);
-        request.setAttribute("laptop1", laptop1);
-        request.setAttribute("smartphone1", smartphone1);
-        request.setAttribute("tablet1", tablet1);
-        request.setAttribute("acces1", acces1);
+//        int laptop1 = blog.getBlogByViewer(1);
+//        int smartphone1 = blog.getBlogByViewer(2);
+//        int tablet1 = blog.getBlogByViewer(3);
+//        int acces1 = blog.getBlogByViewer(4);
+//        request.setAttribute("laptop1", laptop1);
+//        request.setAttribute("smartphone1", smartphone1);
+//        request.setAttribute("tablet1", tablet1);
+//        request.setAttribute("acces1", acces1);
+
+       int countBlog = blog.countBlog();
+       request.setAttribute("countBlog", countBlog);
 
         int avgStar = blog.AverageStar();
         request.setAttribute("avgstar", avgStar);
@@ -69,9 +77,21 @@ public class MKTDashboardServlet extends HttpServlet {
         request.setAttribute("star4", star4);
         request.setAttribute("star5", star5);
         
-         
+        Feedback f = feedback.getProductStar();
+        request.setAttribute("product5star", f);
         
-
+        int countSlider = slider.countSlider();
+        request.setAttribute("slider", countSlider);
+        
+        List<Feedback> userfeedback = feedback.getUserFeedback();
+        request.setAttribute("userfeedback", userfeedback);
+        
+        List<OrderProduct> orderProduct = opdao.mostOrderTop3();
+        request.setAttribute("listSell", orderProduct);
+        
+        List<Feedback> pFeedback = feedback.getProductFeedback();
+        request.setAttribute("pFeedback", pFeedback);
+        
         request.getRequestDispatcher("marketing/mktdashboard.jsp").forward(request, response);
     }
 

@@ -17,6 +17,7 @@ import Model.Orders;
 import Model.OrderStatus;
 import Model.ShipAddress;
 import Model.Users;
+import java.util.List;
 
 /**
  *
@@ -258,6 +259,25 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         }
         return 0;
     }
+    
+     public List<Orders> countUserOrder() {
+        List<Orders> list = new ArrayList<>();
+        String sql = "select top 3 username , count(totalprice) as 'counts' from users u\n"
+                + "join orders o \n"
+                + "on u.userID = o.userID\n"
+                + "group by username\n"
+                + "order by counts desc";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Users u = new Users(rs.getString(1));
+                list.add(new Orders(u, rs.getInt(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
     @Override
     public int insertAll(ArrayList<Orders> arr) {
@@ -300,9 +320,7 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
 //        System.out.println("---------------------");
 //        System.out.println(order1);
          
-          for (Orders orders : dao.selectAllByUserId(2)) {
-              System.out.println(orders);
-        }
+           
     }
 
 }

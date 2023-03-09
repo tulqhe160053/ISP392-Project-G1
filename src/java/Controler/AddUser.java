@@ -54,14 +54,19 @@ public class AddUser extends HttpServlet {
         Users u2 = user.checkEmailExist(email);
         boolean validateEmail = va.validateEmail(email);
         boolean validatePhone = va.checkPhone(phone);
+        boolean validatePassword = va.checkPassword(password);
 
         if (u1 != null) {
             request.setAttribute("message", "Username is already exist");
-            request.getRequestDispatcher("admin/adduser.jsp").forward(request, response);
+            request.getRequestDispatcher("adduser.jsp").forward(request, response);
         } else {
-            if (validateEmail == false || validatePhone == false) {
-                request.setAttribute("message", "Incorrect email or phone");
+            if (validatePassword == false) {
+                request.setAttribute("message", "Invalid password!");
                 request.getRequestDispatcher("adduser.jsp").forward(request, response);
+            }else if (validateEmail == false || validatePhone == false) {
+                request.setAttribute("message", "Invalid email or phone number!");
+                request.getRequestDispatcher("adduser.jsp").forward(request, response);
+             
             } else {
                 if (u2 != null) {
                     request.setAttribute("message", "Email already registered");

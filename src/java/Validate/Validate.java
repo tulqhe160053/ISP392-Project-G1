@@ -31,4 +31,10 @@ public class Validate {
         boolean kt = str.matches(reg);
         return kt;
     }
+    
+    public boolean checkPassword(String regex){
+        String reg = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$";
+        boolean kt = regex.matches(reg);
+        return kt;
+    }
 }

@@ -11,8 +11,8 @@ package Model;
 public class Feedback {
 
     private int id;
-    private int userID;
-    private int productID;
+    private Users user;
+    private Product product;
     private int star;
     private String feedbackDetail;
     
@@ -20,10 +20,21 @@ public class Feedback {
         
     }
 
-    public Feedback(int id, int userID, int productID, int star, String feedbackDetail) {
+    public Feedback(Product product, int star) {
+        this.product = product;
+        this.star = star;
+    }
+
+    public Feedback(Users user, int star) {
+        this.user = user;
+        this.star = star;
+    }
+
+    
+    public Feedback(int id, Users user, Product product, int star, String feedbackDetail) {
         this.id = id;
-        this.userID = userID;
-        this.productID = productID;
+        this.user = user;
+        this.product = product;
         this.star = star;
         this.feedbackDetail = feedbackDetail;
     }
@@ -36,20 +47,20 @@ public class Feedback {
         this.id = id;
     }
 
-    public int getUserID() {
-        return userID;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public int getProductID() {
-        return productID;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getStar() {
@@ -70,8 +81,16 @@ public class Feedback {
 
     @Override
     public String toString() {
-        return "Feedback{" + "id=" + id + ", userID=" + userID + ", productID=" + productID + ", star=" + star + ", feedbackDetail=" + feedbackDetail + '}';
+        return "Feedback{" + "id=" + id + ", user=" + user + ", product=" + product + ", star=" + star + ", feedbackDetail=" + feedbackDetail + '}';
     }
+    
+    
+    
+
+    
+    
+    
+ 
     
     
 }

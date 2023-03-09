@@ -117,12 +117,12 @@
         <servlet-class>Controler.EditBlogServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>MKTDashboardServlet</servlet-name>
-        <servlet-class>Controler.MKTDashboardServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>Controler.CartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MKTDashboardServlet</servlet-name>
+        <servlet-class>Controler.MKTDashboardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -241,12 +241,12 @@
         <url-pattern>/editblog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>MKTDashboardServlet</servlet-name>
-        <url-pattern>/mkt</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MKTDashboardServlet</servlet-name>
+        <url-pattern>/mkt</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

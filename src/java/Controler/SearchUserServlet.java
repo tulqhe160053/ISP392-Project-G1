@@ -65,9 +65,9 @@ public class SearchUserServlet extends HttpServlet {
         String searchTxt = request.getParameter("txt");
         List<Users> userSearch = u.searchName(searchTxt);
          
-         int page, numperpage = 5;
+         int page, numperpage = 8;
         int size = userSearch.size();
-        int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang
+        int num = (size % 8 == 0 ? (size / 8) : ((size / 8)) + 1);//so trang
         String xpage = request.getParameter("page");
         if (xpage == null) {
             page = 1;

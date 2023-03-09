@@ -38,6 +38,20 @@ public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
         }
         return (t);
     }
+    
+     public int countSlider(){
+        int count = 0 ;
+        String sql = "select count(*) as counts from slider";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
 
     @Override
     public Slider selectById(Slider t) {

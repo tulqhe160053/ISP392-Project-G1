@@ -125,6 +125,16 @@
                                 </div>
                             </div>
                         </div>
+                                    
+                              <div class="col-xl-12">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Top 3 Users have the most order
+                                    </div>
+                                    <div class="card-body"><canvas id="countUserOrder" width="100%" height="30"></canvas></div>
+                                </div>
+                            </div>      
 
                          
 
@@ -176,32 +186,7 @@
             });
         </script>
 
-<!--        <script>
-            var xValues = ["Active", "Locked"];
-            var yValues = [${requestScope.active}, ${requestScope.locked}];
-            var barColors = [
-                "#b91d47",
-                "#00aba9"
-
-            ];
-
-            new Chart('myPieChart', {
-                type: 'pie',
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
-                        }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Count Number of User by Status'
-                    }
-                }
-            });
-        </script>-->
+ 
         
         <script>
             const dataPie = {
@@ -218,7 +203,7 @@
             </c:forEach>
                             ],
                             backgroundColor: [
-                                    "rgb(255, 99, 132)",
+                                    "rgb(255, 0, 0)",
                                     "rgb(54, 162, 235)",
                                     "rgb(255, 205, 86)"
                             ],
@@ -234,6 +219,39 @@
                     configPie
                     );
         </script>
+        
+        <script>
+            const dataBar = {
+            labels: [
+            <c:forEach items="${orders}" var="od">
+            "${od.user.userName}",
+            </c:forEach>
+            ],
+                    datasets: [{
+                    label: "My First Dataset",
+                            data: [
+            <c:forEach items="${orders}" var="od">
+                            "${od.totalPrice}",
+            </c:forEach>
+                            ],
+                            backgroundColor: [
+                                    "rgb(255, 0, 0)",
+                                    "rgb(0, 63, 127)",
+                                    "rgb(255, 205, 86)"
+                            ],
+                            hoverOffset: 4
+                    }]
+            };
+            const configBar = {
+            type: "pie",
+                    data: dataBar,
+            };
+            const myBarChart = new Chart(
+                    document.getElementById("countUserOrder"),
+                    configBar
+                    );
+        </script>
+
 
         
  

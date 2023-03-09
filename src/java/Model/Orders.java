@@ -26,6 +26,12 @@ public class Orders {
     public Orders(int id) {
         this.id = id;
     }
+
+    public Orders(Users user, int totalPrice) {
+        this.user = user;
+        this.totalPrice = totalPrice;
+    }
+    
     
     
 

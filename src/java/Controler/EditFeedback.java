@@ -93,15 +93,16 @@ public class EditFeedback extends HttpServlet {
             int star = Integer.parseInt(request.getParameter("star-value"));
             String feedback = request.getParameter("feedback-text");
             // edit feedback
+            Product p = new Product();
             Feedback userFeedback = new Feedback();
-            userFeedback.setProductID(productID);
-            userFeedback.setUserID(user.getUserID());
+            p.setProductID(productID);
+            user.getUserID();
             userFeedback.setStar(star);
             userFeedback.setFeedbackDetail(feedback);
             System.out.println(userFeedback.toString());
 
             // add feedback to database
-            feedbackDAO.editFeedback(userFeedback);
+            feedbackDAO.editFeedback(userFeedback ,p , user);
 
             // redirect 
             response.sendRedirect("home");

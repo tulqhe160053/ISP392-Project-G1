@@ -399,6 +399,20 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return count;
     }
+    
+     public int countBlog() {
+        int count = 0;
+        try {
+            String sql = "select count(*) from blog";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
 
     @Override
     public void insert(Blog t) {
