@@ -4,8 +4,10 @@
  */
 package Controler;
 
+import Dao.CategoryDAO;
 import Dao.ProductDAO;
 import Dao.ProductImgDAO;
+import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import Model.Product;
 import Model.ProductImg;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -34,7 +37,17 @@ public class ProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        doGet(request, response);
+        String action = request.getParameter("action");
+        switch (action) {
+            case "viewProductDetail":
+                viewProductDetail(request, response);
+                break;
+            case "listProduct":
+                listProduct(request, response);
+                break;
+            default:
+                break;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,30 +62,7 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/product/viewProductDetail.jsp";
-        try {
-            String productId_String = request.getParameter("productId");
-            if (productId_String.equals("")) {
-                url = "/common/homepage.jsp";
-                request.getRequestDispatcher(url).forward(request, response);
-            } else {
-                int productId = Integer.parseInt(productId_String);
-                Product product_save = new Product();
-                product_save.setProductID(productId);
-                
-                ProductDAO product_dao = new ProductDAO();
-                Product product = product_dao.selectById(product_save);
-                request.setAttribute("product", product);
-                ProductImgDAO productImg_dao = new ProductImgDAO();
-                 ProductImg productImg = productImg_dao.selectByProductId(product);
-                request.setAttribute("productImg", productImg);
-                
-            }
-        } catch (Exception e) {
-            System.err.println(e);
-        }       
-        
-        request.getRequestDispatcher(url).forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -99,4 +89,59 @@ public class ProductServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void viewProductDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String url = "/product/viewProductDetail.jsp";
+        try {
+            String productId_String = request.getParameter("productId");
+            if (productId_String.equals("")) {
+                url = "/common/homepage.jsp";
+                request.getRequestDispatcher(url).forward(request, response);
+            } else {
+                int productId = Integer.parseInt(productId_String);
+                Product product_save = new Product();
+                product_save.setProductID(productId);
+
+                ProductDAO product_dao = new ProductDAO();
+                Product product = product_dao.selectById(product_save);
+                request.setAttribute("product", product);
+                ProductImgDAO productImg_dao = new ProductImgDAO();
+                ProductImg productImg = productImg_dao.selectByProductId(product);
+                request.setAttribute("productImg", productImg);
+
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        request.getRequestDispatcher(url).forward(request, response);
+    }
+
+    private void listProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CategoryDAO dao = new CategoryDAO();
+        ArrayList<Category> listCategorys = dao.selectAll();
+        request.setAttribute("listCategorys", listCategorys);
+        ProductDAO product_daoo = new ProductDAO();
+        ArrayList<Product> list_products = product_daoo.selectAll();
+        request.setAttribute("list_products", list_products);
+        ProductImgDAO productImg_dao = new ProductImgDAO();
+        ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
+        request.setAttribute("list_productImg", list_productImg);
+        String url = "/product/listProduct.jsp";
+        HttpSession session = request.getSession();
+        session.removeAttribute("message");
+        try {
+            String catId_String = request.getParameter("catId");
+            if (catId_String.equals("")) {
+                url = "/common/homepage.jsp";
+                request.getRequestDispatcher(url).forward(request, response);
+            } else {
+                int catId = Integer.parseInt(catId_String);
+                request.setAttribute("catId", catId);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        request.getRequestDispatcher(url).forward(request, response);
+    }
 }

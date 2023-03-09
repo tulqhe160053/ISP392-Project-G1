@@ -68,7 +68,7 @@
 						<h3>${product.getProductName()}</h3>
 						<h2>$${product.getSellPrice()}</h2>
 						<ul class="list">
-							<li><a class="active" href="<%=request.getContextPath()%>/category?catId=${product.getCategory().getCategoryId()}"><span>Category:</span> ${product.getCategory().getCategoryName()}</a></li>
+							<li><a class="active" href="<%=request.getContextPath()%>/product?action=listProduct&catId=${product.getCategory().getCategoryId()}"><span>Category:</span> ${product.getCategory().getCategoryName()}</a></li>
 							<li><span>Stock</span> : <span class="ml-4">${product.getProductStatus().getStatusName()}</span></li>
 						</ul>
 						<p>${product.getDescription()}</p>

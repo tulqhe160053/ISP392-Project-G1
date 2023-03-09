@@ -150,7 +150,7 @@
                     <div class="row">
                         <c:forEach items="${requestScope.listCategorys}" var="category">
                             <div class="col-lg-3 col-md-4 h-auto mb-3">
-                                <button type="button" class="btn btn-warning btn-lg w-100 h-auto"><a href="<%=request.getContextPath()%>/category?catId=${category.getCategoryId()}" class="text-dark" style="text-decoration: none">${category.getCategoryName()}</a></button>
+                                <button type="button" class="btn btn-warning btn-lg w-100 h-auto"><a href="<%=request.getContextPath()%>/product?action=listProduct&catId=${category.getCategoryId()}" class="text-dark" style="text-decoration: none">${category.getCategoryName()}</a></button>
                             </div>
                         </c:forEach>
                     </div>
@@ -192,7 +192,7 @@
                                                 <h5 class="card-title">${product.getProductName()}</h5>
                                                 <p class="card-text">Color: ${product.getColor()}</p>
                                                 <p class="card-text text-danger">Price: ${product.getSellPrice()}$</p>
-                                                <a href="product?productId=${product.getProductID()}" class="btn btn-primary">View detail</a>
+                                                <a href="product?action=viewProductDetail&productId=${product.getProductID()}" class="btn btn-primary">View detail</a>
                                                 <form action="<%=request.getContextPath()%>/cart" method="get" style="display: inline-block">
                                                     <input type="hidden" name="action" value="addCart" />
                                                     <input type="hidden" name="productId" value="${product.getProductID()}" />
@@ -236,7 +236,7 @@
                                                             <p class="card-text text-danger">Price: ${product.getSellPrice()}$</p>                                                       
                                                         </div>
                                                         <div>
-                                                            <a href="product?productId=${product.getProductID()}" class="btn btn-primary">View detail</a>
+                                                            <a href="product?action=viewProductDetail&productId=${product.getProductID()}" class="btn btn-primary">View detail</a>
                                                             <!--                                                <form action="cart" method="get" style="display: inline-block">
                                                                                                                 <input type="hidden" name="productId" value="${product.getProductID()}" />
                                                                                                                 <input type="hidden" name="amount" value="1" />
@@ -258,7 +258,7 @@
                                     </c:forEach>
                                 </div>
                                 <div class="row">
-                                    <a href="category?catId=${category.getCategoryId()}">View all product</a>
+                                    <a href="product?action=listProduct&catId=${category.getCategoryId()}">View all product</a>
                                 </div>
                             </div>
                         </div>
