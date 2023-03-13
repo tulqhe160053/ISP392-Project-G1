@@ -25,14 +25,14 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("ID");
-                
+
                 int user_id = rs.getInt("UserID");
                 UserDAO user_dao = new UserDAO();
                 Users x = new Users();
                 x.setUserID(user_id);
-                Users user = user_dao.selectById(x);               
+                Users user = user_dao.selectById(x);
 
-                Cart z = new Cart(id,user);
+                Cart z = new Cart(id, user);
                 t.add(z);
             }
             rs.close();
@@ -57,7 +57,7 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
 
             if (rs.next()) {
                 int id = rs.getInt("ID");
-                
+
                 int user_id = rs.getInt("UserID");
                 UserDAO user_dao = new UserDAO();
                 Users x = new Users();
@@ -73,7 +73,37 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
         }
         return (ketqua);
     }
-    
+
+    public Cart getById(int cartId) {
+        Cart ketqua = null;
+        xSql = "select * from Cart where ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, cartId);
+            rs = ps.executeQuery();
+            /* The cursor on the rs after this statement is in the BOF area, i.e. it is before the first record.
+         Thus the first rs.next() statement moves the cursor to the first record
+             */
+
+            if (rs.next()) {
+                int id = rs.getInt("ID");
+
+                int user_id = rs.getInt("UserID");
+                UserDAO user_dao = new UserDAO();
+                Users x = new Users();
+                x.setUserID(user_id);
+                Users user = user_dao.selectById(x);
+                ketqua = new Cart(id, user);
+            } else {
+                ketqua = null;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return (ketqua);
+    }
+
     public Cart selectByUserId(int userId) {
         Cart ketqua = null;
         xSql = "select * from Cart where UserID = ?";
@@ -87,7 +117,7 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
 
             while (rs.next()) {
                 int id = rs.getInt("ID");
-                
+
                 int user_id = rs.getInt("UserID");
                 UserDAO user_dao = new UserDAO();
                 Users x = new Users();
@@ -113,7 +143,7 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
         } catch (Exception e) {
         }
     }
-    
+
     public void deleteByUserId(int id) {
         try {
             String sql = "delete from Cart where UserID = (?)";
@@ -123,7 +153,7 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
         } catch (Exception e) {
         }
     }
-    
+
     @Override
     public int insertAll(ArrayList<Cart> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -142,7 +172,19 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
             e.printStackTrace();
         }
     }
-    
+
+    public void deleteByCartId(int cartId) {
+        xSql = "DELETE FROM Cart WHERE ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, cartId);
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public int deleteAll(ArrayList<Cart> arr) {
@@ -156,7 +198,7 @@ public class CartDAO extends MyDAO implements DAOInterface<Cart> {
 
     public static void main(String[] args) {
         CartDAO dao = new CartDAO();
-        
+
         for (Cart arg : dao.selectAll()) {
             System.out.println(arg);
         }

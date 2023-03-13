@@ -64,7 +64,7 @@
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                     <div class="col-first">
-                        <h1>Shopping Cart</h1>
+                        <h1>Edit Cart</h1>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,8 @@
         <!--Delete cart button-->
         <div class="container mt-5">
             <div class="float-right">
-                <a class="btn btn-danger" href="<%=request.getContextPath()%>/editcart?action=deleteCart">Delete cart</a>
+                <a class="btn btn-primary" href="<%=request.getContextPath()%>/cart?action=viewCart">View cart</a>
+                <a class="btn btn-danger" href="<%=request.getContextPath()%>/cart?action=deleteCart&cartId=${requestScope.cartId}">Delete cart</a>
             </div>
         </div>
         <!--End delete cart button-->
@@ -116,8 +117,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="product_count">
-                                                        <input name="amount" type="number" value="${cartProduct.getAmount()}">
-                                                        <h5></h5>
+                                                        <h5>${cartProduct.getAmount()}</h5>
                                                     </div>
                                                 </td>
                                                 <td>                                                  
@@ -125,10 +125,13 @@
                          
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                    <button type="button" class="btn btn-danger" >
+                                                        <a class="text-white" href="<%=request.getContextPath()%>/cart?action=delProduct&cartId=${requestScope.cartId}&productId=${cartProduct.getProduct().getProductID()}"><i class="fa fa-trash"></i></a>
+                                                    </button>
                                                 </td>
                                                
                                             </tr>
+                                       
                                         </c:if>
                                     </c:forEach>
                                 </c:forEach>
@@ -145,7 +148,7 @@
                                     <td>
                                         <div class="checkout_btn_inner d-flex align-items-center">
                                             <a class="gray_btn" href="<%=request.getContextPath()%>/home">Continue Shopping</a>
-                                            <a class="primary-btn" href="<%=request.getContextPath()%>/cartcomplete">Proceed to checkout</a>
+                                            <a class="primary-btn" href="<%=request.getContextPath()%>/cart?action=viewCartComplete">Proceed to checkout</a>
                                         </div>
                                     </td>
                                 </tr>

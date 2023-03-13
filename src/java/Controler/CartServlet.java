@@ -53,6 +53,15 @@ public class CartServlet extends HttpServlet {
             case "viewCartComplete":
                 viewCartComplete(request, response);
                 break;
+            case "viewEditCart":
+                viewEditCart(request, response);
+                break;
+            case "delProduct":
+                deleteProduct(request, response);
+                break;
+            case "deleteCart":
+                deleteCart(request, response);
+                break;
             default:
                 break;
         }
@@ -152,6 +161,7 @@ public class CartServlet extends HttpServlet {
                     Product p = cartproduct.getProduct();
                     total += p.getSellPrice() * cartproduct.getAmount();
                 }
+                request.setAttribute("cartId", cart.getId());
                 request.setAttribute("total", total);
                 request.setAttribute("listCartProduct", cartproduct_dao.getByCartId(cart.getId()));
                 ProductImgDAO productImg_dao = new ProductImgDAO();
@@ -220,6 +230,82 @@ public class CartServlet extends HttpServlet {
                 request.getRequestDispatcher("login").forward(request, response);
             }
         } catch (Exception e) {
+        }
+    }
+
+    private void viewEditCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("home").forward(request, response);
+        } else {
+            try {
+                String cartId_string = request.getParameter("cartId");
+                int cartId = Integer.parseInt(cartId_string);
+                CartDAO cart_dao = new CartDAO();
+                Cart cart = cart_dao.getById(cartId);
+                CartProductDAO cartproduct_dao = new CartProductDAO();
+                int total = 0;
+                for (CartProduct cartproduct : cartproduct_dao.getByCartId(cart.getId())) {
+                    Product p = cartproduct.getProduct();
+                    total += p.getSellPrice() * cartproduct.getAmount();
+                }
+                request.setAttribute("cartId", cartId);
+                request.setAttribute("total", total);
+                request.setAttribute("listCartProduct", cartproduct_dao.getByCartId(cart.getId()));
+                ProductImgDAO productImg_dao = new ProductImgDAO();
+                ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
+                request.setAttribute("list_productImg", list_productImg);
+                request.getRequestDispatcher("/cart/editcart.jsp").forward(request, response);
+            } catch (NumberFormatException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("login").forward(request, response);
+        } else {
+            String cartId_String = request.getParameter("cartId");
+            String productId_String = request.getParameter("productId");
+
+            try {
+                int cartId = Integer.parseInt(cartId_String);
+                int productId = Integer.parseInt(productId_String);
+
+                CartProductDAO cartproduct_dao = new CartProductDAO();
+                CartProduct p = cartproduct_dao.getByProIdAndCartId(cartId, productId);
+                cartproduct_dao.deleteByCartProduct(cartId, productId);
+                viewEditCart(request, response);
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    private void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("login").forward(request, response);
+        } else {
+            try {
+                String cartId_String = request.getParameter("cartId");
+                int cartId = Integer.parseInt(cartId_String);             
+                CartProductDAO cartproduct_dao = new CartProductDAO();
+                cartproduct_dao.deleteByCartId(cartId);
+                CartDAO cart_dao = new CartDAO();
+                cart_dao.deleteByCartId(cartId);
+                String message = "Delete cart successfully ";
+                session.setAttribute("message", message);
+                request.getRequestDispatcher("home").forward(request, response);
+            } catch (NumberFormatException e) {
+                System.err.println(e);
+            }
+            
         }
     }
 }

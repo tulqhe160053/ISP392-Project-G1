@@ -74,7 +74,7 @@
         <!--Delete cart button-->
         <div class="container mt-5">
             <div class="float-right">               
-                <a class="btn btn-primary" href="<%=request.getContextPath()%>/editcart">Edit cart</a>
+                <a class="btn btn-primary" href="<%=request.getContextPath()%>/cart?action=viewEditCart&cartId=${requestScope.cartId}">Edit cart</a>
             </div>
         </div>
         <!--End delete cart button-->
