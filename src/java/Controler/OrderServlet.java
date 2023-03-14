@@ -30,6 +30,7 @@ import Model.OrderProduct;
 import Model.Orders;
 import Model.ProductImg;
 import Model.Users;
+import java.util.List;
 
 /**
  *
@@ -175,7 +176,22 @@ public class OrderServlet extends HttpServlet {
                     session.setAttribute("message", message);
                     request.getRequestDispatcher("home").forward(request, response);
                 }
-                request.setAttribute("listOrder", listOrder);
+                    int page, numperpage = 4;
+                    int size = listOrder.size();
+                    int num = (size % 4 == 0 ? (size / 4) : ((size / 4)) + 1);//so trang
+                    String xpage = request.getParameter("page");
+                    if (xpage == null) {
+                        page = 1;
+                    } else {
+                        page = Integer.parseInt(xpage);
+                    }
+                    int start, end;
+                    start = (page - 1) * numperpage;
+                    end = Math.min(page * numperpage, size);
+                    List<Orders> orderList = orderDao.getListByPage(listOrder, start, end);
+                    request.setAttribute("page", page);
+                    request.setAttribute("num", num);
+                request.setAttribute("listOrder", orderList);
                 request.getRequestDispatcher("/order/ListOrder.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("login").forward(request, response);

@@ -168,6 +168,15 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         return ketqua;
     }
     
+        public List<Orders> getListByPage(List<Orders> list,
+            int start, int end) {
+        ArrayList<Orders> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+    
     public ArrayList<Orders> selectAllByUserId(int userId) {
         ArrayList<Orders> t = new ArrayList<>();
         xSql = "select * from Orders where UserID = ?";
