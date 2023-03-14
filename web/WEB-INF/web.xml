@@ -128,6 +128,10 @@
         <servlet-name>ListMyFeedback</servlet-name>
         <servlet-class>Controler.ListMyFeedback</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerDashBoard</servlet-name>
+        <servlet-class>Controler.SellerDashBoard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>ListMyFeedback</servlet-name>
         <url-pattern>/listmyfeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerDashBoard</servlet-name>
+        <url-pattern>/sellerdashboard</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

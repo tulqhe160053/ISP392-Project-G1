@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Most Ordered Product</div>
+                                    <div class="card-body">Total Income</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <h4>${most.product.productName}(${most.order.id})</h4>
                                     </div>

@@ -107,7 +107,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
                 int brand_id = rs.getInt("BrandID");
                 BrandDAO brand_dao = new BrandDAO();
                 Brand brand = brand_dao.selectById(new Brand(brand_id, null));
-                
+
                 ketqua = new Product(productID, productName, description, color, originalPrice,
                         sellPrice, salePercent, category, seller, amount, productStatus, brand);
             } else {
@@ -119,15 +119,15 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         }
         return (ketqua);
     }
-    
+
     public ArrayList<Product> getProductsByName(String xxName) {
         ArrayList<Product> t = new ArrayList<>();
-    xSql = "select * from Product WHERE ProductName like '%" + xxName + "%'";
-    try {
-      ps = con.prepareStatement(xSql);
-      rs = ps.executeQuery();
-      while(rs.next()) {
-        int productID = rs.getInt("ProductID");
+        xSql = "select * from Product WHERE ProductName like '%" + xxName + "%'";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int productID = rs.getInt("ProductID");
                 String productName = rs.getString("ProductName");
                 String description = rs.getString("Description");
                 String color = rs.getString("color");
@@ -159,14 +159,13 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
                 Product y = new Product(productID, productName, description, color, originalPrice,
                         sellPrice, salePercent, category, seller, amount, productStatus, brand);
                 t.add(y);
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
 
     public ArrayList<Product> selectAllByCatId(Category cat) {
@@ -212,7 +211,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         }
         return (t);
     }
-    
+
     public ArrayList<Product> getBySellerID(int seller_id) {
         ArrayList<Product> t = new ArrayList<>();
         xSql = "select * from Product where SellerID = ?";
@@ -228,7 +227,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
                 int originalPrice = rs.getInt("OriginalPrice");
                 int sellPrice = rs.getInt("SellPrice");
                 int salePercent = rs.getInt("SalePercent");
-                
+
                 int catId = rs.getInt("CatID");
                 CategoryDAO cat_dao = new CategoryDAO();
                 Category category = cat_dao.selectById(new Category(catId, null));
@@ -259,24 +258,38 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         }
         return (t);
     }
-    
-     public int countProduct(){
-        int count = 0 ;
+
+    public int countProduct() {
+        int count = 0;
         String sql = "select count(*) as 'count' from product";
         try {
             ps = con.prepareStatement(sql);
-            rs = ps.executeQuery(); 
-            if(rs.next()){
+            rs = ps.executeQuery();
+            if (rs.next()) {
                 count = rs.getInt(1);
             }
         } catch (Exception e) {
         }
         return count;
     }
-     
-    
-    
-        public void AddProduct(Product p) {
+
+    public int countProductbySellerID(int seller_id) {
+        int count = 0;
+        String sql = "select count(*) as 'count' from product where sellerid = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, seller_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
+
+
+    public void AddProduct(Product p) {
         String query = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?,?, ?,?)";
         try {
             ps = con.prepareStatement(query);
@@ -297,8 +310,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         } catch (Exception e) {
         }
     }
-    
-    
+
     @Override
     public void insert(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -326,10 +338,12 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        
+
         for (Product pro : dao.selectAllByCatId(new Category(2, ""))) {
             System.out.println(pro);
         }
+
+
 
     }
 }
