@@ -54,11 +54,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Seller Dashboard
                             </a>
-                            <a class="nav-link" href="<%=request.getContextPath()%>/seller/addproduct.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                New product
-                            </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="<%=request.getContextPath()%>/product/listSellproduct.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 My product list
                             </a>
@@ -68,4 +64,68 @@
 
                 </nav>
             </div>
-         </div>
+
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Seller Dashboard</h1>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Total Number of Product</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <h3>${requestScope.product} products</h3>                                         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Total Number of Orders</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <h3>${requestScope.order} orders</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Most Ordered Product</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <h4>${most.product.productName}(${most.order.id})</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Best Seller Product
+                                    </div>
+                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted"></div>
+
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+            <script src="js/scripts.js"></script>
+
+        </div>

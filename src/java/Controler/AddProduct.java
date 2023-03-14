@@ -4,6 +4,7 @@
  */
 package Controler;
 
+import Dao.CategoryDAO;
 import Dao.ProductDAO;
 import Model.Brand;
 import Model.Category;
@@ -19,6 +20,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -38,7 +40,7 @@ public class AddProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                response.setContentType("text/html;charset=UTF-8");
+               doGet(request, response);
 
      }
 
@@ -54,7 +56,10 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+                    CategoryDAO category_dao = new CategoryDAO();
+                    ArrayList<Category> listCategory = category_dao.selectAll();
+                    request.setAttribute("listCategory", listCategory);
+                    request.getRequestDispatcher("seller/addproduct.jsp").forward(request, response);
         
     }
 
@@ -72,33 +77,27 @@ public class AddProduct extends HttpServlet {
         processRequest(request, response);
                 HttpSession session = request.getSession();
                 Users u = (Users) session.getAttribute("user");
-                int sid = u.getUserID();
-                
+                int id = u.getUserID();
+                u.setUserID(id);
+               
                 String pname = request.getParameter("pname");
                 String Description = request.getParameter("Description");
                 String Color = request.getParameter("Color");
-                String StringOPrice = request.getParameter("OriginalPrice");
-                int OriginalPrice = Integer.parseInt("StringOPrice");
-                String StringSPrice = request.getParameter("StringSPrice");
-                int SellPrice = Integer.parseInt("SellPrice");
-                String Stringpercent = request.getParameter("SalePercent");
-                int  SalePercent = Integer.parseInt("Stringpercent");
-                String StrAmount = request.getParameter("Amount");
-                int Amount = Integer.parseInt("StrAmount");
+                int OriginalPrice = Integer.parseInt(request.getParameter("OriginalPrice"));
+                int SellPrice = Integer.parseInt(request.getParameter("SellPrice"));
+                int  SalePercent = Integer.parseInt(request.getParameter("SalePercent"));
+                int Amount = Integer.parseInt(request.getParameter("Amount"));
 
                 ProductStatus ps = new ProductStatus();
-                String StringsttID = request.getParameter("sttID");
-                int sttID = Integer.parseInt("StringsttID");
+                int sttID = Integer.parseInt(request.getParameter("sttID"));
                 ps.setStatusID(sttID);
                 
                 Brand br = new Brand();
-                String StringbrandID = request.getParameter("brandID");
-                int brandID = Integer.parseInt("StringbrandID");
+                int brandID = Integer.parseInt(request.getParameter("brandID"));
                 br.setBrandID(brandID);
                 
                 Category cat = new Category();
-                String StringpCategory = request.getParameter("Category");
-                int pCategory = Integer.parseInt("StringpCategory");
+                int pCategory = Integer.parseInt(request.getParameter("Category"));
                 cat.setCategoryId(pCategory);
                 
                 Product p = new Product();
@@ -112,6 +111,7 @@ public class AddProduct extends HttpServlet {
                 p.setProductStatus(ps);
                 p.setBrand(br);
                 p.setCategory(cat);
+               p.setSeller(u);
                 
                 ProductDAO pdao = new ProductDAO();
                 pdao.AddProduct(p);

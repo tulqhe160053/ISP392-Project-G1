@@ -273,6 +273,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         }
         return count;
     }
+     
     
     
         public void AddProduct(Product p) {

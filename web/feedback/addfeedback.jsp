@@ -5,7 +5,6 @@
 --%>
 
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -159,20 +158,20 @@
         </head>
         <body>
             <%@include file="../header.jsp" %>
-            
-            	<!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
-		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-				<div class="col-first">
-					<nav class="d-flex align-items-center">
-                                                                                                                            Add feedback
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End Banner Area -->
+
+            <!-- Start Banner Area -->
+            <section class="banner-area organic-breadcrumb">
+                <div class="container">
+                    <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                        <div class="col-first">
+                            <nav class="d-flex align-items-center">
+                                Add feedback
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Banner Area -->
 
             <div class="container">
 
@@ -221,15 +220,15 @@
                                     </form>
                                 </div>
 
-        
-                                    <div class="feedback-text">
-                                        <form action="<%=request.getContextPath()%>/addfeedback" id="submit-feedback" method="POST" onsubmit="submitFeedback()" >                                    
+
+                                <div class="feedback-text">
+                                    <form action="<%=request.getContextPath()%>/addfeedback" id="submit-feedback" method="POST" onsubmit="submitFeedback()" >                                    
                                         <label for="feedback-text" class="form-label">Your Feedback: </label>
-                                        <textarea name="feedback-text" class="form-control" id="feedback-text" rows="5" placeholder="Write your Feedback here"></textarea>
+                                        <textarea name="feedback-text" class="form-control" id="feedback-text" rows="5" maxlength="300" placeholder="Tối đa 300 kí tự "></textarea>
                                         <input type="hidden" id="star-value" name="star-value">                                        
                                         <input type="hidden" id="productID" name="productID" value="${product.getProductID()}">
                                         <button type="submit" class="btn btn-warning mt-5" >Submit</button>                                   
-                                         </form>
+                                    </form>
                                 </div>
                             </div>
 

@@ -1,7 +1,7 @@
 <%-- 
     Document   : addproduct
     Created on : Mar 6, 2023, 1:18:36 PM
-    Author     : Admin
+    Author     : Trang
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,6 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>Add Product</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -27,7 +28,11 @@
             }
         </style>
 
+
+
     <body>
+
+
         <div class="container">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -45,7 +50,10 @@
                                 <h4 class="text-warning">New product</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
-                            <div class="modal-body">					
+                            <div class="modal-body">	
+
+                                <label for="image">Image</label>
+                                <input type="file" name="image"><br>
 
                                 <div class="form-group">
                                     <label>Product Name</label>
@@ -56,6 +64,10 @@
                                     <textarea name="Description" class="form-control" id="Description" rows="5" placeholder="Write product description here"></textarea>
                                 </div>
                                 <div class="form-group">
+                                    <label>Color</label>
+                                    <input name="SalePercent" type="text" class="form-control" required>
+                                </div>
+                                <div class="form-group">
                                     <label>OriginalPrice</label>
                                     <input name="OriginalPrice" type="text" class="form-control" required>
                                 </div>
@@ -63,47 +75,37 @@
                                     <label>SellPrice</label>
                                     <input name="SellPrice" type="text" class="form-control" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>SalePercent</label>
-                                    <input name="SalePercent" type="text" class="form-control" required>
-                                </div>
 
                                 <div class="form-group">
                                     <label>Amount</label>
-                                    <input value="${detail.amount}" name="Amount" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>StatusID</label>
-                                    <input name="sttID" type="text" class="form-control" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>BrandID</label>
-                                    <input  name="brandID" type="text" class="form-control" required>
+                                    <input  name="Amount" type="text" class="form-control" required>
                                 </div>
 
-                            <div class="form-group">
-                                <label>Category</label>
-                                <select name="Category" class="form-select" aria-label="Default select example">
-                                    <c:forEach items="${requestScope.listCategorys}" var="category">
-                                        <option  value="<%=request.getContextPath()%>/category?catId=${category.getCategoryId()}">${category.getCategoryName()}</option>
-                                    </c:forEach>
-                                </select>
+                                <div class="post_tag">
+                                    <h3><select class="form-select active" name="catId">
+                                            <option value="0">Category</option>
+                                            <c:forEach items="${requestScope.listCategory}" var="cat">
+                                                <option value="${cat.getCategoryId()}">${cat.getCategoryName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </h3>
+                                </div>
+
                             </div>
-
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-success" value="Save">
+                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/seller/sellerdashboard.jsp">Back</a></button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-success" value="Save">
-                        <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/seller/sellerdashboard.jsp">Back</a></button>
-                    </div>
-                    </form>
                 </div>
             </div>
+
         </div>
 
-    </div>
+
+        <script src="<%=request.getContextPath()%>/js/manager.js" type="text/javascript"></script>
 
 
-    <script src="<%=request.getContextPath()%>/js/manager.js" type="text/javascript"></script>
-</body>
+    </body>
 </html>

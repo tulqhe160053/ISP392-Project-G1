@@ -44,22 +44,20 @@
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/common/viewuser.jsp">My Profile</a></li>
                                     <li class="nav-item"><a class="nav-link" href="ViewListAddress">My Address</a></li>
-                                    <c:if test="${sessionScope.user.getRole().getRoleID() == 2}">
-                                            <li class="nav-item"><a class="nav-link" href="ListSellProduct">My Product</a></li>
-                                        </c:if>
+                                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/feedback/myfeedback.jsp">My Feedback</a></li>
                                     <li class="nav-item"><a class="nav-link" href="mylistblog">My blog</a></li>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 1}">
-                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/admin">Admin Dashboard</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/admin">Admin Dashboard</a></li>
                                         </c:if>
 
-                                             <c:if test="${sessionScope.user.getRole().getRoleID() == 4}">
-                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/mkt">MKT Dashboard</a></li>
+                                    <c:if test="${sessionScope.user.getRole().getRoleID() == 4}">
+                                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/mkt">MKT Dashboard</a></li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 3}">
-                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/order?action=listOrder">My Order</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/order?action=listOrder">My Order</a></li>
                                         </c:if>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 2}">
-                                            <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/seller/sellerdashboard.jsp">Seller Dashboard</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/seller/sellerdashboard.jsp">Seller Dashboard</a></li>
                                         </c:if>
 
                                     <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout">Log Out</a></li>
