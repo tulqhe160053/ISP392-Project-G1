@@ -67,53 +67,10 @@
         </style>
     </head>
     <body class="sb-nav-fixed">
+        <jsp:include page="../nav.jsp"/>
 
-
-
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            Navbar Brand
-            <a class="navbar-brand pe-5" href="user"></a>
-
-            Navbar Search
-            <form action="user?action=search" method="post" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-
-
-            </form>
-            Navbar
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-user fa-fw"></i>Hello </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="logout">Logout</a></li>
-                     
-                </li>
-            </ul>
-        </nav>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="admin">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Admin Dashboard
-                            </a>
-
-                            <a class="nav-link" href="user">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                Manager User
-                            </a>
-
-
-
-                        </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div>
-                </nav>
-            </div>
+              <jsp:include page="../sidenav.jsp"/>
 
             <div class="container-fluid rounded bg-white mt-5 mb-5">
                 <div class="col">

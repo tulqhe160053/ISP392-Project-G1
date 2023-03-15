@@ -18,48 +18,11 @@
 
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#"></a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form action="user?action=search" method="post" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-
-
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i>Hello ${sessionScope.user.userName} </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">My Profile</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="logout">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        
+        <jsp:include page="../nav.jsp"/>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="mkt">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                MKT Dashboard
-                            </a>
-                            <a class="nav-link" href="blogmkt">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                Manager Blogs
-                            </a>
 
-                        </div>
-                    </div>
-
-                </nav>
-            </div>
+            <jsp:include page="../sidenav.jsp"/>
 
             <div id="layoutSidenav_content">
                 <main>
@@ -71,7 +34,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 mt-4">
-                                    <form action="filterblog" method="get">
+                                    <form id="filter" action="filterblog" method="get">
                                         <div class="justify-content-md-start row">
                                             <div class="col-md-5 row align-items-center">
                                                 <div class="col-md-4">
@@ -79,7 +42,7 @@
                                                 </div>
                                                 <div class="col-md-8">
 
-                                                    <select name="catid" class="form-select" aria-label="Default select example">
+                                                    <select name="catid" class="form-select" aria-label="Default select example" onchange="document.getElementById('filter').submit();">
 
                                                         <option value="" >All</option>
 
@@ -93,13 +56,14 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-5 row align-items-center">
-                                                <div class="col-md-3">
+
+                                            <div class="col-md-4 row align-items-center">
+                                                <div class="col-md-4">
                                                     <label class="">Status</label>
                                                 </div>
                                                 <div class="col-md-8">
 
-                                                    <select name="blogstatusid" class="form-select" aria-label="Default select example">
+                                                    <select name="blogstatusid" class="form-select" aria-label="Default select example" onchange="document.getElementById('filter').submit();">
                                                         <option value="" >All</option>
                                                         <c:forEach items="${blogstatus}" var="b">
                                                             <option <c:if test="${requestScope.status == b.statusID}">selected</c:if> value="${b.statusID}">${b.statusName}</option>
@@ -111,9 +75,9 @@
 
 
 
-                                            <div class="col-md-2 md-0">
-                                                <input type="submit" class="btn btn-primary" value="Filter">
-                                            </div>
+
+
+
 
 
                                         </div>
@@ -150,14 +114,14 @@
                                     <table width ="100%">
 
                                         <thead>
-                                            <tr>
+                                            <tr style="text-align: center">
                                                 <th>ID</th>
                                                 <th style="text-align: center;">Image</th>
                                                 <th>Title</th>
                                                 <th>Category</th>
                                                 <th>Author</th>
                                                 <th style="text-align: center;">Time</th>
-                                                <th>Viewer</th>
+
                                                 <th style="text-align: center;">Status</th>
 
 
@@ -169,14 +133,13 @@
                                             <c:forEach items="${listBlog}" var = "b">       
                                                 <tbody>
 
-                                                    <tr>
+                                                    <tr style="text-align: center">
                                                         <td>${b.id}</td>                                               
                                                         <td><img width=200px" style="" src="<%=request.getContextPath()%>/assets/blog_img/${b.imageLink}" alt="alt"/></td>
                                                         <td>${b.title}</td>
                                                         <td>${b.category.getCategoryName()}</td>
                                                         <td>${b.user.getUserName()}</td>
                                                         <td style="text-align: center;">${b.createTime}</td>
-                                                        <td style="text-align: center;">${b.viewer}</td>
 
                                                         <c:if test="${b.blogstatus.statusName == 'Active'}">
                                                             <td style="text-align: center;"> 
@@ -247,10 +210,10 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <c:set var="page" value="${page}"/>
-                                                 <c:if test="${requestScope.page > 1}">
-                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog?txt=${requestScope.search}&page=${requestScope.page-1}">Previous</a></li>
+                                                <c:if test="${requestScope.page > 1}">
+                                                    <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog?txt=${requestScope.search}&page=${requestScope.page-1}">Previous</a></li>
                                                     </c:if>
-                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                    <c:forEach begin="${1}" end="${num}" var="i">
                                                     <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog?txt=${requestScope.search}&page=${i}">${i}</a></li>
                                                     </c:forEach>
                                                     <c:if test="${requestScope.num > requestScope.page}">

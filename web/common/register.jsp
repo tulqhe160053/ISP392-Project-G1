@@ -1,8 +1,4 @@
-<%-- 
-   Document   : login
-   Created on : Jan 16, 2023, 11:27:55 PM
-   Author     : ducth
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -112,7 +108,7 @@
                                     <input type="text" class="form-control" id="name" name="userName" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="password" class="form-control" id="psw" name="password" placeholder="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
+                                    <input type="password" class="form-control" id="psw" name="password" placeholder="Password"  = onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
                                 </div>
                                <div id="message">
                                 <h3>Password must contain the following:</h3>

@@ -22,48 +22,9 @@
 
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#"></a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form action="user?action=search" method="post" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-
-
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i>Hello ${sessionScope.user.userName} </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">My Profile</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="logout">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+         <jsp:include page="../nav.jsp"/>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="admin">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Admin Dashboard
-                            </a>
-                            <a class="nav-link" href="user">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                Manager Users
-                            </a>
-
-                        </div>
-                    </div>
-
-                </nav>
-            </div>
+             <jsp:include page="../sidenav.jsp"/>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -80,7 +41,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 mt-4">
-                                    <form action="filteruser" method="get">
+                                    <form id="filter" action="filteruser" method="get">
                                         <div class="justify-content-md-start row">
                                             <div class="col-md-6 row align-items-center">
                                                 <div class="col-md-2">
@@ -88,10 +49,10 @@
                                                 </div>
                                                 <div class="col-md-8">
 
-                                                    <select name="role_id" class="form-select" aria-label="Default select example">
+                                                    <select name="role_id" class="form-select" aria-label="Default select example" onchange="document.getElementById('filter').submit()">
 
                                                         <option value="" >All</option>
-                                                        <option value="1" <c:if test="${requestScope.role.equals('1')}">selected</c:if>  >Admin</option>
+                                                        <option value="1" <c:if test="${requestScope.role.equals('1')}">selected</c:if> >Admin</option>
                                                         <option value="2" <c:if test="${requestScope.role.equals('2')}">selected</c:if> >Seller</option>
                                                         <option value="3" <c:if test="${requestScope.role.equals('3')}">selected</c:if> >Customer</option>
                                                         <option value="4" <c:if test="${requestScope.role.equals('4')}">selected</c:if> >Marketing</option>
@@ -105,7 +66,7 @@
                                                         <label class="form-label">Status</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select name="status" class="form-select" aria-label="Default select example">
+                                                        <select name="status" class="form-select" aria-label="Default select example" onchange="document.getElementById('filter').submit()">
                                                             <option value="" >All</option>
                                                             <option value="1" <c:if test="${requestScope.status.equals('1')}">selected</c:if> >Active</option>
                                                         <option value="2" <c:if test="${requestScope.status.equals('2')}">selected</c:if> >Locked</option>
@@ -114,9 +75,7 @@
                                                 </div>
 
 
-                                                <div class="col-md-2 md-0">
-                                                    <button type="submit" class="btn btn-primary">Filter</button>
-                                                </div>
+                                                
                                             </div>
                                         </form>
                                     </div>

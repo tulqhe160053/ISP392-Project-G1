@@ -132,6 +132,18 @@
         <servlet-name>CategorySellerServlet</servlet-name>
         <servlet-class>Controler.CategorySellerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderDetailSellerServlet</servlet-name>
+        <servlet-class>Controler.OrderDetailSellerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderListSellerServlet</servlet-name>
+        <servlet-class>Controler.OrderListSellerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterOrderServlet</servlet-name>
+        <servlet-class>Controler.FilterOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -263,6 +275,18 @@
     <servlet-mapping>
         <servlet-name>CategorySellerServlet</servlet-name>
         <url-pattern>/categoryseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailSellerServlet</servlet-name>
+        <url-pattern>/orderdetailseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderListSellerServlet</servlet-name>
+        <url-pattern>/orderseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterOrderServlet</servlet-name>
+        <url-pattern>/filterseller</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

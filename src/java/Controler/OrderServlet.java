@@ -136,7 +136,7 @@ public class OrderServlet extends HttpServlet {
             // Kết hợp LocalDate và LocalTime thành LocalDateTime
             LocalDateTime deliveryTime = LocalDate.now().atTime(defaultTime).plus(1, ChronoUnit.DAYS);
 
-            Orders order = new Orders(1, user, total, null, shipaddress_dao.getById(shipAddressId), orderStatus_dao.getById(2), orderDate.format(formatter), deliveryTime.format(formatter));
+            Orders order = new Orders(1, user, total, null, shipaddress_dao.getById(shipAddressId), orderStatus_dao.getById(1), orderDate.format(formatter), deliveryTime.format(formatter));
             order_dao.insert(order);
 
             Orders order1 = order_dao.selectAll().get(order_dao.selectAll().size() - 1);
@@ -192,7 +192,7 @@ public class OrderServlet extends HttpServlet {
                     request.setAttribute("page", page);
                     request.setAttribute("num", num);
                 request.setAttribute("listOrder", orderList);
-                request.getRequestDispatcher("/order/ListOrder.jsp").forward(request, response);
+                request.getRequestDispatcher("order/ListOrder.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("login").forward(request, response);
             }
@@ -218,7 +218,7 @@ public class OrderServlet extends HttpServlet {
             ProductImgDAO productImg_dao = new ProductImgDAO();
             ArrayList<ProductImg> list_productImg = productImg_dao.selectAll();
             request.setAttribute("list_productImg",list_productImg);
-            request.getRequestDispatcher("/order/ViewOrderDetail.jsp").forward(request, response);
+            request.getRequestDispatcher("order/ViewOrderDetail.jsp").forward(request, response);
         } catch (Exception e) {
         }
     }

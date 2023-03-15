@@ -21,16 +21,8 @@
         <servlet-class>Controler.ChangePassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditCart</servlet-name>
-        <servlet-class>Controler.EditCart</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ListBlogServlet</servlet-name>
         <servlet-class>Controler.ListBlogServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteCart</servlet-name>
-        <servlet-class>Controler.DeleteCart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddFeedback</servlet-name>
@@ -124,6 +116,34 @@
         <servlet-name>MKTDashboardServlet</servlet-name>
         <servlet-class>Controler.MKTDashboardServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListMyFeedback</servlet-name>
+        <servlet-class>Controler.ListMyFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerDashBoard</servlet-name>
+        <servlet-class>Controler.SellerDashBoard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBrand</servlet-name>
+        <servlet-class>Controler.AddBrand</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategorySellerServlet</servlet-name>
+        <servlet-class>Controler.CategorySellerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailSellerServlet</servlet-name>
+        <servlet-class>Controler.OrderDetailSellerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderListSellerServlet</servlet-name>
+        <servlet-class>Controler.OrderListSellerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterOrderServlet</servlet-name>
+        <servlet-class>Controler.FilterOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -143,14 +163,6 @@
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/changepassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditCart</servlet-name>
-        <url-pattern>/editcart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteCart</servlet-name>
-        <url-pattern>/deletecart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddFeedback</servlet-name>
@@ -247,6 +259,34 @@
     <servlet-mapping>
         <servlet-name>MKTDashboardServlet</servlet-name>
         <url-pattern>/mkt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListMyFeedback</servlet-name>
+        <url-pattern>/listmyfeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerDashBoard</servlet-name>
+        <url-pattern>/sellerdashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBrand</servlet-name>
+        <url-pattern>/AddBrand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategorySellerServlet</servlet-name>
+        <url-pattern>/categoryseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailSellerServlet</servlet-name>
+        <url-pattern>/orderdetailseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderListSellerServlet</servlet-name>
+        <url-pattern>/orderseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterOrderServlet</servlet-name>
+        <url-pattern>/filterseller</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

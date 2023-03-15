@@ -50,13 +50,18 @@ public class RegisterServlet extends HttpServlet {
         Validate va  = new Validate();
         boolean validateEmail = va.validateEmail(email);
         boolean validatePhone = va.checkPhone(phone);
+        boolean validatePassword = va.checkPassword(password);
 
         if (u != null) {
             request.setAttribute("mess", "Username is already exist");
             request.getRequestDispatcher("common/register.jsp").forward(request, response);
         } else {
-            if (validateEmail == false || validatePhone == false) {
-                request.setAttribute("mess", "Incorrect email or phone");
+            if (validatePassword == false) {
+                request.setAttribute("mess", "Invalid Password!");
+                request.getRequestDispatcher("common/register.jsp").forward(request, response);
+            }
+            else if (validateEmail == false || validatePhone == false) {
+                request.setAttribute("mess", "Invalid email or phone");
                 request.getRequestDispatcher("common/register.jsp").forward(request, response);
             } else {
                 if (u1 != null) {
@@ -66,7 +71,7 @@ public class RegisterServlet extends HttpServlet {
                     if (!repassword.equals(password)) {
                         request.setAttribute("mess", "Confirm password incorrect");
                         request.getRequestDispatcher("common/register.jsp").forward(request, response);
-                    }else{
+                    } else {
                         SendMail sm = new SendMail();
                         String verifyCode = sm.getRandom();
                         Users newUser = new Users();
@@ -83,53 +88,46 @@ public class RegisterServlet extends HttpServlet {
                 }
             }
 
- 
         }
     }
 
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-        }
+        processRequest(request, response);
+    }
 
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-        }
+        processRequest(request, response);
+    }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-        
-        
-            () {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
 
-    }
+}

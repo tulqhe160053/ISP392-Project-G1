@@ -254,7 +254,60 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         }
         return ketqua;
     }
-    
+     public List<Orders> filterOrdersByDate(String from, String to, String status) {
+        List<Orders> list = new ArrayList<>();
+        String sql = "SELECT * FROM Orders WHERE 1=1";
+        if (from != "" && from != null) {
+            sql += " and OrderDate >= '" + from + "'";
+        }
+        if (to != "" && to != null) {
+            sql += " and OrderDate <= '" + to + "'";
+        }
+        if (status != "" && status != null) {
+            sql += " and StatusID = " + status;
+        }
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                int userID = rs.getInt("UserID");
+                UserDAO user_dao = new UserDAO();
+                Users user = user_dao.getById(userID);
+
+                int totalPrice = rs.getInt("TotalPrice");
+                String note = rs.getString("Note");
+
+                int shipId = rs.getInt("ShipId");
+                ShipAddressDAO shipAddress_dao = new ShipAddressDAO();
+                ShipAddress shipAddress = shipAddress_dao.getById(shipId);
+
+                int orderStatusId = rs.getInt("StatusID");
+                OrderStatusDAO orderStatus_dao = new OrderStatusDAO();
+                OrderStatus orderStatus = orderStatus_dao.getById(orderStatusId);
+
+                String OrderDate = rs.getString("OrderDate");
+                String DeliveryDate = rs.getString("DeliveryDate");
+
+                Orders x = new Orders(id, user, totalPrice, note, shipAddress, orderStatus, OrderDate, DeliveryDate);
+                list.add(x);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+       public void updateOrderStatus (String sid , String oid) {
+        String sql = "update orders set statusID = ? where ID  = ?"; 
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,sid);
+            ps.setString(2,oid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
     public int countOrder() {
         String sql = "select COUNT (*) from [orders] ";
         try {

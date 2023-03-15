@@ -36,8 +36,8 @@ public class AddFeedback extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            doGet(request, response);
-     
+        doGet(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,24 +52,23 @@ public class AddFeedback extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.setContentType("text/html;charset=UTF-8");
-            response.setCharacterEncoding("UTF-8");         
-            String url = "/feedback/addfeedback.jsp";
+        response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String url = "/feedback/addfeedback.jsp";
         try {
             String productId_String = request.getParameter("productID");
 
-                int productID = Integer.parseInt(productId_String);
-                Product product_save = new Product();
-                product_save.setProductID(productID);             
-                ProductDAO product_dao = new ProductDAO();
-                Product product = product_dao.selectById(product_save);
-                request.setAttribute("product", product);
-                request.getRequestDispatcher(url).forward(request, response);
-                
-           
+            int productID = Integer.parseInt(productId_String);
+            Product product_save = new Product();
+            product_save.setProductID(productID);
+            ProductDAO product_dao = new ProductDAO();
+            Product product = product_dao.selectById(product_save);
+            request.setAttribute("product", product);
+            request.getRequestDispatcher(url).forward(request, response);
+
         } catch (Exception e) {
             System.err.println(e);
-        }       
+        }
     }
 
     /**
@@ -83,8 +82,11 @@ public class AddFeedback extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            HttpSession session = request.getSession();
-            Users user = (Users) session.getAttribute("user");
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("common/login.jsp").forward(request, response);
+        } else {
             FeedbackDAO feedbackDAO = new FeedbackDAO();
             // get current product id
             String productId_String = request.getParameter("productID");
@@ -102,13 +104,13 @@ public class AddFeedback extends HttpServlet {
             System.out.println(userFeedback.toString());
 
             // add feedback to database
-            feedbackDAO.addFeedback(userFeedback , p ,user);
+            feedbackDAO.addFeedback(userFeedback, p, user);
 
             // redirect 
             response.sendRedirect("home");
-        
 
-        
+        }
+
     }
 
     /**
