@@ -57,7 +57,7 @@
                                 <h2>Manage <b>Brand</b></h2>
                             </div>
                             <div class="col-sm-6">
-                                <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"> <span>Add New Brand</span></a>
+                                <a href="AddBrand" class="btn btn-success" data-toggle="modal"> <span>Add New Brand</span></a>
                             </div>
                         </div>
                     </div>
