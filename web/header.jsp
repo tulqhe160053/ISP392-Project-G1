@@ -53,6 +53,9 @@
                                     <c:if test="${sessionScope.user.getRole().getRoleID() == 4}">
                                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/mkt">MKT Dashboard</a></li>
                                         </c:if>
+                                        <c:if test="${sessionScope.user.getRole().getRoleID() == 2}">
+                                            <li class="nav-item"><a class="nav-link" href="ListSellProduct">My Product</a></li>
+                                        </c:if>
                                         <c:if test="${sessionScope.user.getRole().getRoleID() == 3}">
                                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/order?action=listOrder">My Order</a></li>
                                         </c:if>

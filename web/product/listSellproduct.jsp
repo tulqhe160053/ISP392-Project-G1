@@ -85,7 +85,7 @@
                                 <td>${p.productName}</td>
                                 <td><img src="assets/product_img/${p.category.categoryName}/${p.brand.brandName}/${p.img.productImgUrl}" alt="error" style="width: 50px"></td>
                                 <td>${p.originalPrice}đ</td>
-                                <td>${p.sellPrice}đ</td>
+                                <td>${p.sellPrice}$</td>
                                 <td>${p.salePercent}</td>
                                 <td>${p.category.categoryName}</td>
                                 <td>${p.amount}</td>
