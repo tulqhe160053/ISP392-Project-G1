@@ -73,6 +73,17 @@ public class CategoryDAO extends MyDAO implements DAOInterface<Category> {
             e.printStackTrace();
         }
     }
+    public void insertCat(String name) {
+        xSql = "insert into Category  values (?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, name);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public int insertAll(ArrayList<Category> arr) {
