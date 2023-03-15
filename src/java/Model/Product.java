@@ -22,8 +22,17 @@ public class Product {
     private int amount;
     private ProductStatus productStatus;
     private Brand brand;
+    private ProductImg img;
 
     public Product() {
+    }
+    
+    public ProductImg getImg() {
+        return img;
+    }
+
+    public void setImg(ProductImg img) {
+        this.img = img;
     }
 
     public Product(int productID) {
