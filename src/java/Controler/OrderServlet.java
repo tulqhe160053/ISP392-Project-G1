@@ -132,7 +132,7 @@ public class OrderServlet extends HttpServlet {
 
             // Tạo LocalTime đại diện cho giờ mặc định là 8 giờ sáng
             LocalTime defaultTime = LocalTime.of(8, 0, 0);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             // Kết hợp LocalDate và LocalTime thành LocalDateTime
             LocalDateTime deliveryTime = LocalDate.now().atTime(defaultTime).plus(1, ChronoUnit.DAYS);
 
