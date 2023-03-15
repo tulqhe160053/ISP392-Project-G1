@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Model.Brand;
 import Model.Category;
 import Model.Product;
+import Model.ProductImg;
 import Model.ProductStatus;
 import Model.Users;
 
@@ -214,7 +215,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
 
     public ArrayList<Product> getBySellerID(int seller_id) {
         ArrayList<Product> t = new ArrayList<>();
-        xSql = "select * from Product where SellerID = ?";
+        xSql = " select * from Product p, ProductImg i where p.ProductID =i .ProductID and  p.SellerID =?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, seller_id);
@@ -227,8 +228,12 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
                 int originalPrice = rs.getInt("OriginalPrice");
                 int sellPrice = rs.getInt("SellPrice");
                 int salePercent = rs.getInt("SalePercent");
-
+                
                 int catId = rs.getInt("CatID");
+                ProductImg proImg = new ProductImg();
+                proImg.setId(rs.getInt("ID"));
+                proImg.setProductImgUrl(rs.getString("ProductImgURL"));
+                
                 CategoryDAO cat_dao = new CategoryDAO();
                 Category category = cat_dao.selectById(new Category(catId, null));
 
@@ -249,6 +254,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
 
                 Product y = new Product(productID, productName, description, color, originalPrice,
                         sellPrice, salePercent, category, seller, amount, productStatus, brand);
+                y.setImg(proImg);
                 t.add(y);
             }
             rs.close();
