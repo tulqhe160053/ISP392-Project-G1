@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.skinFlat.css" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magnific-popup.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
-        
+
 
     </head>
 
@@ -45,49 +45,45 @@
 
         <jsp:include page="../header.jsp" />
         <div class="d-flex justify-content-center align-items-center mb-3">
-                            <h4 class="text-right"></h4>
-                        </div> 
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px"<span> </span></div>
-        
+            <h4 class="text-right"></h4>
+        </div> 
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px"<span> </span></div>
+
         <div class="container">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2>Manage <b>Products</b></h2>
-                            </div>
-                            <div class="col-sm-6">
-                                <a href="<%=request.getContextPath()%>/seller/addproduct.jsp" class="btn btn-success" data-toggle="modal"> <span>Add New Product</span></a>
-                                <a href="manager_category" class="btn btn-warning" > <span>Manage Categories</span></a>						
-                            </div>
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>Manage <b>Products</b></h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"> <span>Add New Product</span></a>
+                            <a href="manager_category" class="btn btn-warning" > <span>Manage Categories</span></a>						
                         </div>
                     </div>
+                </div>
 
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Original Price</th>
-                                <th>Sell Price</th>
-                                <th>Sale Percent</th>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th>Brand</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Original Price</th>
+                            <th>Sell Price</th>
+                            <th>Sale Percent</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Brand</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <c:forEach items="${listP}" var="p">
                             <tr>
                                 <td>${p.productID}</td>
                                 <td>${p.productName}</td>
-                                <c:forEach items="${listI}" var="i">
-                                    <c:if test="${p.productID == i.id}">
-                                        <td><img src="<%=request.getContextPath()%>/assets/product_img/${p.category.categoryName}/${p.brand.brandName}/${i.productImgUrl}" alt="error" style="width: 50px"></td>
-                                    </c:if>
-                                </c:forEach>
+                                <td><img src="assets/product_img/${p.category.categoryName}/${p.brand.brandName}/${p.img.productImgUrl}" alt="error" style="width: 50px"></td>
                                 <td>${p.originalPrice}đ</td>
                                 <td>${p.sellPrice}đ</td>
                                 <td>${p.salePercent}</td>
@@ -95,8 +91,8 @@
                                 <td>${p.amount}</td>
                                 <td>${p.productStatus.statusName}</td>
                                 <td>${p.brand.brandName}</td>
-                                
-    
+
+
                                 <td>
                                     <a href="load_product?pid=${p.productID}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
                                     <a href="delete_product?pid=${p.productID}" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
@@ -107,7 +103,7 @@
                 </table>
             </div>
         </div>
-                    
+
         <!-- Add Product -->
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
