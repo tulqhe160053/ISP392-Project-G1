@@ -21,16 +21,8 @@
         <servlet-class>Controler.ChangePassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditCart</servlet-name>
-        <servlet-class>Controler.EditCart</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ListBlogServlet</servlet-name>
         <servlet-class>Controler.ListBlogServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteCart</servlet-name>
-        <servlet-class>Controler.DeleteCart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddFeedback</servlet-name>
@@ -155,14 +147,6 @@
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/changepassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditCart</servlet-name>
-        <url-pattern>/editcart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteCart</servlet-name>
-        <url-pattern>/deletecart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddFeedback</servlet-name>

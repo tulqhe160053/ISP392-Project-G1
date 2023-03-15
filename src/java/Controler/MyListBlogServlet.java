@@ -58,9 +58,9 @@ public class MyListBlogServlet extends HttpServlet {
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectMyAll(userId);
         
-        int page, numperpage = 3;
+        int page, numperpage = 5;
         int size = listBlog.size();
-        int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
+        int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang
         String xpage = request.getParameter("page");
         if (xpage == null) {
             page = 1;

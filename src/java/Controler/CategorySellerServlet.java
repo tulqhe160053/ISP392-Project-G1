@@ -5,21 +5,21 @@
 
 package Controler;
 
-import Dao.CartDAO;
+import Dao.CategoryDAO;
+import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import Model.Users;
+import java.util.List;
 
 /**
  *
- * @author Tu
+ * @author Admin
  */
-public class DeleteCart extends HttpServlet {
+public class CategorySellerServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,7 +31,18 @@ public class DeleteCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        doGet(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CategorySellerServlet</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CategorySellerServlet at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,21 +56,10 @@ public class DeleteCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String url = "login";
-        try {
-            HttpSession session = request.getSession();
-            if (session != null) {
-                Users user = (Users) session.getAttribute("user");
-                
-                CartDAO dao = new CartDAO();
-                dao.deleteByUserId(user.getUserID());
-                url = "home";
-                request.getRequestDispatcher(url).forward(request, response);
-            }
-            request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception e) {
-        }
-        
+        CategoryDAO cat = new CategoryDAO();
+        List<Category> category = cat.selectAll();
+        request.setAttribute("category", category);
+        request.getRequestDispatcher("/product/listCategory.jsp").forward(request, response);
     } 
 
     /** 
@@ -72,7 +72,11 @@ public class DeleteCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String catName = request.getParameter("name");
+        CategoryDAO cat = new CategoryDAO();
+        cat.insertCat(catName);
+        response.sendRedirect("categoryseller");
+        
     }
 
     /** 
