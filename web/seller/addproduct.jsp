@@ -21,6 +21,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="<%=request.getContextPath()%>/css/managerproduct.css" rel="stylesheet" type="text/css"/>
+                <link rel="stylesheet" href="<%=request.getContextPath()%>/css/linearicons.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/themify-icons.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/owl.carousel.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nice-select.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/nouislider.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.skinFlat.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
         <style>
             img{
                 width: 200px;
@@ -45,13 +55,32 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="addproduct" method="post">
+                        <form action="<%=request.getContextPath()%>/addproduct" method="post">
                             <div class="modal-header">						
-                                <h4 class="text-warning">New product</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="text-warning">New product</h3>
                             </div>
                             <div class="modal-body">	
 
+                                <div class="post_tag">
+                                    <h4><select class="form-select active" name="catId">
+                                            <option value="0">Category</option>
+                                            <c:forEach items="${requestScope.listCategory}" var="cat">
+                                                <option value="${cat.getCategoryId()}">${cat.getCategoryName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </h4>
+                                </div>
+                                
+                                <div class="post_tag">
+                                    <h4><select class="form-select active" name="brandID">
+                                            <option value="0">Brand</option>
+                                            <c:forEach items="${requestScope.listBrand}" var="brand">
+                                                <option value="${brand.getBrandID()}">${brand.getBrandName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </h4>
+                                </div>
+                                
                                 <label for="image">Image</label>
                                 <input type="file" name="image"><br>
 
@@ -65,7 +94,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Color</label>
-                                    <input name="SalePercent" type="text" class="form-control" required>
+                                    <input name="color" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>OriginalPrice</label>
@@ -75,26 +104,29 @@
                                     <label>SellPrice</label>
                                     <input name="SellPrice" type="text" class="form-control" required>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>SalePercent</label>
+                                    <input name="SalePercent" type="text" class="form-control" required>
+                                </div>
                                 <div class="form-group">
                                     <label>Amount</label>
                                     <input  name="Amount" type="text" class="form-control" required>
                                 </div>
 
                                 <div class="post_tag">
-                                    <h3><select class="form-select active" name="catId">
-                                            <option value="0">Category</option>
-                                            <c:forEach items="${requestScope.listCategory}" var="cat">
-                                                <option value="${cat.getCategoryId()}">${cat.getCategoryName()}</option>
+                                    <h4><select class="form-select active" name="sttID">
+                                            <option value="0">Status</option>
+                                            <c:forEach items="${requestScope.productStatus}" var="status">
+                                                <option value="${status.getStatusID()}">${status. getStatusName()}</option>
                                             </c:forEach>
                                         </select>
-                                    </h3>
+                                    </h4>
                                 </div>
 
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-success" value="Save">
-                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/seller/sellerdashboard.jsp">Back</a></button>
+                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/sellerdashboard">Back</a></button>
                             </div>
                         </form>
                     </div>

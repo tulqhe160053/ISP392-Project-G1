@@ -4,8 +4,11 @@
  */
 package Controler;
 
+import Dao.BrandDAO;
 import Dao.CategoryDAO;
 import Dao.ProductDAO;
+import Dao.ProductImgDAO;
+import Dao.ProductStatusDAO;
 import Model.Brand;
 import Model.Category;
 import Model.Product;
@@ -16,16 +19,20 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
  *
  * @author Trang
  */
+@MultipartConfig(maxFileSize = 16177216)
 @WebServlet(name = "AddProduct", urlPatterns = {"/addproduct"})
 public class AddProduct extends HttpServlet {
 
@@ -40,9 +47,9 @@ public class AddProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               doGet(request, response);
+        doGet(request, response);
 
-     }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -56,11 +63,20 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                    CategoryDAO category_dao = new CategoryDAO();
-                    ArrayList<Category> listCategory = category_dao.selectAll();
-                    request.setAttribute("listCategory", listCategory);
-                    request.getRequestDispatcher("seller/addproduct.jsp").forward(request, response);
-        
+        CategoryDAO category_dao = new CategoryDAO();
+        ArrayList<Category> listCategory = category_dao.selectAll();
+        request.setAttribute("listCategory", listCategory);
+
+        BrandDAO br = new BrandDAO();
+        ArrayList<Brand> listBrand = br.selectAll();
+        request.setAttribute("listBrand", listBrand);
+
+        ProductStatusDAO ps = new ProductStatusDAO();
+        ArrayList<ProductStatus> productStatus = ps.selectAll();
+        request.setAttribute("productStatus", productStatus);
+
+        request.getRequestDispatcher("seller/addproduct.jsp").forward(request, response);
+
     }
 
     /**
@@ -75,46 +91,30 @@ public class AddProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-                HttpSession session = request.getSession();
-                Users u = (Users) session.getAttribute("user");
-                int id = u.getUserID();
-                u.setUserID(id);
-               
-                String pname = request.getParameter("pname");
-                String Description = request.getParameter("Description");
-                String Color = request.getParameter("Color");
-                int OriginalPrice = Integer.parseInt(request.getParameter("OriginalPrice"));
-                int SellPrice = Integer.parseInt(request.getParameter("SellPrice"));
-                int  SalePercent = Integer.parseInt(request.getParameter("SalePercent"));
-                int Amount = Integer.parseInt(request.getParameter("Amount"));
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("user");
+        int id = u.getUserID();
 
-                ProductStatus ps = new ProductStatus();
-                int sttID = Integer.parseInt(request.getParameter("sttID"));
-                ps.setStatusID(sttID);
-                
-                Brand br = new Brand();
-                int brandID = Integer.parseInt(request.getParameter("brandID"));
-                br.setBrandID(brandID);
-                
-                Category cat = new Category();
-                int pCategory = Integer.parseInt(request.getParameter("Category"));
-                cat.setCategoryId(pCategory);
-                
-                Product p = new Product();
-                p.setProductName(pname);
-                p.setDescription(Description);
-                p.setColor(Color);
-                p.setOriginalPrice(OriginalPrice);
-                p.setSellPrice(SellPrice);
-                p.setSalePercent(SalePercent);
-                p.setAmount(Amount);
-                p.setProductStatus(ps);
-                p.setBrand(br);
-                p.setCategory(cat);
-               p.setSeller(u);
-                
-                ProductDAO pdao = new ProductDAO();
-                pdao.AddProduct(p);
+        String pname = request.getParameter("pname");
+        String Description = request.getParameter("Description");
+        String Color = request.getParameter("color");
+        int OriginalPrice = Integer.parseInt(request.getParameter("OriginalPrice"));
+        int SellPrice = Integer.parseInt(request.getParameter("SellPrice"));
+        int SalePercent = Integer.parseInt(request.getParameter("SalePercent"));
+        String amount_string = request.getParameter("Amount");
+        int Amount = Integer.parseInt(amount_string);
+        int catId = Integer.parseInt(request.getParameter("catId"));
+        int sttID = Integer.parseInt(request.getParameter("sttID"));
+        int brandID = Integer.parseInt(request.getParameter("brandID"));
+
+        Part filePart = request.getPart("image");
+        String imageFileName = filePart.getSubmittedFileName();
+        InputStream is = filePart.getInputStream();
+        byte[] data = new byte[is.available()];
+        is.read(data);
+
+        ProductDAO pdao = new ProductDAO();
+        pdao.AddProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, id, Amount, sttID, brandID);
 
         request.getRequestDispatcher("seller/sellerdashboard.jsp").forward(request, response);
     }

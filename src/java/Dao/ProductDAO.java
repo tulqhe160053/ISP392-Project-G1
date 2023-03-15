@@ -295,22 +295,25 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
     }
 
 
-    public void AddProduct(Product p) {
-        String query = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?,?, ?,?)";
+    public void AddProduct( String productname, String description, String color, int originalprice,
+            int salepercent, int sellprice, int catid, int sellerid, 
+            int amount, int statusid, int brandid) {
+        
+        String query = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(query);
-            ps.setString(1, p.getProductName());
-            ps.setString(2, p.getDescription());
-            ps.setString(3, p.getColor());
-            ps.setInt(4, p.getOriginalPrice());
-            ps.setInt(5, p.getSellPrice());
-            ps.setInt(6, p.getSellPrice());
-            ps.setInt(7, p.getCategory().getCategoryId());
-            ps.setInt(8, p.getSeller().getUserID());
-            ps.setInt(9, p.getAmount());
-            ps.setInt(10, p.getProductStatus().getStatusID());
-            ps.setInt(11, p.getBrand().getBrandID());
-
+            ps.setString(1, productname);
+            ps.setString(2, description);
+            ps.setString(3, color);
+            ps.setInt(4, originalprice);
+            ps.setInt(5, salepercent);
+            ps.setInt(6, sellprice);
+            ps.setInt(7, catid);
+            ps.setInt(8, sellerid);
+            ps.setInt(9, amount);
+            ps.setInt(10, brandid);
+            ps.setInt(11, statusid);
+            
             ps.executeUpdate();
 
         } catch (Exception e) {

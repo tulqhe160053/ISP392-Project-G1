@@ -54,7 +54,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Seller Dashboard
                             </a>
-                            <a class="nav-link" href="<%=request.getContextPath()%>/product/listSellproduct.jsp">
+                            <a class="nav-link" href="<%=request.getContextPath()%>/ListSellProduct">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 My product list
                             </a>
