@@ -57,7 +57,7 @@
                             <h2>Manage <b>Products</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"> <span>Add New Product</span></a>
+                            <a href="<%=request.getContextPath()%>/addproduct" class="btn btn-success" data-toggle="modal"> <span>Add New Product</span></a>
                             <a href="<%=request.getContextPath()%>/categoryseller" class="btn btn-warning" > <span>Manage Categories</span></a>						
                         </div>
                     </div>

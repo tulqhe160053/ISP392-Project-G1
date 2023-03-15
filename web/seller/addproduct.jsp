@@ -45,7 +45,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="AddProduct" method="post">
+                        <form action="addproduct" method="post">
                             <div class="modal-header">						
                                 <h4 class="text-warning">New product</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

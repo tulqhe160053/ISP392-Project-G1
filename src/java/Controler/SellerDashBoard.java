@@ -4,12 +4,17 @@
  */
 package Controler;
 
+import Dao.OrderDAO;
+import Dao.OrderProductDAO;
+import Dao.ProductDAO;
+import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -28,8 +33,24 @@ public class SellerDashBoard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+            
+            HttpSession session = (HttpSession) request.getSession();
+            Users user = (Users) session.getAttribute("user");
+            int userId = user.getUserID();
+            
+            ProductDAO pdao = new ProductDAO();
+            OrderDAO odao = new OrderDAO();
+            OrderProductDAO opdao = new OrderProductDAO();
 
+            int countProduct = pdao.countProductbySellerID(userId);
+            request.setAttribute("total", countProduct);
+            
+            
+            
+            
+
+            request.getRequestDispatcher("seller/sellerdashboard.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
