@@ -69,14 +69,12 @@ public class ListSellProduct extends HttpServlet {
         
         ProductImgDAO dal = new ProductImgDAO();
         ArrayList<ProductImg> i = dal.selectAll();
-        
+        request.setAttribute("ListI", i);
         
 
         ProductDAO dao = new ProductDAO() ;
         ArrayList<Product> p = dao.getBySellerID(userId );
         request.setAttribute("listP", p);
-        request.setAttribute("ListI", i);
-//        response.getWriter().print(t);
         request.getRequestDispatcher("/product/listSellproduct.jsp").forward(request, response);
     }
 
