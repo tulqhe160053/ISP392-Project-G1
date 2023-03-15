@@ -64,6 +64,17 @@ public class BrandDAO extends MyDAO implements DAOInterface<Brand> {
         }
         return (ketqua);
     }
+    
+    
+    public void addbrand(String brandname) {
+        try {
+            xSql = "INSERT INTO dbo.Brand(BrandName)VALUES(N'"+brandname+"')";
+            ps = con.prepareStatement(xSql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void insert(Brand t) {
