@@ -21,7 +21,7 @@ import Model.Users;
 
 /**
  *
- * @author Admin
+ * @author Trang
  */
 public class EditFeedback extends HttpServlet {
 
@@ -54,22 +54,14 @@ public class EditFeedback extends HttpServlet {
             throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");         
-            String url = "/feedback/editfeedback.jsp";
-        try {
-            String productId_String = request.getParameter("productID");
-
-                int productID = Integer.parseInt(productId_String);
-                Product product_save = new Product();
-                product_save.setProductID(productID);             
-                ProductDAO product_dao = new ProductDAO();
-                Product product = product_dao.selectById(product_save);
-                request.setAttribute("product", product);
-                request.getRequestDispatcher(url).forward(request, response);
-                
-           
-        } catch (Exception e) {
-            System.err.println(e);
-        }       
+            
+            String feedbackId_String = request.getParameter("id");
+            int feedbackId = Integer.parseInt(feedbackId_String);
+            FeedbackDAO dao  = new FeedbackDAO();
+            Feedback f = dao.getFeedbacksById(feedbackId);
+            request.setAttribute("editF", f);
+            
+            request.getRequestDispatcher("feedback/editfeedback.jsp").forward(request, response);
     }
 
     /**
@@ -84,30 +76,16 @@ public class EditFeedback extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             HttpSession session = request.getSession();
-            Users user = (Users) session.getAttribute("user");
+            
+            String feedbackId_String = request.getParameter("id");
+            int feedbackId = Integer.parseInt(feedbackId_String);
+            
             FeedbackDAO feedbackDAO = new FeedbackDAO();
-            // get current product id
-            String productId_String = request.getParameter("productID");
-            int productID = Integer.parseInt(productId_String);
-            // get input rating
             int star = Integer.parseInt(request.getParameter("star-value"));
-            String feedback = request.getParameter("feedback-text");
-            // edit feedback
-            Product p = new Product();
-            Feedback userFeedback = new Feedback();
-            p.setProductID(productID);
-            user.getUserID();
-            userFeedback.setStar(star);
-            userFeedback.setFeedbackDetail(feedback);
-            System.out.println(userFeedback.toString());
+            String des = request.getParameter("feedback-text");
+            feedbackDAO.editFeedback(star, des, feedbackId);
 
-            // add feedback to database
-            feedbackDAO.editFeedback(userFeedback ,p , user);
-
-            // redirect 
-            response.sendRedirect("home");
-        
-
+            response.sendRedirect("listmyfeedback");
         
     }
 

@@ -183,7 +183,7 @@
                             <div class="feedback-form mt-5 mb-5 ml-5 mr-5">
 
                                 <div class="header">
-                                    <h3 class="text-dark">Add feedback for product</h3>
+                                    <h3 class="text-dark">Edit feedback for product</h3>
                                 </div>
 
                                 <div class="star-rating">
@@ -223,12 +223,10 @@
 
         
                                     <div class="feedback-text">
-                                        <form action="<%=request.getContextPath()%>/editfeedback" id="submit-feedback" method="POST" onsubmit="submitFeedback()" >                                    
+                                        <form action="editfeedback?id=${editF.id}" id="submit-feedback" method="POST" onsubmit="submitFeedback()" >                                    
                                         <label for="feedback-text" class="form-label">Your Feedback: </label>
-                                        <textarea name="feedback-text" class="form-control" id="feedback-text" rows="5" placeholder="Write your Feedback here"></textarea>
-                                        <input type="text" class="form-control" name="userName" value="${sessionScope.Feedback.FeebackDetail}" >
+                                        <textarea name = "feedback-text" class="form-control"  placeholder="enter content">${editF.feedbackDetail}</textarea>
                                         <input type="hidden" id="star-value" name="star-value">                                        
-                                        <input type="hidden" id="productID" name="productID" value="${product.getProductID()}">
                                         <button type="submit" class="btn btn-warning mt-5" >Submit</button>                                   
                                          </form>
                                 </div>

@@ -82,14 +82,13 @@ public class FeedbackDAO extends MyDAO {
         }
     }
 
-    public void editFeedback(Feedback feedback, Product p, Users u) {
-        String sql = "update into Feedback values (?,?,?,?)";
+    public void editFeedback(int star, String des, int id) {
+        String sql = "update  Feedback set Star = ?, FeedbackDetail = ? where ID = ?";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, u.getUserID());
-            ps.setInt(2, p.getProductID());
-            ps.setInt(3, feedback.getStar());
-            ps.setString(4, feedback.getFeedbackDetail());
+            ps.setInt(1, star);
+            ps.setString(2, des);
+            ps.setInt(3, id);
             ps.executeUpdate();
 
         } catch (Exception e) {

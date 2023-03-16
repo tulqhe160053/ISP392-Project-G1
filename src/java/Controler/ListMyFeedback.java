@@ -52,7 +52,6 @@ public class ListMyFeedback extends HttpServlet {
                 HttpSession session = (HttpSession) request.getSession();
                 Users user = (Users) session.getAttribute("user");
                 int userId = user.getUserID();
-                
                 FeedbackDAO dao = new FeedbackDAO() ;
                 ArrayList<Feedback> f = dao.getFeedbacksByUserId(userId );
                 request.setAttribute("listF", f);

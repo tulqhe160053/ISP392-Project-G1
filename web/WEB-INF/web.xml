@@ -28,6 +28,10 @@
         <servlet-name>AddFeedback</servlet-name>
         <servlet-class>Controler.AddFeedback</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>EditFeedback</servlet-name>
+        <servlet-class>Controler.EditFeedback</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>OrderServlet</servlet-name>
         <servlet-class>Controler.OrderServlet</servlet-class>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>AddFeedback</servlet-name>
         <url-pattern>/addfeedback</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>EditFeedback</servlet-name>
+        <url-pattern>/editfeedback</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderServlet</servlet-name>

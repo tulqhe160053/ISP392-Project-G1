@@ -57,7 +57,7 @@
                                 <td>${f.feedbackDetail}</td>
 
                                 <td>
-                                    <a href="editfeedback?id=${f.product.productID}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
+                                    <a href="editfeedback?id=${f.id}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
                                     <a href="#" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
                                 </td>
                             </tr>
