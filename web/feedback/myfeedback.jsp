@@ -58,7 +58,7 @@
 
                                 <td>
                                     <a href="editfeedback?id=${f.id}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
-                                    <a href="#" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
+                                    <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="deletefeedback?id=${f.id}"><i class="icofont-ui-delete"></i> Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>

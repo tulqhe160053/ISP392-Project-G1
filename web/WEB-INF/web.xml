@@ -28,7 +28,7 @@
         <servlet-name>AddFeedback</servlet-name>
         <servlet-class>Controler.AddFeedback</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>EditFeedback</servlet-name>
         <servlet-class>Controler.EditFeedback</servlet-class>
     </servlet>
@@ -148,6 +148,10 @@
         <servlet-name>FilterOrderServlet</servlet-name>
         <servlet-class>Controler.FilterOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteFeedback</servlet-name>
+        <servlet-class>Controler.DeleteFeedback</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -172,7 +176,7 @@
         <servlet-name>AddFeedback</servlet-name>
         <url-pattern>/addfeedback</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>EditFeedback</servlet-name>
         <url-pattern>/editfeedback</url-pattern>
     </servlet-mapping>
@@ -295,6 +299,10 @@
     <servlet-mapping>
         <servlet-name>FilterOrderServlet</servlet-name>
         <url-pattern>/filterseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedback</servlet-name>
+        <url-pattern>/deletefeedback</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

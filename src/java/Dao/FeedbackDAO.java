@@ -96,6 +96,16 @@ public class FeedbackDAO extends MyDAO {
         }
     }
     
+    public void deleteFeedback(int id) {
+        String query = "delete from feedback where id = ?";
+        try{
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e){
+        }
+    }
+    
         public ArrayList<Feedback> getFeedbacksByUserId(int userId) {
         String query = "SELECT * FROM Feedback WHERE UserID = ?";
         try {
