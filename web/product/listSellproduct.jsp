@@ -94,7 +94,7 @@
 
 
                                 <td>
-                                    <a href="load_product?pid=${p.productID}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
+                                    <a href="editproduct?pid=${p.productID}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
                                     <a href="delete_product?pid=${p.productID}" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
                                 </td>
                             </tr>

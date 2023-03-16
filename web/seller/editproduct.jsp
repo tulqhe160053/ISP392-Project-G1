@@ -1,8 +1,9 @@
 <%-- 
-    Document   : addproduct
-    Created on : Mar 6, 2023, 1:18:36 PM
+    Document   : editproduct
+    Created on : Mar 17, 2023, 3:32:42 AM
     Author     : Trang
 --%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -63,7 +64,7 @@
 
                                 <div class="post_tag">
                                     <h4><select class="form-select active" name="catId">
-                                            <option value="0">Category</option>
+                                            <option value="0">${editP.category.categoryName}</option>
                                             <c:forEach items="${requestScope.listCategory}" var="cat">
                                                 <option value="${cat.getCategoryId()}">${cat.getCategoryName()}</option>
                                             </c:forEach>
@@ -73,7 +74,7 @@
                                 
                                 <div class="post_tag">
                                     <h4><select class="form-select active" name="brandID">
-                                            <option value="0">Brand</option>
+                                            <option value="0">${editP.brand.brandName}</option>
                                             <c:forEach items="${requestScope.listBrand}" var="brand">
                                                 <option value="${brand.getBrandID()}">${brand.getBrandName()}</option>
                                             </c:forEach>
@@ -86,36 +87,36 @@
 
                                 <div class="form-group">
                                     <label>Product Name</label>
-                                    <input name="pname" type="text" class="form-control" required>
+                                    <input value = "${editP.productName}" name="pname" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name="Description" class="form-control" id="Description" rows="5" placeholder="Write product description here"></textarea>
+                                    <textarea name = "Description" class="form-control"  placeholder="enter content">${editP.description}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Color</label>
-                                    <input name="color" type="text" class="form-control" required>
+                                    <input value = "${editP.color}" name="color" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>OriginalPrice</label>
-                                    <input type="number"  name="OriginalPrice" min="1" >
+                                    <input  type="number"  name="OriginalPrice" value = "${editP.originalPrice}"min="1" >
                                 </div>
                                 <div class="form-group">
                                     <label>SellPrice</label>
-                                    <input type="number"  name="SellPrice" min="1" >
+                                    <input type="number"  name="SellPrice" value = "${editP.sellPrice}" min="1" >
                                 </div>
                                 <div class="form-group">
                                     <label>SalePercent</label>
-                                    <input type="number"  name="SalePercent" min="0" >
+                                    <input type="number"  name="SalePercent" value = "${editP.salePercent}" min="0" >
                                 </div>
                                 <div class="form-group">
                                     <label>Amount</label>
-                                    <input type="number"  name="Amount" min="1" >
+                                    <input type="number"  name="Amount" value = "${editP.amount}" min="1" >
                                 </div>
 
                                 <div class="post_tag">
                                     <h4><select class="form-select active" name="sttID">
-                                            <option value="0">Status</option>
+                                            <option value="0">${editP.productStatus.statusName}</option>
                                             <c:forEach items="${requestScope.productStatus}" var="status">
                                                 <option value="${status.getStatusID()}">${status. getStatusName()}</option>
                                             </c:forEach>
@@ -141,3 +142,4 @@
 
     </body>
 </html>
+

@@ -319,6 +319,33 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         } catch (Exception e) {
         }
     }
+    
+        public void editProduct( String productname, String description, String color, int originalprice,
+            int salepercent, int sellprice, int catid, int amount, int statusid, int brandid, int productid) {
+        
+        String query = "UPDATE  Product SET ProductName = ?,  Description = ?, color = ?, OriginalPrice = ?"
+                + "SellPrice = ?, SalePercent = ?, CatID = ?, Amount = ?, StatusID = ?, BrandID = ? "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?) "
+                + "WHERE ID = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, productname);
+            ps.setString(2, description);
+            ps.setString(3, color);
+            ps.setInt(4, originalprice);
+            ps.setInt(5, salepercent);
+            ps.setInt(6, sellprice);
+            ps.setInt(7, catid);
+            ps.setInt(8, amount);
+            ps.setInt(9, brandid);
+            ps.setInt(10, statusid);
+            ps.setInt(11,productid );
+            
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
 
     @Override
     public void insert(Product t) {
