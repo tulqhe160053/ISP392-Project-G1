@@ -32,7 +32,7 @@
                         Manager Orders
                     </a>
 
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/ListSellProduct">
                         <div class="sb-nav-link-icon"><i class="fas fa-product-hunt"></i></div>
                         Manager Product
                     </a>

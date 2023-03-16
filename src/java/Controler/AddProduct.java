@@ -116,7 +116,7 @@ public class AddProduct extends HttpServlet {
         ProductDAO pdao = new ProductDAO();
         pdao.AddProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, id, Amount, sttID, brandID);
 
-        request.getRequestDispatcher("seller/sellerdashboard.jsp").forward(request, response);
+        response.sendRedirect("sellerdashboard");
     }
 
     /**

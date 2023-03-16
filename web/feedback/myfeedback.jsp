@@ -44,49 +44,25 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">ProductName</th>
+                                <th scope="col">ProductID</th>
                                 <th scope="col">Star</th>
                                 <th scope="col">Detail</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <c:set var="sum" value="0"></c:set>
-                            <c:forEach items="${listProduct}" var="product">
-                                <c:set var="category" value="${product.getCategory()}"></c:set>
-                                <c:set var="imgLink" value="${product.getImgLink()}"></c:set>
-                                    <tr>
-                                        <td>
-                                            <div class="media">
-                                                <div class="d-flex">
-                                                    <img src="./assets/imgProduct/${category.getCategoryName()}/${imgLink}" alt="error" style="width: 50px">
-                                            </div>
-                                            <div class="media-body">
-                                                <p>${product.getProductName()}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${product.getColor()}</h5>
-                                    </td>
-                                    <td>
-                                        <h5>$${product.getOriginalPrice()}</h5>
-                                    </td>
-                                    <td>                                                  
-                                        <h5>$${product.getSellPrice()}</h5>
-                                    </td>
-                                    <td>                                                  
-                                        <h5>${category.getCategoryName()}</h5>
-                                    </td>
-                                    <td>                                                  
-                                        <h5>${product.getAmount()}</h5>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" ><a class="text-white" href="product?action=deleteProduct&productId=${product.getProductId()}"><i class="fa fa-trash"></i></a></button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
+                    <tbody>
+                        <c:forEach items="${listF}" var="f">
+                            <tr>
+                                <td>${f.product.productID}</td>
+                                <td>${f.star}</td>
+                                <td>${f.feedbackDetail}</td>
+
+                                <td>
+                                    <a href="editfeedback?id=${f.product.productID}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
+                                    <a href="#" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
                     </table>
                 </div>
             </div>

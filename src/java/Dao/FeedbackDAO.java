@@ -96,6 +96,32 @@ public class FeedbackDAO extends MyDAO {
             System.out.println(e);
         }
     }
+    
+        public ArrayList<Feedback> getFeedbacksByUserId(int userId) {
+        String query = "SELECT * FROM Feedback WHERE UserID = ?";
+        try {
+            ArrayList<Feedback> lsFeedback = new ArrayList<>();
+            ps = con.prepareStatement(query);      
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Users u = new Users(rs.getInt("UserID"));
+                Product p = new Product(rs.getInt("ProductId"));
+                Feedback f = new Feedback(
+                        rs.getInt("ID"),
+                        u,
+                        p,
+                        rs.getInt("Star"),
+                        rs.getString("FeedbackDetail")
+                );
+                lsFeedback.add(f);
+            }
+            return lsFeedback;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public int countStar(int star) {
         int count = 0;

@@ -4,12 +4,17 @@
  */
 package Controler;
 
+import Dao.FeedbackDAO;
+import Model.Feedback;
+import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,18 +34,7 @@ public class ListMyFeedback extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListMyFeedback</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ListMyFeedback at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        doGet(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,7 +49,16 @@ public class ListMyFeedback extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+                HttpSession session = (HttpSession) request.getSession();
+                Users user = (Users) session.getAttribute("user");
+                int userId = user.getUserID();
+                
+                FeedbackDAO dao = new FeedbackDAO() ;
+                ArrayList<Feedback> f = dao.getFeedbacksByUserId(userId );
+                request.setAttribute("listF", f);
+                request.getRequestDispatcher("/feedback/myfeedback.jsp").forward(request, response);
+                
+                
     }
 
     /**
