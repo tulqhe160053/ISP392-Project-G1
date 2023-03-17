@@ -68,7 +68,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Image</th>
+                            <!--<th>Image</th>-->
                             <th>Original Price</th>
                             <th>Sell Price</th>
                             <th>Sale Percent</th>
@@ -83,7 +83,7 @@
                             <tr>
                                 <td>${p.productID}</td>
                                 <td>${p.productName}</td>
-                                <td><img src="assets/product_img/${p.category.categoryName}/${p.brand.brandName}/${p.img.productImgUrl}" alt="error" style="width: 50px"></td>
+                                <!--<td><img src="assets/product_img/${p.category.categoryName}/${p.brand.brandName}/${p.img.productImgUrl}" alt="error" style="width: 50px"></td>-->
                                 <td>${p.originalPrice}$</td>
                                 <td>${p.sellPrice}$</td>
                                 <td>${p.salePercent}</td>
@@ -95,7 +95,7 @@
 
                                 <td>
                                     <a href="editproduct?pid=${p.productID}" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
-                                    <a href="delete_product?pid=${p.productID}" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
+                                    <a href="deleteproduct?pid=${p.productID}" onclick="return confirm('Are you sure you want to delete these Product?');" class="text-danger" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
                                 </td>
                             </tr>
                         </c:forEach>

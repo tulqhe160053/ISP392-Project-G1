@@ -345,6 +345,16 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         } catch (Exception e) {
         }
     }
+        
+        public void deleteProduct(int id) {
+            String query = "delete from product where productid = ?";
+            try{
+                ps = con.prepareStatement(query);
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            } catch (Exception e){
+            }
+    }
 
     @Override
     public void insert(Product t) {
