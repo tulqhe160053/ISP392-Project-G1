@@ -48,7 +48,7 @@
                         Manager Blog
                     </a>
                     
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/sliderlistservlet">
                         <div class="sb-nav-link-icon"><i class="fas fa-s"></i></div>
                         Manager Slider
                     </a>

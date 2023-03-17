@@ -11,7 +11,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
         <title>Add Product</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -21,7 +21,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="<%=request.getContextPath()%>/css/managerproduct.css" rel="stylesheet" type="text/css"/>
-                <link rel="stylesheet" href="<%=request.getContextPath()%>/css/linearicons.css">
+        
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/linearicons.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/themify-icons.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css">
@@ -31,7 +32,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.css" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.skinFlat.css" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
-        <style>
+       <style>
             img{
                 width: 200px;
                 height: 120px;
@@ -40,8 +41,7 @@
 
 
 
-    <body>
-
+    <body class="sb-nav-fixed">
 
         <div class="container">
             <div class="table-wrapper">
@@ -55,7 +55,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="addproduct" method="post"enctype='multipart/form-data'>  
+                        <form action="addproduct" method="post" enctype='multipart/form-data'>  
                             <div class="modal-header">						
                                 <h3 class="text-warning">New product</h3>
                             </div>
@@ -137,6 +137,14 @@
 
 
         <script src="<%=request.getContextPath()%>/js/manager.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
 
 
     </body>

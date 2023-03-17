@@ -54,7 +54,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="editproduct" method="post">
+                        <form action="editproduct?pid=${editP.productID}" method="post" enctype='multipart/form-data'>
                             <div class="modal-header">						
                                 <h2 class="text-warning">New product</h2>
                             </div>

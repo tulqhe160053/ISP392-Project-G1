@@ -97,14 +97,20 @@ public class EditProduct extends HttpServlet {
             String pname = request.getParameter("pname");
             String Description = request.getParameter("Description");
             String Color = request.getParameter("color");
-            int OriginalPrice = Integer.parseInt(request.getParameter("OriginalPrice"));
-            int SellPrice = Integer.parseInt(request.getParameter("SellPrice"));
-            int SalePercent = Integer.parseInt(request.getParameter("SalePercent"));
+            String ori_string = request.getParameter("OriginalPrice");
+            int OriginalPrice = Integer.parseInt(ori_string);
+            String sell_string = request.getParameter("SellPrice");
+            int SellPrice = Integer.parseInt(sell_string);
+            String sale_string = request.getParameter("SalePercent");
+            int SalePercent = Integer.parseInt(sale_string);
             String amount_string = request.getParameter("Amount");
             int Amount = Integer.parseInt(amount_string);
-            int catId = Integer.parseInt(request.getParameter("catId"));
-            int sttID = Integer.parseInt(request.getParameter("sttID"));
-            int brandID = Integer.parseInt(request.getParameter("brandID"));
+            String cat_string = request.getParameter("catId");
+            int catId = Integer.parseInt(cat_string);
+            String sta_string = request.getParameter("sttID");
+            int sttID = Integer.parseInt(sta_string);
+            String bra_string = request.getParameter("brandID");
+            int brandID = Integer.parseInt(bra_string);
 
             Part filePart = request.getPart("image");
             String imageFileName = filePart.getSubmittedFileName();
