@@ -18,6 +18,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -38,18 +40,7 @@ public class EditProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditProduct</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+         doGet(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -100,7 +91,31 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+            String productID_String = request.getParameter("pid");
+            int productID = Integer.parseInt(productID_String);
+            
+            String pname = request.getParameter("pname");
+            String Description = request.getParameter("Description");
+            String Color = request.getParameter("color");
+            int OriginalPrice = Integer.parseInt(request.getParameter("OriginalPrice"));
+            int SellPrice = Integer.parseInt(request.getParameter("SellPrice"));
+            int SalePercent = Integer.parseInt(request.getParameter("SalePercent"));
+            String amount_string = request.getParameter("Amount");
+            int Amount = Integer.parseInt(amount_string);
+            int catId = Integer.parseInt(request.getParameter("catId"));
+            int sttID = Integer.parseInt(request.getParameter("sttID"));
+            int brandID = Integer.parseInt(request.getParameter("brandID"));
+
+            Part filePart = request.getPart("image");
+            String imageFileName = filePart.getSubmittedFileName();
+            InputStream is = filePart.getInputStream();
+            byte[] data = new byte[is.available()];
+            is.read(data);
+
+            ProductDAO pdao = new ProductDAO();
+            pdao.editProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, Amount, sttID, brandID, productID);
+        
+            response.sendRedirect("sellerdashboard");
     }
 
     /**

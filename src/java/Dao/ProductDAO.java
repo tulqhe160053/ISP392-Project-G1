@@ -306,13 +306,13 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
             ps.setString(2, description);
             ps.setString(3, color);
             ps.setInt(4, originalprice);
-            ps.setInt(5, salepercent);
-            ps.setInt(6, sellprice);
+            ps.setInt(5, sellprice);
+            ps.setInt(6, salepercent);
             ps.setInt(7, catid);
             ps.setInt(8, sellerid);
             ps.setInt(9, amount);
-            ps.setInt(10, brandid);
-            ps.setInt(11, statusid);
+            ps.setInt(10, statusid);
+            ps.setInt(11, brandid);
             
             ps.executeUpdate();
 
@@ -325,8 +325,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         
         String query = "UPDATE  Product SET ProductName = ?,  Description = ?, color = ?, OriginalPrice = ?"
                 + "SellPrice = ?, SalePercent = ?, CatID = ?, Amount = ?, StatusID = ?, BrandID = ? "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?) "
-                + "WHERE ID = ?";
+                + "WHERE ProductID = ?";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, productname);
@@ -374,10 +373,6 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-
-        for (Product pro : dao.selectAllByCatId(new Category(2, ""))) {
-            System.out.println(pro);
-        }
 
 
 
