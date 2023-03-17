@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>OriginalPrice</label>
-                                    <input  type="number"  name="OriginalPrice" value = "${editP.originalPrice}"min="1" >
+                                    <input  type="number"  name="OriginalPrice" value = "${editP.originalPrice}" min="1" >
                                 </div>
                                 <div class="form-group">
                                     <label>SellPrice</label>
@@ -125,7 +125,7 @@
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-success" value="Save">
-                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/sellerdashboard">Back</a></button>
+                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/ListSellProduct">Back</a></button>
                             </div>
                         </form>
                     </div>

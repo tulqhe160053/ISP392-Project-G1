@@ -5,6 +5,7 @@
 package Controler;
 
 import Dao.ProductDAO;
+import Dao.ProductImgDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -60,7 +61,9 @@ public class DeleteProduct extends HttpServlet {
             String productid_string = request.getParameter("pid");
             int productId = Integer.parseInt(productid_string);        
             ProductDAO dao = new ProductDAO();
+            ProductImgDAO imgdao = new ProductImgDAO();
             dao.deleteProduct(productId);
+            imgdao.deleteProduct(productId);
             response.sendRedirect("ListSellProduct");
     }
 

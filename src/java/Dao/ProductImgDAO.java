@@ -107,6 +107,29 @@ public class ProductImgDAO extends MyDAO implements DAOInterface<ProductImg> {
             e.printStackTrace();
         }
     }
+    
+        public void add(Product p, String productImgUrl) {
+        xSql = "insert into ProductImg (ProductID,ProductImgURL) values (?,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, p.getProductID());
+            ps.setString(2, productImgUrl);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+        public void deleteProduct(int id) {
+            String query = "delete from productimg where productid = ?";
+            try{
+                ps = con.prepareStatement(query);
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            } catch (Exception e){
+            }
+    }
 
     @Override
     public int insertAll(ArrayList<ProductImg> arr) {

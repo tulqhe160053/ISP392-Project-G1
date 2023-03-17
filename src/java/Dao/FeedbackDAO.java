@@ -131,7 +131,7 @@ public class FeedbackDAO extends MyDAO {
         }
         return null;
     }
-
+        
     public int countStar(int star) {
         int count = 0;
         String sql = "select count(*) as count_star from feedback where star = ?";

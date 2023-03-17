@@ -5,7 +5,9 @@
 package Controler;
 
 import Dao.FeedbackDAO;
+import Dao.ProductImgDAO;
 import Model.Feedback;
+import Model.ProductImg;
 import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,9 +54,16 @@ public class ListMyFeedback extends HttpServlet {
                 HttpSession session = (HttpSession) request.getSession();
                 Users user = (Users) session.getAttribute("user");
                 int userId = user.getUserID();
+                
+                ProductImgDAO dal = new ProductImgDAO();
+                ArrayList<ProductImg> i = dal.selectAll();
+                request.setAttribute("ListI", i);
+                
                 FeedbackDAO dao = new FeedbackDAO() ;
                 ArrayList<Feedback> f = dao.getFeedbacksByUserId(userId );
                 request.setAttribute("listF", f);
+                
+                
                 request.getRequestDispatcher("/feedback/myfeedback.jsp").forward(request, response);
                 
                 

@@ -112,6 +112,7 @@ public class EditProduct extends HttpServlet {
             String bra_string = request.getParameter("brandID");
             int brandID = Integer.parseInt(bra_string);
 
+
             Part filePart = request.getPart("image");
             String imageFileName = filePart.getSubmittedFileName();
             InputStream is = filePart.getInputStream();
@@ -121,7 +122,7 @@ public class EditProduct extends HttpServlet {
             ProductDAO pdao = new ProductDAO();
             pdao.editProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, Amount, sttID, brandID, productID);
         
-            response.sendRedirect("sellerdashboard");
+            response.sendRedirect("ListSellProduct");
     }
 
     /**

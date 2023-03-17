@@ -294,6 +294,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         return count;
     }
 
+    
 
     public void AddProduct( String productname, String description, String color, int originalprice,
             int salepercent, int sellprice, int catid, int sellerid, 
@@ -356,6 +357,20 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
             }
     }
 
+        public int getLastProductId(){
+            int productid = 0;
+            String sql = "SELECT MAX (productId) FROM product" ;
+            try {
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    productid = rs.getInt(1);
+                }
+            } catch (Exception e) {
+            }
+            return productid;
+        }
+        
     @Override
     public void insert(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -383,7 +398,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-
+        System.out.println(dao.getLastProductId());
 
 
     }

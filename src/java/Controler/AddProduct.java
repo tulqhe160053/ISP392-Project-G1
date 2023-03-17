@@ -12,6 +12,7 @@ import Dao.ProductStatusDAO;
 import Model.Brand;
 import Model.Category;
 import Model.Product;
+import Model.ProductImg;
 import Model.ProductStatus;
 import Model.Users;
 import jakarta.servlet.http.HttpServletRequest;
@@ -115,8 +116,14 @@ public class AddProduct extends HttpServlet {
 
         ProductDAO pdao = new ProductDAO();
         pdao.AddProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, id, Amount, sttID, brandID);
-
-        response.sendRedirect("sellerdashboard");
+        
+        int lastid = pdao.getLastProductId();
+        Product p = new Product();
+        ProductImgDAO imgdao = new ProductImgDAO();
+        p.setProductID(lastid);
+        imgdao.add(p, imageFileName);
+        
+        response.sendRedirect("ListSellProduct");
     }
 
     /**

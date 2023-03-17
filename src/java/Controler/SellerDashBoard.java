@@ -7,6 +7,7 @@ package Controler;
 import Dao.OrderDAO;
 import Dao.OrderProductDAO;
 import Dao.ProductDAO;
+import Model.Orders;
 import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
@@ -38,14 +40,14 @@ public class SellerDashBoard extends HttpServlet {
             HttpSession session = (HttpSession) request.getSession();
             Users user = (Users) session.getAttribute("user");
             int userId = user.getUserID();
-            
-            ProductDAO pdao = new ProductDAO();
-            OrderDAO odao = new OrderDAO();
-            OrderProductDAO opdao = new OrderProductDAO();
 
+            ProductDAO pdao = new ProductDAO();
             int countProduct = pdao.countProductbySellerID(userId);
             request.setAttribute("total", countProduct);
             
+            OrderDAO odao = new OrderDAO();
+            int sumTotal = odao.sumTotalOrder();
+            request.setAttribute("sum", sumTotal);
             
             
             

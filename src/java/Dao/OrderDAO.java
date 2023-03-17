@@ -341,6 +341,21 @@ public class OrderDAO extends MyDAO implements DAOInterface<Orders> {
         return list;
     }
 
+        public int sumTotalOrder() {
+        int sum = 0;
+        String sql = "SELECT SUM(TotalPrice) AS sum "
+                + "FROM ORDERS;";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                sum = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return sum;
+    }
+
     @Override
     public int insertAll(ArrayList<Orders> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
