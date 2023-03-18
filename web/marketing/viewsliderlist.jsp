@@ -69,7 +69,7 @@
                         <c:forEach items="${listS}" var="s">
                             <tr>
                                 <td>${s.sliderID}</td>
-                                <td><img src="assets/banner_img/${s.urlImage}" alt="error" style="width: 100px"></td>
+                                <td><img src="<%=request.getContextPath()%>/assets/banner_img/${s.urlImage}" alt="error" style="width: 100px"></td>
                                 <td>${s.category.categoryName}</td>
                                 <td><a href="editslider?id=${s.sliderID}" data-toggle="modal" >Edit</a></td>
                                 <td>
