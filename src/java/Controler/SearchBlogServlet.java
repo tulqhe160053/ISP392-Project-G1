@@ -106,7 +106,24 @@ public class SearchBlogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String key= request.getParameter("key");
+        BlogDAO dao = new BlogDAO();
+        List<Blog> blog = dao.searchblog(key);
+        int page, numperpage = 3;
+        int size = blog.size();
+        int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
+        String xpage = request.getParameter("page");
+        if (xpage == null) {
+            page = 1;
+        } else {
+            page = Integer.parseInt(xpage);
+        }
+        int start, end;
+        start = (page - 1) * numperpage;
+        end = Math.min(page * numperpage, size);
+        List<Blog> listblog = dao.getListByPage(blog, start, end);
+        request.setAttribute("listBlog", listblog);
+        request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
     }
 
     /**

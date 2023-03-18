@@ -172,6 +172,27 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return list;
     }
+    public List<Blog> searchblog(String key ){
+        List<Blog> list = new ArrayList<>();
+        try {
+            String sql= "Select * from Blog where title like ? or description like ? or Content like ? ";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%" + key + "%");
+            ps.setString(2, "%" + key + "%");
+            ps.setString(3, "%" + key + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
+                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+            }
+            
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
 
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();

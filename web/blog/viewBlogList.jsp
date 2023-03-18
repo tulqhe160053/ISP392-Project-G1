@@ -170,7 +170,7 @@
                             <aside class="single_sidebar_widget search_widget">
                                 <div class="input-group">
                                     <form action = "searchblog" method="post">
-                                        <input type="text" class="form-control" placeholder="Search Posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
+                                        <input type="text" name = "key" class="form-control" placeholder="Search here">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier" value = "search" ></i></button>
                                         </span>
