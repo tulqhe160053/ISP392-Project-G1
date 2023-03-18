@@ -107,7 +107,7 @@
                                         
                                         <div class="form-outline mb-4">
                                             <input value="${listS.id}" type="text" id="form3Example3" name="id" class="form-control form-control-lg" readonly >
-                                            <label class="form-label" for="form3Example3">ID</label>
+                                            <label class="form-label" for="form3Example3">SHIP ID</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
@@ -116,7 +116,7 @@
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input value="${listS.phoneNum}" type="text" id="form3Example8" name="PhoneNum" class="form-control form-control-lg" >
+                                            <input value="${listS.phoneNum}" type="num" name="PhoneNum" class="form-control form-control-lg" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required>
                                             <label class="form-label" for="form3Example8">Phone Num</label>
                                         </div>
 
@@ -143,9 +143,7 @@
                                                     </c:forEach>
                                                 </select>
                                             </div>
-                                            <div class="col-md-12 form-group">
-                                                <h3 class="text-danger">${mess}</h3>
-                                            </div>
+                                     
 
                                             <div class="d-flex justify-content-end pt-3">
                                                 <input value="SAVE ADDRESS" type="submit" class="primary-btn">
