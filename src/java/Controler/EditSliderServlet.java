@@ -99,7 +99,8 @@ public class EditSliderServlet extends HttpServlet {
             Slider s = dao.selectByID(imageName);
             imageName = s.getUrlImage();
         }
-        
+        dao.updateSlider(imageName, catid, id );
+        response.sendRedirect("sliderlistservlet");
     }
 
     /** 

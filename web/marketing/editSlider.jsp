@@ -61,7 +61,7 @@
         <section class="blog_area">
             <div class="container">
                 <div class="row">
-                    <form action="editslider" method="POST" enctype='multipart/form-data'>
+                    <form action="editslider?id=${slider.sliderID}" method="POST" enctype='multipart/form-data'>
                         <div class="col-lg-8">
                             <div class="blog_left_sidebar">
 
