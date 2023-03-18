@@ -36,10 +36,6 @@
                                 Order Detail
                             </div>
 
-
-
-
-
                             <div class="card-body">
                                 <table width ="100%">
 
@@ -49,8 +45,6 @@
                                             <th>Product Name</th>
                                             <th>Product Image</th>
                                             <th>Total Price</th>
-
-
 
                                         </tr>
                                     </thead>

@@ -93,7 +93,7 @@
                                         <button class="btn btn-primary" type="submit">Save</button>
 
                                         <input class="btn btn-secondary" type="reset" value="Enter again">
-                                        <a href="" class="btn btn-danger">Cancel</a>
+                                        <a href="sliderlistservlet" class="btn btn-danger">Cancel</a>
                                     </div>
                                 </div>
                             </div>
