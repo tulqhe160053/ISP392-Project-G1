@@ -73,6 +73,7 @@ public class ListBlogServlet extends HttpServlet {
         List<Blog> blog = dao.getListByPage(listBlog, start, end);
         request.setAttribute("page", page);
         request.setAttribute("num", num);
+        request.setAttribute("check", "list");
         request.setAttribute("listBlog", blog);
         request.setAttribute("topBlog", topBlog);
         request.setAttribute("category", category);
