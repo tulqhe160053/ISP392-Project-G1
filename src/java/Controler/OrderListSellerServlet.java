@@ -15,10 +15,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 
-/**
- *
- * @author ducth
- */
+
 public class OrderListSellerServlet extends HttpServlet {
 
     /**

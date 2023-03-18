@@ -1,8 +1,4 @@
-<%-- 
-    Document   : userList
-    Created on : Jan 28, 2023, 1:10:32 AM
-    Author     : ducth
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

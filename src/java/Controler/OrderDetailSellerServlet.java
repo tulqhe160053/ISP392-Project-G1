@@ -18,10 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
-/**
- *
- * @author ducth
- */
+
 public class OrderDetailSellerServlet extends HttpServlet {
 
     /**
