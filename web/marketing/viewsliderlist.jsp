@@ -62,6 +62,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Category</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                     <tbody>
@@ -70,7 +71,7 @@
                                 <td>${s.sliderID}</td>
                                 <td><img src="assets/banner_img/${s.urlImage}" alt="error" style="width: 100px"></td>
                                 <td>${s.category.categoryName}</td>
-
+                                <td><a href="editslider?id=${s.sliderID}" data-toggle="modal" >Edit</a></td>
                                 <td>
                                     <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="deleteslider?id=${s.sliderID}" onclick="return confirm('Are you sure you want to delete these Slider?');" ><i class="icofont-ui-delete"></i> Delete</a>
                                 </td>

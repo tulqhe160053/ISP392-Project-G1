@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="blog_post">
-                                            <img src="<%=request.getContextPath()%>/assets/blog_img/${slider.urlImage}" alt="">
+                                            <img src="<%=request.getContextPath()%>/assets/assets_img/${slider.urlImage}" alt="">
                                             <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
 
                                         </div>
@@ -99,7 +99,7 @@
                                         <button class="btn btn-primary" type="submit">Save</button>
 
                                         <input class="btn btn-secondary" type="reset" value="Enter again">
-                                        <a href="mylistblog" class="btn btn-danger">Cancel</a>
+                                        <a href="" class="btn btn-danger">Cancel</a>
                                     </div>
                                 </div>
                             </div>
