@@ -58,7 +58,7 @@ public class DeleteProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            String productid_string = request.getParameter("id");
+            String productid_string = request.getParameter("pid");
             int productId = Integer.parseInt(productid_string);        
             ProductDAO dao = new ProductDAO();
             ProductImgDAO imgdao = new ProductImgDAO();

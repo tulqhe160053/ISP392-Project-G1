@@ -101,34 +101,39 @@ public class EditProduct extends HttpServlet {
         HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("user");
         int id = u.getUserID();
-        
-        String productID_String = request.getParameter("pid");
-        int productID = Integer.parseInt(productID_String);
+        if (u == null){
+            request.getRequestDispatcher("login").forward(request, response);
+        }else{
+            
+                    String productID_String = request.getParameter("pid");
+                    int productID = Integer.parseInt(productID_String);
 
-        String pname = request.getParameter("pname");
-        String Description = request.getParameter("Description");
-        String Color = request.getParameter("color");
-        String ori_string = request.getParameter("OriginalPrice");
-        int OriginalPrice = Integer.parseInt(ori_string);
-        String sell_string = request.getParameter("SellPrice");
-        int SellPrice = Integer.parseInt(sell_string);
-        String sale_string = request.getParameter("SalePercent");
-        int SalePercent = Integer.parseInt(sale_string);
-        String amount_string = request.getParameter("Amount");
-        int Amount = Integer.parseInt(amount_string);
-        String cat_string = request.getParameter("catId");
-        int catId = Integer.parseInt(cat_string);
-        String sta_string = request.getParameter("sttID");
-        int sttID = Integer.parseInt(sta_string);
-        String bra_string = request.getParameter("brandID");
-        int brandID = Integer.parseInt(bra_string);
+                    String pname = request.getParameter("pname");
+                    String Description = request.getParameter("Description");
+                    String Color = request.getParameter("color");
+                    String ori_string = request.getParameter("OriginalPrice");
+                    int OriginalPrice = Integer.parseInt(ori_string);
+                    String sell_string = request.getParameter("SellPrice");
+                    int SellPrice = Integer.parseInt(sell_string);
+                    String sale_string = request.getParameter("SalePercent");
+                    int SalePercent = Integer.parseInt(sale_string);
+                    String amount_string = request.getParameter("Amount");
+                    int Amount = Integer.parseInt(amount_string);
+                    String cat_string = request.getParameter("catId");
+                    int catId = Integer.parseInt(cat_string);
+                    String sta_string = request.getParameter("sttID");
+                    int sttID = Integer.parseInt(sta_string);
+                    String bra_string = request.getParameter("brandID");
+                    int brandID = Integer.parseInt(bra_string);
 
 
         ProductDAO pdao = new ProductDAO();
         pdao.editProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, id, Amount, sttID, brandID, productID);
 
 
-        request.getRequestDispatcher("sellerdashboard").forward(request, response);
+        request.getRequestDispatcher("ListSellProduct").forward(request, response);
+        }
+
     }
 
     /**
