@@ -153,15 +153,58 @@
                                 </article>
 
                             </c:forEach>
-                            <nav class="blog-pagination justify-content-center d-flex">
-                                <ul class="pagination">
-                                    <c:set var="page" value="${page}"/>
-                                    <c:forEach begin="${1}" end="${num}" var="i">
-                                        <li class="page-item"><a class="page-link ${i==page?"current":""}" href="listblog?page=${i}">${i}</a></li>
-                                        </c:forEach>
-                                </ul>
-                            </nav>
-
+                            <c:if test="${requestScope.check.equals('list')}">
+                                <nav class="blog-pagination justify-content-center d-flex">
+                                    <ul class="pagination">
+                                        <c:set var="page" value="${page}"/>
+                                        <c:if test="${requestScope.page > 1}">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="listblog?page=${requestScope.page-1}">Previous</a></li>
+                                            </c:if>
+                                            <c:forEach begin="${1}" end="${num}" var="i">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="listblog?page=${i}">${i}</a></li>
+                                            </c:forEach>
+                                            <c:if test="${requestScope.num > requestScope.page}">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="listblog?page=${requestScope.page+1}">Next</a></li>
+                                            </c:if>  
+                                    </ul>
+                                </nav>
+                            </c:if>
+                            
+                            <c:if test="${requestScope.check.equals('search')}">
+                                <nav class="blog-pagination justify-content-center d-flex">
+                                    <ul class="pagination">
+                                        <c:set var="page" value="${page}"/>
+                                        <c:if test="${requestScope.page > 1}">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog1?key=${requestScope.key}&page=${requestScope.page-1}">Previous</a></li>
+                                            </c:if>
+                                            <c:forEach begin="${1}" end="${num}" var="i">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog1?key=${requestScope.key}&page=${i}">${i}</a></li>
+                                            </c:forEach>
+                                            <c:if test="${requestScope.num > requestScope.page}">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="searchblog1?key=${requestScope.key}&page=${requestScope.page+1}">Next</a></li>
+                                            </c:if>  
+                                    </ul>
+                                </nav>
+                            </c:if>
+                            <c:if test="${requestScope.check.equals('filter')}">
+                                <nav class="blog-pagination justify-content-center d-flex">
+                                    <ul class="pagination">
+                                        <c:set var="page" value="${page}"/>
+                                        <c:if test="${requestScope.page > 1}">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogcategory?catid=${requestScope.id}&page=${requestScope.page-1}">Previous</a></li>
+                                            </c:if>
+                                            <c:forEach begin="${1}" end="${num}" var="i">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogcategory?catid=${requestScope.id}&page=${i}">${i}</a></li>
+                                            </c:forEach>
+                                            <c:if test="${requestScope.num > requestScope.page}">
+                                            <li class="page-item"><a class="page-link ${i==page?"current":""}" href="blogcategory?catid=${requestScope.id}&page=${requestScope.page+1}">Next</a></li>
+                                            </c:if>  
+                                    </ul>
+                                </nav>
+                            </c:if>
+                            
+                            
+                            
                         </div>
 
                     </div>
@@ -169,7 +212,7 @@
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
                                 <div class="input-group">
-                                    <form action = "searchblog" method="post">
+                                    <form action = "searchblog1">
                                         <input type="text" name = "key" class="form-control" placeholder="Search here">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier" value = "search" ></i></button>
@@ -233,7 +276,7 @@
                                 <ul class="list">
                                     <c:forEach items="${category}" var="c">
                                         <li><a  href="blogcategory?catid=${c.categoryId}">${c.categoryName}</a></li>
-                                    </c:forEach>
+                                        </c:forEach>
                                 </ul>
                             </aside>
                         </div>
