@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import Model.Role;
 import Model.UserStatus;
 import Model.Users;
+import Validate.Validate;
 
 /**
  *
@@ -45,12 +46,19 @@ public class EditUser extends HttpServlet {
             String email = request.getParameter("email");
             String phoneNum = request.getParameter("PhoneNum");
             UserDAO dao = new UserDAO();
+            
             int userId = user.getUserID();
             dao.editUser(userName, gender, email, phoneNum, userId);
+            
+            Validate va  = new Validate();
+            boolean validateEmail = va.validateEmail(email);
+            boolean validatePhone = va.checkPhone(phoneNum);
             if (!user.getUserName().equals(userName)) {
                 session.removeAttribute("user");
                 request.getRequestDispatcher("/common/login.jsp").forward(request, response);
-            } else {
+            } else if (validateEmail == false || validatePhone == false) {
+                    request.getRequestDispatcher("common/edituser.jsp").forward(request, response);
+                } else {
                 user.setUserName(userName);
                 user.setGender(gender);
                 user.setEmail(email);

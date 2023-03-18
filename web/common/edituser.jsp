@@ -69,11 +69,10 @@
 
                             <div class="row mt-3">
                                 <div class="col-md-5"> 
-                                    <input type="radio" name="gender" id="radio1" value="male">Male
-                                </div>
-
-                                <div class="col-md-5">
-                                    <input type="radio" name="gender" id="radio2" value="female">Female
+                                    <select name="gender" class="form-control" placeholder="Gender" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Gender'" required>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Email</label>
                                     <input type="text" class="form-control" name="email" value="${sessionScope.user.email}" ></div>
@@ -85,7 +84,8 @@
                                 </div>
 
 
-                                <div class="col-md-12 mt-4"><label for = "pwd">Current status: ${sessionScope.user.getUserStatus().getStatusName()}</label>
+                                <div class="col-md-12 mt-4"><label for = "pwd">Status:</label>
+                                    <input type="text" class="form-control" name="userId" value="${sessionScope.user.getUserStatus().getStatusName()}" readonly >
                                 </div>
                             </div>
                             <div class="mt-5 text-center"><button value="submit" type="submit" class="primary-btn" >Save</button></div>
