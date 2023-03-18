@@ -126,7 +126,7 @@
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-success" value="Save">
-                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/sellerdashboard">Back</a></button>
+                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/ListSellProduct">Back</a></button>
                             </div>
                         </form>
                     </div>

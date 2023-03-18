@@ -85,31 +85,31 @@
 
                                 <div class="form-group">
                                     <label>Product Name</label>
-                                    <input value = "${editP.productName}" name="pname" type="text" class="form-control" required>
+                                    <input value="${editP.getProductName()}" name="pname" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name = "Description" class="form-control"  placeholder="enter content">${editP.description}</textarea>
+                                    <textarea name="Description" class="form-control"  placeholder="enter content" value="${editP.getDescription()}">${editP.getDescription()}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Color</label>
-                                    <input value = "${editP.color}" name="color" type="text" class="form-control" required>
+                                    <input value="${editP.getColor()}" name="color" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>OriginalPrice</label>
-                                    <input  type="number"  name="OriginalPrice" value = "${editP.originalPrice}"  min="1"  >
+                                    <input  type="number"  name="OriginalPrice" value="${editP.getOriginalPrice()}"  min="1"  >
                                 </div>
                                 <div class="form-group">
                                     <label>SellPrice</label>
-                                    <input type="number"  name="SellPrice" value = "${editP.sellPrice}" min="1" >
+                                    <input type="number"  name="SellPrice" value="${editP.getSellPrice()}" min="1" >
                                 </div>
                                 <div class="form-group">
                                     <label>SalePercent</label>
-                                    <input type="number"  name="SalePercent" value = "${editP.salePercent}" min="0" >
+                                    <input type="number"  name="SalePercent" value = "${editP.getSalePercent()}" min="0" >
                                 </div>
                                 <div class="form-group">
                                     <label>Amount</label>
-                                    <input type="number"  name="Amount" value = "${editP.amount}" min="1" >
+                                    <input type="number"  name="Amount" value = "${editP.getAmount()}" min="1" >
                                 </div>
 
                                 <div class="post_tag">
