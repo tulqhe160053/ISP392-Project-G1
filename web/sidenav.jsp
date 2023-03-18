@@ -52,6 +52,11 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-s"></i></div>
                         Manager Slider
                     </a>
+                        
+                    <a class="nav-link" href="ViewBrand">
+                        <div class="sb-nav-link-icon"><i class="fas fa-s"></i></div>
+                        Brand
+                    </a>
 
                     <a class="nav-link" href="">
                         <div class="sb-nav-link-icon"><i class="fas fa-comment"></i></div>
