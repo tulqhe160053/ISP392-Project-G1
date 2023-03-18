@@ -176,6 +176,10 @@
         <servlet-name>DeleteSlider</servlet-name>
         <servlet-class>Controler.DeleteSlider</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteBrand</servlet-name>
+        <servlet-class>Controler.DeleteBrand</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -351,6 +355,10 @@
     <servlet-mapping>
         <servlet-name>DeleteSlider</servlet-name>
         <url-pattern>/deleteslider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBrand</servlet-name>
+        <url-pattern>/DeleteBrand</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

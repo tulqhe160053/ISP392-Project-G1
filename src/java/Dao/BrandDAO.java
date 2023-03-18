@@ -75,6 +75,16 @@ public class BrandDAO extends MyDAO implements DAOInterface<Brand> {
             e.printStackTrace();
         }
     }
+    
+    public void deletebrand(int bid) {
+            String query = "delete from Brand where BrandID = ?";
+            try{
+                ps = con.prepareStatement(query);
+                ps.setInt(1, bid);
+                ps.executeUpdate();
+            } catch (Exception e){
+            }
+    }
 
     @Override
     public void insert(Brand t) {
