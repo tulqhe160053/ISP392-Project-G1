@@ -115,10 +115,10 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Email</label>
-                                    <input type="text" class="form-control" name="email" value="${sessionScope.user.email}" placeholder="Email"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required></div>
+                                    <input type="email" class="form-control" name="email" value="${sessionScope.user.email}" placeholder="Email"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required></div>
                                     
                                 <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label>
-                                    <input type="text" class="form-control" name="PhoneNum" value="${sessionScope.user.phoneNum}" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required></div>
+                                    <input type="num" class="form-control" name="PhoneNum" value="${sessionScope.user.phoneNum}" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required></div>
                                 <div class="col-md-12 form-group">
                                                 <h3 class="text-danger">${mess}</h3>
                                 </div>    
