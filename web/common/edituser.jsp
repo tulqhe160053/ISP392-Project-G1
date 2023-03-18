@@ -56,7 +56,7 @@
                         <div class="d-flex justify-content-center align-items-center mb-3">
                             <h4 class="text-right">User Edit</h4>
                         </div>
-                        <form  action="edituser" method="post" id="contactForm">
+                        <form  action="<%=request.getContextPath()%>/edituser" method="post" id="contactForm">
                             <div class="row mt-3">
                                 <div class="col-md-12"><label for = "pwd">Username</label>
                                     <input type="text" class="form-control" name="userName" value="${sessionScope.user.userName}" ></div>
@@ -86,10 +86,6 @@
 
 
                                 <div class="col-md-12 mt-4"><label for = "pwd">Current status: ${sessionScope.user.getUserStatus().getStatusName()}</label>
-                                    <select class="form-select" name="status_id" id="status" value="${sessionScope.user.getUserStatus().getStatusName()}">
-                                        <option>Active</option>
-                                        <option>Deactive</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="mt-5 text-center"><button value="submit" type="submit" class="primary-btn" >Save</button></div>

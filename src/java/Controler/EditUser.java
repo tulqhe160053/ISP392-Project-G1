@@ -40,25 +40,23 @@ public class EditUser extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             HttpSession session = request.getSession();
             Model.Users user = (Model.Users) session.getAttribute("user");
-            //model.UserStatus id = (model.UserStatus) session.getAttribute("statusid");
             String userName = request.getParameter("userName");
             String gender = request.getParameter("gender");
             String email = request.getParameter("email");
             String phoneNum = request.getParameter("PhoneNum");
             UserDAO dao = new UserDAO();
             int userId = user.getUserID();
-            //int status = id.getId();
             dao.editUser(userName, gender, email, phoneNum, userId);
             if (!user.getUserName().equals(userName)) {
                 session.removeAttribute("user");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
             } else {
                 user.setUserName(userName);
                 user.setGender(gender);
                 user.setEmail(email);
                 user.setPhoneNum(phoneNum);
                 session.setAttribute("user", user);
-                request.getRequestDispatcher("/commom/viewuser.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/viewuser.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
