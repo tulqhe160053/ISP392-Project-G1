@@ -155,7 +155,6 @@
 
 
                                                         <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogdetailmkt?action=blogdetail&blog_id=${b.id}"><i class="fa-solid fa-book"  style="color:#22baa0"></i></a></i></td>
-                                                        <td style="text-align: center"> <a style="margin: 0 10px 0 10px  ;" href="blogdetailmkt?action=delete&bid=${b.id}"><i class="fa-solid fa-trash"style="color:#22baa0"></i></a></i></td>
 
 
 
