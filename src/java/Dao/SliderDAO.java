@@ -7,6 +7,7 @@ package Dao;
 import java.util.ArrayList;
 import Model.Category;
 import Model.Slider;
+import java.sql.SQLException;
 
 /**
  *
@@ -51,6 +52,20 @@ public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
         } catch (Exception e) {
         }
         return count;
+    }
+     
+     public void InsertSlider(String imageLink, String catid ) {
+        try {
+            String sql = "insert into dbo.[Slider] \n" +
+                    "(urlImage, CatID) \n" +
+                    "values (?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, imageLink);
+            ps.setString(2, catid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
