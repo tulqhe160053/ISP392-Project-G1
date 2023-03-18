@@ -5,22 +5,28 @@
 
 package Controler;
 
+import Dao.BlogDAO;
 import Dao.CategoryDAO;
 import Dao.SliderDAO;
+import Model.Blog;
 import Model.Category;
 import Model.Slider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.util.List;
 
 /**
  *
  * @author Admin
  */
+@MultipartConfig(maxFileSize = 16177216)
 public class EditSliderServlet extends HttpServlet {
    
     /** 
@@ -78,7 +84,23 @@ public class EditSliderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        SliderDAO dao = new SliderDAO();
+        String id = request.getParameter("id");
+        String catid = request.getParameter("catid");
+        Part filePart = request.getPart("image");
+        String imageName = null;
+        if (filePart.getSize() > 0) {
+            imageName = filePart.getSubmittedFileName();
+                InputStream is = filePart.getInputStream();
+                byte[] data = new byte[is.available()];
+                is.read(data);
+        } else {
+            // Lấy đường dẫn của ảnh cũ từ CSDL
+            Slider s = dao.selectByID(imageName);
+            imageName = s.getUrlImage();
+        }
+        dao.updateSlider(imageName, catid, id );
+        response.sendRedirect("sliderlistservlet");
     }
 
     /** 

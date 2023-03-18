@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author Tu
  */
 public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
-    
+
     @Override
     public ArrayList<Slider> selectAll() {
         ArrayList<Slider> t = new ArrayList<>();
@@ -62,7 +62,7 @@ public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
         }
         return null;
     }
-    
+
     public int countSlider() {
         int count = 0;
         String sql = "select count(*) as counts from slider";
@@ -76,7 +76,19 @@ public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
         }
         return count;
     }
-    
+
+    public void updateSlider(String id, String urlimage, String catid) {
+        String xSql = "Update Slider set urlimage= ? , catid =? where id =?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, urlimage);
+            ps.setString(2, catid);
+            ps.setString(3, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
     public void InsertSlider(String imageLink, String catid) {
         try {
             String sql = "insert into dbo.[Slider] \n"
@@ -90,7 +102,7 @@ public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
             e.printStackTrace();
         }
     }
-    
+
     public void deleteSlider(int id) {
         String query = "delete from slider where id = ?";
         try {
@@ -100,37 +112,37 @@ public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
         } catch (Exception e) {
         }
     }
-    
+
     @Override
     public Slider selectById(Slider t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void insert(Slider t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public int insertAll(ArrayList<Slider> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void delete(Slider t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public int deleteAll(ArrayList<Slider> arr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void update(int x, Slider t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public static void main(String[] args) {
         SliderDAO dao = new SliderDAO();
         Slider s = dao.selectByID("1");

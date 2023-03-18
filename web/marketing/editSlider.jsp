@@ -45,7 +45,7 @@
         <jsp:include page="../header.jsp" />
         <!-- End Header Area -->
 
-        <!-- Start Banner Area -->
+       
         <section class="banner-area organic-breadcrumb">
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -57,17 +57,11 @@
                 </div>
             </div>
         </section>
-        <!-- End Banner Area -->
-
-        <!--================Blog Categorie Area =================-->
-
-        <!--================Blog Categorie Area =================-->
-
-        <!--================Blog Area =================-->
+        
         <section class="blog_area">
             <div class="container">
                 <div class="row">
-                    <form action="editslider" method="POST" enctype='multipart/form-data'>
+                    <form action="editslider?id=${slider.sliderID}" method="POST" enctype='multipart/form-data'>
                         <div class="col-lg-8">
                             <div class="blog_left_sidebar">
 
@@ -88,7 +82,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="blog_post">
-                                            <img src="<%=request.getContextPath()%>/assets/blog_img/${slider.urlImage}" alt="">
+                                            <img width="1000px"src="<%=request.getContextPath()%>/assets/banner_img/${slider.urlImage}" alt="">
                                             <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
 
                                         </div>
@@ -99,7 +93,7 @@
                                         <button class="btn btn-primary" type="submit">Save</button>
 
                                         <input class="btn btn-secondary" type="reset" value="Enter again">
-                                        <a href="mylistblog" class="btn btn-danger">Cancel</a>
+                                        <a href="" class="btn btn-danger">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +104,7 @@
         </div>
     </section>
 
-    <!--================Blog Area =================-->
+  
 
     <!-- start footer Area -->
     <%@include file="../footer.jsp" %>
