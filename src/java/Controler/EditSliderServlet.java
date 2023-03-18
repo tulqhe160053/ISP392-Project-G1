@@ -62,7 +62,7 @@ public class EditSliderServlet extends HttpServlet {
         CategoryDAO cat = new CategoryDAO();
         List<Category> category = cat.selectAll();
         SliderDAO dao = new SliderDAO();
-        Slider slider = dao.getSliderbyID(id);
+        Slider slider = dao.selectByID(id);
         request.setAttribute("slider", slider);
         request.setAttribute("category", category);
         request.getRequestDispatcher("/marketing/editSlider.jsp").forward(request, response);
