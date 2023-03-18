@@ -67,6 +67,16 @@ public class SliderDAO extends MyDAO implements DAOInterface<Slider> {
             e.printStackTrace();
         }
     }
+     
+        public void deleteSlider(int id) {
+            String query = "delete from slider where id = ?";
+            try{
+                ps = con.prepareStatement(query);
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            } catch (Exception e){
+            }
+    }
 
     @Override
     public Slider selectById(Slider t) {

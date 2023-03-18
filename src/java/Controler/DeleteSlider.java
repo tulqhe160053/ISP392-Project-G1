@@ -4,8 +4,7 @@
  */
 package Controler;
 
-import Dao.ProductDAO;
-import Dao.ProductImgDAO;
+import Dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class DeleteProduct extends HttpServlet {
+public class DeleteSlider extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +35,10 @@ public class DeleteProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteProduct</title>");            
+            out.println("<title>Servlet DeleteSlider</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteSlider at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,14 +56,12 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            String productid_string = request.getParameter("id");
-            int productId = Integer.parseInt(productid_string);        
-            ProductDAO dao = new ProductDAO();
-            ProductImgDAO imgdao = new ProductImgDAO();
-            dao.deleteProduct(productId);
-            imgdao.deleteProduct(productId);
-            response.sendRedirect("ListSellProduct");
+            String id_string = request.getParameter("id");
+            int sliderId = Integer.parseInt(id_string);        
+            
+            SliderDAO dao = new SliderDAO();
+            dao.deleteSlider(sliderId);
+            response.sendRedirect("sliderlistservlet");
     }
 
     /**

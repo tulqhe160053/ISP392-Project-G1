@@ -172,6 +172,10 @@
         <servlet-name>BlogCategoryServlet</servlet-name>
         <servlet-class>Controler.BlogCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteSlider</servlet-name>
+        <servlet-class>Controler.DeleteSlider</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -343,6 +347,10 @@
     <servlet-mapping>
         <servlet-name>BlogCategoryServlet</servlet-name>
         <url-pattern>/blogcategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSlider</servlet-name>
+        <url-pattern>/deleteslider</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>

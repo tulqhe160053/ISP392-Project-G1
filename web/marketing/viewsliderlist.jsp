@@ -72,8 +72,7 @@
                                 <td>${s.category.categoryName}</td>
 
                                 <td>
-                                    <a href="#" class="edit" data-toggle="modal"><i class="icofont-ui-edit" data-toggle="tooltip" title="Edit">Edit  </i></a>
-                                    <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#" onclick="return confirm('Are you sure you want to delete these Slider?');" ><i class="icofont-ui-delete"></i> Delete</a>
+                                    <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="deleteslider?id=${s.sliderID}" onclick="return confirm('Are you sure you want to delete these Slider?');" ><i class="icofont-ui-delete"></i> Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
