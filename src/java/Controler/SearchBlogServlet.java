@@ -109,6 +109,8 @@ public class SearchBlogServlet extends HttpServlet {
         String key= request.getParameter("key");
         BlogDAO dao = new BlogDAO();
         List<Blog> blog = dao.searchblog(key);
+        CategoryDAO cat = new CategoryDAO();
+        List<Category> category = cat.selectAll();
         int page, numperpage = 3;
         int size = blog.size();
         int num = (size % 3 == 0 ? (size / 3) : ((size / 3)) + 1);//so trang
@@ -122,7 +124,10 @@ public class SearchBlogServlet extends HttpServlet {
         start = (page - 1) * numperpage;
         end = Math.min(page * numperpage, size);
         List<Blog> listblog = dao.getListByPage(blog, start, end);
+        request.setAttribute("page", page);
+        request.setAttribute("num", num);
         request.setAttribute("listBlog", listblog);
+        request.setAttribute("category", category);
         request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
     }
 
