@@ -5,6 +5,7 @@
 package Controler;
 
 import Dao.BlogDAO;
+import Dao.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import Model.Blog;
+import Model.Category;
 
 /**
  *
@@ -57,7 +59,8 @@ public class MyListBlogServlet extends HttpServlet {
         
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectMyAll(userId);
-        
+        CategoryDAO cat = new CategoryDAO();
+        List<Category> category = cat.selectAll();
         int page, numperpage = 5;
         int size = listBlog.size();
         int num = (size % 5 == 0 ? (size / 5) : ((size / 5)) + 1);//so trang
@@ -74,6 +77,7 @@ public class MyListBlogServlet extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("num", num);
         request.setAttribute("listBlog", blog);
+        request.setAttribute("category", category);
         request.getRequestDispatcher("blog/viewMyBlogList.jsp").forward(request, response);
 
     }
