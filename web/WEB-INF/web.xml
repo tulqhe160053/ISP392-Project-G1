@@ -168,6 +168,10 @@
         <servlet-name>AddSlider</servlet-name>
         <servlet-class>Controler.AddSlider</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogCategoryServlet</servlet-name>
+        <servlet-class>Controler.BlogCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -335,6 +339,10 @@
     <servlet-mapping>
         <servlet-name>AddSlider</servlet-name>
         <url-pattern>/AddSlider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogCategoryServlet</servlet-name>
+        <url-pattern>/blogcategory</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
