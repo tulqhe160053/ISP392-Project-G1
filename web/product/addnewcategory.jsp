@@ -46,34 +46,27 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Category</b></h2>
+                            <h2>Add <b>Category</b></h2>
                         </div>
-                        <div class="col-sm-6">
-                                <a href="<%=request.getContextPath()%>/product/addnewcategory.jsp" class="btn btn-success" data-toggle="modal"> <span>Add New Category</span></a>
-                            </div>
+                        <form action ="<%=request.getContextPath()%>/addnewcategory">
+                            <div class="row">
+                                <label for = "pwd"></label><input required name="name" type="text" class="form-control"  placeholder="enter category  name">
+                                <div class="col-md-12 mt-5 text-center">
+                                    <button class="btn btn-primary" type="submit">Save</button>
 
+                                    <input class="btn btn-secondary" type="reset" value="Enter again">
+                                    <a href="<%=request.getContextPath()%>/categoryseller" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${category}" var="c">
-                        <tr>
-                            <td>${c.categoryId}</td>
-                            <td>${c.categoryName}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+
             </div>
         </div>
 
     </body>        
     <jsp:include page="../footer.jsp" />
 </html>
+
