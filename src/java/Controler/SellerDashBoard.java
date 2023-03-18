@@ -47,8 +47,9 @@ public class SellerDashBoard extends HttpServlet {
             
             OrderDAO odao = new OrderDAO();
             int sumTotal = odao.sumTotalOrder();
+            int countOrder = odao.countOrder();
             request.setAttribute("sum", sumTotal);
-            
+            request.setAttribute("countO", countOrder);
             
             
 
