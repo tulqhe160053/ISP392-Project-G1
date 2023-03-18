@@ -45,7 +45,7 @@
         <jsp:include page="../header.jsp" />
         <!-- End Header Area -->
 
-        <!-- Start Banner Area -->
+       
         <section class="banner-area organic-breadcrumb">
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -57,13 +57,7 @@
                 </div>
             </div>
         </section>
-        <!-- End Banner Area -->
-
-        <!--================Blog Categorie Area =================-->
-
-        <!--================Blog Categorie Area =================-->
-
-        <!--================Blog Area =================-->
+        
         <section class="blog_area">
             <div class="container">
                 <div class="row">
@@ -110,7 +104,7 @@
         </div>
     </section>
 
-    <!--================Blog Area =================-->
+  
 
     <!-- start footer Area -->
     <%@include file="../footer.jsp" %>
