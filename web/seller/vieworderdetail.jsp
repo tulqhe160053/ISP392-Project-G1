@@ -18,7 +18,7 @@
 
     </head>
     <body class="sb-nav-fixed">
-         <jsp:include page="../nav.jsp"/>
+        <jsp:include page="../nav.jsp"/>
         <div id="layoutSidenav">
             <jsp:include page="../sidenav.jsp"/>
             <div id="layoutSidenav_content">
@@ -26,15 +26,17 @@
                     <div class="container-fluid px-4">
 
                         <h1 class="mt-4">Order Detail</h1>
-
-
-
+                        <div class="mt-auto">
+                            <a href="<%=request.getContextPath()%>/orderseller" class="btn btn-danger ">Back</a>
+                        </div>
 
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 Order Detail
                             </div>
+
+
 
 
 
@@ -61,9 +63,9 @@
                                                         <td>${d.product.productID}</td>
                                                         <td>${d.product.productName}</td>
                                                         <td><img style="width : 120px;" src="<%=request.getContextPath()%>/assets/product_img/${d.product.category.categoryName}/${d.product.brand.brandName}/${img.productImgUrl}" alt="alt"/></td> 
-                                                           
+
                                                         <td>${d.amount}$</td>
-                                                         
+
                                                     </tr>
                                                 </tbody>
                                             </c:if>
