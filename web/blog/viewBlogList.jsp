@@ -231,10 +231,9 @@
                             <aside class="single-sidebar-widget tag_cloud_widget">
                                 <h4 class="widget_title">Tag Clouds</h4>
                                 <ul class="list">
-                                    <li><a href="#">Laptop</a></li>
-                                    <li><a href="#">Smartphone</a></li>
-                                    <li><a href="#">Accessories</a></li>
-                                    <li><a href="#">Tablet</a></li>
+                                    <c:forEach items="${category}" var="c">
+                                        <li><a  href="blogcategory?catid=${c.categoryId}">${c.categoryName}</a></li>
+                                    </c:forEach>
                                 </ul>
                             </aside>
                         </div>

@@ -5,6 +5,7 @@
 package Controler;
 
 import Dao.BlogDAO;
+import Dao.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import Model.Blog;
+import Model.Category;
 
 /**
  *
@@ -50,7 +52,8 @@ public class ListBlogServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        
+        CategoryDAO cat = new CategoryDAO();
+        List<Category> category = cat.selectAll();
         
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectAll();
@@ -72,7 +75,7 @@ public class ListBlogServlet extends HttpServlet {
         request.setAttribute("num", num);
         request.setAttribute("listBlog", blog);
         request.setAttribute("topBlog", topBlog);
-        
+        request.setAttribute("category", category);
         request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
     }
 
