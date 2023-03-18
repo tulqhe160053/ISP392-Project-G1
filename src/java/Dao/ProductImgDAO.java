@@ -120,6 +120,18 @@ public class ProductImgDAO extends MyDAO implements DAOInterface<ProductImg> {
             e.printStackTrace();
         }
     }
+        public void update(Product p, String productImgUrl) {
+        xSql = "Update ProductImg set ProductID = ?, productImgUrl = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, p.getProductID());
+            ps.setString(2, productImgUrl);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
         public void deleteProduct(int id) {
             String query = "delete from productimg where productid = ?";

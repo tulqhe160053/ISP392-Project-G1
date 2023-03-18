@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>OriginalPrice</label>
-                                    <input  type="number"  name="OriginalPrice" value = "${editP.originalPrice}" min="1" >
+                                    <input  type="number"  name="OriginalPrice" value = "${editP.originalPrice}"  min="1"  >
                                 </div>
                                 <div class="form-group">
                                     <label>SellPrice</label>

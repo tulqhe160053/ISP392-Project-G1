@@ -44,7 +44,7 @@
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">Total Number of Orders</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <h3>${requestScope.order} orders</h3>
+                                        <h3>${requestScope.countO} orders</h3>
                                     </div>
                                 </div>
                             </div>

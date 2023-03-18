@@ -7,6 +7,7 @@ package Controler;
 import Dao.BrandDAO;
 import Dao.CategoryDAO;
 import Dao.ProductDAO;
+import Dao.ProductImgDAO;
 import Dao.ProductStatusDAO;
 import Model.Brand;
 import Model.Category;
@@ -121,6 +122,11 @@ public class EditProduct extends HttpServlet {
 
             ProductDAO pdao = new ProductDAO();
             pdao.editProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, Amount, sttID, brandID, productID);
+            
+            Product p = new Product();
+            p.setProductID(productID);
+            ProductImgDAO imgdao = new ProductImgDAO();
+            imgdao.update(p, imageFileName);
         
             response.sendRedirect("ListSellProduct");
     }
