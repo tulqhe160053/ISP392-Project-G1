@@ -76,17 +76,20 @@ public class EditFeedback extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             HttpSession session = request.getSession();
-            
-            String feedbackId_String = request.getParameter("id");
-            int feedbackId = Integer.parseInt(feedbackId_String);
-            
-            FeedbackDAO feedbackDAO = new FeedbackDAO();
-            int star = Integer.parseInt(request.getParameter("star-value"));
-            String des = request.getParameter("feedback-text");
-            feedbackDAO.editFeedback(star, des, feedbackId);
+            Users user = (Users) session.getAttribute("user");
+            if (user == null) {
+                request.getRequestDispatcher("common/login.jsp").forward(request, response);
+            } else {
+                String feedbackId_String = request.getParameter("id");
+                int feedbackId = Integer.parseInt(feedbackId_String);
 
-            response.sendRedirect("listmyfeedback");
-        
+                FeedbackDAO feedbackDAO = new FeedbackDAO();
+                int star = Integer.parseInt(request.getParameter("star-value"));
+                String des = request.getParameter("feedback-text");
+                feedbackDAO.editFeedback(star, des, feedbackId);
+
+                response.sendRedirect("listmyfeedback");
+            }
     }
 
     /**

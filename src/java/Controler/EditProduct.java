@@ -103,7 +103,8 @@ public class EditProduct extends HttpServlet {
         int id = u.getUserID();
         if (u == null){
             request.getRequestDispatcher("login").forward(request, response);
-        }else{
+            
+        } else{
             
                     String productID_String = request.getParameter("pid");
                     int productID = Integer.parseInt(productID_String);
