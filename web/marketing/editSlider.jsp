@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="blog_post">
-                                            <img src="<%=request.getContextPath()%>/assets/assets_img/${slider.urlImage}" alt="">
+                                            <img width="1000px"src="<%=request.getContextPath()%>/assets/banner_img/${slider.urlImage}" alt="">
                                             <div class="d-flex flex-column align-items-start text-start"><input type="file" name = "image" id="uploadfile"/></div>
 
                                         </div>
