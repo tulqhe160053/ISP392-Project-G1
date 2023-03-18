@@ -77,7 +77,7 @@
                                 
     
                                 <td>
-                                    <a href="delete_product?pid=${p.productID}" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
+                                    <a href="DeleteBrand?bid=${b.brandID}" class="delete" data-toggle="modal"><i class="icofont-ui-delete" data-toggle="tooltip" title="Delete">Delete</i></a>
                                 </td>
                             </tr>
                         </c:forEach>
