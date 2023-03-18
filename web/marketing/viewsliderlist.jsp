@@ -50,7 +50,7 @@
                                 <h2>Slider List</h2>
                             </div>
                             <div class="col-sm-5">
-                                <a href="#" class="btn btn-success" data-toggle="modal"> <span>Add New Slider</span></a>
+                                <a href="AddSlider" class="btn btn-success" data-toggle="modal"> <span>Add New Slider</span></a>
                             </div>
                         </div>
                     </div>
