@@ -51,7 +51,7 @@ public class ListBlogServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         
-        String key= request.getParameter("key");
+        
         BlogDAO dao = new BlogDAO();
         ArrayList<Blog> listBlog = dao.selectAll();
         ArrayList<Blog> topBlog = dao.selectTop2();
@@ -72,9 +72,6 @@ public class ListBlogServlet extends HttpServlet {
         request.setAttribute("num", num);
         request.setAttribute("listBlog", blog);
         request.setAttribute("topBlog", topBlog);
-        
-        List<Blog> blog1 = dao.searchblog(key);
-        request.setAttribute("blog1", blog1);
         
         request.getRequestDispatcher("/blog/viewBlogList.jsp").forward(request, response);
     }
