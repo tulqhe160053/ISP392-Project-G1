@@ -228,12 +228,12 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
                 int originalPrice = rs.getInt("OriginalPrice");
                 int sellPrice = rs.getInt("SellPrice");
                 int salePercent = rs.getInt("SalePercent");
-                
+
                 int catId = rs.getInt("CatID");
                 ProductImg proImg = new ProductImg();
                 proImg.setId(rs.getInt("ID"));
                 proImg.setProductImgUrl(rs.getString("ProductImgURL"));
-                
+
                 CategoryDAO cat_dao = new CategoryDAO();
                 Category category = cat_dao.selectById(new Category(catId, null));
 
@@ -294,12 +294,10 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         return count;
     }
 
-    
-
-    public void AddProduct( String productname, String description, String color, int originalprice,
-            int salepercent, int sellprice, int catid, int sellerid, 
+    public void AddProduct(String productname, String description, String color, int originalprice,
+            int salepercent, int sellprice, int catid, int sellerid,
             int amount, int statusid, int brandid) {
-        
+
         String query = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(query);
@@ -314,18 +312,20 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
             ps.setInt(9, amount);
             ps.setInt(10, statusid);
             ps.setInt(11, brandid);
-            
+
             ps.executeUpdate();
 
         } catch (Exception e) {
         }
     }
-    
-        public void editProduct( String productname, String description, String color, int originalprice,
-            int salepercent, int sellprice, int catid, int amount, int statusid, int brandid, int productid) {
-        
-        String query = "UPDATE  Product SET ProductName = ?,  Description = ?, color = ?, OriginalPrice = ?"
-                + "SellPrice = ?, SalePercent = ?, CatID = ?, Amount = ?, StatusID = ?, BrandID = ? "
+
+
+
+    public void editProduct(String productname, String description, String color, int originalprice,
+            int salepercent, int sellprice, int catid, int sellerId, int amount, int statusid, int brandid, int productid) {
+
+        String query = "UPDATE Product SET ProductName = ?, [Description] = ?, color = ?, OriginalPrice = ?,"
+                + "SellPrice = ?, SalePercent = ?, CatID = ?, SellerID = ?, Amount = ?, StatusID = ?, BrandID = ? "
                 + "WHERE ProductID = ?";
         try {
             ps = con.prepareStatement(query);
@@ -333,44 +333,45 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
             ps.setString(2, description);
             ps.setString(3, color);
             ps.setInt(4, originalprice);
-            ps.setInt(5, salepercent);
-            ps.setInt(6, sellprice);
+            ps.setInt(5, sellprice);
+            ps.setInt(6, salepercent);
             ps.setInt(7, catid);
-            ps.setInt(8, amount);
-            ps.setInt(9, brandid);
+            ps.setInt(8, sellerId);
+            ps.setInt(9, amount);
             ps.setInt(10, statusid);
-            ps.setInt(11,productid );
-            
+            ps.setInt(11, brandid);
+            ps.setInt(12, productid);
+
             ps.executeUpdate();
 
         } catch (Exception e) {
         }
     }
-        
-        public void deleteProduct(int id) {
-            String query = "delete from product where productid = ?";
-            try{
-                ps = con.prepareStatement(query);
-                ps.setInt(1, id);
-                ps.executeUpdate();
-            } catch (Exception e){
-            }
+
+    public void deleteProduct(int id) {
+        String query = "delete from product where productid = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
     }
 
-        public int getLastProductId(){
-            int productid = 0;
-            String sql = "SELECT MAX (productId) FROM product" ;
-            try {
-                ps = con.prepareStatement(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    productid = rs.getInt(1);
-                }
-            } catch (Exception e) {
+    public int getLastProductId() {
+        int productid = 0;
+        String sql = "SELECT MAX (productId) FROM product";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                productid = rs.getInt(1);
             }
-            return productid;
+        } catch (Exception e) {
         }
-        
+        return productid;
+    }
+
     @Override
     public void insert(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -398,8 +399,11 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        System.out.println(dao.getLastProductId());
 
+        dao.editProduct("Laptop gaming", "Ngon", "Red", 200, 10, 210, 1, 3, 10, 1, 1, 13);
+        for (Product product : dao.selectAll()) {
+            System.out.println(product);
+        }
 
     }
 }

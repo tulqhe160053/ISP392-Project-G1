@@ -95,35 +95,42 @@ public class AddProduct extends HttpServlet {
         HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("user");
         int id = u.getUserID();
+        if (u == null) {
+            request.getRequestDispatcher("common/login.jsp").forward(request, response);
+            
+        } else{
+                    String pname = request.getParameter("pname");
+                    String Description = request.getParameter("Description");
+                    String Color = request.getParameter("color");
+                    int OriginalPrice = Integer.parseInt(request.getParameter("OriginalPrice"));
+                    int SellPrice = Integer.parseInt(request.getParameter("SellPrice"));
+                    int SalePercent = Integer.parseInt(request.getParameter("SalePercent"));
+                    String amount_string = request.getParameter("Amount");
+                    int Amount = Integer.parseInt(amount_string);
+                    int catId = Integer.parseInt(request.getParameter("catId"));
+                    int sttID = Integer.parseInt(request.getParameter("sttID"));
+                    int brandID = Integer.parseInt(request.getParameter("brandID"));
 
-        String pname = request.getParameter("pname");
-        String Description = request.getParameter("Description");
-        String Color = request.getParameter("color");
-        int OriginalPrice = Integer.parseInt(request.getParameter("OriginalPrice"));
-        int SellPrice = Integer.parseInt(request.getParameter("SellPrice"));
-        int SalePercent = Integer.parseInt(request.getParameter("SalePercent"));
-        String amount_string = request.getParameter("Amount");
-        int Amount = Integer.parseInt(amount_string);
-        int catId = Integer.parseInt(request.getParameter("catId"));
-        int sttID = Integer.parseInt(request.getParameter("sttID"));
-        int brandID = Integer.parseInt(request.getParameter("brandID"));
+                    Part filePart = request.getPart("image");
+                    String imageFileName = filePart.getSubmittedFileName();
+                    InputStream is = filePart.getInputStream();
+                    byte[] data = new byte[is.available()];
+                    is.read(data);
 
-        Part filePart = request.getPart("image");
-        String imageFileName = filePart.getSubmittedFileName();
-        InputStream is = filePart.getInputStream();
-        byte[] data = new byte[is.available()];
-        is.read(data);
+                    ProductDAO pdao = new ProductDAO();
+                    pdao.AddProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, id, Amount, sttID, brandID);
 
-        ProductDAO pdao = new ProductDAO();
-        pdao.AddProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, id, Amount, sttID, brandID);
+                    int lastid = pdao.getLastProductId();
+                    Product p = new Product();
+                    ProductImgDAO imgdao = new ProductImgDAO();
+                    p.setProductID(lastid);
+                    imgdao.add(p, imageFileName);
         
-        int lastid = pdao.getLastProductId();
-        Product p = new Product();
-        ProductImgDAO imgdao = new ProductImgDAO();
-        p.setProductID(lastid);
-        imgdao.add(p, imageFileName);
+                    request.getRequestDispatcher("sellerdashboard").forward(request, response);
+            
         
-        response.sendRedirect("ListSellProduct");
+        }
+
     }
 
     /**

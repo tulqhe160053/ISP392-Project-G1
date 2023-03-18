@@ -70,7 +70,7 @@ public class ResetPassword extends HttpServlet {
             String toEmail = request.getParameter("email");
             Users u = dao.getUsersByEmail(toEmail);
             if (u == null) {
-                request.setAttribute("warning", "The email did not exist, please try again!");
+                request.setAttribute("mess", "The email did not exist, please try again!");
                 request.getRequestDispatcher("/common/resetpassword.jsp").forward(request, response);
             } else {
                 ResetMail rm = new ResetMail();
@@ -84,7 +84,7 @@ public class ResetPassword extends HttpServlet {
 
             }
         } catch (Exception ex) {
-            request.setAttribute("warning", "The email did not exist, please try again!");
+            request.setAttribute("mess", "The email did not exist, please try again!");
             request.getRequestDispatcher("/common/resetpassword.jsp").forward(request, response);
         }
     }

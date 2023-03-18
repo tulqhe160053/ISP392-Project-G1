@@ -6,6 +6,7 @@ package Dao;
 
 import java.util.ArrayList;
 import Model.Category;
+import java.sql.SQLException;
 
 /**
  *
@@ -129,6 +130,16 @@ public class CategoryDAO extends MyDAO implements DAOInterface<Category> {
         
         for (Category ca : cat.selectAll()) {
             System.out.println(ca);
+        }
+    }
+
+    public void insert(String name) {
+        String sql="Insert into Category values(?)";
+        try {
+            ps=con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.executeUpdate();
+        } catch (SQLException e) {
         }
     }
 

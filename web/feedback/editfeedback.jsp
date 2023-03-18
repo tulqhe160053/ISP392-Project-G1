@@ -72,7 +72,7 @@
             <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/homepage.css" />
 
 
-            <title>Add Feedback</title>
+            <title>Edit Feedback</title>
 
             <style>
                 .rating {

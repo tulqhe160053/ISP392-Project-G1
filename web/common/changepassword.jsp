@@ -58,18 +58,18 @@
                             <h3>Change Your Password</h3>
                             <form class="row login_form" action="<%=request.getContextPath()%>/changepassword" method="post" id="contactForm" novalidate="novalidate">
                                 <div class="col-md-12 form-group">
-                                    <input type="password" class="form-control" id="name" name="oldPassword" placeholder="Enter your old-password" required>                          
+                                    <input type="password" class="form-control" id="name" name="oldPassword" placeholder="Enter your old-password" maxlength="6" required>                          
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="password" class="form-control" id="name" name="newPassword" placeholder="Enter your new-password" required>                          
+                                    <input type="password" class="form-control" id="name" name="newPassword" placeholder="Enter your new-password" maxlength="6" required>                          
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="password" class="form-control" id="name" name="reNewPassword" placeholder="Re-enter your new-password" required>                          
+                                    <input type="password" class="form-control" id="name" name="reNewPassword" placeholder="Re-enter your new-password" maxlength="6" required>                          
                                 </div>
                                 
                                 <div class="col-md-12 form-group">
                                     <h3 class="text-danger">${mess}</h3>
-                                </div>-->
+                                </div>
 
                                 <div class="col-md-12 form-group">
                                     <button type="submit" value="submit" class="primary-btn">Change</button>

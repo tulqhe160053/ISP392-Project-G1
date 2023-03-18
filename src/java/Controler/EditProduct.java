@@ -12,13 +12,16 @@ import Dao.ProductStatusDAO;
 import Model.Brand;
 import Model.Category;
 import Model.Product;
+import Model.ProductImg;
 import Model.ProductStatus;
+import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ public class EditProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         doGet(request, response);
+        doGet(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,29 +59,32 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            CategoryDAO category_dao = new CategoryDAO();
-            ArrayList<Category> listCategory = category_dao.selectAll();
-            request.setAttribute("listCategory", listCategory);
 
-            BrandDAO br = new BrandDAO();
-            ArrayList<Brand> listBrand = br.selectAll();
-            request.setAttribute("listBrand", listBrand);
+        CategoryDAO category_dao = new CategoryDAO();
+        ArrayList<Category> listCategory = category_dao.selectAll();
+        request.setAttribute("listCategory", listCategory);
 
-            ProductStatusDAO ps = new ProductStatusDAO();
-            ArrayList<ProductStatus> productStatus = ps.selectAll();
-            request.setAttribute("productStatus", productStatus);
+        BrandDAO br = new BrandDAO();
+        ArrayList<Brand> listBrand = br.selectAll();
+        request.setAttribute("listBrand", listBrand);
 
-            String productID_String = request.getParameter("pid");
-            int productID = Integer.parseInt(productID_String);
-            Product a = new Product();
-            a.setProductID(productID);
-            
+        ProductStatusDAO ps = new ProductStatusDAO();
+        ArrayList<ProductStatus> productStatus = ps.selectAll();
+        request.setAttribute("productStatus", productStatus);
+
+        String productID_String = request.getParameter("pid");
+        int productID = Integer.parseInt(productID_String);
+        Product a = new Product();
+        a.setProductID(productID);
+
             ProductDAO dao  = new ProductDAO();
             Product p = dao.selectById(a);
+            ProductImgDAO img = new ProductImgDAO();
+            ProductImg imgp = img.selectByProductId(p);
+            p.setImg(imgp);
             request.setAttribute("editP", p);
-            
-            request.getRequestDispatcher("seller/editproduct.jsp").forward(request, response);
+
+        request.getRequestDispatcher("seller/editproduct.jsp").forward(request, response);
     }
 
     /**
@@ -92,43 +98,43 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String productID_String = request.getParameter("pid");
-            int productID = Integer.parseInt(productID_String);
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("user");
+        int id = u.getUserID();
+        if (u == null){
+            request.getRequestDispatcher("login").forward(request, response);
             
-            String pname = request.getParameter("pname");
-            String Description = request.getParameter("Description");
-            String Color = request.getParameter("color");
-            String ori_string = request.getParameter("OriginalPrice");
-            int OriginalPrice = Integer.parseInt(ori_string);
-            String sell_string = request.getParameter("SellPrice");
-            int SellPrice = Integer.parseInt(sell_string);
-            String sale_string = request.getParameter("SalePercent");
-            int SalePercent = Integer.parseInt(sale_string);
-            String amount_string = request.getParameter("Amount");
-            int Amount = Integer.parseInt(amount_string);
-            String cat_string = request.getParameter("catId");
-            int catId = Integer.parseInt(cat_string);
-            String sta_string = request.getParameter("sttID");
-            int sttID = Integer.parseInt(sta_string);
-            String bra_string = request.getParameter("brandID");
-            int brandID = Integer.parseInt(bra_string);
-
-
-            Part filePart = request.getPart("image");
-            String imageFileName = filePart.getSubmittedFileName();
-            InputStream is = filePart.getInputStream();
-            byte[] data = new byte[is.available()];
-            is.read(data);
-
-            ProductDAO pdao = new ProductDAO();
-            pdao.editProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, Amount, sttID, brandID, productID);
+        } else{
             
-            Product p = new Product();
-            p.setProductID(productID);
-            ProductImgDAO imgdao = new ProductImgDAO();
-            imgdao.update(p, imageFileName);
-        
-            response.sendRedirect("ListSellProduct");
+                    String productID_String = request.getParameter("pid");
+                    int productID = Integer.parseInt(productID_String);
+
+                    String pname = request.getParameter("pname");
+                    String Description = request.getParameter("Description");
+                    String Color = request.getParameter("color");
+                    String ori_string = request.getParameter("OriginalPrice");
+                    int OriginalPrice = Integer.parseInt(ori_string);
+                    String sell_string = request.getParameter("SellPrice");
+                    int SellPrice = Integer.parseInt(sell_string);
+                    String sale_string = request.getParameter("SalePercent");
+                    int SalePercent = Integer.parseInt(sale_string);
+                    String amount_string = request.getParameter("Amount");
+                    int Amount = Integer.parseInt(amount_string);
+                    String cat_string = request.getParameter("catId");
+                    int catId = Integer.parseInt(cat_string);
+                    String sta_string = request.getParameter("sttID");
+                    int sttID = Integer.parseInt(sta_string);
+                    String bra_string = request.getParameter("brandID");
+                    int brandID = Integer.parseInt(bra_string);
+
+
+        ProductDAO pdao = new ProductDAO();
+        pdao.editProduct(pname, Description, Color, OriginalPrice, SalePercent, SellPrice, catId, id, Amount, sttID, brandID, productID);
+
+
+        request.getRequestDispatcher("ListSellProduct").forward(request, response);
+        }
+
     }
 
     /**

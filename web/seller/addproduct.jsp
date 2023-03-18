@@ -55,7 +55,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="addproduct" method="post" enctype='multipart/form-data'>  
+                        <form action="<%=request.getContextPath()%>/addproduct" method="post" enctype='multipart/form-data'>  
                             <div class="modal-header">						
                                 <h3 class="text-warning">New product</h3>
                             </div>
@@ -126,7 +126,7 @@
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-success" value="Save">
-                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/sellerdashboard">Back</a></button>
+                                <button type="button" class="btn btn-light"><a href="<%=request.getContextPath()%>/ListSellProduct">Back</a></button>
                             </div>
                         </form>
                     </div>
