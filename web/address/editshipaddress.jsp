@@ -36,6 +36,46 @@
         <link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/main.css">
+        <style>
+            #message {
+                display:none;
+                background: #f1f1f1;
+                color: #000;
+                position: relative;
+                padding: 20px;
+                margin-top: 10px;
+            }
+
+            #message p {
+                padding: 10px 35px;
+                font-size: 18px;
+            }
+
+            
+            
+            
+            .valid {
+                color: green;
+            }
+
+            .valid:before {
+                position: relative;
+                left: -35px;
+                
+            }
+
+            /* Add a red text color and an "x" icon when the requirements are wrong */
+            .invalid {
+                color: red;
+            }
+
+            .invalid:before {
+                position: relative;
+                left: -35px;
+                
+            }
+
+        </style>
     </head>
 
 
@@ -102,6 +142,9 @@
                                                         <option value="${o.cityID}">${o.cityName}</option>
                                                     </c:forEach>
                                                 </select>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <h3 class="text-danger">${mess}</h3>
                                             </div>
 
                                             <div class="d-flex justify-content-end pt-3">

@@ -57,6 +57,7 @@ public class EditUser extends HttpServlet {
                 session.removeAttribute("user");
                 request.getRequestDispatcher("/common/login.jsp").forward(request, response);
             } else if (validateEmail == false || validatePhone == false) {
+                    request.setAttribute("mess", "Invalid email or phone");
                     request.getRequestDispatcher("common/edituser.jsp").forward(request, response);
                 } else {
                 user.setUserName(userName);

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import Model.Users;
+import Validate.Validate;
 
 /**
  *
@@ -33,7 +34,8 @@ public class EditShipAddress2 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = (HttpSession) request.getSession();
+        try {
+            HttpSession session = (HttpSession) request.getSession();
             String id = request.getParameter("id");
             int ID = Integer.parseInt(id);
             
@@ -49,10 +51,23 @@ public class EditShipAddress2 extends HttpServlet {
             int District = Integer.parseInt(Districtid);
 
             String AddressDetail = request.getParameter("AddressDetail");
+            Validate va  = new Validate();
+            boolean validatePhone = va.checkPhone(PhoneNum);
             
-            ShipAddressDAO dao = new ShipAddressDAO();
+            
+            if ( validatePhone == false) {
+                request.setAttribute("mess", "Invalid email");
+                response.sendRedirect("ViewListAddress");
+            }else {
+                ShipAddressDAO dao = new ShipAddressDAO();
             dao.editshipaddress( Fullname, PhoneNum, City, District, AddressDetail, ID);
-            response.sendRedirect("ViewListAddress");
+                response.sendRedirect("ViewListAddress");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().print(e);
+            response.getWriter().print(e.getMessage());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

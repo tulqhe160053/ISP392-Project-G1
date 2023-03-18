@@ -36,6 +36,46 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ion.rangeSlider.skinFlat.css" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magnific-popup.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+        <style>
+            #message {
+                display:none;
+                background: #f1f1f1;
+                color: #000;
+                position: relative;
+                padding: 20px;
+                margin-top: 10px;
+            }
+
+            #message p {
+                padding: 10px 35px;
+                font-size: 18px;
+            }
+
+            
+            
+            
+            .valid {
+                color: green;
+            }
+
+            .valid:before {
+                position: relative;
+                left: -35px;
+                
+            }
+
+            /* Add a red text color and an "x" icon when the requirements are wrong */
+            .invalid {
+                color: red;
+            }
+
+            .invalid:before {
+                position: relative;
+                left: -35px;
+                
+            }
+
+        </style>
     </head>
 
     <body>
@@ -75,10 +115,13 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Email</label>
-                                    <input type="text" class="form-control" name="email" value="${sessionScope.user.email}" ></div>
-                                <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label>
-                                    <input type="text" class="form-control" name="PhoneNum" value="${sessionScope.user.phoneNum}" ></div>
+                                    <input type="text" class="form-control" name="email" value="${sessionScope.user.email}" placeholder="Email"   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required></div>
                                     
+                                <div class="col-md-12 mt-3"><label for = "pwd">Phone Number</label>
+                                    <input type="text" class="form-control" name="PhoneNum" value="${sessionScope.user.phoneNum}" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" required></div>
+                                <div class="col-md-12 form-group">
+                                                <h3 class="text-danger">${mess}</h3>
+                                </div>    
                                     <div class="col-md-12 mt-3"><label for = "pwd">UserID: </label>
                                         <input type="text" class="form-control" name="userId" value="${sessionScope.user.getUserID()}" readonly >
                                 </div>
