@@ -123,7 +123,7 @@ public class AddProduct extends HttpServlet {
         p.setProductID(lastid);
         imgdao.add(p, imageFileName);
         
-        request.getRequestDispatcher("ListSellProduct").forward(request, response);
+        request.getRequestDispatcher("sellerdashboard").forward(request, response);
     }
 
     /**

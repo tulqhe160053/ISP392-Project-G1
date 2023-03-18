@@ -54,15 +54,15 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="editproduct?pid=${editP.productID}" method="post" enctype='multipart/form-data'>
+                        <form action="editproduct?pid=${editP.productID}" method="post" >
                             <div class="modal-header">						
-                                <h2 class="text-warning">New product</h2>
+                                <h2 class="text-warning">Edit product</h2>
                             </div>
                             <div class="modal-body">	
 
                                 <div class="post_tag">
                                     <h6><select class="form-select active" name="catId">
-                                            <option value="0">${editP.category.categoryName}</option>
+                                            <option value="${editP.category.getCategoryId()}">${editP.category.categoryName}</option>
                                             <c:forEach items="${requestScope.listCategory}" var="cat">
                                                 <option value="${cat.getCategoryId()}">${cat.getCategoryName()}</option>
                                             </c:forEach>
@@ -72,7 +72,7 @@
                                 
                                 <div class="post_tag">
                                     <h6><select class="form-select active" name="brandID">
-                                            <option value="0">${editP.brand.brandName}</option>
+                                            <option value="${editP.brand.brandID}">${editP.brand.brandName}</option>
                                             <c:forEach items="${requestScope.listBrand}" var="brand">
                                                 <option value="${brand.getBrandID()}">${brand.getBrandName()}</option>
                                             </c:forEach>
@@ -80,12 +80,14 @@
                                     </h6>
                                 </div>
                                 
-                                <label for="image">Image</label>
-                                <input type="file" name="image"><br>
+                                <div class="form-group">
+                                    <label>Image</label>
+                                    <input type="text" class="form-control" name="image" value="${editP.img.getProductImgUrl()}" readonly >
+                                </div>
 
                                 <div class="form-group">
                                     <label>Product Name</label>
-                                    <input value="${editP.getProductName()}" name="pname" type="text" class="form-control" required>
+                                    <input value="${editP.productName}" name="pname" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
@@ -93,28 +95,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Color</label>
-                                    <input value="${editP.getColor()}" name="color" type="text" class="form-control" required>
+                                    <input value="${editP.color}" name="color" type="text" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>OriginalPrice</label>
-                                    <input  type="number"  name="OriginalPrice" value="${editP.getOriginalPrice()}"  min="1"  >
+                                    <input  type="number"  name="OriginalPrice" value="${editP.originalPrice}"  min="1"  >
                                 </div>
                                 <div class="form-group">
                                     <label>SellPrice</label>
-                                    <input type="number"  name="SellPrice" value="${editP.getSellPrice()}" min="1" >
+                                    <input type="number"  name="SellPrice" value = "${editP.sellPrice}" min="1" >
                                 </div>
                                 <div class="form-group">
                                     <label>SalePercent</label>
-                                    <input type="number"  name="SalePercent" value = "${editP.getSalePercent()}" min="0" >
+                                    <input type="number"  name="SalePercent" value = "${editP.salePercent}" min="0" >
                                 </div>
                                 <div class="form-group">
                                     <label>Amount</label>
-                                    <input type="number"  name="Amount" value = "${editP.getAmount()}" min="1" >
+                                    <input type="number"  name="Amount" value = "${editP.amount}" min="1" >
                                 </div>
 
                                 <div class="post_tag">
                                     <h6><select class="form-select active" name="sttID">
-                                            <option value="0">${editP.productStatus.statusName}</option>
+                                            <option value="${editP.productStatus.statusID}">${editP.productStatus.statusName}</option>
                                             <c:forEach items="${requestScope.productStatus}" var="status">
                                                 <option value="${status.getStatusID()}">${status. getStatusName()}</option>
                                             </c:forEach>

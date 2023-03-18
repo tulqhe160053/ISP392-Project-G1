@@ -69,7 +69,7 @@
                                 
                                 <div class="col-md-12 form-group">
                                     <h3 class="text-danger">${mess}</h3>
-                                </div>-->
+                                </div>
 
                                 <div class="col-md-12 form-group">
                                     <button type="submit" value="submit" class="primary-btn">Change</button>

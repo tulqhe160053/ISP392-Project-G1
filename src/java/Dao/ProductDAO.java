@@ -319,38 +319,13 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
         }
     }
 
+
+
     public void editProduct(String productname, String description, String color, int originalprice,
-            int salepercent, int sellprice, int catid, int amount, int statusid, int brandid, int productid) {
-
-        String query = "UPDATE Product SET ProductName = ?, [Description] = ?, color = ?, OriginalPrice = ?,"
-                + "SellPrice = ?, SalePercent = ?, CatID = ?,SellerID = ? Amount = ?, StatusID = ?, BrandID = ? "
-                + "WHERE ProductID = ?";
-        try {
-            ps = con.prepareStatement(query);
-            ps.setString(1, productname);
-            ps.setString(2, description);
-            ps.setString(3, color);
-            ps.setInt(4, originalprice);
-            ps.setInt(5, salepercent);
-            ps.setInt(6, sellprice);
-            ps.setInt(7, catid);
-            ps.setInt(8, 3);
-            ps.setInt(9, amount);
-            ps.setInt(10, statusid);
-            ps.setInt(11, brandid);
-            ps.setInt(12, productid);
-
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-        }
-    }
-
-    public void editProduct2(String productname, String description, String color, int originalprice,
             int salepercent, int sellprice, int catid, int sellerId, int amount, int statusid, int brandid, int productid) {
 
         String query = "UPDATE Product SET ProductName = ?, [Description] = ?, color = ?, OriginalPrice = ?,"
-                + "SellPrice = ?, SalePercent = ?, CatID = ?,SellerID = ?, Amount = ?, StatusID = ?, BrandID = ? "
+                + "SellPrice = ?, SalePercent = ?, CatID = ?, SellerID = ?, Amount = ?, StatusID = ?, BrandID = ? "
                 + "WHERE ProductID = ?";
         try {
             ps = con.prepareStatement(query);
@@ -425,7 +400,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
 
-        dao.editProduct2("Laptop gaming", "Ngon", "Red", 200, 10, 210, 1, 3, 10, 1, 1, 13);
+        dao.editProduct("Laptop gaming", "Ngon", "Red", 200, 10, 210, 1, 3, 10, 1, 1, 13);
         for (Product product : dao.selectAll()) {
             System.out.println(product);
         }

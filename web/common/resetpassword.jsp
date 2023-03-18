@@ -62,12 +62,12 @@
                             <h3>Reset Password</h3>
                             <form class="row login_form" action="<%=request.getContextPath()%>/resetpassword" method="post" id="contactForm" novalidate="novalidate">
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="name" name="email" placeholder="Email" required>
+                                    <input type="email" class="form-control" id="name" name="email" placeholder="Email" required>
                                 </div>
 
-<!--                                <div class="col-md-12 form-group">
+                                <div class="col-md-12 form-group">
                                     <h3 class="text-danger">${mess}</h3>
-                                </div>-->
+                                </div>
 
                                 <div class="col-md-12 form-group">
                                     <button type="submit" value="submit" class="primary-btn">Send Code</button>
