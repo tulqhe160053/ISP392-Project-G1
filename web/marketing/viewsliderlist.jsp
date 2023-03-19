@@ -51,6 +51,7 @@
                             </div>
                             <div class="col-sm-5">
                                 <a href="AddSlider" class="btn btn-success" data-toggle="modal"> <span>Add New Slider</span></a>
+                                <a href="" class="btn btn-danger" data-toggle="modal"> <span>Back</span></a>
                             </div>
                         </div>
                     </div>
