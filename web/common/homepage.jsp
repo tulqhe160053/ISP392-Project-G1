@@ -186,7 +186,7 @@
                             <c:forEach items="${list}" var="product">
                                 <c:forEach var="productImg" items="${requestScope.list_productImg}">
                                     <c:if test="${productImg.getProduct().getProductID() == product.getProductID()}">
-                                        <div class="card ml-3 mb-3" style="width: 18rem;">
+                                        <div class="card mb-3" style="width: 18rem;">
                                             <img src="<%=request.getContextPath()%>/assets/product_img/${product.getCategory().getCategoryName()}/${product.getBrand().getBrandName()}/${productImg.getProductImgUrl()}" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h5 class="card-title">${product.getProductName()}</h5>
@@ -222,13 +222,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row justify-content-center">
                                     <c:forEach items="${requestScope.list_products}" var="product">
                                         <c:if test="${product.getCategory().getCategoryId() == category.getCategoryId()}">
 
                                             <c:forEach var="productImg" items="${requestScope.list_productImg}">
                                                 <c:if test="${productImg.getProduct().getProductID() == product.getProductID()}">
-                                                    <div class="card ml-3 mb-3" style="width: 18rem;">
+                                                    <div class="card mb-3" style="width: 18rem;">
                                                         <img src="<%=request.getContextPath()%>/assets/product_img/${category.getCategoryName()}/${product.getBrand().getBrandName()}/${productImg.getProductImgUrl()}" class="card-img-top" alt="...">
                                                         <div class="card-body">
                                                             <h5 class="card-title">${product.getProductName()}</h5>
