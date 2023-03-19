@@ -51,6 +51,9 @@
                         <form action ="<%=request.getContextPath()%>/addnewcategory">
                             <div class="row">
                                 <label for = "pwd"></label><input required name="name" type="text" class="form-control"  placeholder="enter category  name">
+                                <div class="col-md-12 form-group">
+                                    <h3 class="text-danger">${mess}</h3>
+                                </div>
                                 <div class="col-md-12 mt-5 text-center">
                                     <button class="btn btn-primary" type="submit">Save</button>
 

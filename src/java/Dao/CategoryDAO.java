@@ -74,6 +74,23 @@ public class CategoryDAO extends MyDAO implements DAOInterface<Category> {
             e.printStackTrace();
         }
     }
+
+    public Category checkExist(String name) {
+        String xSql = "select * Category  where CategoryName = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, name);
+            ps.executeQuery();
+            while (rs.next()) {
+                int categoryId = rs.getInt("CategoryID");
+                String categoryName = rs.getString("CategoryName");
+                return new Category(categoryId, categoryName);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public void insertCat(String name) {
         xSql = "insert into Category  values (?)";
         try {
@@ -111,7 +128,7 @@ public class CategoryDAO extends MyDAO implements DAOInterface<Category> {
     }
 
     @Override
-    public void update(int catID,Category t) {
+    public void update(int catID, Category t) {
         xSql = "update Category set CategoryName=? where CategoryID=?";
         try {
             ps = con.prepareStatement(xSql);
@@ -127,16 +144,16 @@ public class CategoryDAO extends MyDAO implements DAOInterface<Category> {
     public static void main(String[] args) {
         CategoryDAO cat = new CategoryDAO();
         Category x = new Category();
-        
+
         for (Category ca : cat.selectAll()) {
             System.out.println(ca);
         }
     }
 
     public void insert(String name) {
-        String sql="Insert into Category values(?)";
+        String sql = "Insert into Category values(?)";
         try {
-            ps=con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, name);
             ps.executeUpdate();
         } catch (SQLException e) {
