@@ -76,17 +76,17 @@ public class CategoryDAO extends MyDAO implements DAOInterface<Category> {
     }
 
     public Category checkExist(String name) {
-        String xSql = "select * Category  where CategoryName = ?";
+        String xSql = "select * from Category  where CategoryName = ? ";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, name);
-            ps.executeQuery();
-            while (rs.next()) {
+            rs=ps.executeQuery();
+            while(rs.next()) {
                 int categoryId = rs.getInt("CategoryID");
                 String categoryName = rs.getString("CategoryName");
                 return new Category(categoryId, categoryName);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return null;
     }
@@ -143,11 +143,9 @@ public class CategoryDAO extends MyDAO implements DAOInterface<Category> {
 
     public static void main(String[] args) {
         CategoryDAO cat = new CategoryDAO();
-        Category x = new Category();
-
-        for (Category ca : cat.selectAll()) {
-            System.out.println(ca);
-        }
+        Category x = cat.checkExist("Laptop");
+        System.out.println(x);
+        
     }
 
     public void insert(String name) {

@@ -64,7 +64,7 @@ public class AddNewCategoryServlet extends HttpServlet {
         CategoryDAO dao = new CategoryDAO();
         Category c = dao.checkExist(name);
         if (c != null) {
-            request.setAttribute("mess", "Category existed!");
+            request.setAttribute("mess", "Category name existed!");
             request.getRequestDispatcher("/product/addnewcategory.jsp").forward(request, response);
         } else {
             if (validateName == true) {

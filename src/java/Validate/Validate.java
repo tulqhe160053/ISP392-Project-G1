@@ -16,7 +16,7 @@ public class Validate {
     private Matcher matcher;
 
     private static final String EMAIL_REGEX = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
-    private static String name_regex = "[a-zỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ']";
+    private static String name_regex = "([a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){0,})";
     public Validate() {
         pattern = Pattern.compile(EMAIL_REGEX);
     }
@@ -26,7 +26,8 @@ public class Validate {
         return matcher.matches();
     }
     public boolean validateName(String regex){
-        return regex.matches(name_regex);
+        boolean check = regex.matches(name_regex);
+        return check;
     }
 
     public boolean checkPhone(String str) {

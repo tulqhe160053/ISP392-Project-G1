@@ -49,9 +49,9 @@
                             <h2>Manage <b>Category</b></h2>
                         </div>
                         <div class="col-sm-6">
-                                <a href="<%=request.getContextPath()%>/product/addnewcategory.jsp" class="btn btn-success" data-toggle="modal"> <span>Add New Category</span></a>
-                            </div>
-
+                            <a href="<%=request.getContextPath()%>/product/addnewcategory.jsp" class="btn btn-success" data-toggle="modal"> <span>Add New Category</span></a>
+                            <a href="<%=request.getContextPath()%>/sellerdashboard" class="btn btn-warning" > <span>Back</span></a>	
+                        </div>
                     </div>
                 </div>
 
@@ -63,12 +63,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${category}" var="c">
-                        <tr>
-                            <td>${c.categoryId}</td>
-                            <td>${c.categoryName}</td>
-                        </tr>
-                    </c:forEach>
+                        <c:forEach items="${category}" var="c">
+                            <tr>
+                                <td>${c.categoryId}</td>
+                                <td>${c.categoryName}</td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
