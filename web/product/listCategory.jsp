@@ -51,9 +51,7 @@
                         <div class="col-sm-6">
                             <a href="<%=request.getContextPath()%>/product/addnewcategory.jsp" class="btn btn-success" data-toggle="modal"> <span>Add New Category</span></a>
                             <a href="<%=request.getContextPath()%>/sellerdashboard" class="btn btn-warning" > <span>Back</span></a>	
-
                         </div>
-
                     </div>
                 </div>
 
