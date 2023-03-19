@@ -22,7 +22,7 @@
     </head>
     <body class="sb-nav-fixed">
          <jsp:include page="../nav.jsp"/>
-
+         
         <div id="layoutSidenav">
              <jsp:include page="../sidenav.jsp"/>
 
