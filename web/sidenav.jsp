@@ -36,9 +36,13 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-product-hunt"></i></div>
                         Manager Product
                     </a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/categoryseller">
+                        <div class="fa-tachometer-alt"><i class="fas fa-product-hunt"></i></div>
+                        Manager Category
+                    </a>
                 </c:if>
-                
-                 <c:if test="${sessionScope.user.role.getRoleID() == 4}">
+
+                <c:if test="${sessionScope.user.role.getRoleID() == 4}">
                     <a class="nav-link" href="mkt">
                         <div class="sb-nav-link-icon"><i class="fas fa-dashboard"></i></div>
                         MKT Dashboard
@@ -47,12 +51,12 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                         Manager Blog
                     </a>
-                    
+
                     <a class="nav-link" href="<%=request.getContextPath()%>/sliderlistservlet">
                         <div class="sb-nav-link-icon"><i class="fas fa-s"></i></div>
                         Manager Slider
                     </a>
-                        
+
                     <a class="nav-link" href="ViewBrand">
                         <div class="sb-nav-link-icon"><i class="fas fa-s"></i></div>
                         Brand
