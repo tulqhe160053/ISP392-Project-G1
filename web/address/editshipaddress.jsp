@@ -111,7 +111,7 @@
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input value="${listS.fullName}" type="text" id="form3Example3" name="Fullname" class="form-control form-control-lg" placeholder="Fullname" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fullname'" required>
+                                            <input value="${listS.fullName}" type="text" id="form3Example3" pattern="^[^\d]+$" name="Fullname" class="form-control form-control-lg" placeholder="Fullname" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fullname'" required>
                                             <label class="form-label" for="form3Example3">Full Name</label>
                                         </div>
 

@@ -110,8 +110,8 @@
                             <div class="row mt-3">
                                 <div class="col-md-5"> 
                                     <select name="gender" class="form-control" placeholder="Gender" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Gender'" required>
-                                        <option <c:if test="${sessionScope.user.gender == male}">selected</c:if> value="male">male</option>
-                                        <option <c:if test="${sessionScope.user.gender == female}">selected</c:if> value="female">female</option>
+                                        <option <c:if test="${sessionScope.user.gender == 'male'}">selected</c:if> value="male">male</option>
+                                        <option <c:if test="${sessionScope.user.gender == 'female'}">selected</c:if> value="female">female</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-3"><label for = "pwd">Email</label>
