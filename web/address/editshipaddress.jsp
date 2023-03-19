@@ -131,7 +131,7 @@
                                                 <select name="district" class="select">
                                                     <option value="0">District</option>
                                                     <c:forEach items="${listD}" var= "o">
-                                                        <option value="${o.districtID}">${o.districtName}</option>
+                                                        <option <c:if test="${listS.district.getDistrictName() == o.getDistrictName()}">selected</c:if> value="${o.districtID}">${o.districtName}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -139,7 +139,7 @@
                                                 <select name="city" class="select">
                                                     <option value="0">City</option>
                                                     <c:forEach items="${listC}" var= "o">
-                                                        <option value="${o.cityID}">${o.cityName}</option>
+                                                        <option <c:if test="${listS.shipCity.getCityName() == o.getCityName()}">selected</c:if> value="${o.cityID}">${o.cityName}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
