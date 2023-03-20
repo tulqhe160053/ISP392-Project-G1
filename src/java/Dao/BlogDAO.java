@@ -33,7 +33,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
                     + "                 on b.UserID = u.UserID\n"
                     + "		        join BlogStatus bs \n"
                     + "		        on b.statusID = bs.statusID \n"
-                    + "                 where bs.statusid = 1";
+                    + "                 where bs.statusid = 1 order by createtime desc ";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
