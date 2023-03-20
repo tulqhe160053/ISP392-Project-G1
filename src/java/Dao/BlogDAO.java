@@ -217,9 +217,9 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setString(3, "%" + key + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
                 list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
 
