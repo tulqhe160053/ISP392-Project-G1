@@ -90,7 +90,7 @@
                                         <div class="blog_post">
                                             <img witdh="1000px" height="300px" src="<%=request.getContextPath()%>/assets/blog_img/default.jpg" alt="">
                                             <label for="image">Image:</label>
-                                            <input type="file" name="image"><br>
+                                            <input type="file" name="image" placeholder="image" onfocus="this.placeholder = ''" onblur="this.placeholder = 'image'" required><br>
 
                                         </div>
                                     </div>
