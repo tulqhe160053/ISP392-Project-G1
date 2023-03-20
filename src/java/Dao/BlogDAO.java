@@ -37,10 +37,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
         } catch (Exception e) {
         }
@@ -61,10 +61,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs);
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                return new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs);
 
             }
         } catch (Exception e) {
@@ -79,10 +79,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
             
         } catch (SQLException e) {
@@ -105,10 +105,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setInt(1, UserID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
         } catch (Exception e) {
         }
@@ -130,10 +130,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
         } catch (Exception e) {
         }
@@ -154,10 +154,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setString(1, bid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs);
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                return new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs);
             }
         } catch (Exception e) {
         }
@@ -181,10 +181,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setString(2, "%" + text + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
         } catch (Exception e) {
         }
@@ -200,10 +200,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setString(3, "%" + key + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
             
         } catch (SQLException e) {
@@ -226,10 +226,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
 
             }
         } catch (Exception e) {
@@ -258,10 +258,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                list.add(new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
 
             }
         } catch (Exception e) {
@@ -281,10 +281,10 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
-                return new Blog(rs.getInt(1), u, c, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), bs);
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                return new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs);
             }
         } catch (Exception e) {
         }
