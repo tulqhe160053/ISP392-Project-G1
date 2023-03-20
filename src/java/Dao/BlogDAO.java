@@ -75,17 +75,21 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public List<Blog> getBlogByCategory(String id) {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql = "Select * from Blog where catId= ? ";
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                + "                join category c \n"
+                + "                 on b.CatId = c.CategoryID\n"
+                + "                 join users u\n"
+                + "                 on b.UserID = u.UserID\n"
+                + "		        join BlogStatus bs \n"
+                + "		        on b.statusID = bs.statusID \n"
+                + "                      where catid= ? ";
             ps = con.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-//                Users u = new Users(rs.getString("username"));
-//                Category c = new Category(rs.getString("categoryname"));
-//                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
-                Users u = new Users(rs.getString(2));
-                Category c = new Category(rs.getString(3));
-                BlogStatus bs = new BlogStatus(rs.getString(10));
+                Users u = new Users(rs.getString("username"));
+                Category c = new Category(rs.getString("categoryname"));
+                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
                 list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
 
             }
@@ -199,7 +203,14 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public List<Blog> searchblog(String key) {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql = "Select * from Blog where title like ? or description like ? or Content like ? ";
+            String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
+                + "                join category c \n"
+                + "                 on b.CatId = c.CategoryID\n"
+                + "                 join users u\n"
+                + "                 on b.UserID = u.UserID\n"
+                + "		        join BlogStatus bs \n"
+                + "		        on b.statusID = bs.statusID \n"
+                + "                      where title like ? or description like ? or Content like ? ";
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + key + "%");
             ps.setString(2, "%" + key + "%");
@@ -496,7 +507,7 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
     public Blog selectById(Blog t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+        
     public void updateView(int id) {
         try {
             String sql = "UPDATE Blog SET viewer = viewer+1  where ID = ?";
