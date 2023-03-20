@@ -71,8 +71,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return null;
     }
-    public List<Blog> getBlogByCateory(String id ){
-        List<Blog> list = new ArrayList<>();
+    public ArrayList<Blog> getBlogByCateory(String id ){
+        ArrayList<Blog> list = new ArrayList<>();
         try {
             String sql= "Select * from Blog where catId= ? ";
             ps = con.prepareStatement(sql);
