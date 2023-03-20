@@ -5,9 +5,11 @@
 package Controler;
 
 import Dao.CategoryDAO;
+import Dao.FeedbackDAO;
 import Dao.ProductDAO;
 import Dao.ProductImgDAO;
 import Model.Category;
+import Model.Feedback;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -103,11 +105,13 @@ public class ProductServlet extends HttpServlet {
 
                 ProductDAO product_dao = new ProductDAO();
                 Product product = product_dao.selectById(product_save);
+                FeedbackDAO feedback_dao = new FeedbackDAO();
+                ArrayList<Feedback> listFeedBack = feedback_dao.getFeedbacksByProductId(productId);
                 request.setAttribute("product", product);
                 ProductImgDAO productImg_dao = new ProductImgDAO();
                 ProductImg productImg = productImg_dao.selectByProductId(product);
-                request.setAttribute("productImg", productImg);
-
+                request.setAttribute("productImg", productImg);                               
+                request.setAttribute("listFeedBack", listFeedBack);
             }
         } catch (Exception e) {
             System.err.println(e);

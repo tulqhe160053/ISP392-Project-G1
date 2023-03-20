@@ -25,7 +25,9 @@ public class FeedbackDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Users u = new Users(rs.getInt("UserID"));
-                Product p = new Product(rs.getInt("ProductId"));
+                int productId = rs.getInt("ProductID");
+                ProductDAO productdao = new ProductDAO();               
+                Product p = productdao.selectById(new Product(productId));
                 Feedback f = new Feedback(
                         rs.getInt("ID"),
                         u,
@@ -106,7 +108,7 @@ public class FeedbackDAO extends MyDAO {
         }
     }
     
-        public ArrayList<Feedback> getFeedbacksByUserId(int userId) {
+    public ArrayList<Feedback> getFeedbacksByUserId(int userId) {
         String query = "SELECT * FROM Feedback WHERE UserID = ?";
         try {
             ArrayList<Feedback> lsFeedback = new ArrayList<>();
@@ -123,6 +125,32 @@ public class FeedbackDAO extends MyDAO {
                         rs.getInt("Star"),
                         rs.getString("FeedbackDetail")
                 );
+                lsFeedback.add(f);
+            }
+            return lsFeedback;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public ArrayList<Feedback> getFeedbacksByProductId(int productId) {
+        String query = "SELECT * FROM Feedback WHERE ProductID = ?";
+        try {
+            ArrayList<Feedback> lsFeedback = new ArrayList<>();
+            ps = con.prepareStatement(query);      
+            ps.setInt(1, productId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                int userId = rs.getInt("UserID");
+                UserDAO user_dao = new UserDAO();
+                Users u = user_dao.getById(userId);
+                ProductDAO productdao = new ProductDAO();               
+                Product p = productdao.selectById(new Product(productId));
+                int star = rs.getInt("Star");
+                String feedBackDetail = rs.getString("FeedbackDetail");
+                Feedback f = new Feedback(id, u, p, star, feedBackDetail);
                 lsFeedback.add(f);
             }
             return lsFeedback;
@@ -206,8 +234,10 @@ public class FeedbackDAO extends MyDAO {
 
     public static void main(String[] args) {
         FeedbackDAO dao = new FeedbackDAO();
-        List<Feedback> f = dao.getProductFeedback();
-        System.out.println(f.toString());
+//        for (Feedback f : dao.getAllFeedbacks()) {
+//            System.out.println(f);
+//        }
+        System.out.println(dao.getFeedbacksByProductId(13));
     }
 
 }

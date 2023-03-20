@@ -400,10 +400,7 @@ public class ProductDAO extends MyDAO implements DAOInterface<Product> {
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
 
-        dao.editProduct("Laptop gaming", "Ngon", "Red", 200, 10, 210, 1, 3, 10, 1, 1, 13);
-        for (Product product : dao.selectAll()) {
-            System.out.println(product);
-        }
+        System.out.println(dao.selectById(new Product(4)));
 
     }
 }
