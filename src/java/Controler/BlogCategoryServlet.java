@@ -60,7 +60,7 @@ public class BlogCategoryServlet extends HttpServlet {
     throws ServletException, IOException {
         BlogDAO dao = new BlogDAO();
         String id = request.getParameter("catid");
-        List<Blog> blog = dao.getBlogByCateory(id);
+        List<Blog> blog = dao.getBlogByCategory(id);
         CategoryDAO cat = new CategoryDAO();
         List<Category> category = cat.selectAll();
         int page, numperpage = 2;

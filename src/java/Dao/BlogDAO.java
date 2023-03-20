@@ -71,20 +71,25 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return null;
     }
-    public ArrayList<Blog> getBlogByCateory(String id ){
-        ArrayList<Blog> list = new ArrayList<>();
+
+    public List<Blog> getBlogByCategory(String id) {
+        List<Blog> list = new ArrayList<>();
         try {
-            String sql= "Select * from Blog where catId= ? ";
+            String sql = "Select * from Blog where catId= ? ";
             ps = con.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString("username"));
-                Category c = new Category(rs.getString("categoryname"));
-                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+//                Users u = new Users(rs.getString("username"));
+//                Category c = new Category(rs.getString("categoryname"));
+//                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
                 list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
+
             }
-            
+
         } catch (SQLException e) {
         }
         return list;
@@ -164,8 +169,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         return null;
     }
 
-    public List<Blog> search(String text) {
-        List<Blog> list = new ArrayList<>();
+    public ArrayList<Blog> search(String text) {
+        ArrayList<Blog> list = new ArrayList<>();
         try {
             String sql = "select b.id , u.UserName , c.CategoryName , b.title , b.content , b.description , b.imageLink , b.createtime , b.viewer , bs.statusName  from blog b\n"
                     + "                join category c \n"
@@ -190,27 +195,27 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return list;
     }
-    public List<Blog> searchblog(String key ){
+
+    public List<Blog> searchblog(String key) {
         List<Blog> list = new ArrayList<>();
         try {
-            String sql= "Select * from Blog where title like ? or description like ? or Content like ? ";
+            String sql = "Select * from Blog where title like ? or description like ? or Content like ? ";
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + key + "%");
             ps.setString(2, "%" + key + "%");
             ps.setString(3, "%" + key + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getString("username"));
-                Category c = new Category(rs.getString("categoryname"));
-                BlogStatus bs = new BlogStatus(rs.getString("statusname"));
+                Users u = new Users(rs.getString(2));
+                Category c = new Category(rs.getString(3));
+                BlogStatus bs = new BlogStatus(rs.getString(10));
                 list.add(new Blog(rs.getInt("id"), u, c, rs.getString("title"), rs.getString("content"), rs.getString("description"), rs.getString("imagelink"), rs.getString("createtime"), rs.getInt("viewer"), bs));
             }
-            
+
         } catch (SQLException e) {
         }
         return list;
     }
-    
 
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();
@@ -438,8 +443,8 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
         }
         return count;
     }
-    
-     public int countBlog() {
+
+    public int countBlog() {
         int count = 0;
         try {
             String sql = "select count(*) from blog";
@@ -480,9 +485,11 @@ public class BlogDAO extends MyDAO implements DAOInterface<Blog> {
 
     public static void main(String[] args) {
         BlogDAO bd = new BlogDAO();
-        for (Blog blog : bd.selectAll()) {
-            System.out.println(blog);
+        List<Blog> t = bd.getBlogByCategory("l");
+        for (Blog b : t) {
+            System.out.println(b.toString());
         }
+
     }
 
     @Override
