@@ -72,11 +72,6 @@ public class CategorySellerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String catName = request.getParameter("name");
-        CategoryDAO cat = new CategoryDAO();
-        cat.insertCat(catName);
-        response.sendRedirect("categoryseller");
-        
     }
 
     /** 
